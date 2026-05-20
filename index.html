@@ -55,11 +55,24 @@
 </a>
 
 <script>
-  // Carga los sections HTML y luego levanta el módulo JS principal
+  /* ── Carga secciones HTML con manejo de errores ────────────────────
+     - Verifica res.ok antes de leer el HTML
+     - Muestra un placeholder visible si algo falla (404, red caída, etc.)
+     - Ya no falla en silencio
+  ─────────────────────────────────────────────────────────────────── */
   async function loadComponent(id, file) {
-    const res  = await fetch(file);
-    const html = await res.text();
-    document.getElementById(id).innerHTML = html;
+    try {
+      const res = await fetch(file);
+      if (!res.ok) throw new Error(`HTTP ${res.status} — ${file}`);
+      const html = await res.text();
+      document.getElementById(id).innerHTML = html;
+    } catch (err) {
+      console.error(`[loadComponent] ${err.message}`);
+      document.getElementById(id).innerHTML =
+        `<div style="padding:1rem;color:#c0392b;font-size:.85rem">
+           ⚠️ No se pudo cargar <code>${file}</code>
+         </div>`;
+    }
   }
 
   Promise.all([
@@ -71,21 +84,19 @@
     loadComponent('valores-container',    'sections/valores.html'),
     loadComponent('horario-container',    'sections/horario.html'),
   ]).then(() => {
-    // Un solo script type=module reemplaza el loadScript() en cadena.
-    // El navegador resuelve el árbol de imports automáticamente:
-    // main.js → cart.js → config.js
-    //        → mcard.js → menu-data.js
+    // Un solo script type=module — el navegador resuelve el árbol
+    // de imports automáticamente: main.js → cart.js, mcard.js, etc.
     const s = document.createElement('script');
-    s.type = 'module';
-    s.src  = 'js/main.js';
+    s.type  = 'module';
+    s.src   = 'js/main.js';
     document.body.appendChild(s);
 
     // Barra de urgencia (horario)
-    var bar = document.getElementById('urgency-bar');
+    const bar = document.getElementById('urgency-bar');
     if (bar) {
-      var now      = new Date();
-      var totalMin = now.getHours() * 60 + now.getMinutes();
-      var isOpen   = totalMin >= 660 && totalMin < 1320;
+      const now      = new Date();
+      const totalMin = now.getHours() * 60 + now.getMinutes();
+      const isOpen   = totalMin >= 660 && totalMin < 1320;
       if (isOpen) {
         bar.innerHTML = '🍝 Abierto ahora &nbsp;·&nbsp; Lunes a Domingo 11:00 AM – 10:00 PM &nbsp;·&nbsp; Delivery disponible &nbsp;<a href="https://wa.me/584247827899" target="_blank">Ordenar ahora →</a>';
       } else {
