@@ -1,27 +1,28 @@
 /**
  * mcard.js — Componente de card del menú.
  *
- * Importa datos de menu-data.js y Cart de cart.js.
- * Expone Cart en window para compatibilidad con onclick inline en HTML.
+ * Genera el HTML de cada card del menú y los destacados.
+ * Renderiza grids completos por categoría.
+ *
+ * Imports:
+ *   - ASSETS_BASE_URL : ruta base de imágenes (hoy: 'assets/', mañana: Supabase Storage URL)
+ *   - WA_NUMBER       : número de WhatsApp centralizado en config.js
+ *   - menuData        : datos del menú
+ *   - destacadosData  : datos de destacados
+ *   - Cart            : módulo del carrito
  */
 
-import { menuData, destacadosData } from './menu-data.js';
-import { WA_NUMBER } from './config.js';
-import { Cart } from './cart.js';
+import { ASSETS_BASE_URL, WA_NUMBER } from './config.js';
+import { menuData, destacadosData }   from './menu-data.js';
+import { Cart }                        from './cart.js';
 
-// Necesario para que los onclick="Cart.add(...)" en el HTML sigan funcionando
+// Cart debe ser accesible desde los onclick inline del HTML generado
 window.Cart = Cart;
 
 /* ── Ícono reutilizable ───────────────────────────────────────────── */
 const ICON_PLUS = `<svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>`;
 
-/* ── Generador de URL de WhatsApp ─────────────────────────────────── */
-function waUrl(waText) {
-  const msg = encodeURIComponent(`Hola! Quiero ordenar ${waText}`);
-  return `https://wa.me/${WA_NUMBER}?text=${msg}`;
-}
-
-/* ── Generador de una card ────────────────────────────────────────── */
+/* ── Generador de una card de menú ───────────────────────────────── */
 function buildMcard(plato) {
   const hasImg = Boolean(plato.img);
 
@@ -30,7 +31,9 @@ function buildMcard(plato) {
 
   let imgBlock = '';
   if (hasImg) {
-    const baseStyle  = `background-image:url('../assets/${plato.img}')`;
+    // ASSETS_BASE_URL reemplaza el '../assets/' hardcodeado.
+    // Cuando llegue Supabase Storage, solo cambia config.js — nada más.
+    const baseStyle  = `background-image:url('${ASSETS_BASE_URL}${plato.img}')`;
     const extraStyle = plato.imgStyle ? `;${plato.imgStyle}` : '';
     const imgClass   = plato.imgStyle ? 'mcard-img mcard-img--producto' : 'mcard-img';
     imgBlock = `<div class="${imgClass}" style="${baseStyle}${extraStyle}"></div>`;
@@ -62,9 +65,15 @@ function buildMcard(plato) {
 /* ── Renderizado de un panel completo ────────────────────────────── */
 function renderGrid(panelId, platos) {
   const panel = document.getElementById(panelId);
-  if (!panel) { console.warn(`[mcard] Panel #${panelId} no encontrado.`); return; }
+  if (!panel) {
+    console.warn(`[mcard] Panel #${panelId} no encontrado.`);
+    return;
+  }
   const grid = panel.querySelector('.mgrid');
-  if (!grid) { console.warn(`[mcard] .mgrid no encontrado en #${panelId}.`); return; }
+  if (!grid) {
+    console.warn(`[mcard] .mgrid no encontrado dentro de #${panelId}.`);
+    return;
+  }
   grid.innerHTML = platos.map(buildMcard).join('\n');
 }
 
@@ -85,7 +94,7 @@ export function initMenu() {
 function buildDestCard(plato) {
   return `
     <div class="dest-card">
-      <div class="dest-img" style="background-image: url('../assets/${plato.img}')">
+      <div class="dest-img" style="background-image:url('${ASSETS_BASE_URL}${plato.img}')">
         <span class="dest-badge">${plato.badge}</span>
       </div>
       <div class="dest-info">
@@ -106,11 +115,12 @@ function buildDestCard(plato) {
 }
 
 export function renderDestacados() {
-  const scroll        = document.querySelector('.dest-scroll');
-  const dotsContainer = document.querySelector('.dest-dots');
+  const scroll         = document.querySelector('.dest-scroll');
+  const dotsContainer  = document.querySelector('.dest-dots');
   if (!scroll || !dotsContainer) return;
 
   scroll.innerHTML = destacadosData.map(buildDestCard).join('\n');
+
   dotsContainer.innerHTML = destacadosData
     .map((_, i) => `<span class="dest-dot${i === 0 ? ' active' : ''}"></span>`)
     .join('\n');
