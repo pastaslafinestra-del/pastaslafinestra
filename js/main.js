@@ -86,31 +86,28 @@ function initStagger() {
   const isMobile = window.innerWidth <= 768;
 
   if (isMobile) {
-    // Móvil: preparar cards ANTES de observar (el estado inicial debe existir
-    // antes del primer paint para que la transición lo vea)
     const allCards = Array.from(document.querySelectorAll('.mcard, .dest-card'));
 
-    allCards.forEach(card => {
-      card.style.opacity   = '0';
-      card.style.transform = 'translateY(20px)';
-    });
-
+    // Solo ocultar cards que NO son visibles aún (evita flash en las iniciales)
     const cardObserver = new IntersectionObserver(entries => {
       entries.forEach(e => {
         if (!e.isIntersecting) return;
-        const card  = e.target;
-        // Índice real de la card en el array global → delay consistente
-        const idx   = allCards.indexOf(card) % 6; // máx 6 para no acumular delay
-        card.style.transition = `opacity 0.4s ease ${idx * 60}ms, transform 0.4s ease ${idx * 60}ms`;
-        requestAnimationFrame(() => requestAnimationFrame(() => {
-          card.style.opacity   = '1';
-          card.style.transform = 'translateY(0)';
-        }));
+        const card = e.target;
+        card.style.transition = 'opacity 0.35s ease';
+        card.style.opacity    = '1';
         cardObserver.unobserve(card);
       });
-    }, { threshold: 0.1, rootMargin: '0px 60px 0px 0px' });
+    }, { threshold: 0.05, rootMargin: '0px 80px 0px 0px' });
 
-    allCards.forEach(c => cardObserver.observe(c));
+    allCards.forEach(card => {
+      // Si ya es visible al cargar, no la ocultamos
+      const rect = card.getBoundingClientRect();
+      const alreadyVisible = rect.left < window.innerWidth && rect.right > 0;
+      if (!alreadyVisible) {
+        card.style.opacity = '0';
+      }
+      cardObserver.observe(card);
+    });
   } else {
     // Desktop: observer por grid (comportamiento original)
     const gridObserver = new IntersectionObserver(entries => {
