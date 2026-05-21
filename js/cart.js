@@ -72,9 +72,14 @@ export const Cart = (() => {
             <span class="cart-header-title">Tu pedido</span>
             <span class="cart-header-count" id="cart-count"></span>
           </div>
-          <button class="cart-close" id="cart-close" aria-label="Cerrar carrito">
-            <svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
-          </button>
+          <div class="cart-header-actions">
+            <button class="cart-clear" id="cart-clear" aria-label="Vaciar pedido" style="display:none">
+              Vaciar todo
+            </button>
+            <button class="cart-close" id="cart-close" aria-label="Cerrar carrito">
+              <svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
+            </button>
+          </div>
         </div>
         <div class="cart-items" id="cart-items"></div>
         <div class="cart-footer" id="cart-footer">
@@ -97,6 +102,8 @@ export const Cart = (() => {
     `);
   }
 
+  let clearEl;
+
   function bindRefs() {
     drawerEl   = document.getElementById('cart-drawer');
     overlayEl  = document.getElementById('cart-overlay');
@@ -105,12 +112,14 @@ export const Cart = (() => {
     subtotalEl = document.getElementById('cart-subtotal');
     fabEl      = document.getElementById('cart-fab');
     countEl    = document.getElementById('cart-count');
+    clearEl    = document.getElementById('cart-clear');
   }
 
   function bindEvents() {
     document.getElementById('cart-close').addEventListener('click', close);
     overlayEl.addEventListener('click', close);
     fabEl.addEventListener('click', open);
+    clearEl.addEventListener('click', clearAll);
 
     itemsEl.addEventListener('click', e => {
       const btn = e.target.closest('[data-action]');
@@ -143,6 +152,9 @@ export const Cart = (() => {
     badgeEl.classList.toggle('visible', units > 0);
     countEl.textContent = units > 0 ? `(${units} ${units === 1 ? 'ítem' : 'ítems'})` : '';
     subtotalEl.textContent = fmtPrice(total);
+
+    // Mostrar "Vaciar todo" solo cuando hay ítems
+    clearEl.style.display = items.length > 0 ? 'block' : 'none';
 
     const waBtn = document.getElementById('cart-wa-btn');
     if (items.length > 0) {
@@ -204,6 +216,11 @@ export const Cart = (() => {
       btnEl.addEventListener('animationend', () => btnEl.classList.remove('adding'), { once: true });
     }
 
+    render();
+  }
+
+  function clearAll() {
+    items = [];
     render();
   }
 
