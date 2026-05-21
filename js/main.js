@@ -87,24 +87,38 @@ function initStagger() {
 
   if (isMobile) {
     const allCards = Array.from(document.querySelectorAll('.mcard, .dest-card'));
-
-    // Poner todas en opacity 0 sincrónicamente
     allCards.forEach(card => { card.style.opacity = '0'; });
 
-    // Esperar 2 frames para que el browser pinte el estado inicial,
-    // luego registrar el observer
     requestAnimationFrame(() => requestAnimationFrame(() => {
-      const cardObserver = new IntersectionObserver(entries => {
-        entries.forEach(e => {
-          if (!e.isIntersecting) return;
-          const card = e.target;
-          card.style.transition = 'opacity 0.4s ease';
-          card.style.opacity    = '1';
-          cardObserver.unobserve(card);
-        });
-      }, { threshold: 0.05, rootMargin: '0px 80px 0px 0px' });
+      // Para cada card, buscar su contenedor scrolleable como root
+      const observed = new Set();
 
-      allCards.forEach(card => cardObserver.observe(card));
+      allCards.forEach(card => {
+        // Buscar el scroll container más cercano
+        const container = card.closest('.mgrid, .dest-scroll') || null;
+
+        if (observed.has(container)) return; // ya hay un observer para ese container
+
+        const siblings = container
+          ? Array.from(container.querySelectorAll('.mcard, .dest-card'))
+          : [card];
+
+        const obs = new IntersectionObserver(entries => {
+          entries.forEach(e => {
+            if (!e.isIntersecting) return;
+            e.target.style.transition = 'opacity 0.45s ease';
+            e.target.style.opacity    = '1';
+            obs.unobserve(e.target);
+          });
+        }, {
+          root: container || null,
+          threshold: 0.1,
+          rootMargin: '0px 60px 0px 0px'
+        });
+
+        siblings.forEach(c => obs.observe(c));
+        if (container) observed.add(container);
+      });
     }));
   } else {
     // Desktop: observer por grid (comportamiento original)
