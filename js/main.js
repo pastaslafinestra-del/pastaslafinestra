@@ -88,26 +88,24 @@ function initStagger() {
   if (isMobile) {
     const allCards = Array.from(document.querySelectorAll('.mcard, .dest-card'));
 
-    // Solo ocultar cards que NO son visibles aún (evita flash en las iniciales)
-    const cardObserver = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if (!e.isIntersecting) return;
-        const card = e.target;
-        card.style.transition = 'opacity 0.35s ease';
-        card.style.opacity    = '1';
-        cardObserver.unobserve(card);
-      });
-    }, { threshold: 0.05, rootMargin: '0px 80px 0px 0px' });
+    // Poner todas en opacity 0 sincrónicamente
+    allCards.forEach(card => { card.style.opacity = '0'; });
 
-    allCards.forEach(card => {
-      // Si ya es visible al cargar, no la ocultamos
-      const rect = card.getBoundingClientRect();
-      const alreadyVisible = rect.left < window.innerWidth && rect.right > 0;
-      if (!alreadyVisible) {
-        card.style.opacity = '0';
-      }
-      cardObserver.observe(card);
-    });
+    // Esperar 2 frames para que el browser pinte el estado inicial,
+    // luego registrar el observer
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      const cardObserver = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (!e.isIntersecting) return;
+          const card = e.target;
+          card.style.transition = 'opacity 0.4s ease';
+          card.style.opacity    = '1';
+          cardObserver.unobserve(card);
+        });
+      }, { threshold: 0.05, rootMargin: '0px 80px 0px 0px' });
+
+      allCards.forEach(card => cardObserver.observe(card));
+    }));
   } else {
     // Desktop: observer por grid (comportamiento original)
     const gridObserver = new IntersectionObserver(entries => {
