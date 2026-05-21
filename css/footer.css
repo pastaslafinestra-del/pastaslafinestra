@@ -1,0 +1,123 @@
+/* ══════════════════════════════════════════
+   FOOTER.CSS — Footer del sitio.
+   Usa tokens de variables.css.
+══════════════════════════════════════════ */
+
+footer {
+  background: #060606;
+  position: relative;
+  overflow: hidden;
+  padding: var(--space-10) var(--space-9) var(--space-9);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  border-top: none;
+}
+
+/* Bandera italiana arriba */
+footer::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #009246 33.3%, rgba(255,255,255,0.5) 33.3% 66.6%, #CE2B37 66.6%);
+}
+
+/* Glow verde leve centro-top */
+footer::after {
+  content: '';
+  position: absolute;
+  top: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 500px;
+  height: 160px;
+  background: radial-gradient(ellipse at center, rgba(27,107,48,0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.ft-logo {
+  font-family: var(--font-serif);
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-style: italic;
+  font-weight: 700;
+  color: var(--blanco);
+  letter-spacing: -0.01em;
+  text-align: center;
+  margin-bottom: 1.4rem;
+  position: relative;
+  z-index: 1;
+}
+.ft-logo::after {
+  content: '';
+  display: block;
+  width: 32px;
+  height: 1px;
+  background: rgba(27,107,48,0.6);
+  margin: 1rem auto 0;
+}
+
+.ft-info {
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
+  color: rgba(255,255,255,0.3);
+  line-height: 2;
+  text-align: center;
+  letter-spacing: var(--ls-sm);
+  margin-bottom: 1.8rem;
+  position: relative;
+  z-index: 1;
+}
+
+.ft-ig {
+  margin-bottom: var(--space-8);
+  position: relative;
+  z-index: 1;
+}
+.ft-ig a {
+  font-family: var(--font-sans);
+  font-size: var(--text-2xs);
+  letter-spacing: var(--ls-xl);
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+  text-decoration: none;
+  transition: var(--transition-fast);
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+.ft-ig a::before {
+  content: '';
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 4px;
+  flex-shrink: 0;
+  transition: var(--transition-fast);
+}
+.ft-ig a:hover { color: var(--verde3); }
+.ft-ig a:hover::before { border-color: var(--verde3); }
+
+.ft-bottom {
+  width: 100%;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  padding-top: 1.5rem;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+.ft-copy {
+  font-family: var(--font-sans);
+  font-size: var(--text-2xs);
+  color: rgba(255,255,255,0.12);
+  letter-spacing: var(--ls-md);
+  text-transform: uppercase;
+}
+
+@media (max-width: 768px) {
+  footer { padding: var(--space-section-mobile) 1.5rem 2.5rem; }
+  .ft-logo { font-size: 1.6rem; }
+  footer::after { width: 280px; }
+}

@@ -1,0 +1,210 @@
+/* ══════════════════════════════════════════
+   MENU-BLOCKS.CSS — Bloques del menú:
+   sistema de pasta, aviso de precios,
+   banner de ordenar por WhatsApp.
+══════════════════════════════════════════ */
+
+/* ── Sistema de Pasta ── */
+.pasta-system {
+  background: var(--negro);
+  padding: var(--space-8) var(--space-9);
+  margin-bottom: var(--space-7);
+  border-radius: var(--radio);
+  overflow: hidden;
+  position: relative;
+}
+.pasta-system::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #009246 33.3%, #fff 33.3% 66.6%, #CE2B37 66.6%);
+}
+.ps-head {
+  font-family: var(--font-serif);
+  font-size: var(--text-h3);
+  font-style: italic;
+  font-weight: 700;
+  color: var(--blanco);
+  margin-bottom: var(--space-2);
+  line-height: var(--lh-snug);
+  letter-spacing: var(--ls-tight);
+}
+.ps-sub {
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
+  color: rgba(255,255,255,0.4);
+  margin-bottom: var(--space-7);
+  line-height: var(--lh-relaxed);
+  letter-spacing: var(--ls-sm);
+}
+.ps-cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-7); }
+.ps-col h4 {
+  font-family: var(--font-sans);
+  font-size: var(--text-2xs);
+  letter-spacing: var(--ls-xl);
+  text-transform: uppercase;
+  font-weight: 500;
+  margin-bottom: var(--space-4);
+  padding-bottom: var(--space-2);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  line-height: 1;
+}
+.pc-verde h4  { color: var(--verde3); }
+.pc-blanco h4 { color: rgba(255,255,255,0.45); }
+.pc-rojo h4   { color: #d97070; }
+.ps-col ul { list-style: none; display: flex; flex-direction: column; gap: var(--space-2); }
+.ps-col li {
+  font-family: var(--font-serif-body);
+  font-size: var(--text-md);
+  color: rgba(255,255,255,0.6);
+  font-style: italic;
+  line-height: var(--lh-snug);
+  padding-left: var(--space-2);
+  border-left: 1px solid rgba(255,255,255,0.08);
+  transition: var(--transition-fast);
+}
+.ps-col li:hover { color: rgba(255,255,255,0.85); border-left-color: var(--verde3); }
+.ps-col li b {
+  font-style: normal;
+  font-family: var(--font-sans);
+  font-size: var(--text-2xs);
+  color: rgba(255,255,255,0.3);
+  font-weight: 400;
+  letter-spacing: var(--ls-sm);
+}
+.pasta-note {
+  background: var(--crema);
+  border-left: 3px solid var(--verde);
+  padding: var(--space-4) var(--space-6);
+  margin-top: var(--space-6);
+  border-radius: 0 var(--radio) var(--radio) 0;
+  font-family: var(--font-serif-body);
+  font-size: var(--text-md);
+  font-style: italic;
+  color: var(--texto2);
+  line-height: var(--lh-relaxed);
+}
+
+/* ── Aviso de Precios ── */
+.price-notice {
+  margin-top: var(--space-9);
+  background: var(--negro);
+  padding: var(--space-8) var(--space-9);
+  border-radius: var(--radio);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.price-notice::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #009246 33.3%, #fff 33.3% 66.6%, #CE2B37 66.6%);
+}
+.price-notice p {
+  font-family: var(--font-serif-body);
+  font-size: var(--text-lg);
+  font-style: italic;
+  color: rgba(255,255,255,0.75);
+  line-height: var(--lh-loose);
+}
+.price-notice strong { color: var(--verde3); font-style: normal; font-weight: 500; }
+
+/* ── Banner Ordenar ── */
+.order-banner {
+  background: var(--negro);
+  border-radius: var(--radio);
+  padding: var(--space-card) 2.5rem;
+  margin-bottom: var(--space-9);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-stack);
+  flex-wrap: wrap;
+  border-left: 4px solid #25D366;
+  transition: var(--transition-smooth);
+}
+.order-banner:hover { box-shadow: var(--shadow-dark); }
+.ob-text {
+  font-family: var(--font-serif-body);
+  font-size: var(--text-lg);
+  font-style: italic;
+  color: rgba(255,255,255,0.75);
+  line-height: var(--lh-relaxed);
+}
+.ob-text strong { color: white; font-style: normal; }
+
+/* ── Responsive móvil ── */
+@media (max-width: 768px) {
+
+  /* Sistema de pasta: reducir padding y colapsar columnas en acordeón visual */
+  .pasta-system {
+    padding: var(--space-5) var(--space-4);
+    margin-bottom: var(--space-5);
+  }
+
+  .ps-sub { margin-bottom: var(--space-5); }
+
+  /* Las 3 columnas → scroll horizontal compacto */
+  .ps-cols {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    gap: var(--space-4);
+    padding-bottom: var(--space-2);
+    margin: 0 calc(-1 * var(--space-4));
+    padding-left: var(--space-4);
+    padding-right: var(--space-4);
+  }
+
+  .ps-cols::-webkit-scrollbar { display: none; }
+
+  .ps-col {
+    flex-shrink: 0;
+    width: 200px;
+    scroll-snap-align: start;
+  }
+
+  /* Items siguen siendo lista vertical dentro de cada columna */
+  .ps-col ul {
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .ps-col li {
+    border-left: 1px solid rgba(255,255,255,0.08);
+    font-size: var(--text-sm);
+  }
+
+  /* Nota de pasta: reducir padding */
+  .pasta-note {
+    padding: var(--space-3) var(--space-4);
+    font-size: var(--text-sm);
+  }
+
+  /* Aviso de precios: reducir padding y fuente */
+  .price-notice {
+    padding: var(--space-5) var(--space-4);
+    margin-top: var(--space-6);
+  }
+
+  .price-notice p {
+    font-size: var(--text-base);
+    line-height: var(--lh-relaxed);
+  }
+
+  /* Banner ordenar: apilar verticalmente, reducir padding */
+  .order-banner {
+    padding: var(--space-4) var(--space-4);
+    margin-bottom: var(--space-6);
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-3);
+  }
+
+  .ob-text { font-size: var(--text-base); }
+}

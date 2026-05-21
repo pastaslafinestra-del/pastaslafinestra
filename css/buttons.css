@@ -1,0 +1,128 @@
+/* ══════════════════════════════════════════
+   BUTTONS.CSS — Sistema de botones
+   Base compartida + todas las variantes.
+   Editar aquí para cambiar cualquier botón
+   del sitio sin tocar otros componentes.
+══════════════════════════════════════════ */
+
+/* ── Base ── */
+.btn {
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
+  letter-spacing: var(--ls-lg);
+  text-transform: uppercase;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: none;
+  border-radius: var(--radio);
+  transition: var(--transition-smooth);
+}
+.btn:active { transform: translateY(0) scale(0.98); }
+
+/* ── Primary (verde brand) ── */
+.btn-primary {
+  background: var(--verde);
+  color: white;
+  padding: 15px 38px;
+  box-shadow: var(--shadow-green);
+}
+.btn-primary:hover {
+  background: var(--verde2);
+  box-shadow: var(--shadow-green-hover);
+  transform: translateY(-2px);
+}
+
+/* ── Outline (borde blanco, fondo transparente) ── */
+.btn-outline {
+  background: transparent;
+  color: rgba(255,255,255,0.65);
+  padding: 15px 38px;
+  font-weight: 400;
+  border: 1px solid rgba(255,255,255,0.2);
+}
+.btn-outline:hover {
+  border-color: rgba(255,255,255,0.5);
+  color: white;
+  transform: translateY(-2px);
+}
+
+/* ── WhatsApp grande (hero / destacado) ── */
+.btn-whatsapp {
+  background-color: #25D366;
+  color: white;
+  padding: 16px 40px;
+  gap: 10px;
+  box-shadow: var(--shadow-wa-btn);
+}
+.btn-whatsapp:hover {
+  background-color: #1ea854;
+  box-shadow: var(--shadow-wa-btn-hover);
+  transform: translateY(-2px);
+}
+.btn-whatsapp svg { width: 20px; height: 20px; fill: white; flex-shrink: 0; }
+
+/* ── WhatsApp compacto (banners, order) ── */
+.btn-whatsapp-sm {
+  background-color: #25D366;
+  color: white;
+  padding: 12px 28px;
+  font-size: var(--text-2xs);
+  letter-spacing: var(--ls-md);
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: var(--transition-fast);
+}
+.btn-whatsapp-sm:hover { background-color: #1ea854; transform: translateY(-1px); }
+.btn-whatsapp-sm:active { transform: scale(0.97); }
+.btn-whatsapp-sm svg { width: 16px; height: 16px; fill: white; }
+
+/* ── Order (verde outline pequeño, dentro de cards) ── */
+.btn-order {
+  font-size: var(--text-2xs);
+  letter-spacing: var(--ls-md);
+  color: var(--verde);
+  border: 1px solid rgba(27,107,48,0.25);
+  padding: 7px 14px;
+  background: transparent;
+  transition: var(--transition-fast);
+}
+.btn-order:hover {
+  background-color: var(--verde);
+  color: white;
+  border-color: var(--verde);
+}
+.btn-order svg { width: 12px; height: 12px; transition: var(--transition-fast); }
+.btn-order:hover svg { transform: translateX(3px); }
+
+/* ── White (CTA sobre fondo verde) ── */
+.btn-white {
+  background: white;
+  color: var(--verde);
+  padding: 14px 36px;
+  font-weight: 500;
+  border-radius: 100px;
+  box-shadow: var(--shadow-overlay);
+}
+.btn-white:hover {
+  background: var(--crema);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-heavy);
+}
+
+/* ── White outline (CTA secundario sobre fondo verde) ── */
+.btn-white-outline {
+  background: rgba(255,255,255,0.12);
+  color: white;
+  padding: 14px 36px;
+  font-weight: 400;
+  border-radius: 100px;
+  border: 1px solid rgba(255,255,255,0.3);
+}
+.btn-white-outline:hover {
+  background: rgba(255,255,255,0.22);
+  transform: translateY(-2px);
+}

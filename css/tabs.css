@@ -1,0 +1,118 @@
+/* ══════════════════════════════════════════
+   TABS.CSS — Sistema de pestañas del menú.
+   El JS que activa .on está en main.js.
+══════════════════════════════════════════ */
+
+.tabs-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: var(--space-9);
+  /* Sin border-bottom: línea separadora eliminada por diseño */
+}
+
+.tab {
+  padding: 14px 22px;
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  letter-spacing: var(--ls-md);
+  text-transform: uppercase;
+  /* background reseteado a transparent en base.css — no hace falta declararlo aquí */
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  color: var(--texto3);
+  transition: var(--transition-fast);
+  white-space: nowrap;
+  line-height: var(--lh-tight);
+}
+
+/* Sin subrayado verde — solo cambia el color del texto */
+.tab.on             { color: var(--verde); font-weight: 500; }
+.tab:hover:not(.on) { color: var(--texto2); }
+
+.panel { display: none; }
+.panel.on { display: block; }
+
+/* ── Tabs sticky ── */
+.tabs-sentinel {
+  height: 1px;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.tabs-sticky-wrap {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: transparent;
+  transition:
+    background 0.3s cubic-bezier(0.4,0,0.2,1),
+    box-shadow 0.3s cubic-bezier(0.4,0,0.2,1),
+    backdrop-filter 0.3s ease;
+}
+
+.tabs-sticky-wrap.is-stuck {
+  background: rgba(246,241,233,0.97);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow:
+    0 1px 0 rgba(0,0,0,0.05),
+    0 4px 20px rgba(0,0,0,0.05);
+}
+
+.tabs-sticky-wrap .tabs-wrap {
+  margin-bottom: 0;
+  transition: border-color 0.3s ease;
+}
+
+.tabs-sticky-wrap + .panel.on,
+.tabs-sticky-wrap ~ .panel.on {
+  padding-top: 2.5rem;
+}
+
+/* ── Desktop: nowrap y scroll si no caben ── */
+@media (min-width: 769px) {
+  .tabs-wrap {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+    width: fit-content;
+  }
+  .tabs-wrap::-webkit-scrollbar { display: none; }
+}
+
+@media (max-width: 768px) {
+  .tabs-sticky-wrap .tabs-wrap {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding-left: var(--space-4);
+    padding-right: var(--space-4);
+    gap: 0;
+  }
+
+  .tabs-sticky-wrap .tabs-wrap::-webkit-scrollbar { display: none; }
+
+  /* Tabs más compactos en móvil — más visibles sin scrollear */
+  .tabs-sticky-wrap .tabs-wrap .tab {
+    flex-shrink: 0;
+    padding: 11px 14px;
+    font-size: 0.65rem;
+  }
+
+  .tabs-sticky-wrap::after {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 40px;
+    height: 100%;
+    background: linear-gradient(to right, transparent, rgba(246,241,233,0.9));
+    pointer-events: none;
+    z-index: 1;
+    transition: opacity 0.2s;
+  }
+
+  .tabs-sticky-wrap.scrolled-end::after { opacity: 0; }
+}

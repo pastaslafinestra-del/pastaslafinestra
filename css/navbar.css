@@ -1,0 +1,143 @@
+/* ══════════════════════════════════════════
+   NAVBAR.CSS — Navegación principal.
+   Usa tokens de variables.css.
+══════════════════════════════════════════ */
+
+/* ── Flag bar ── */
+.flag-bar {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #009246 33.3%, #ffffff 33.3% 66.6%, #CE2B37 66.6%);
+  z-index: 10;
+}
+
+/* ── Nav ── */
+nav {
+  position: fixed;
+  top: 0; width: 100%;
+  z-index: 300;
+  background: rgba(10,10,10,0.98);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 3rem;
+  height: 68px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.nav-logo {
+  font-family: var(--font-serif);
+  font-size: 1.3rem;
+  font-style: italic;
+  color: var(--blanco);
+  letter-spacing: 0.01em;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.nav-logo-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--verde3);
+}
+.nav-logo span {
+  color: rgba(255,255,255,0.35);
+  font-style: normal;
+  font-size: var(--text-2xs);
+  letter-spacing: var(--ls-xl);
+  text-transform: uppercase;
+}
+
+.nav-links {
+  display: flex;
+  gap: 0;
+  list-style: none;
+  align-items: center;
+  height: 68px;
+}
+.nav-links li { height: 100%; display: flex; align-items: center; }
+.nav-links a {
+  color: rgba(255,255,255,0.6);
+  text-decoration: none;
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 0 1.2rem;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  border-bottom: 2px solid transparent;
+  transition: var(--transition-fast);
+}
+.nav-links a:hover { color: var(--blanco); border-bottom-color: var(--verde3); }
+
+/* nav .nav-wa: especificidad mayor que .nav-links a — sin !important */
+nav .nav-wa {
+  margin-left: 1rem;
+  background: var(--verde);
+  color: white;
+  padding: 10px 22px;
+  height: auto;
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  border-radius: var(--radio);
+  border-bottom: none;
+  box-shadow: var(--shadow-green-nav);
+}
+nav .nav-wa:hover {
+  background: var(--verde2);
+  box-shadow: var(--shadow-green-nav-hover);
+  transform: translateY(-1px);
+}
+
+/* ── Hamburger ── */
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 8px;
+}
+.nav-hamburger span {
+  width: 22px; height: 1.5px;
+  background: white;
+  border-radius: 2px;
+  transition: var(--transition-fast);
+}
+
+/* ── Menú móvil ── */
+.nav-mobile {
+  display: none;
+  position: fixed;
+  top: 68px; left: 0; right: 0;
+  background: var(--negro);
+  padding: var(--space-card-mobile) 2rem;
+  z-index: 299;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.nav-mobile.open { display: flex; flex-direction: column; gap: 0; }
+.nav-mobile a {
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: var(--space-4) 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  transition: var(--transition-fast);
+}
+.nav-mobile a:hover { color: var(--verde3); }
+
+/* .nav-mobile .mob-wa: especificidad mayor que .nav-mobile a — sin !important */
+.nav-mobile .mob-wa {
+  background: var(--verde);
+  color: white;
+  text-align: center;
+  padding: 12px;
+  margin-top: 1rem;
+  border: none;
+  border-radius: var(--radio);
+}

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es" style="color-scheme:light only;background-color:#FFFFFF">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light only">
+<meta name="supported-color-schemes" content="light">
+<title>La Finestra | Pastas, Pizzas y Salsas Frescas</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,500;1,300;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/variables.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/global.css">
+<link rel="stylesheet" href="css/navbar.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/buttons.css">
+<link rel="stylesheet" href="css/badges.css">
+<link rel="stylesheet" href="css/tabs.css">
+<link rel="stylesheet" href="css/menu-blocks.css">
+<link rel="stylesheet" href="css/sections.css">
+<link rel="stylesheet" href="css/footer.css">
+<link rel="stylesheet" href="css/hero.css">
+<link rel="stylesheet" href="css/destacados.css">
+<link rel="stylesheet" href="css/utilities.css">
+<link rel="stylesheet" href="css/responsive.css">
+<link rel="stylesheet" href="css/cards.css">
+<link rel="stylesheet" href="css/cart.css">
+<script src="https://www.w3schools.com/lib/w3.js"></script>
+</head>
+<body>
+
+<div id="navbar-container"></div>
+<div id="hero-container"></div>
+<div id="destacados-container"></div>
+<div id="menu-container"></div>
+<div id="about-container"></div>
+<div id="valores-container"></div>
+<div id="horario-container"></div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-logo">La Finestra</div>
+  <div class="ft-info">Pastas, Pizzas y Salsas Frescas 🇮🇹<br>San Cristóbal, Táchira, Venezuela &nbsp;·&nbsp; V-19236204-7</div>
+  <div class="ft-ig"><a href="https://instagram.com/lafinestrapastas" target="_blank">@lafinestrapastas</a></div>
+  <div class="ft-bottom">
+    <p class="ft-copy">&copy; 2025 La Finestra &nbsp;·&nbsp; Hecho con amor en San Cristóbal</p>
+  </div>
+</footer>
+
+<!-- WHATSAPP FLOTANTE -->
+<a href="https://wa.me/584247827899" target="_blank" class="wa-float" title="Ordenar por WhatsApp">
+  <div class="wa-float-pulse"></div>
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
+
+<script>
+  /* ── Carga secciones HTML con manejo de errores ────────────────────
+     - Verifica res.ok antes de leer el HTML
+     - Muestra un placeholder visible si algo falla (404, red caída, etc.)
+     - Ya no falla en silencio
+  ─────────────────────────────────────────────────────────────────── */
+  async function loadComponent(id, file) {
+    try {
+      const res = await fetch(file);
+      if (!res.ok) throw new Error(`HTTP ${res.status} — ${file}`);
+      const html = await res.text();
+      document.getElementById(id).innerHTML = html;
+    } catch (err) {
+      console.error(`[loadComponent] ${err.message}`);
+      document.getElementById(id).innerHTML =
+        `<div style="padding:1rem;color:#c0392b;font-size:.85rem">
+           ⚠️ No se pudo cargar <code>${file}</code>
+         </div>`;
+    }
+  }
+
+  Promise.all([
+    loadComponent('navbar-container',     'sections/navbar.html'),
+    loadComponent('hero-container',       'sections/hero.html'),
+    loadComponent('destacados-container', 'sections/destacados.html'),
+    loadComponent('menu-container',       'sections/menu.html'),
+    loadComponent('about-container',      'sections/about.html'),
+    loadComponent('valores-container',    'sections/valores.html'),
+    loadComponent('horario-container',    'sections/horario.html'),
+  ]).then(() => {
+    // Un solo script type=module — el navegador resuelve el árbol
+    // de imports automáticamente: main.js → cart.js, mcard.js, etc.
+    const s = document.createElement('script');
+    s.type  = 'module';
+    s.src   = 'js/main.js';
+    document.body.appendChild(s);
+
+    // Barra de urgencia (horario)
+    const bar = document.getElementById('urgency-bar');
+    if (bar) {
+      const now      = new Date();
+      const totalMin = now.getHours() * 60 + now.getMinutes();
+      const isOpen   = totalMin >= 660 && totalMin < 1320;
+      if (isOpen) {
+        bar.innerHTML = '🍝 Abierto ahora &nbsp;·&nbsp; Lunes a Domingo 11:00 AM – 10:00 PM &nbsp;·&nbsp; Delivery disponible &nbsp;<a href="https://wa.me/584247827899" target="_blank">Ordenar ahora →</a>';
+      } else {
+        bar.classList.add('closed');
+        bar.innerHTML = '🔴 Cerrado &nbsp;·&nbsp; Nuestro horario es Lunes a Domingo 11:00 AM – 10:00 PM';
+      }
+    }
+  });
+</script>
+</body>
+</html>

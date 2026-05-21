@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es" style="color-scheme:light only">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light only">
+<title>Reservar Mesa · La Finestra</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,500;1,300;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/variables.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/reservas.css">
+</head>
+<body class="page-dark">
+
+<header class="res-header">
+  <a href="index.html" class="res-back">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M19 12H5M12 5l-7 7 7 7"/>
+    </svg>
+    Volver
+  </a>
+  <span class="res-header-logo">La Finestra</span>
+</header>
+
+<main class="res-page">
+  <div class="res-wrap">
+
+    <span class="res-eyebrow">— Mesa para ti —</span>
+    <h1 class="res-title">Reservar Mesa</h1>
+    <p class="res-sub">Asegura tu lugar en La Finestra.<br>Te confirmamos por WhatsApp.</p>
+
+    <div class="rf-group">
+      <label class="rf-label">👤 Nombre</label>
+      <input class="rf-input" id="res-nombre" type="text" placeholder="Tu nombre completo" autocomplete="name">
+    </div>
+
+    <div class="rf-group">
+      <label class="rf-label">📅 Fecha</label>
+      <input class="rf-input" id="res-fecha" type="date">
+    </div>
+
+    <div class="rf-group">
+      <label class="rf-label">🕐 Hora</label>
+      <div class="rf-chips" id="res-hora-chips">
+        <button type="button" class="rf-chip" data-val="11:00">11:00</button>
+        <button type="button" class="rf-chip" data-val="11:30">11:30</button>
+        <button type="button" class="rf-chip" data-val="12:00">12:00</button>
+        <button type="button" class="rf-chip" data-val="12:30">12:30</button>
+        <button type="button" class="rf-chip" data-val="13:00">13:00</button>
+        <button type="button" class="rf-chip" data-val="13:30">13:30</button>
+        <button type="button" class="rf-chip" data-val="14:00">14:00</button>
+        <button type="button" class="rf-chip" data-val="14:30">14:30</button>
+        <button type="button" class="rf-chip" data-val="19:00">19:00</button>
+        <button type="button" class="rf-chip" data-val="19:30">19:30</button>
+        <button type="button" class="rf-chip" data-val="20:00">20:00</button>
+        <button type="button" class="rf-chip" data-val="20:30">20:30</button>
+        <button type="button" class="rf-chip" data-val="21:00">21:00</button>
+        <button type="button" class="rf-chip" data-val="21:30">21:30</button>
+        <button type="button" class="rf-chip" data-val="22:00">22:00</button>
+      </div>
+    </div>
+
+    <div class="rf-group">
+      <label class="rf-label">👥 Personas</label>
+      <div class="rf-chips" id="res-personas-chips">
+        <button type="button" class="rf-chip" data-val="1">1</button>
+        <button type="button" class="rf-chip" data-val="2">2</button>
+        <button type="button" class="rf-chip" data-val="3">3</button>
+        <button type="button" class="rf-chip" data-val="4">4</button>
+        <button type="button" class="rf-chip" data-val="5">5</button>
+        <button type="button" class="rf-chip" data-val="6">6</button>
+        <button type="button" class="rf-chip" data-val="7">7</button>
+        <button type="button" class="rf-chip" data-val="8">8</button>
+        <button type="button" class="rf-chip" data-val="9">9</button>
+        <button type="button" class="rf-chip" data-val="10">10</button>
+        <button type="button" class="rf-chip" data-val="+10">+10</button>
+      </div>
+    </div>
+
+    <div class="rf-group">
+      <label class="rf-label">📝 Notas <span class="rf-opcional">(opcional)</span></label>
+      <textarea class="rf-input rf-textarea" id="res-notas" placeholder="Celebración especial, alergias, preferencias..."></textarea>
+    </div>
+
+    <div class="rf-error" id="rf-error">Por favor completa todos los campos obligatorios.</div>
+
+    <button type="button" class="rf-btn" id="rf-submit">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+      </svg>
+      Enviar reserva por WhatsApp
+    </button>
+
+  </div>
+</main>
+
+<script>
+document.querySelectorAll('#res-hora-chips .rf-chip').forEach(function(chip) {
+  chip.addEventListener('click', function() {
+    document.querySelectorAll('#res-hora-chips .rf-chip').forEach(function(c) { c.classList.remove('activo'); });
+    this.classList.add('activo');
+  });
+});
+
+document.querySelectorAll('#res-personas-chips .rf-chip').forEach(function(chip) {
+  chip.addEventListener('click', function() {
+    document.querySelectorAll('#res-personas-chips .rf-chip').forEach(function(c) { c.classList.remove('activo'); });
+    this.classList.add('activo');
+  });
+});
+
+document.getElementById('rf-submit').addEventListener('click', function() {
+  var nombre  = document.getElementById('res-nombre').value.trim();
+  var fecha   = document.getElementById('res-fecha').value;
+  var horaEl  = document.querySelector('#res-hora-chips .rf-chip.activo');
+  var persEl  = document.querySelector('#res-personas-chips .rf-chip.activo');
+  var notas   = document.getElementById('res-notas').value.trim();
+  var errorEl = document.getElementById('rf-error');
+
+  if (!nombre || !fecha || !horaEl || !persEl) {
+    errorEl.classList.add('visible');
+    errorEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    return;
+  }
+  errorEl.classList.remove('visible');
+
+  var parts = fecha.split('-');
+  var y = parts[0], m = parts[1], d = parts[2];
+  var dias  = ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
+  var meses = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+  var fo = new Date(parseInt(y), parseInt(m)-1, parseInt(d));
+  var fechaLegible = dias[fo.getDay()] + ' ' + d + ' de ' + meses[parseInt(m)-1] + ' de ' + y;
+
+  var msg = '📅 *Reserva en La Finestra*\n\n'
+    + '👤 *Nombre:* ' + nombre + '\n'
+    + '📆 *Fecha:* ' + fechaLegible + '\n'
+    + '🕐 *Hora:* ' + horaEl.dataset.val + '\n'
+    + '👥 *Personas:* ' + persEl.dataset.val + '\n'
+    + (notas ? '📝 *Notas:* ' + notas + '\n' : '')
+    + '\n_Enviado desde lafinestra.vercel.app_';
+
+  window.open('https://wa.me/584247827899?text=' + encodeURIComponent(msg), '_blank');
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+/* ══════════════════════════════════════════
+   BADGES.CSS — Etiquetas de estado
+   Variantes: default (oscuro), verde, rojo.
+══════════════════════════════════════════ */
+
+.badge {
+  font-family: var(--font-sans);
+  font-size: var(--text-2xs);
+  letter-spacing: var(--ls-xl);
+  text-transform: uppercase;
+  font-weight: 500;
+  padding: 5px 13px;
+  border: 1px solid rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.45);
+  border-radius: var(--radio);
+  transition: var(--transition-fast);
+  line-height: 1;
+}
+.badge:hover { border-color: rgba(255,255,255,0.25); color: rgba(255,255,255,0.7); }
+
+.badge.g {
+  border-color: rgba(46,148,71,0.4);
+  color: var(--verde3);
+  background: rgba(46,148,71,0.06);
+}
+.badge.r {
+  border-color: rgba(212,40,48,0.35);
+  color: #d97070;
+  background: rgba(212,40,48,0.05);
+}
