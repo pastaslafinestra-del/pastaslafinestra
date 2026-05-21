@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Finestra — Admin</title>
+<style>
+  :root {
+    --bg: #0f0e0c;
+    --surface: #1a1916;
+    --surface2: #242220;
+    --border: #2e2c29;
+    --accent: #c9a96e;
+    --accent2: #e8c88a;
+    --danger: #c0392b;
+    --success: #27ae60;
+    --text: #f0ece4;
+    --muted: #7a756c;
+    --font: 'Georgia', serif;
+    --mono: 'Courier New', monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: var(--font); min-height: 100vh; }
+
+  /* LOGIN */
+  #login-screen {
+    min-height: 100vh; display: flex; align-items: center; justify-content: center;
+    background: radial-gradient(ellipse at 50% 0%, #1e1a14 0%, var(--bg) 70%);
+  }
+  .login-box {
+    width: 360px; padding: 48px 40px; border: 1px solid var(--border);
+    background: var(--surface); text-align: center;
+  }
+  .login-logo { font-size: 13px; letter-spacing: 4px; color: var(--accent); text-transform: uppercase; margin-bottom: 8px; }
+  .login-title { font-size: 28px; color: var(--text); margin-bottom: 32px; font-weight: normal; }
+  .login-box input {
+    width: 100%; padding: 12px 16px; background: var(--bg); border: 1px solid var(--border);
+    color: var(--text); font-size: 15px; font-family: var(--mono); margin-bottom: 16px; outline: none;
+    transition: border .2s;
+  }
+  .login-box input:focus { border-color: var(--accent); }
+  .login-btn {
+    width: 100%; padding: 13px; background: var(--accent); color: var(--bg);
+    border: none; font-size: 13px; letter-spacing: 2px; text-transform: uppercase;
+    cursor: pointer; font-family: var(--font); transition: background .2s;
+  }
+  .login-btn:hover { background: var(--accent2); }
+  .login-error { color: #e74c3c; font-size: 13px; margin-top: 12px; display: none; }
+
+  /* PANEL */
+  #panel { display: none; }
+
+  /* HEADER */
+  .admin-header {
+    background: var(--surface); border-bottom: 1px solid var(--border);
+    padding: 0 32px; display: flex; align-items: center; justify-content: space-between;
+    height: 60px; position: sticky; top: 0; z-index: 100;
+  }
+  .admin-brand { font-size: 11px; letter-spacing: 4px; color: var(--accent); text-transform: uppercase; }
+  .admin-nav { display: flex; gap: 4px; }
+  .nav-tab {
+    padding: 8px 18px; background: none; border: none; color: var(--muted);
+    font-family: var(--font); font-size: 13px; cursor: pointer; letter-spacing: 1px;
+    transition: color .2s; border-bottom: 2px solid transparent; margin-bottom: -1px;
+  }
+  .nav-tab.on { color: var(--accent); border-bottom-color: var(--accent); }
+  .logout-btn {
+    background: none; border: 1px solid var(--border); color: var(--muted);
+    padding: 7px 16px; font-size: 12px; cursor: pointer; font-family: var(--font);
+    transition: all .2s; letter-spacing: 1px;
+  }
+  .logout-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* MAIN */
+  .admin-main { max-width: 1100px; margin: 0 auto; padding: 32px 24px; }
+
+  /* SECTION TABS */
+  .section-view { display: none; }
+  .section-view.on { display: block; }
+
+  /* TOOLBAR */
+  .toolbar {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 24px; gap: 16px; flex-wrap: wrap;
+  }
+  .toolbar-left { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+  .filter-select {
+    background: var(--surface); border: 1px solid var(--border); color: var(--text);
+    padding: 9px 14px; font-family: var(--font); font-size: 13px; cursor: pointer; outline: none;
+  }
+  .search-input {
+    background: var(--surface); border: 1px solid var(--border); color: var(--text);
+    padding: 9px 14px; font-family: var(--font); font-size: 13px; outline: none; width: 220px;
+    transition: border .2s;
+  }
+  .search-input:focus { border-color: var(--accent); }
+  .btn {
+    padding: 9px 20px; border: none; font-family: var(--font); font-size: 13px;
+    cursor: pointer; letter-spacing: 1px; transition: all .2s;
+  }
+  .btn-primary { background: var(--accent); color: var(--bg); }
+  .btn-primary:hover { background: var(--accent2); }
+  .btn-danger { background: var(--danger); color: #fff; }
+  .btn-danger:hover { background: #e74c3c; }
+  .btn-ghost { background: none; border: 1px solid var(--border); color: var(--muted); }
+  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* TABLE */
+  .table-wrap { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th {
+    text-align: left; padding: 10px 14px; font-size: 11px; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--muted); border-bottom: 1px solid var(--border);
+    font-weight: normal; white-space: nowrap;
+  }
+  td { padding: 12px 14px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+  tr:hover td { background: var(--surface); }
+  .td-name { font-size: 14px; max-width: 200px; }
+  .td-cat { font-size: 12px; color: var(--muted); }
+  .td-price { font-family: var(--mono); color: var(--accent); white-space: nowrap; }
+  .td-desc { font-size: 12px; color: var(--muted); max-width: 260px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .td-img { width: 48px; height: 48px; object-fit: cover; background: var(--surface2); display: block; }
+  .td-img-placeholder { width: 48px; height: 48px; background: var(--surface2); display: flex; align-items: center; justify-content: center; }
+  .td-img-placeholder svg { width: 18px; height: 18px; stroke: var(--muted); fill: none; stroke-width: 1.5; }
+
+  /* TOGGLE */
+  .toggle { position: relative; display: inline-block; width: 40px; height: 22px; }
+  .toggle input { opacity: 0; width: 0; height: 0; }
+  .toggle-slider {
+    position: absolute; inset: 0; background: var(--border); cursor: pointer; transition: .2s;
+  }
+  .toggle-slider:before {
+    content: ''; position: absolute; height: 16px; width: 16px; left: 3px; bottom: 3px;
+    background: var(--muted); transition: .2s;
+  }
+  input:checked + .toggle-slider { background: var(--success); }
+  input:checked + .toggle-slider:before { transform: translateX(18px); background: #fff; }
+
+  /* ACTIONS */
+  .actions { display: flex; gap: 8px; }
+  .act-btn {
+    background: none; border: 1px solid var(--border); color: var(--muted);
+    padding: 5px 10px; font-size: 12px; cursor: pointer; font-family: var(--font);
+    transition: all .2s;
+  }
+  .act-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .act-btn.del:hover { border-color: var(--danger); color: var(--danger); }
+
+  /* MODAL */
+  .modal-overlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,.8); z-index: 200;
+    display: none; align-items: center; justify-content: center; padding: 24px;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: var(--surface); border: 1px solid var(--border);
+    width: 100%; max-width: 560px; max-height: 90vh; overflow-y: auto;
+  }
+  .modal-header {
+    padding: 24px 28px 0; display: flex; justify-content: space-between; align-items: center;
+  }
+  .modal-title { font-size: 18px; font-weight: normal; color: var(--text); }
+  .modal-close { background: none; border: none; color: var(--muted); font-size: 22px; cursor: pointer; line-height: 1; }
+  .modal-body { padding: 24px 28px; }
+  .modal-footer { padding: 0 28px 24px; display: flex; gap: 12px; justify-content: flex-end; }
+
+  /* FORM */
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .form-full { grid-column: 1 / -1; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+  .form-label { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); }
+  .form-input, .form-select, .form-textarea {
+    background: var(--bg); border: 1px solid var(--border); color: var(--text);
+    padding: 10px 12px; font-family: var(--font); font-size: 14px; outline: none; transition: border .2s;
+  }
+  .form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--accent); }
+  .form-textarea { resize: vertical; min-height: 80px; }
+  .form-select option { background: var(--surface); }
+
+  /* IMG UPLOAD */
+  .img-upload-area {
+    border: 1px dashed var(--border); padding: 20px; text-align: center; cursor: pointer;
+    transition: border .2s; position: relative;
+  }
+  .img-upload-area:hover { border-color: var(--accent); }
+  .img-upload-area input[type=file] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
+  .img-upload-label { font-size: 12px; color: var(--muted); }
+  .img-preview { max-width: 100%; max-height: 120px; object-fit: contain; display: none; margin: 8px auto 0; }
+
+  /* TOAST */
+  .toast {
+    position: fixed; bottom: 24px; right: 24px; padding: 14px 22px;
+    font-size: 13px; z-index: 999; transform: translateY(80px); opacity: 0;
+    transition: all .3s; pointer-events: none;
+  }
+  .toast.show { transform: translateY(0); opacity: 1; }
+  .toast.ok { background: var(--success); color: #fff; }
+  .toast.err { background: var(--danger); color: #fff; }
+
+  /* LOADING */
+  .loading { padding: 48px; text-align: center; color: var(--muted); font-size: 13px; letter-spacing: 2px; }
+
+  /* BADGE */
+  .badge { padding: 3px 10px; font-size: 11px; letter-spacing: 1px; }
+  .badge-on { background: rgba(39,174,96,.15); color: var(--success); }
+  .badge-off { background: rgba(192,57,43,.12); color: #e74c3c; }
+
+  /* STATS */
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-bottom: 32px; }
+  .stat-card { background: var(--surface); border: 1px solid var(--border); padding: 20px 24px; }
+  .stat-label { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+  .stat-value { font-size: 32px; color: var(--accent); font-weight: normal; }
+
+  @media (max-width: 600px) {
+    .form-grid { grid-template-columns: 1fr; }
+    .admin-nav { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login-screen">
+  <div class="login-box">
+    <div class="login-logo">La Finestra</div>
+    <div class="login-title">Panel Admin</div>
+    <input type="password" id="pwd-input" placeholder="Contraseña" onkeydown="if(event.key==='Enter')doLogin()">
+    <button class="login-btn" onclick="doLogin()">Entrar</button>
+    <div class="login-error" id="login-error">Contraseña incorrecta</div>
+  </div>
+</div>
+
+<!-- PANEL -->
+<div id="panel">
+  <header class="admin-header">
+    <div class="admin-brand">La Finestra · Admin</div>
+    <nav class="admin-nav">
+      <button class="nav-tab on" onclick="switchSection('menu', this)">Menú</button>
+      <button class="nav-tab" onclick="switchSection('destacados', this)">Destacados</button>
+    </nav>
+    <button class="logout-btn" onclick="logout()">Salir</button>
+  </header>
+
+  <main class="admin-main">
+
+    <!-- MENU SECTION -->
+    <div id="section-menu" class="section-view on">
+      <div class="stats" id="menu-stats"></div>
+      <div class="toolbar">
+        <div class="toolbar-left">
+          <select class="filter-select" id="cat-filter" onchange="filterTable()">
+            <option value="">Todas las categorías</option>
+            <option value="entradas">Entradas</option>
+            <option value="pastas">Pastas</option>
+            <option value="pizzas">Pizzas</option>
+            <option value="proteinas">Proteínas</option>
+            <option value="ensaladas">Ensaladas</option>
+            <option value="infantil">Infantil</option>
+            <option value="postres">Postres</option>
+            <option value="bebidas">Bebidas</option>
+            <option value="adicionales">Adicionales</option>
+          </select>
+          <input class="search-input" type="text" placeholder="Buscar plato..." id="search-input" oninput="filterTable()">
+        </div>
+        <button class="btn btn-primary" onclick="openModal()">+ Nuevo plato</button>
+      </div>
+      <div class="table-wrap">
+        <table id="menu-table">
+          <thead>
+            <tr>
+              <th>Imagen</th>
+              <th>Categoría</th>
+              <th>Nombre</th>
+              <th>Descripción</th>
+              <th>Precio</th>
+              <th>Activo</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="menu-tbody"><tr><td colspan="7" class="loading">Cargando...</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- DESTACADOS SECTION -->
+    <div id="section-destacados" class="section-view">
+      <div class="toolbar">
+        <div class="toolbar-left"></div>
+        <button class="btn btn-primary" onclick="openDestModal()">+ Nuevo destacado</button>
+      </div>
+      <div class="table-wrap">
+        <table id="dest-table">
+          <thead>
+            <tr>
+              <th>Imagen</th>
+              <th>Badge</th>
+              <th>Nombre</th>
+              <th>Precio</th>
+              <th>Activo</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="dest-tbody"><tr><td colspan="6" class="loading">Cargando...</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- MODAL MENU ITEM -->
+<div class="modal-overlay" id="item-modal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title" id="modal-title">Nuevo plato</div>
+      <button class="modal-close" onclick="closeModal()">×</button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="edit-id">
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label">Categoría *</label>
+          <select class="form-select" id="f-categoria">
+            <option value="entradas">Entradas</option>
+            <option value="pastas">Pastas</option>
+            <option value="pizzas">Pizzas</option>
+            <option value="proteinas">Proteínas</option>
+            <option value="ensaladas">Ensaladas</option>
+            <option value="infantil">Infantil</option>
+            <option value="postres">Postres</option>
+            <option value="bebidas">Bebidas</option>
+            <option value="adicionales">Adicionales</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Subcategoría (cat)</label>
+          <input class="form-input" id="f-cat" placeholder="Ej: Pasta Larga">
+        </div>
+        <div class="form-group form-full">
+          <label class="form-label">Nombre *</label>
+          <input class="form-input" id="f-name" placeholder="Nombre del plato">
+        </div>
+        <div class="form-group form-full">
+          <label class="form-label">Descripción *</label>
+          <textarea class="form-textarea" id="f-desc" placeholder="Descripción del plato"></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Precio *</label>
+          <input class="form-input" id="f-price" placeholder="$8,04">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Texto WhatsApp</label>
+          <input class="form-input" id="f-watext" placeholder="Ej: una Burrata Pesto">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Orden</label>
+          <input class="form-input" id="f-orden" type="number" value="0">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Disponible</label>
+          <select class="form-select" id="f-disponible">
+            <option value="true">Sí</option>
+            <option value="false">No</option>
+          </select>
+        </div>
+        <div class="form-group form-full">
+          <label class="form-label">Imagen</label>
+          <div class="img-upload-area" id="upload-area">
+            <input type="file" id="f-img-file" accept="image/*" onchange="previewImg(this)">
+            <div class="img-upload-label">Clic para subir imagen (webp, jpg, png)</div>
+            <img class="img-preview" id="img-preview-item" src="">
+          </div>
+          <div style="font-size:11px;color:var(--muted);margin-top:6px;" id="current-img-label"></div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="closeModal()">Cancelar</button>
+      <button class="btn btn-primary" onclick="saveItem()">Guardar</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL DESTACADO -->
+<div class="modal-overlay" id="dest-modal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title" id="dest-modal-title">Nuevo destacado</div>
+      <button class="modal-close" onclick="closeDestModal()">×</button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="dest-edit-id">
+      <div class="form-grid">
+        <div class="form-group form-full">
+          <label class="form-label">Badge *</label>
+          <input class="form-input" id="df-badge" placeholder="Ej: ⭐ Chef recomienda">
+        </div>
+        <div class="form-group form-full">
+          <label class="form-label">Nombre *</label>
+          <input class="form-input" id="df-name" placeholder="Nombre del plato">
+        </div>
+        <div class="form-group form-full">
+          <label class="form-label">Descripción *</label>
+          <textarea class="form-textarea" id="df-desc" placeholder="Descripción"></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Precio *</label>
+          <input class="form-input" id="df-price" placeholder="$8,04">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Texto WhatsApp</label>
+          <input class="form-input" id="df-watext" placeholder="Ej: una Burrata Pesto">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Orden</label>
+          <input class="form-input" id="df-orden" type="number" value="0">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Disponible</label>
+          <select class="form-select" id="df-disponible">
+            <option value="true">Sí</option>
+            <option value="false">No</option>
+          </select>
+        </div>
+        <div class="form-group form-full">
+          <label class="form-label">Imagen</label>
+          <div class="img-upload-area">
+            <input type="file" id="df-img-file" accept="image/*" onchange="previewDestImg(this)">
+            <div class="img-upload-label">Clic para subir imagen</div>
+            <img class="img-preview" id="img-preview-dest" src="">
+          </div>
+          <div style="font-size:11px;color:var(--muted);margin-top:6px;" id="dest-current-img-label"></div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="closeDestModal()">Cancelar</button>
+      <button class="btn btn-primary" onclick="saveDestacado()">Guardar</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+  // ── CONFIG ──────────────────────────────────────────────
+  const ADMIN_PASSWORD  = 'finestra2024';
+  const SUPABASE_URL    = 'https://atjijqvwwdlydgsonptr.supabase.co';
+  const SUPABASE_ANON   = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF0amlqcXZ3d2RseWRnc29ucHRyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkzMTI1MDIsImV4cCI6MjA5NDg4ODUwMn0.DDVEbZaVmAqmuvUs-jAHYAWm1PVUyT1zzy5gKJCdK3Q';
+  const STORAGE_URL     = `${SUPABASE_URL}/storage/v1/object/public/menu-images/`;
+  const HEADERS         = { 'apikey': SUPABASE_ANON, 'Authorization': `Bearer ${SUPABASE_ANON}`, 'Content-Type': 'application/json' };
+
+  // ── AUTH ─────────────────────────────────────────────────
+  function doLogin() {
+    const val = document.getElementById('pwd-input').value;
+    if (val === ADMIN_PASSWORD) {
+      document.getElementById('login-screen').style.display = 'none';
+      document.getElementById('panel').style.display = 'block';
+      loadMenu();
+      loadDestacados();
+    } else {
+      document.getElementById('login-error').style.display = 'block';
+    }
+  }
+  function logout() {
+    document.getElementById('panel').style.display = 'none';
+    document.getElementById('login-screen').style.display = 'flex';
+    document.getElementById('pwd-input').value = '';
+  }
+
+  // ── NAVIGATION ───────────────────────────────────────────
+  function switchSection(name, btn) {
+    document.querySelectorAll('.section-view').forEach(s => s.classList.remove('on'));
+    document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('on'));
+    document.getElementById('section-' + name).classList.add('on');
+    btn.classList.add('on');
+  }
+
+  // ── TOAST ────────────────────────────────────────────────
+  function toast(msg, type = 'ok') {
+    const t = document.getElementById('toast');
+    t.textContent = msg; t.className = `toast ${type} show`;
+    setTimeout(() => t.classList.remove('show'), 3000);
+  }
+
+  // ── SUPABASE HELPERS ─────────────────────────────────────
+  async function sbGet(table, params = '') {
+    const r = await fetch(`${SUPABASE_URL}/rest/v1/${table}?${params}`, { headers: HEADERS });
+    if (!r.ok) throw new Error(await r.text());
+    return r.json();
+  }
+  async function sbInsert(table, data) {
+    const r = await fetch(`${SUPABASE_URL}/rest/v1/${table}`, {
+      method: 'POST', headers: { ...HEADERS, 'Prefer': 'return=representation' },
+      body: JSON.stringify(data)
+    });
+    if (!r.ok) throw new Error(await r.text());
+    return r.json();
+  }
+  async function sbUpdate(table, id, data) {
+    const r = await fetch(`${SUPABASE_URL}/rest/v1/${table}?id=eq.${id}`, {
+      method: 'PATCH', headers: { ...HEADERS, 'Prefer': 'return=representation' },
+      body: JSON.stringify(data)
+    });
+    if (!r.ok) throw new Error(await r.text());
+    return r.json();
+  }
+  async function sbDelete(table, id) {
+    const r = await fetch(`${SUPABASE_URL}/rest/v1/${table}?id=eq.${id}`, {
+      method: 'DELETE', headers: HEADERS
+    });
+    if (!r.ok) throw new Error(await r.text());
+  }
+
+  // ── IMAGE UPLOAD ─────────────────────────────────────────
+  async function uploadImage(file, folder) {
+    const ext  = file.name.split('.').pop();
+    const name = `${folder}/${Date.now()}.${ext}`;
+    const r = await fetch(`${SUPABASE_URL}/storage/v1/object/menu-images/${name}`, {
+      method: 'POST',
+      headers: { 'apikey': SUPABASE_ANON, 'Authorization': `Bearer ${SUPABASE_ANON}`, 'Content-Type': file.type },
+      body: file
+    });
+    if (!r.ok) throw new Error('Error subiendo imagen');
+    return name;
+  }
+
+  function previewImg(input) {
+    const file = input.files[0];
+    if (!file) return;
+    const img = document.getElementById('img-preview-item');
+    img.src = URL.createObjectURL(file);
+    img.style.display = 'block';
+  }
+  function previewDestImg(input) {
+    const file = input.files[0];
+    if (!file) return;
+    const img = document.getElementById('img-preview-dest');
+    img.src = URL.createObjectURL(file);
+    img.style.display = 'block';
+  }
+
+  // ── MENU ─────────────────────────────────────────────────
+  let allItems = [];
+
+  async function loadMenu() {
+    try {
+      allItems = await sbGet('menu_items', 'order=categoria.asc,orden.asc');
+      renderStats();
+      renderTable();
+    } catch(e) { toast('Error cargando menú', 'err'); }
+  }
+
+  function renderStats() {
+    const total   = allItems.length;
+    const activos = allItems.filter(i => i.disponible).length;
+    const cats    = [...new Set(allItems.map(i => i.categoria))].length;
+    document.getElementById('menu-stats').innerHTML = `
+      <div class="stat-card"><div class="stat-label">Total platos</div><div class="stat-value">${total}</div></div>
+      <div class="stat-card"><div class="stat-label">Activos</div><div class="stat-value">${activos}</div></div>
+      <div class="stat-card"><div class="stat-label">Sin imagen</div><div class="stat-value">${allItems.filter(i=>!i.img).length}</div></div>
+      <div class="stat-card"><div class="stat-label">Categorías</div><div class="stat-value">${cats}</div></div>
+    `;
+  }
+
+  function filterTable() {
+    const cat = document.getElementById('cat-filter').value;
+    const q   = document.getElementById('search-input').value.toLowerCase();
+    const filtered = allItems.filter(i =>
+      (!cat || i.categoria === cat) &&
+      (!q   || i.name.toLowerCase().includes(q) || (i.descripcion||'').toLowerCase().includes(q))
+    );
+    renderRows(filtered);
+  }
+
+  function renderTable() { renderRows(allItems); }
+
+  function renderRows(items) {
+    const tbody = document.getElementById('menu-tbody');
+    if (!items.length) { tbody.innerHTML = '<tr><td colspan="7" class="loading">Sin resultados</td></tr>'; return; }
+    tbody.innerHTML = items.map(item => `
+      <tr>
+        <td>${item.img
+          ? `<img class="td-img" src="${STORAGE_URL}${item.img}" alt="">`
+          : `<div class="td-img-placeholder"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>`
+        }</td>
+        <td><div class="td-cat">${item.categoria}</div>${item.cat ? `<div style="font-size:11px;color:var(--muted)">${item.cat}</div>` : ''}</td>
+        <td class="td-name">${item.name}</td>
+        <td class="td-desc">${item.descripcion || ''}</td>
+        <td class="td-price">${item.price}</td>
+        <td>
+          <label class="toggle">
+            <input type="checkbox" ${item.disponible ? 'checked' : ''} onchange="toggleDisponible(${item.id}, this.checked)">
+            <span class="toggle-slider"></span>
+          </label>
+        </td>
+        <td>
+          <div class="actions">
+            <button class="act-btn" onclick="openModal(${item.id})">Editar</button>
+            <button class="act-btn del" onclick="deleteItem(${item.id}, '${item.name.replace(/'/g,"\\'")}')">Borrar</button>
+          </div>
+        </td>
+      </tr>`).join('');
+  }
+
+  async function toggleDisponible(id, val) {
+    try {
+      await sbUpdate('menu_items', id, { disponible: val });
+      const item = allItems.find(i => i.id === id);
+      if (item) item.disponible = val;
+      renderStats();
+      toast(val ? 'Plato activado' : 'Plato desactivado');
+    } catch(e) { toast('Error actualizando', 'err'); }
+  }
+
+  async function deleteItem(id, name) {
+    if (!confirm(`¿Eliminar "${name}"?`)) return;
+    try {
+      await sbDelete('menu_items', id);
+      allItems = allItems.filter(i => i.id !== id);
+      renderStats(); renderTable();
+      toast('Plato eliminado');
+    } catch(e) { toast('Error eliminando', 'err'); }
+  }
+
+  // ── MODAL MENU ───────────────────────────────────────────
+  let editingId = null;
+
+  function openModal(id = null) {
+    editingId = id;
+    document.getElementById('modal-title').textContent = id ? 'Editar plato' : 'Nuevo plato';
+    document.getElementById('edit-id').value = id || '';
+    document.getElementById('img-preview-item').style.display = 'none';
+    document.getElementById('f-img-file').value = '';
+    document.getElementById('current-img-label').textContent = '';
+
+    if (id) {
+      const item = allItems.find(i => i.id === id);
+      if (!item) return;
+      document.getElementById('f-categoria').value  = item.categoria || 'entradas';
+      document.getElementById('f-cat').value        = item.cat || '';
+      document.getElementById('f-name').value       = item.name || '';
+      document.getElementById('f-desc').value       = item.descripcion || '';
+      document.getElementById('f-price').value      = item.price || '';
+      document.getElementById('f-watext').value     = item.wa_text || '';
+      document.getElementById('f-orden').value      = item.orden ?? 0;
+      document.getElementById('f-disponible').value = item.disponible ? 'true' : 'false';
+      if (item.img) {
+        document.getElementById('current-img-label').textContent = `Imagen actual: ${item.img}`;
+        document.getElementById('img-preview-item').src = STORAGE_URL + item.img;
+        document.getElementById('img-preview-item').style.display = 'block';
+      }
+    } else {
+      document.getElementById('f-categoria').value  = 'entradas';
+      document.getElementById('f-cat').value        = '';
+      document.getElementById('f-name').value       = '';
+      document.getElementById('f-desc').value       = '';
+      document.getElementById('f-price').value      = '';
+      document.getElementById('f-watext').value     = '';
+      document.getElementById('f-orden').value      = 0;
+      document.getElementById('f-disponible').value = 'true';
+    }
+    document.getElementById('item-modal').classList.add('open');
+  }
+
+  function closeModal() { document.getElementById('item-modal').classList.remove('open'); }
+
+  async function saveItem() {
+    const name = document.getElementById('f-name').value.trim();
+    const desc = document.getElementById('f-desc').value.trim();
+    const price = document.getElementById('f-price').value.trim();
+    if (!name || !desc || !price) { toast('Nombre, descripción y precio son obligatorios', 'err'); return; }
+
+    const categoria  = document.getElementById('f-categoria').value;
+    const cat        = document.getElementById('f-cat').value.trim() || null;
+    const wa_text    = document.getElementById('f-watext').value.trim();
+    const orden      = parseInt(document.getElementById('f-orden').value) || 0;
+    const disponible = document.getElementById('f-disponible').value === 'true';
+    const imgFile    = document.getElementById('f-img-file').files[0];
+
+    let imgPath = editingId ? (allItems.find(i => i.id === editingId)?.img || null) : null;
+
+    try {
+      if (imgFile) imgPath = await uploadImage(imgFile, categoria);
+
+      const payload = { categoria, cat, name, descripcion: desc, price, wa_text, orden, disponible, img: imgPath };
+
+      if (editingId) {
+        await sbUpdate('menu_items', editingId, payload);
+        const idx = allItems.findIndex(i => i.id === editingId);
+        if (idx !== -1) allItems[idx] = { ...allItems[idx], ...payload };
+        toast('Plato actualizado ✓');
+      } else {
+        const [created] = await sbInsert('menu_items', payload);
+        allItems.push(created);
+        toast('Plato creado ✓');
+      }
+
+      closeModal(); renderStats(); renderTable();
+    } catch(e) { toast('Error guardando: ' + e.message, 'err'); }
+  }
+
+  // ── DESTACADOS ───────────────────────────────────────────
+  let allDest = [];
+
+  async function loadDestacados() {
+    try {
+      allDest = await sbGet('destacados', 'order=orden.asc');
+      renderDestTable();
+    } catch(e) { toast('Error cargando destacados', 'err'); }
+  }
+
+  function renderDestTable() {
+    const tbody = document.getElementById('dest-tbody');
+    if (!allDest.length) { tbody.innerHTML = '<tr><td colspan="6" class="loading">Sin destacados</td></tr>'; return; }
+    tbody.innerHTML = allDest.map(d => `
+      <tr>
+        <td>${d.img
+          ? `<img class="td-img" src="${STORAGE_URL}${d.img}" alt="">`
+          : `<div class="td-img-placeholder"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>`
+        }</td>
+        <td style="font-size:14px">${d.badge}</td>
+        <td class="td-name">${d.name}</td>
+        <td class="td-price">${d.price}</td>
+        <td>
+          <label class="toggle">
+            <input type="checkbox" ${d.disponible ? 'checked' : ''} onchange="toggleDest(${d.id}, this.checked)">
+            <span class="toggle-slider"></span>
+          </label>
+        </td>
+        <td>
+          <div class="actions">
+            <button class="act-btn" onclick="openDestModal(${d.id})">Editar</button>
+            <button class="act-btn del" onclick="deleteDest(${d.id}, '${d.name.replace(/'/g,"\\'")}')">Borrar</button>
+          </div>
+        </td>
+      </tr>`).join('');
+  }
+
+  async function toggleDest(id, val) {
+    try {
+      await sbUpdate('destacados', id, { disponible: val });
+      const d = allDest.find(i => i.id === id);
+      if (d) d.disponible = val;
+      toast(val ? 'Activado' : 'Desactivado');
+    } catch(e) { toast('Error', 'err'); }
+  }
+
+  async function deleteDest(id, name) {
+    if (!confirm(`¿Eliminar destacado "${name}"?`)) return;
+    try {
+      await sbDelete('destacados', id);
+      allDest = allDest.filter(d => d.id !== id);
+      renderDestTable();
+      toast('Eliminado');
+    } catch(e) { toast('Error eliminando', 'err'); }
+  }
+
+  let editingDestId = null;
+
+  function openDestModal(id = null) {
+    editingDestId = id;
+    document.getElementById('dest-modal-title').textContent = id ? 'Editar destacado' : 'Nuevo destacado';
+    document.getElementById('img-preview-dest').style.display = 'none';
+    document.getElementById('df-img-file').value = '';
+    document.getElementById('dest-current-img-label').textContent = '';
+
+    if (id) {
+      const d = allDest.find(i => i.id === id);
+      if (!d) return;
+      document.getElementById('df-badge').value      = d.badge || '';
+      document.getElementById('df-name').value       = d.name || '';
+      document.getElementById('df-desc').value       = d.descripcion || '';
+      document.getElementById('df-price').value      = d.price || '';
+      document.getElementById('df-watext').value     = d.wa_text || '';
+      document.getElementById('df-orden').value      = d.orden ?? 0;
+      document.getElementById('df-disponible').value = d.disponible ? 'true' : 'false';
+      if (d.img) {
+        document.getElementById('dest-current-img-label').textContent = `Imagen actual: ${d.img}`;
+        document.getElementById('img-preview-dest').src = STORAGE_URL + d.img;
+        document.getElementById('img-preview-dest').style.display = 'block';
+      }
+    } else {
+      ['df-badge','df-name','df-desc','df-price','df-watext'].forEach(id => document.getElementById(id).value = '');
+      document.getElementById('df-orden').value = 0;
+      document.getElementById('df-disponible').value = 'true';
+    }
+    document.getElementById('dest-modal').classList.add('open');
+  }
+
+  function closeDestModal() { document.getElementById('dest-modal').classList.remove('open'); }
+
+  async function saveDestacado() {
+    const badge = document.getElementById('df-badge').value.trim();
+    const name  = document.getElementById('df-name').value.trim();
+    const desc  = document.getElementById('df-desc').value.trim();
+    const price = document.getElementById('df-price').value.trim();
+    if (!badge || !name || !desc || !price) { toast('Badge, nombre, descripción y precio son obligatorios', 'err'); return; }
+
+    const wa_text    = document.getElementById('df-watext').value.trim();
+    const orden      = parseInt(document.getElementById('df-orden').value) || 0;
+    const disponible = document.getElementById('df-disponible').value === 'true';
+    const imgFile    = document.getElementById('df-img-file').files[0];
+
+    let imgPath = editingDestId ? (allDest.find(d => d.id === editingDestId)?.img || null) : null;
+
+    try {
+      if (imgFile) imgPath = await uploadImage(imgFile, 'destacados');
+
+      const payload = { badge, name, descripcion: desc, price, wa_text, orden, disponible, img: imgPath };
+
+      if (editingDestId) {
+        await sbUpdate('destacados', editingDestId, payload);
+        const idx = allDest.findIndex(d => d.id === editingDestId);
+        if (idx !== -1) allDest[idx] = { ...allDest[idx], ...payload };
+        toast('Destacado actualizado ✓');
+      } else {
+        const [created] = await sbInsert('destacados', payload);
+        allDest.push(created);
+        toast('Destacado creado ✓');
+      }
+
+      closeDestModal(); renderDestTable();
+    } catch(e) { toast('Error guardando: ' + e.message, 'err'); }
+  }
+</script>
+</body>
+</html>
