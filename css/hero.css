@@ -46,7 +46,7 @@
   position: relative;
   z-index: 2;
   text-align: center;
-  padding: 2rem 1.5rem 3.5rem;
+  padding: var(--space-7) var(--space-6) var(--space-9);
   width: 100%;
   max-width: 600px;
   margin: 0 auto;
@@ -56,13 +56,14 @@
   gap: 0;
 }
 
+/* ── Textos ── */
 .hero-brand {
   font-family: var(--font-serif);
   font-size: clamp(1.4rem, 5vw, 2rem);
   font-style: italic;
   color: var(--blanco);
-  letter-spacing: 0.04em;
-  margin-bottom: 0.6rem;
+  letter-spacing: var(--ls-sm);
+  margin-bottom: var(--space-2);
   opacity: 0.95;
   text-shadow:
     0 2px 16px rgba(0,0,0,0.6),
@@ -71,11 +72,11 @@
 
 .hero-eyebrow {
   font-family: var(--font-sans);
-  color: rgba(255, 255, 255, 0.85);
+  color: rgba(255,255,255,0.85);
   font-size: var(--text-2xs);
   letter-spacing: var(--ls-xl);
   text-transform: uppercase;
-  margin-bottom: 1rem;
+  margin-bottom: var(--space-4);
   text-shadow: 0 1px 8px rgba(0,0,0,0.5);
 }
 
@@ -83,10 +84,10 @@
   font-family: var(--font-serif);
   font-size: clamp(2.8rem, 10vw, 4.4rem);
   font-weight: 700;
-  line-height: 1.02;
+  line-height: 1.02; /* --lh-hero: intencional, más compacto que --lh-tight */
   color: var(--blanco);
-  margin-bottom: 1rem;
-  letter-spacing: -0.01em;
+  margin-bottom: var(--space-4);
+  letter-spacing: var(--ls-tight);
   text-shadow:
     0 2px 40px rgba(0,0,0,0.5),
     0 1px 0 rgba(0,0,0,0.3);
@@ -98,21 +99,22 @@
   color: rgba(255,255,255,0.82);
   line-height: var(--lh-normal);
   font-style: italic;
-  margin-bottom: 2.2rem;
+  margin-bottom: var(--space-7);
   max-width: 340px;
   text-shadow: 0 1px 8px rgba(0,0,0,0.4);
 }
 
+/* ── CTAs ── */
 .hero-ctas {
   display: flex;
-  gap: 0.8rem;
+  gap: var(--space-3);
   justify-content: center;
   flex-wrap: wrap;
 }
 
-.btn-hero-p {
-  background: var(--verde2);
-  color: var(--blanco);
+/* Base compartida para ambos botones hero */
+.btn-hero-p,
+.btn-hero-s {
   padding: 14px 32px;
   border-radius: 100px;
   text-decoration: none;
@@ -122,13 +124,17 @@
   font-weight: 500;
   text-transform: uppercase;
   transition: var(--transition-smooth);
-  box-shadow: 0 4px 24px rgba(42,122,59,0.35), inset 0 1px 0 rgba(255,255,255,0.1);
 }
 
+.btn-hero-p {
+  background: var(--verde2);
+  color: var(--blanco);
+  box-shadow: var(--shadow-green), inset 0 1px 0 rgba(255,255,255,0.1);
+}
 .btn-hero-p:hover {
   background: var(--verde);
   transform: translateY(-2px);
-  box-shadow: 0 8px 32px rgba(42,122,59,0.45);
+  box-shadow: var(--shadow-green-hover);
 }
 
 .btn-hero-s {
@@ -137,17 +143,7 @@
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(255,255,255,0.22);
   color: rgba(255,255,255,0.9);
-  padding: 14px 32px;
-  border-radius: 100px;
-  text-decoration: none;
-  font-family: var(--font-sans);
-  font-size: var(--text-sm);
-  letter-spacing: var(--ls-md);
-  font-weight: 500;
-  text-transform: uppercase;
-  transition: var(--transition-smooth);
 }
-
 .btn-hero-s:hover {
   background: rgba(255,255,255,0.16);
   border-color: rgba(255,255,255,0.4);
@@ -156,7 +152,7 @@
 
 /* ── Móvil pequeño ── */
 @media (max-width: 480px) {
-  .hero-content { padding: 1.5rem 1.2rem 3rem; }
+  .hero-content { padding: var(--space-6) var(--space-5) var(--space-9); }
   .hero-ctas { flex-direction: column; align-items: center; }
   .btn-hero-p, .btn-hero-s {
     width: 100%;
@@ -169,6 +165,6 @@
 /* ── Desktop ── */
 @media (min-width: 769px) {
   .hero { align-items: center; }
-  .hero-content { padding: 6rem 2rem 5rem; max-width: 720px; }
+  .hero-content { padding: var(--space-11) var(--space-7) var(--space-10); max-width: 720px; }
   .hero-sub { max-width: 420px; }
 }

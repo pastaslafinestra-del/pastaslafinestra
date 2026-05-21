@@ -1,0 +1,49 @@
+/* ══════════════════════════════════════════
+   FORCE-LIGHT.CSS — Overrides modo oscuro
+   Fuerza el sitio a modo claro siempre.
+   Ubicación: css/overrides/force-light.css
+   Cargar DESPUÉS de base.css en el HTML.
+══════════════════════════════════════════ */
+
+@media (prefers-color-scheme: dark) {
+
+  /* ── Fondo y texto global ── */
+  html:not(:has(body.page-dark)),
+  body:not(.page-dark) {
+    background-color: var(--blanco) !important;
+    color: var(--texto) !important;
+    color-scheme: light !important;
+  }
+
+  body:not(.page-dark) * {
+    color-scheme: light !important;
+  }
+
+  /* ── Inputs y controles de formulario ── */
+  body:not(.page-dark) input,
+  body:not(.page-dark) select,
+  body:not(.page-dark) textarea {
+    background-color: var(--blanco) !important;
+    color: var(--texto) !important;
+  }
+
+  /* ── Secciones por fondo ── */
+  .about, .menu-sec, .horario   { background-color: var(--crema)  !important; }
+  .hero, .valores                { background-color: var(--negro2) !important; }
+  .about-card, .icard,
+  .pasta-system, .price-notice   { background-color: var(--negro)  !important; }
+  .vitem                         { background-color: var(--negro3) !important; }
+  .cta-sec                       { background-color: var(--verde)  !important; }
+  footer                         { background-color: #060606       !important; }
+  nav                            { background-color: var(--negro)  !important; }
+
+  /* ── Cards de menú ── */
+  .mcard                         { background-color: var(--blanco) !important; color: var(--texto)  !important; }
+  .mcard-name                    { color: var(--texto)  !important; }
+  .mcard-desc                    { color: var(--texto3) !important; }
+  .mcard:hover                   { background-color: var(--crema)  !important; }
+
+  /* ── Tabs ── */
+  .tab                           { color: var(--texto3) !important; background-color: transparent !important; }
+  .tab.on                        { color: var(--verde)  !important; }
+}

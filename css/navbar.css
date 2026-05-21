@@ -23,20 +23,21 @@ nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 3rem;
+  padding: 0 var(--space-9);
   height: 68px;
   border-bottom: 1px solid rgba(255,255,255,0.06);
 }
 
+/* ── Logo ── */
 .nav-logo {
   font-family: var(--font-serif);
-  font-size: 1.3rem;
+  font-size: var(--text-lg);
   font-style: italic;
   color: var(--blanco);
-  letter-spacing: 0.01em;
+  letter-spacing: var(--ls-none);
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: var(--space-3);
 }
 .nav-logo-dot {
   width: 6px; height: 6px;
@@ -51,6 +52,7 @@ nav {
   text-transform: uppercase;
 }
 
+/* ── Links desktop ── */
 .nav-links {
   display: flex;
   gap: 0;
@@ -62,10 +64,10 @@ nav {
 .nav-links a {
   color: rgba(255,255,255,0.6);
   text-decoration: none;
-  font-size: 0.7rem;
-  letter-spacing: 0.14em;
+  font-size: var(--text-xs);
+  letter-spacing: var(--ls-lg);
   text-transform: uppercase;
-  padding: 0 1.2rem;
+  padding: 0 var(--space-5);
   height: 100%;
   display: flex;
   align-items: center;
@@ -76,13 +78,13 @@ nav {
 
 /* nav .nav-wa: especificidad mayor que .nav-links a — sin !important */
 nav .nav-wa {
-  margin-left: 1rem;
+  margin-left: var(--space-4);
   background: var(--verde);
-  color: white;
+  color: var(--blanco);
   padding: 10px 22px;
   height: auto;
-  font-size: 0.68rem;
-  letter-spacing: 0.14em;
+  font-size: var(--text-xs);
+  letter-spacing: var(--ls-lg);
   border-radius: var(--radio);
   border-bottom: none;
   box-shadow: var(--shadow-green-nav);
@@ -97,13 +99,13 @@ nav .nav-wa:hover {
 .nav-hamburger {
   display: none;
   flex-direction: column;
-  gap: 5px;
+  gap: var(--space-1);
   cursor: pointer;
-  padding: 8px;
+  padding: var(--space-2);
 }
 .nav-hamburger span {
   width: 22px; height: 1.5px;
-  background: white;
+  background: var(--blanco);
   border-radius: 2px;
   transition: var(--transition-fast);
 }
@@ -114,7 +116,7 @@ nav .nav-wa:hover {
   position: fixed;
   top: 68px; left: 0; right: 0;
   background: var(--negro);
-  padding: var(--space-card-mobile) 2rem;
+  padding: var(--space-card-mobile) var(--space-7);
   z-index: 299;
   border-bottom: 1px solid rgba(255,255,255,0.06);
 }
@@ -122,8 +124,8 @@ nav .nav-wa:hover {
 .nav-mobile a {
   color: rgba(255,255,255,0.7);
   text-decoration: none;
-  font-size: 0.8rem;
-  letter-spacing: 0.12em;
+  font-size: var(--text-sm);
+  letter-spacing: var(--ls-md);
   text-transform: uppercase;
   padding: var(--space-4) 0;
   border-bottom: 1px solid rgba(255,255,255,0.05);
@@ -134,10 +136,10 @@ nav .nav-wa:hover {
 /* .nav-mobile .mob-wa: especificidad mayor que .nav-mobile a — sin !important */
 .nav-mobile .mob-wa {
   background: var(--verde);
-  color: white;
+  color: var(--blanco);
   text-align: center;
   padding: 12px;
-  margin-top: 1rem;
+  margin-top: var(--space-4);
   border: none;
   border-radius: var(--radio);
 }

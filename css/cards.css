@@ -5,38 +5,39 @@
 ══════════════════════════════════════════ */
 
 .menu-sec {
+  background: var(--crema);
   padding-left: 0;
   padding-right: 0;
 }
 
 .menu-sec .inner {
-  padding-left: 2rem;
-  padding-right: 2rem;
+  padding-left: var(--space-7);
+  padding-right: var(--space-7);
 }
 
-/* ── Grid desktop: flex wrap, cards fijas 250px igual que dest-card ── */
+/* ── Grid desktop ── */
 .mgrid {
   display: flex;
   flex-wrap: wrap;
-  gap: 1.1rem;
-  padding: 0.25rem 2rem 1rem;
+  gap: var(--space-4);
+  padding: var(--space-1) var(--space-7) var(--space-4);
 }
 
 /* ── Card base ── */
 .mcard {
- width: 250px;
- min-width: 250px;
- max-width: 250px;
- height: auto;
- min-height: 400px;
- flex-shrink: 0;
- background: var(--blanco);
- border: 1px solid var(--gris2);
- border-radius: var(--radio-card);
- overflow: hidden;
- display: flex;
- flex-direction: column;
- transition: var(--transition-premium);
+  width: 250px;
+  min-width: 250px;
+  max-width: 250px;
+  height: auto;
+  min-height: 400px;
+  flex-shrink: 0;
+  background: var(--blanco);
+  border: 1px solid var(--crema3);
+  border-radius: var(--radio-card);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: var(--transition-premium);
 }
 
 .mcard:hover {
@@ -48,14 +49,13 @@
 
 .mcard:active { transform: scale(0.98); }
 
-/* Borde lateral verde eliminado — generaba desalineación entre cards con y sin foto */
-
+/* ── Imagen ── */
 .mcard-img {
   width: 100%;
   height: 175px;
   background-size: cover;
   background-position: center;
-  background-color: white;
+  background-color: var(--blanco);
   transition: transform 0.5s ease;
   position: relative;
   flex-shrink: 0;
@@ -71,12 +71,7 @@
 
 .mcard-foto:hover .mcard-img { transform: scale(1.05); }
 
-.mcard-clean .mcard-img {
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-color: white;
-}
-
+/* Cards clean: sin overlay en imagen */
 .mcard-clean .mcard-img::after { display: none; }
 
 /* Cards con foto: más altura para que el precio no se corra */
@@ -85,16 +80,21 @@
   min-height: 400px;
 }
 
+/* Imagen de producto con fondo claro */
+.mcard-img--producto {
+  background-color: var(--color-img-bg);
+}
+
+/* ── Body ── */
 .mcard-body {
-  padding: 0.85rem 0.95rem 0.95rem;
+  padding: var(--space-3) var(--space-3) var(--space-3);
   display: flex;
   flex-direction: column;
   flex: 1;
-   overflow: visible;
+  overflow: visible;
 }
 
-.mcard-cat { display: none; }
-
+/* ── Tags ── */
 .mcard-tag {
   display: inline-block;
   font-family: var(--font-sans);
@@ -106,13 +106,14 @@
   border: 1px solid transparent;
 }
 
-.tag-hot { background: rgba(180,50,20,0.1); color: var(--rojo2); border-color: rgba(180,50,20,0.2); }
+.tag-hot { background: rgba(180,50,20,0.1);  color: var(--rojo2);  border-color: rgba(180,50,20,0.2);  }
 .tag-new { background: rgba(27,107,48,0.08); color: var(--verde3); border-color: rgba(27,107,48,0.15); }
 .tag-veg { background: rgba(27,107,48,0.08); color: var(--verde3); border-color: rgba(27,107,48,0.15); }
 
+/* ── Textos ── */
 .mcard-name {
   font-family: var(--font-serif);
-  font-size: 0.98rem;
+  font-size: var(--text-base);
   font-weight: 700;
   color: var(--texto);
   margin-bottom: var(--space-2);
@@ -122,19 +123,17 @@
 
 .mcard-desc {
   font-family: var(--font-sans);
-  font-size: 0.83rem;
-  color: var(--texto3);
-  line-height: var(--lh-normal);
-  margin-bottom: 0;
+  font-size: var(--text-sm);
+  color: var(--texto2);
 }
 
-/* Footer siempre pegado al fondo en todos los tipos de card */
+/* ── Footer de card ── */
 .mcard-footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-top: auto;
-  padding-top: 0.7rem;
+  padding-top: var(--space-3);
   border-top: 1px solid var(--gris2);
 }
 
@@ -172,13 +171,13 @@
   flex-shrink: 0;
   transition: var(--transition-smooth);
   -webkit-tap-highlight-color: transparent;
-  box-shadow: 0 2px 10px rgba(27,107,48,0.3);
+  box-shadow: var(--shadow-green-subtle);
 }
 
 .mcard-btn:hover {
   background: var(--verde);
   transform: scale(1.1);
-  box-shadow: 0 4px 16px rgba(27,107,48,0.45);
+  box-shadow: var(--shadow-green);
 }
 
 .mcard-btn:active { transform: scale(0.9); }
@@ -186,81 +185,67 @@
 .mcard-btn svg {
   width: 15px;
   height: 15px;
-  stroke: white;
+  stroke: var(--blanco);
   fill: none;
   stroke-width: 2.5;
   stroke-linecap: round;
 }
 
-/* ── Nota informativa de panel (ej: proteínas) ── */
+/* ── Nota informativa de panel ── */
 .panel-note-italic {
   font-family: var(--font-sans);
-  font-size: 0.85rem;
+  font-size: var(--text-sm);
   color: var(--texto3);
   font-style: italic;
   line-height: var(--lh-normal);
   border-left: 3px solid var(--verde2);
   background: rgba(27,107,48,0.04);
   border-radius: 0 var(--radio) var(--radio) 0;
-  padding: 0.65rem 1.2rem;
-  margin: 0.75rem 2rem 0.25rem;
-}
-
-/* ── Imagen de producto con fondo claro (fondo igualado a las imágenes) ── */
-.mcard-img--producto {
-  background-color: #F0EDE6;
+  padding: var(--space-3) var(--space-5);
+  margin: var(--space-3) var(--space-7) var(--space-1);
 }
 
 /* ── Responsive móvil ── */
 @media (max-width: 768px) {
 
-  section.menu-sec {
-    padding-left: 0;
-    padding-right: 0;
-  }
-
   .menu-sec .inner {
-    padding-left: 1.2rem;
-    padding-right: 1.2rem;
+    padding-left: var(--space-5);
+    padding-right: var(--space-5);
   }
 
   .mgrid {
-    display: flex;
     flex-wrap: nowrap;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
-    gap: 0.9rem;
-    padding: 0.25rem 1.2rem 1rem;
-    align-items: stretch; /* todas las cards igualan altura entre sí */
+    gap: var(--space-3);
+    padding: var(--space-1) var(--space-5) var(--space-4);
+    align-items: stretch;
   }
 
   .mgrid::-webkit-scrollbar { display: none; }
 
   .mcard {
-  flex-shrink: 0;
-  width: 210px;
-  min-width: 210px;
-  max-width: 210px;
-  height: auto;
-  min-height: 380px;
-  scroll-snap-align: start;
-}
+    flex-shrink: 0;
+    width: 210px;
+    min-width: 210px;
+    max-width: 210px;
+    height: auto;
+    min-height: 380px;
+    scroll-snap-align: start;
+  }
 
   .mcard-foto .mcard-img { height: 155px; }
 
-  .mcard-body { padding: 0.75rem 0.9rem 0.9rem; }
+  .mcard-body { padding: var(--space-3); }
 
   .mcard-name { font-size: 0.95rem; }
 
-  /* 2 líneas en móvil para dejar espacio al footer con la altura fija */
-  .mcard-desc {
-  font-size: 0.80rem;
-}
+  .mcard-desc { font-size: 0.80rem; }
 
   .panel-note-italic {
-    margin: 0.5rem 1.2rem 0.25rem;
+    margin: var(--space-2) var(--space-5) var(--space-1);
     font-size: 0.80rem;
   }
 }
