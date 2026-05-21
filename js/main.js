@@ -15,6 +15,7 @@ try {
   const { menuData, destacadosData } = await loadMenuData();
   renderDestacados(destacadosData);
   initMenu(menuData);
+  initStagger(); // Cards ya existen en el DOM
 } catch (err) {
   console.error('[main] Error cargando menú:', err);
 }
@@ -32,6 +33,12 @@ function showTab(id, btn) {
       left: btn.offsetLeft - (tabsWrap.offsetWidth / 2) + (btn.offsetWidth / 2),
       behavior: 'smooth'
     });
+  }
+
+  // Animar cards del panel recién activado
+  if (!reducedMotion) {
+    const panel = document.getElementById('p-' + id);
+    if (panel) animateCards(panel.querySelectorAll('.mcard'));
   }
 }
 window.showTab = showTab;
@@ -62,22 +69,50 @@ document.querySelectorAll('.fade, .fade-left, .fade-right').forEach(el => {
 });
 
 /* ── 7. Stagger ─────────────────────────────────────────────────── */
-if (!reducedMotion) {
-  const gridObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
-      entry.target.querySelectorAll('.mcard, .dest-card').forEach((card, i) => {
+function animateCards(cards) {
+  cards.forEach((card, i) => {
+    card.style.opacity    = '0';
+    card.style.transform  = 'translateY(16px)';
+    card.style.transition = `opacity 0.45s ease ${i * 60}ms, transform 0.45s ease ${i * 60}ms`;
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      card.style.opacity = '1'; card.style.transform = 'translateY(0)';
+    }));
+  });
+}
+
+function initStagger() {
+  if (reducedMotion) return;
+
+  const isMobile = window.innerWidth <= 768;
+
+  if (isMobile) {
+    // Móvil: observer por card individual (scroll horizontal)
+    const cardObserver = new IntersectionObserver(entries => {
+      entries.forEach((e, i) => {
+        if (!e.isIntersecting) return;
+        const card = e.target;
         card.style.opacity    = '0';
-        card.style.transform  = 'translateY(18px)';
-        card.style.transition = `opacity 0.5s ease ${i * 70}ms, transform 0.5s ease ${i * 70}ms`;
+        card.style.transform  = 'translateY(16px)';
+        card.style.transition = `opacity 0.4s ease ${i * 40}ms, transform 0.4s ease ${i * 40}ms`;
         requestAnimationFrame(() => requestAnimationFrame(() => {
           card.style.opacity = '1'; card.style.transform = 'translateY(0)';
         }));
+        cardObserver.unobserve(card);
       });
-      gridObserver.unobserve(entry.target);
-    });
-  }, { threshold: 0.08 });
-  document.querySelectorAll('.mgrid, .dest-scroll').forEach(el => gridObserver.observe(el));
+    }, { threshold: 0.15, rootMargin: '0px 40px 0px 0px' });
+
+    document.querySelectorAll('.mcard, .dest-card').forEach(c => cardObserver.observe(c));
+  } else {
+    // Desktop: observer por grid (comportamiento original)
+    const gridObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        animateCards(entry.target.querySelectorAll('.mcard, .dest-card'));
+        gridObserver.unobserve(entry.target);
+      });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.mgrid, .dest-scroll').forEach(el => gridObserver.observe(el));
+  }
 }
 
 /* ── 8. Nav highlight ───────────────────────────────────────────── */
