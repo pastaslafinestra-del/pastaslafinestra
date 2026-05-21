@@ -10,6 +10,9 @@ import { loadMenuData }               from './menu-fetch.js';
 /* ── 1. Carrito ─────────────────────────────────────────────────── */
 Cart.init();
 
+/* ── 5. Reduced motion (movido aquí para que initStagger lo use) ── */
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
 /* ── 2. Datos desde Supabase → renderizado ──────────────────────── */
 try {
   const { menuData, destacadosData } = await loadMenuData();
@@ -53,9 +56,6 @@ initTabs();
 /* ── 4. Nav móvil ───────────────────────────────────────────────── */
 window.toggleMenu = () => document.getElementById('navMobile')?.classList.toggle('open');
 window.closeMenu  = () => document.getElementById('navMobile')?.classList.remove('open');
-
-/* ── 5. Reduced motion ──────────────────────────────────────────── */
-const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 /* ── 6. Scroll reveal ───────────────────────────────────────────── */
 const revealObserver = new IntersectionObserver(entries => {
