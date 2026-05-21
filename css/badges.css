@@ -25,6 +25,6 @@
 }
 .badge.r {
   border-color: rgba(212,40,48,0.35);
-  color: #d97070;
+  color: var(--rojo-claro);
   background: rgba(212,40,48,0.05);
 }

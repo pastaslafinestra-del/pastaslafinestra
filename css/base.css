@@ -1,6 +1,7 @@
 /* ══════════════════════════════════════════
-   BASE.CSS — Reset, body, dark-mode block
-   Fase 4: tipografía global optimizada
+   BASE.CSS — Reset, body, tipografía global
+   Nota: el bloque force-light está en
+         css/overrides/force-light.css
 ══════════════════════════════════════════ */
 
 *, *::before, *::after {
@@ -12,13 +13,12 @@
 html {
   scroll-behavior: smooth;
   color-scheme: light only;
-  background-color: #FFFFFF;
-  /* Base font-size: permite que rem escale limpio en todos los navegadores */
+  background-color: var(--blanco);
   font-size: 16px;
 }
 
 body {
-  background-color: #FFFFFF;
+  background-color: var(--blanco);
   color: var(--texto);
   font-family: var(--font-sans);
   font-size: var(--text-base);
@@ -28,23 +28,16 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-  color-scheme: light only;
 }
 
-/* Párrafos base */
 p {
   line-height: var(--lh-normal);
 }
 
-/* Links base */
 a {
   color: inherit;
 }
 
-/* Buttons base — reset del estilo nativo del navegador.
-   Sin esto, los <button> heredan background:buttonface (blanco/gris)
-   del agente de usuario, ignorando cualquier background:transparent
-   declarado en otros archivos CSS. */
 button {
   background: transparent;
   border: none;
@@ -54,42 +47,8 @@ button {
   color: inherit;
 }
 
-/* Mejorar rendering de fuentes serif en todos los contextos */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-serif);
   line-height: var(--lh-snug);
   letter-spacing: var(--ls-tight);
-  text-rendering: optimizeLegibility;
-}
-
-/* ── FORZAR MODO CLARO ── */
-@media (prefers-color-scheme: dark) {
-  html:not(:has(body.page-dark)),
-  body:not(.page-dark) {
-    background-color: #FFFFFF !important;
-    color: #1A1A1A !important;
-    color-scheme: light !important;
-  }
-  body:not(.page-dark) * { color-scheme: light !important; }
-  body:not(.page-dark) input,
-body:not(.page-dark) button:not(.tab):not(.mcard-btn):not(.dest-btn):not(.cart-fab):not(.cart-close):not(.cart-qty-btn):not(.cart-btn-wa),
-body:not(.page-dark) select,
-body:not(.page-dark) textarea {
-  background-color: #FFFFFF !important;
-  color: #1A1A1A !important;
-}
-  .about, .menu-sec, .horario { background-color: #F6F1E9 !important; }
-  .hero, .valores             { background-color: #141414 !important; }
-  .about-card, .icard,
-  .pasta-system, .price-notice { background-color: #0A0A0A !important; }
-  .vitem                      { background-color: #1C1C1C !important; }
-  .cta-sec                    { background-color: #1B6B30 !important; }
-  footer                      { background-color: #060606 !important; }
-  nav                         { background-color: #0A0A0A !important; }
-  .mcard        { background-color: #FFFFFF !important; color: #1A1A1A !important; }
-  .mcard-name   { color: #1A1A1A !important; }
-  .mcard-desc   { color: #7A746C !important; }
-  .mcard:hover  { background-color: #F6F1E9 !important; }
-  .tab    { color: #7A746C !important; background-color: transparent !important; }
-  .tab.on { color: #1B6B30 !important; }
 }

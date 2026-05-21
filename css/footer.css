@@ -4,7 +4,7 @@
 ══════════════════════════════════════════ */
 
 footer {
-  background: #060606;
+  background: var(--negro-deep);
   position: relative;
   overflow: hidden;
   padding: var(--space-10) var(--space-9) var(--space-9);
@@ -15,13 +15,13 @@ footer {
   border-top: none;
 }
 
-/* Bandera italiana arriba */
+/* Bandera italiana arriba — misma lógica que navbar y menu-blocks */
 footer::before {
   content: '';
   position: absolute;
   top: 0; left: 0; right: 0;
   height: 3px;
-  background: linear-gradient(90deg, #009246 33.3%, rgba(255,255,255,0.5) 33.3% 66.6%, #CE2B37 66.6%);
+  background: var(--gradient-flag);
 }
 
 /* Glow verde leve centro-top */
@@ -43,9 +43,9 @@ footer::after {
   font-style: italic;
   font-weight: 700;
   color: var(--blanco);
-  letter-spacing: -0.01em;
+  letter-spacing: var(--ls-tight);
   text-align: center;
-  margin-bottom: 1.4rem;
+  margin-bottom: var(--space-6);
   position: relative;
   z-index: 1;
 }
@@ -55,17 +55,17 @@ footer::after {
   width: 32px;
   height: 1px;
   background: rgba(27,107,48,0.6);
-  margin: 1rem auto 0;
+  margin: var(--space-4) auto 0;
 }
 
 .ft-info {
   font-family: var(--font-sans);
   font-size: var(--text-xs);
   color: rgba(255,255,255,0.3);
-  line-height: 2;
+  line-height: var(--lh-loose);
   text-align: center;
   letter-spacing: var(--ls-sm);
-  margin-bottom: 1.8rem;
+  margin-bottom: var(--space-7);
   position: relative;
   z-index: 1;
 }
@@ -85,7 +85,7 @@ footer::after {
   transition: var(--transition-fast);
   display: inline-flex;
   align-items: center;
-  gap: 7px;
+  gap: var(--space-2);
 }
 .ft-ig a::before {
   content: '';
@@ -103,7 +103,7 @@ footer::after {
 .ft-bottom {
   width: 100%;
   border-top: 1px solid rgba(255,255,255,0.05);
-  padding-top: 1.5rem;
+  padding-top: var(--space-6);
   text-align: center;
   position: relative;
   z-index: 1;
@@ -117,7 +117,7 @@ footer::after {
 }
 
 @media (max-width: 768px) {
-  footer { padding: var(--space-section-mobile) 1.5rem 2.5rem; }
-  .ft-logo { font-size: 1.6rem; }
+  footer    { padding: var(--space-section-mobile) var(--space-6) var(--space-8); }
+  .ft-logo  { font-size: 1.6rem; }
   footer::after { width: 280px; }
 }

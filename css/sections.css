@@ -8,7 +8,7 @@
 /* ── NOSOTROS ── */
 .about {
   background: var(--crema);
-  padding: var(--space-10) 2rem;
+  padding: var(--space-10) var(--space-7);
   position: relative;
 }
 .about::before {
@@ -41,22 +41,22 @@
 
 /* ── VALORES MINI ── */
 .valores-mini {
-  background: #0f0f0f;
+  background: var(--negro2);
   border-top: 1px solid rgba(255,255,255,0.05);
   border-bottom: 1px solid rgba(255,255,255,0.05);
-  padding: 22px 40px;
+  padding: var(--space-6) var(--space-10);
 }
 .valores-mini-inner {
   display: flex;
   justify-content: center;
-  gap: 60px;
+  gap: var(--space-10);
   max-width: 1100px;
   margin: 0 auto;
 }
 .valores-mini-item {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: var(--space-2);
   font-size: var(--text-xs);
   letter-spacing: var(--ls-sm);
   text-transform: uppercase;
@@ -64,25 +64,25 @@
   transition: var(--transition-fast);
 }
 .valores-mini-item:hover { color: rgba(255,255,255,0.85); }
-.valores-mini-item span { font-size: 18px; }
+.valores-mini-item span { font-size: var(--icon-sm); }
 
 /* ── HORARIO MINI ── */
 .horario-mini {
-  background: #0a0a0a;
-  padding: 28px 40px;
+  background: var(--negro);
+  padding: var(--space-7) var(--space-10);
   border-top: 1px solid rgba(255,255,255,0.04);
 }
 .horario-mini-inner {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 32px;
+  gap: var(--space-8);
   max-width: 1100px;
   margin: 0 auto;
   flex-wrap: wrap;
 }
-.horario-mini-item { display: flex; align-items: center; gap: 12px; }
-.horario-mini-item span { font-size: 20px; }
+.horario-mini-item { display: flex; align-items: center; gap: var(--space-3); }
+.horario-mini-item span { font-size: var(--icon-md); }
 .horario-mini-item strong {
   display: block;
   font-size: var(--text-2xs);
@@ -93,7 +93,7 @@
 }
 .horario-mini-item p,
 .horario-mini-item a {
-  font-size: 0.82rem;
+  font-size: var(--text-sm);
   color: rgba(255,255,255,0.8);
   text-decoration: none;
   transition: var(--transition-fast);
@@ -108,7 +108,7 @@
 .cta-sec {
   background: var(--verde);
   text-align: center;
-  padding: var(--space-11) 2rem;
+  padding: var(--space-11) var(--space-7);
   position: relative;
   overflow: hidden;
 }
@@ -130,7 +130,7 @@
 .cta-title {
   font-family: var(--font-serif);
   font-size: var(--text-h1);
-  color: white;
+  color: var(--blanco);
   font-style: italic;
   margin-bottom: var(--space-4);
   position: relative;
@@ -153,10 +153,11 @@
   position: relative;
   z-index: 1;
 }
+
 /* ── STRIP CÓMO ORDENAR ── */
 .how-strip {
   background: var(--crema);
-  padding: var(--space-9) 2rem;
+  padding: var(--space-9) var(--space-7);
   text-align: center;
 }
 .how-strip-inner { max-width: 900px; margin: 0 auto; }
@@ -183,36 +184,47 @@
   background: var(--crema3);
   z-index: 0;
 }
-.how-step { position: relative; z-index: 1; padding: 0 1.5rem; }
+.how-step { position: relative; z-index: 1; padding: 0 var(--space-6); }
 .how-num {
   width: 56px; height: 56px;
   border-radius: 50%;
-  background: #FFFFFF;
+  background: var(--blanco);
   border: 2px solid var(--verde3);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 1rem;
+  margin: 0 auto var(--space-4);
   font-family: var(--font-serif);
   font-size: var(--text-h4);
   color: var(--verde);
   box-shadow: var(--shadow-green-subtle);
 }
-.how-label { font-size: var(--text-sm); letter-spacing: var(--ls-sm); color: var(--texto2); line-height: var(--lh-normal); }
-.how-label strong { display: block; color: var(--texto); margin-bottom: var(--space-1); font-size: var(--text-sm); }
+.how-label {
+  font-size: var(--text-sm);
+  letter-spacing: var(--ls-sm);
+  color: var(--texto2);
+  line-height: var(--lh-normal);
+}
+.how-label strong {
+  display: block;
+  color: var(--texto);
+  margin-bottom: var(--space-1);
+  font-size: var(--text-sm);
+}
 
-
-/* ── RESPONSIVE SECCIONES ── */
+/* ── RESPONSIVE ── */
 @media (max-width: 768px) {
-  .valores-mini-inner { gap: 24px; flex-wrap: wrap; justify-content: center; }
-  .valores-mini { padding: 20px; }
-  .horario-mini { padding: 20px; }
-  .horario-mini-sep { display: none; }
-  .horario-mini-inner { gap: 20px; justify-content: flex-start; }
-  .how-strip { padding: var(--space-card) 1.5rem; }
-  .how-steps { grid-template-columns: 1fr; gap: var(--space-stack); }
-  .how-steps::before { display: none; }
-  .cta-sec { padding: 3.5rem 1.5rem; }
-  .cta-btns { flex-direction: column; align-items: center; }
-  .btn-blanco, .btn-blanco-secondary { width: 100%; max-width: 280px; text-align: center; }
+  .valores-mini        { padding: var(--space-5); }
+  .valores-mini-inner  { gap: var(--space-6); flex-wrap: wrap; justify-content: center; }
+  .horario-mini        { padding: var(--space-5); }
+  .horario-mini-sep    { display: none; }
+  .horario-mini-inner  { gap: var(--space-5); justify-content: flex-start; }
+  .how-strip           { padding: var(--space-card) var(--space-6); }
+  .how-steps           { grid-template-columns: 1fr; gap: var(--space-stack); }
+  .how-steps::before   { display: none; }
+  .cta-sec             { padding: var(--space-9) var(--space-6); }
+  .cta-btns            { flex-direction: column; align-items: center; }
+  /* .btn-white y .btn-white-outline se controlan en buttons.css */
+  .btn-white,
+  .btn-white-outline   { width: 100%; max-width: 280px; text-align: center; }
 }

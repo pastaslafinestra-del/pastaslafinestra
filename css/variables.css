@@ -1,15 +1,15 @@
 /* ══════════════════════════════════════════
    VARIABLES.CSS — Design Tokens
    La Finestra · Fase 4 (tipografía)
-   Prompt 2: sombras centralizadas
 ══════════════════════════════════════════ */
 
 :root {
   /* Negros / Charcoals */
-  --negro:   #0A0A0A;
-  --negro2:  #141414;
-  --negro3:  #1C1C1C;
-  --negro4:  #222222;
+  --negro:      #0A0A0A;
+  --negro2:     #141414;
+  --negro3:     #1C1C1C;
+  --negro4:     #222222;
+  --negro-deep: #060606;  /* footer background */
 
   /* Cremas */
   --crema:   #F6F1E9;
@@ -28,6 +28,8 @@
   --rojo:    #BF2227;
   --rojo2:   #D42830;
 
+  --rojo-claro: #d97070;  /* texto rojo suave sobre fondo oscuro (ps-col rojo) */
+
   /* Oros */
   --oro:     #9A7B2F;
   --oro2:    #C49A3C;
@@ -36,59 +38,64 @@
   --gris:    #F2F0EC;
   --gris2:   #E8E4DC;
 
+  /* WhatsApp */
+  --color-wa:       #25D366;
+  --color-wa-hover: #1ea854;
+
+  /* Miscelánea UI */
+  --color-img-bg:   #F0EDE6;  /* fondo de cards con imagen de producto */
+  --gradient-flag:  linear-gradient(90deg, #009246 33.3%, #ffffff 33.3% 66.6%, #CE2B37 66.6%); /* bandera italiana — navbar, menu-blocks, footer */
+
   /* Textos */
   --texto:   #1A1A1A;
   --texto2:  #4A4540;
   --texto3:  #7A746C;
 
   /* ── SOMBRAS — sistema centralizado ─────────────────
-     Nombres anteriores mantenidos como aliases para
-     no romper componentes que ya los usan.
-     Los nuevos nombres semánticos son los canónicos.
+     Sombras neutras (negro)
   ─────────────────────────────────────────────────── */
-
-  /* Sombras neutras (negro) */
-  --shadow-soft:        0 2px 12px rgba(0,0,0,0.06);  /* elementos sutiles, how-num  */
-  --shadow-card:        0 4px 24px rgba(0,0,0,0.08);  /* cards en reposo             */
-  --shadow-card-hover:  0 8px 40px rgba(0,0,0,0.12);  /* cards en hover              */
-  --shadow-overlay:     0 4px 24px rgba(0,0,0,0.20);  /* botones sobre fondo verde   */
-  --shadow-heavy:       0 8px 32px rgba(0,0,0,0.30);  /* hover botones sobre verde   */
-  --shadow-dark:        0 4px 24px rgba(0,0,0,0.35);  /* banners oscuros hover       */
+  --shadow-soft:            0 2px 12px rgba(0,0,0,0.06);
+  --shadow-card:            0 4px 24px rgba(0,0,0,0.08);
+  --shadow-card-hover:      0 8px 40px rgba(0,0,0,0.12);
+  --shadow-overlay:         0 4px 24px rgba(0,0,0,0.20);
+  --shadow-heavy:           0 8px 32px rgba(0,0,0,0.30);
+  --shadow-dark:            0 4px 24px rgba(0,0,0,0.35);
 
   /* Sombras verde brand */
-  --shadow-green:           0 4px 20px rgba(27,107,48,0.40);   /* btn-primary reposo      */
-  --shadow-green-hover:     0 6px 28px rgba(27,107,48,0.55);   /* btn-primary hover       */
-  --shadow-green-nav:       0 2px 12px rgba(27,107,48,0.35);   /* btn nav reposo          */
-  --shadow-green-nav-hover: 0 4px 20px rgba(27,107,48,0.50);   /* btn nav hover           */
-  --shadow-green-subtle:    0 2px 12px rgba(27,107,48,0.15);   /* how-num, acentos leves  */
+  --shadow-green:           0 4px 20px rgba(27,107,48,0.40);
+  --shadow-green-hover:     0 6px 28px rgba(27,107,48,0.55);
+  --shadow-green-nav:       0 2px 12px rgba(27,107,48,0.35);
+  --shadow-green-nav-hover: 0 4px 20px rgba(27,107,48,0.50);
+  --shadow-green-subtle:    0 2px 12px rgba(27,107,48,0.15);
 
   /* Sombras WhatsApp */
-  --shadow-wa:          0 4px 20px rgba(37,211,102,0.45), 0 2px 8px rgba(0,0,0,0.20);   /* wa-float reposo  */
-  --shadow-wa-hover:    0 8px 32px rgba(37,211,102,0.60), 0 4px 16px rgba(0,0,0,0.25);  /* wa-float hover   */
-  --shadow-wa-btn:      0 4px 24px rgba(37,211,102,0.40);  /* btn-wa-hero reposo         */
-  --shadow-wa-btn-hover:0 6px 32px rgba(37,211,102,0.60);  /* btn-wa-hero hover          */
+  --shadow-wa:              0 4px 20px rgba(37,211,102,0.45), 0 2px 8px rgba(0,0,0,0.20);
+  --shadow-wa-hover:        0 8px 32px rgba(37,211,102,0.60), 0 4px 16px rgba(0,0,0,0.25);
+  --shadow-wa-btn:          0 4px 24px rgba(37,211,102,0.40);
+  --shadow-wa-btn-hover:    0 6px 32px rgba(37,211,102,0.60);
 
-  /* Aliases legacy — compatibilidad con código anterior */
+  /* Aliases legacy — mantener hasta migración completa */
   --sombra:  var(--shadow-card);
   --sombra2: var(--shadow-card-hover);
   --sombra3: var(--shadow-soft);
 
-  /* Misc */
-  --radio:      2px;   /* botones, badges, pills — elementos pequeños */
-  --radio-card: 14px;  /* cards, paneles, contenedores grandes       */
-  --trans:   all 0.28s cubic-bezier(0.4,0,0.2,1);
+  /* ── BORDER RADIUS ───────────────────────────────── */
+  --radio:      2px;    /* botones, badges, pills */
+  --radio-sm:   6px;    /* inputs, elementos medianos */
+  --radio-card: 14px;   /* cards, paneles, contenedores */
 
-  /* ── FASE 4: ESCALA TIPOGRÁFICA ──────────────────
-     Todas las fuentes se definen aquí como tokens.
-     Editar aquí afecta todo el sitio de forma segura.
-  ─────────────────────────────────────────────────── */
+  /* Iconos (font-size para emojis/símbolos inline) */
+  --icon-sm:    18px;
+  --icon-md:    20px;
+
+  /* ── FASE 4: ESCALA TIPOGRÁFICA ──────────────────── */
 
   /* Familias */
   --font-serif:      'Playfair Display', Georgia, serif;
   --font-serif-body: 'Cormorant Garamond', 'Garamond', serif;
   --font-sans:       'Jost', system-ui, sans-serif;
 
-  /* Escala de tamaños (fluid = clamp responsive) */
+  /* Escala de tamaños */
   --text-2xs:   0.65rem;
   --text-xs:    0.72rem;
   --text-sm:    0.82rem;
@@ -117,54 +124,41 @@
   --ls-lg:      0.16em;
   --ls-xl:      0.22em;
 
-  /* ── SPACING — sistema de espaciado ─────────────────
-     Escala basada en base de 0.5rem (8px).
-     Usar estos tokens en padding, margin y gap.
-     Nunca hardcodear valores de spacing nuevos.
-  ─────────────────────────────────────────────────── */
+  /* ── SPACING ─────────────────────────────────────── */
+  --space-1:   0.25rem;
+  --space-2:   0.5rem;
+  --space-3:   0.75rem;
+  --space-4:   1rem;
+  --space-5:   1.25rem;
+  --space-6:   1.5rem;
+  --space-7:   2rem;
+  --space-8:   2.5rem;
+  --space-9:   3rem;
+  --space-10:  4rem;
+  --space-11:  5rem;
+  --space-12:  7rem;
 
-  --space-1:   0.25rem;   /*  4px — detalles mínimos, margin-bottom micro  */
-  --space-2:   0.5rem;    /*  8px — gaps internos pequeños, padding badge   */
-  --space-3:   0.75rem;   /* 12px — gaps icon+label, padding nav-mobile btn */
-  --space-4:   1rem;      /* 16px — gap general, padding-top mcard-order    */
-  --space-5:   1.25rem;   /* 20px — padding mobile compacto                 */
-  --space-6:   1.5rem;    /* 24px — gap cards, padding móvil                */
-  --space-7:   2rem;      /* 32px — padding card, padding sección móvil     */
-  --space-8:   2.5rem;    /* 40px — padding banners, CTA móvil              */
-  --space-9:   3rem;      /* 48px — margin-bottom tabs, sección móvil       */
-  --space-10:  4rem;      /* 64px — padding secciones medianas              */
-  --space-11:  5rem;      /* 80px — padding CTA desktop                     */
-  --space-12:  7rem;      /* 112px — padding secciones principales desktop  */
+  /* Aliases semánticos */
+  --space-section:        var(--space-12);
+  --space-section-mobile: var(--space-9);
+  --space-card:           var(--space-7);
+  --space-card-mobile:    var(--space-6);
+  --space-banner:         var(--space-8);
+  --space-inline:         var(--space-4);
+  --space-stack:          var(--space-6);
 
-  /* Aliases semánticos — más legibles en contexto */
-  --space-section:        var(--space-12);  /* padding secciones principales  */
-  --space-section-mobile: var(--space-9);   /* padding secciones en móvil     */
-  --space-card:           var(--space-7);   /* padding interno de cards       */
-  --space-card-mobile:    var(--space-6);   /* padding cards en móvil         */
-  --space-banner:         var(--space-8);   /* padding banners oscuros        */
-  --space-inline:         var(--space-4);   /* gap entre elementos en línea   */
-  --space-stack:          var(--space-6);   /* gap entre cards en grid        */
-
-  /* ── TRANSICIONES — sistema unificado ───────────────
-     3 velocidades semánticas para toda la UI.
-     --trans legacy se mantiene como alias de --transition-smooth.
-  ─────────────────────────────────────────────────── */
-
-  /* Rápida: color, border, opacity — cambios de estado simples */
+  /* ── TRANSICIONES ────────────────────────────────── */
   --transition-fast:    color 0.2s ease, background 0.2s ease,
                         border-color 0.2s ease, opacity 0.2s ease;
 
-  /* Suave: la mayoría de componentes interactivos */
   --transition-smooth:  background 0.25s ease, color 0.25s ease,
                         border-color 0.25s ease, box-shadow 0.25s ease,
                         transform 0.22s cubic-bezier(0.4,0,0.2,1);
 
-  /* Premium: cards, elementos con elevación, movimiento percibido */
   --transition-premium: background 0.3s ease, border-color 0.3s ease,
                         box-shadow 0.3s ease,
                         transform 0.28s cubic-bezier(0.4,0,0.2,1);
 
-  /* Alias legacy — compatibilidad con código anterior */
+  /* Alias legacy — apuntar a smooth como canónico */
   --trans: var(--transition-smooth);
-
 }

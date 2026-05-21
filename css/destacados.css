@@ -1,19 +1,24 @@
 /* ══════════════════════════════════════════
    DESTACADOS.CSS — Sección de platos destacados.
    Usa tokens de variables.css.
+
+   DEUDA TÉCNICA: dest-card comparte estructura
+   con mcard (cards.css). Candidata a refactor
+   en una clase base .base-card con modificador
+   .base-card--dark para el tema oscuro.
 ══════════════════════════════════════════ */
 
 /* ── Sección ── */
 .dest-sec {
-  background: #0f0f0f;
-  padding: 2rem 0 1.5rem;
+  background: var(--negro3);
+  padding: var(--space-7) 0 var(--space-6);
 }
 
 .dest-header {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  padding: 0 1.2rem 1rem;
+  padding: 0 var(--space-5) var(--space-4);
 }
 
 .dest-label {
@@ -22,39 +27,39 @@
   letter-spacing: var(--ls-xl);
   color: rgba(255,255,255,0.35);
   text-transform: uppercase;
-  margin-bottom: 0.25rem;
+  margin-bottom: var(--space-1);
 }
 
 .dest-title {
   font-family: var(--font-serif);
   font-size: clamp(1.5rem, 5vw, 2rem);
-  color: #f5f0e8;
+  color: var(--crema);
   margin: 0;
 }
 
 .dest-ver-todo {
   font-family: var(--font-sans);
   font-size: var(--text-sm);
-  color: #3aad55;
+  color: var(--verde3);
   text-decoration: none;
   letter-spacing: var(--ls-sm);
   white-space: nowrap;
-  padding-bottom: 0.2rem;
+  padding-bottom: var(--space-1);
   transition: var(--transition-fast);
 }
 
-.dest-ver-todo:hover { color: #5ecf74; }
+.dest-ver-todo:hover { color: var(--verde2); }
 
 /* ── Scroll horizontal ── */
 .dest-scroll {
   display: flex;
-  gap: 0.9rem;
+  gap: var(--space-4);
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
-  padding: 0.25rem 1.2rem 1rem;
-  align-items: stretch; /* todas las dest-card igualan altura entre sí */
+  padding: var(--space-1) var(--space-5) var(--space-4);
+  align-items: stretch;
 }
 
 .dest-scroll::-webkit-scrollbar { display: none; }
@@ -65,8 +70,8 @@
   width: 210px;
   height: auto;
   min-height: 380px;
-  background: #161616;
-  border-radius: 14px;
+  background: var(--negro2);
+  border-radius: var(--radio-card);
   overflow: hidden;
   scroll-snap-align: start;
   border: 1px solid rgba(255,255,255,0.07);
@@ -78,7 +83,7 @@
 .dest-card:hover {
   transform: translateY(-4px);
   border-color: rgba(255,255,255,0.13);
-  box-shadow: 0 12px 32px rgba(0,0,0,0.5);
+  box-shadow: var(--shadow-heavy);
 }
 
 .dest-card:active { transform: scale(0.97); }
@@ -92,6 +97,7 @@
   position: relative;
   overflow: hidden;
   flex-shrink: 0;
+  transition: transform 0.5s ease;
 }
 
 .dest-img::after {
@@ -103,10 +109,7 @@
 
 .dest-img > * { position: relative; z-index: 1; }
 
-.dest-card:hover .dest-img {
-  background-size: 110%;
-  transition: background-size 0.5s ease;
-}
+.dest-card:hover .dest-img { transform: scale(1.05); }
 
 /* ── Badge ── */
 .dest-badge {
@@ -118,8 +121,8 @@
   -webkit-backdrop-filter: blur(8px);
   color: rgba(255,255,255,0.9);
   font-family: var(--font-sans);
-  font-size: 0.62rem;
-  letter-spacing: 0.04em;
+  font-size: var(--text-2xs);
+  letter-spacing: var(--ls-sm);
   padding: 3px 9px;
   border-radius: 20px;
   border: 1px solid rgba(255,255,255,0.12);
@@ -128,7 +131,7 @@
 
 /* ── Info ── */
 .dest-info {
-  padding: 0.75rem 0.9rem 0.9rem;
+  padding: var(--space-3) var(--space-4) var(--space-4);
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -136,15 +139,15 @@
 
 .dest-name {
   font-family: var(--font-serif);
-  font-size: 0.95rem;
-  color: #f0ebe2;
-  margin-bottom: 0.3rem;
+  font-size: var(--text-base);
+  color: var(--crema);
+  margin-bottom: var(--space-1);
   line-height: var(--lh-snug);
 }
 
 .dest-desc {
   font-family: var(--font-serif-body);
-  font-size: 0.80rem;
+  font-size: var(--text-sm);
   color: rgba(255,255,255,0.38);
   line-height: var(--lh-normal);
   margin-bottom: 0;
@@ -156,7 +159,7 @@
   align-items: center;
   justify-content: space-between;
   margin-top: auto;
-  padding-top: 0.7rem;
+  padding-top: var(--space-3);
   border-top: 1px solid rgba(255,255,255,0.07);
 }
 
@@ -164,7 +167,7 @@
   font-family: var(--font-sans);
   font-size: var(--text-base);
   font-weight: 500;
-  color: #f0ebe2;
+  color: var(--crema);
   letter-spacing: var(--ls-sm);
 }
 
@@ -183,13 +186,13 @@
   text-decoration: none;
   transition: var(--transition-smooth);
   flex-shrink: 0;
-  box-shadow: 0 2px 10px rgba(42,122,59,0.3);
+  box-shadow: var(--shadow-green-subtle);
   -webkit-tap-highlight-color: transparent;
 }
 
 .dest-btn:hover {
   background: var(--verde);
-  box-shadow: 0 4px 16px rgba(42,122,59,0.45);
+  box-shadow: var(--shadow-green);
   transform: scale(1.08);
 }
 
@@ -198,7 +201,7 @@
 .dest-btn svg {
   width: 15px;
   height: 15px;
-  stroke: white;
+  stroke: var(--blanco);
   fill: none;
   stroke-width: 2.5;
   stroke-linecap: round;
@@ -208,8 +211,8 @@
 .dest-dots {
   display: flex;
   justify-content: center;
-  gap: 6px;
-  padding: 0.5rem 0 0.2rem;
+  gap: var(--space-2);
+  padding: var(--space-2) 0 var(--space-1);
 }
 
 .dest-dot {
@@ -228,15 +231,19 @@
 
 /* ── Desktop ── */
 @media (min-width: 769px) {
-  .dest-sec { padding: 3rem 0 2rem; }
-  .dest-header { padding: 0 2rem 1.2rem; }
-  .dest-scroll { padding: 0.25rem 2rem 1rem; gap: 1.1rem; }
+  .dest-sec    { padding: var(--space-9) 0 var(--space-7); }
+  .dest-header { padding: 0 var(--space-7) var(--space-5); }
+  .dest-scroll { padding: var(--space-1) var(--space-7) var(--space-4); gap: var(--space-5); }
 
   /* En desktop: card más grande, igual que mcard desktop */
   .dest-card { width: 250px; height: auto; min-height: 400px; }
-  .dest-img { height: 175px; }
+  .dest-img  { height: 175px; }
   .dest-name { font-size: 0.98rem; }
-  .dest-desc { font-size: 0.83rem; -webkit-line-clamp: 3; line-clamp: 3; }
-  .dest-info { padding: 0.85rem 0.95rem 0.95rem; }
+  .dest-desc {
+    font-size: var(--text-sm);
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+  }
+  .dest-info { padding: var(--space-4); }
   .dest-dots { display: none; }
 }

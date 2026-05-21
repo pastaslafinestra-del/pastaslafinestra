@@ -7,30 +7,27 @@
   display: flex;
   flex-wrap: wrap;
   margin-bottom: var(--space-9);
-  /* Sin border-bottom: línea separadora eliminada por diseño */
 }
 
 .tab {
-  padding: 14px 22px;
+  padding: 14px 22px; /* --tab-padding: intencional, sin token equivalente exacto */
   font-family: var(--font-sans);
   font-size: var(--text-sm);
   letter-spacing: var(--ls-md);
   text-transform: uppercase;
-  /* background reseteado a transparent en base.css — no hace falta declararlo aquí */
   border-bottom: 2px solid transparent;
   margin-bottom: -1px;
-  color: var(--texto3);
+  color: var(--texto2);
   transition: var(--transition-fast);
   white-space: nowrap;
   line-height: var(--lh-tight);
 }
 
-/* Sin subrayado verde — solo cambia el color del texto */
 .tab.on             { color: var(--verde); font-weight: 500; }
 .tab:hover:not(.on) { color: var(--texto2); }
 
-.panel { display: none; }
-.panel.on { display: block; }
+.panel     { display: none; }
+.panel.on  { display: block; }
 
 /* ── Tabs sticky ── */
 .tabs-sentinel {
@@ -66,7 +63,7 @@
 
 .tabs-sticky-wrap + .panel.on,
 .tabs-sticky-wrap ~ .panel.on {
-  padding-top: 2.5rem;
+  padding-top: var(--space-8);
 }
 
 /* ── Desktop: nowrap y scroll si no caben ── */
@@ -80,6 +77,7 @@
   .tabs-wrap::-webkit-scrollbar { display: none; }
 }
 
+/* ── Móvil ── */
 @media (max-width: 768px) {
   .tabs-sticky-wrap .tabs-wrap {
     flex-wrap: nowrap;
@@ -95,11 +93,10 @@
 
   .tabs-sticky-wrap .tabs-wrap::-webkit-scrollbar { display: none; }
 
-  /* Tabs más compactos en móvil — más visibles sin scrollear */
   .tabs-sticky-wrap .tabs-wrap .tab {
     flex-shrink: 0;
     padding: 11px 14px;
-    font-size: 0.65rem;
+    font-size: var(--text-2xs);
   }
 
   .tabs-sticky-wrap::after {
