@@ -205,37 +205,6 @@
   .badge-on { background: rgba(39,174,96,.15); color: var(--success); }
   .badge-off { background: rgba(192,57,43,.12); color: #e74c3c; }
 
-  /* ETIQUETAS */
-  .etiqueta-pill {
-    display: inline-flex; align-items: center; gap: 6px;
-    padding: 4px 10px; font-size: 12px; border-radius: 2px;
-    font-family: var(--font); letter-spacing: .5px; white-space: nowrap;
-  }
-  .badge-selector-grid {
-    display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 8px; margin-bottom: 12px;
-  }
-  .badge-option {
-    display: flex; align-items: center; gap-8px; padding: 10px 12px;
-    border: 1px solid var(--border); background: var(--bg); cursor: pointer;
-    transition: all .2s; font-size: 13px; color: var(--muted);
-    font-family: var(--font); gap: 8px; text-align: left;
-  }
-  .badge-option:hover { border-color: var(--accent); color: var(--text); }
-  .badge-option.selected { border-color: var(--accent); background: rgba(201,169,110,.08); color: var(--accent); }
-  .badge-option .badge-emoji { font-size: 16px; }
-  .badge-custom-row { display: flex; gap: 8px; align-items: center; margin-top: 4px; }
-  .badge-custom-row input { flex: 1; }
-  .badge-custom-toggle {
-    background: none; border: 1px dashed var(--border); color: var(--muted);
-    padding: 8px 14px; font-size: 12px; cursor: pointer; font-family: var(--font);
-    transition: all .2s; letter-spacing: 1px; white-space: nowrap;
-  }
-  .badge-custom-toggle:hover { border-color: var(--accent); color: var(--accent); }
-  .badge-custom-area { display: none; margin-top: 10px; padding: 12px; border: 1px dashed var(--border); background: rgba(201,169,110,.04); }
-  .badge-custom-area.open { display: block; }
-  .badge-preview-row { margin-top: 8px; min-height: 28px; }
-
   /* STATS */
   .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-bottom: 32px; }
   .stat-card { background: var(--surface); border: 1px solid var(--border); padding: 20px 24px; }
@@ -423,46 +392,8 @@
       <input type="hidden" id="dest-edit-id">
       <div class="form-grid">
         <div class="form-group form-full">
-          <label class="form-label">Etiqueta *</label>
-          <input type="hidden" id="df-badge">
-          <div class="badge-selector-grid" id="badge-grid">
-            <button type="button" class="badge-option" data-value="⭐ Chef recomienda" onclick="selectBadge(this)">
-              <span class="badge-emoji">⭐</span> Chef recomienda
-            </button>
-            <button type="button" class="badge-option" data-value="🔥 Más Vendido" onclick="selectBadge(this)">
-              <span class="badge-emoji">🔥</span> Más Vendido
-            </button>
-            <button type="button" class="badge-option" data-value="❤️ Favorito" onclick="selectBadge(this)">
-              <span class="badge-emoji">❤️</span> Favorito
-            </button>
-            <button type="button" class="badge-option" data-value="✨ Especial" onclick="selectBadge(this)">
-              <span class="badge-emoji">✨</span> Especial
-            </button>
-            <button type="button" class="badge-option" data-value="🆕 Nuevo" onclick="selectBadge(this)">
-              <span class="badge-emoji">🆕</span> Nuevo
-            </button>
-            <button type="button" class="badge-option" data-value="🌿 Vegetariano" onclick="selectBadge(this)">
-              <span class="badge-emoji">🌿</span> Vegetariano
-            </button>
-            <button type="button" class="badge-option" data-value="🌶️ Picante" onclick="selectBadge(this)">
-              <span class="badge-emoji">🌶️</span> Picante
-            </button>
-            <button type="button" class="badge-option" data-value="🏆 Premio" onclick="selectBadge(this)">
-              <span class="badge-emoji">🏆</span> Premio
-            </button>
-          </div>
-          <button type="button" class="badge-custom-toggle" onclick="toggleCustomBadge()">+ Etiqueta personalizada</button>
-          <div class="badge-custom-area" id="badge-custom-area">
-            <div class="form-group">
-              <label class="form-label">Texto personalizado</label>
-              <div class="badge-custom-row">
-                <input class="form-input" id="badge-custom-input" placeholder="Ej: 🎄 Navidad" oninput="onCustomBadgeInput(this.value)">
-                <button type="button" class="btn btn-ghost" onclick="applyCustomBadge()">Usar</button>
-              </div>
-              <div class="badge-preview-row" id="badge-preview"></div>
-            </div>
-          </div>
-          <div style="font-size:11px;color:var(--muted);margin-top:8px;" id="badge-selected-label"></div>
+          <label class="form-label">Badge *</label>
+          <input class="form-input" id="df-badge" placeholder="Ej: ⭐ Chef recomienda">
         </div>
         <div class="form-group form-full">
           <label class="form-label">Nombre *</label>
