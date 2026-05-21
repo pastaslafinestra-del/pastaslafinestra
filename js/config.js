@@ -1,12 +1,5 @@
-/**
- * config.js — Constantes globales de configuración.
- *
- * Fuente única de verdad para URLs y valores que cambian según el entorno.
- * Cuando se integre Supabase Storage, solo hay que cambiar ASSETS_BASE_URL aquí.
- *
- * Hoy:    ASSETS_BASE_URL = 'assets/'
- * Mañana: ASSETS_BASE_URL = 'https://xxx.supabase.co/storage/v1/object/public/menu-images/'
- */
+export const WA_NUMBER       = '584247827899';
+export const ASSETS_BASE_URL = 'assets/';
 
-export const WA_NUMBER      = '584247827899';
-export const ASSETS_BASE_URL = 'assets/';  // sin ../  porque index.html está en la raíz
+export const SUPABASE_URL  = 'https://atjijqvwwdlydgsonptr.supabase.co';
+export const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF0amlqcXZ3d2RseWRnc29ucHRyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkzMTI1MDIsImV4cCI6MjA5NDg4ODUwMn0.DDVEbZaVmAqmuvUs-jAHYAWm1PVUyT1zzy5gKJCdK3Q';
