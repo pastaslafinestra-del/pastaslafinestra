@@ -211,6 +211,21 @@
   .stat-label { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
   .stat-value { font-size: 32px; color: var(--accent); font-weight: normal; }
 
+  /* SECTION CARDS */
+  .section-card {
+    background: var(--surface); border: 1px solid var(--border);
+    padding: 20px 24px; display: flex; align-items: center; justify-content: space-between;
+    gap: 16px; transition: border .2s;
+  }
+  .section-card.active { border-color: rgba(39,174,96,.4); }
+  .section-card.inactive { border-color: rgba(192,57,43,.25); opacity: .7; }
+  .sc-info {}
+  .sc-name { font-size: 15px; color: var(--text); margin-bottom: 4px; }
+  .sc-key { font-size: 11px; color: var(--muted); letter-spacing: 1px; font-family: var(--mono); }
+  .sc-status { font-size: 11px; letter-spacing: 1px; margin-top: 6px; }
+  .sc-status.on { color: var(--success); }
+  .sc-status.off { color: #e74c3c; }
+
   @media (max-width: 600px) {
     .form-grid { grid-template-columns: 1fr; }
     .admin-nav { display: none; }
@@ -237,6 +252,7 @@
     <nav class="admin-nav">
       <button class="nav-tab on" onclick="switchSection('menu', this)">Menú</button>
       <button class="nav-tab" onclick="switchSection('destacados', this)">Destacados</button>
+      <button class="nav-tab" onclick="switchSection('secciones', this)">Secciones</button>
     </nav>
     <button class="logout-btn" onclick="logout()">Salir</button>
   </header>
@@ -303,6 +319,20 @@
           </thead>
           <tbody id="dest-tbody"><tr><td colspan="6" class="loading">Cargando...</td></tr></tbody>
         </table>
+      </div>
+    </div>
+
+    <!-- SECCIONES SECTION -->
+    <div id="section-secciones" class="section-view">
+      <div style="margin-bottom:24px;">
+        <p style="color:var(--muted);font-size:13px;line-height:1.7;">
+          Activa o desactiva las secciones del menú público. Las secciones desactivadas desaparecen
+          completamente de la barra de navegación del sitio. Útil para secciones de temporada como
+          <em>Congelados</em>.
+        </p>
+      </div>
+      <div id="secciones-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;">
+        <div class="loading" style="grid-column:1/-1">Cargando secciones...</div>
       </div>
     </div>
 
@@ -461,6 +491,7 @@
       document.getElementById('panel').style.display = 'block';
       loadMenu();
       loadDestacados();
+      loadSecciones();
     } else {
       document.getElementById('login-error').style.display = 'block';
     }
@@ -826,6 +857,82 @@
       closeDestModal(); renderDestTable();
     } catch(e) { toast('Error guardando: ' + e.message, 'err'); }
   }
+  // ── SECCIONES DEL MENÚ ──────────────────────────────────────
+  // Definición local de todas las secciones posibles
+  const TODAS_SECCIONES = [
+    { key: 'entradas',    label: 'Entradas' },
+    { key: 'pastas',      label: 'Pastas' },
+    { key: 'pizzas',      label: 'Pizzas' },
+    { key: 'proteinas',   label: 'Proteínas' },
+    { key: 'ensaladas',   label: 'Ensaladas' },
+    { key: 'infantil',    label: 'Menú Infantil' },
+    { key: 'postres',     label: 'Postres' },
+    { key: 'bebidas',     label: 'Bebidas' },
+    { key: 'adicionales', label: 'Adicionales' },
+    { key: 'congelados',  label: 'Congelados' },
+  ];
+
+  let seccionesData = {}; // { key: { id, activa } }
+
+  async function loadSecciones() {
+    try {
+      const rows = await sbGet('secciones_menu', 'order=orden.asc');
+      seccionesData = {};
+      rows.forEach(r => { seccionesData[r.key] = r; });
+    } catch(e) {
+      // Si la tabla no existe aún, usamos defaults (todo activo)
+      seccionesData = {};
+    }
+    renderSeccionesGrid();
+  }
+
+  function renderSeccionesGrid() {
+    const grid = document.getElementById('secciones-grid');
+    grid.innerHTML = TODAS_SECCIONES.map(sec => {
+      const row    = seccionesData[sec.key];
+      const activa = row ? row.activa : true; // default: activa
+      return `
+        <div class="section-card ${activa ? 'active' : 'inactive'}" id="sc-${sec.key}">
+          <div class="sc-info">
+            <div class="sc-name">${sec.label}</div>
+            <div class="sc-key">${sec.key}</div>
+            <div class="sc-status ${activa ? 'on' : 'off'}">${activa ? '● Visible en el menú' : '● Oculta del menú'}</div>
+          </div>
+          <label class="toggle" title="${activa ? 'Desactivar' : 'Activar'} sección">
+            <input type="checkbox" ${activa ? 'checked' : ''} onchange="toggleSeccion('${sec.key}', '${sec.label}', this.checked)">
+            <span class="toggle-slider"></span>
+          </label>
+        </div>`;
+    }).join('');
+  }
+
+  async function toggleSeccion(key, label, activa) {
+    const card      = document.getElementById('sc-' + key);
+    const statusEl  = card.querySelector('.sc-status');
+    const row       = seccionesData[key];
+
+    try {
+      if (row && row.id) {
+        // Ya existe en DB → UPDATE
+        await sbUpdate('secciones_menu', row.id, { activa });
+        seccionesData[key].activa = activa;
+      } else {
+        // No existe → INSERT
+        const orden = TODAS_SECCIONES.findIndex(s => s.key === key);
+        const [created] = await sbInsert('secciones_menu', { key, label, activa, orden });
+        seccionesData[key] = created;
+      }
+
+      // Actualizar UI de la card
+      card.className = `section-card ${activa ? 'active' : 'inactive'}`;
+      statusEl.className = `sc-status ${activa ? 'on' : 'off'}`;
+      statusEl.textContent = activa ? '● Visible en el menú' : '● Oculta del menú';
+
+      toast(`"${label}" ${activa ? 'activada ✓' : 'desactivada'}`);
+    } catch(e) {
+      toast('Error: ' + e.message, 'err');
+      // Revertir checkbox
+      card.querySelector('input[type=checkbox]').checked = !activa;
+    }
+  }
 </script>
-</body>
-</html>

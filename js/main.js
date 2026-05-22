@@ -15,12 +15,46 @@ const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matc
 
 /* ── 2. Datos desde Supabase → renderizado ──────────────────────── */
 try {
-  const { menuData, destacadosData } = await loadMenuData();
+  const { menuData, destacadosData, seccionesConfig } = await loadMenuData();
   renderDestacados(destacadosData);
   initMenu(menuData);
+  applySecciones(seccionesConfig); // Ocultar/mostrar tabs según config admin
   initStagger(); // Cards ya existen en el DOM
 } catch (err) {
   console.error('[main] Error cargando menú:', err);
+}
+
+/* ── Visibilidad de secciones ───────────────────────────────────── */
+function applySecciones(config) {
+  const tabs  = document.querySelectorAll('.tab[data-section-key]');
+  let firstVisible = null;
+
+  tabs.forEach(tab => {
+    const key    = tab.dataset.sectionKey;
+    // Si no hay config para esta key, mostrar por defecto
+    const activa = (key in config) ? config[key] : true;
+
+    if (!activa) {
+      tab.style.display = 'none';
+      // También ocultar el panel correspondiente para que no sea "activo"
+      const panel = document.getElementById('p-' + key);
+      if (panel) panel.style.display = 'none';
+    } else {
+      tab.style.display = '';
+      if (!firstVisible) firstVisible = tab;
+    }
+  });
+
+  // Si el tab activo por defecto está oculto, activar el primero visible
+  const activeTab = document.querySelector('.tab.on');
+  if (activeTab && activeTab.style.display === 'none' && firstVisible) {
+    activeTab.classList.remove('on');
+    const activePanel = document.getElementById('p-' + activeTab.dataset.tab);
+    if (activePanel) activePanel.classList.remove('on');
+    firstVisible.classList.add('on');
+    const firstPanel = document.getElementById('p-' + firstVisible.dataset.tab);
+    if (firstPanel) firstPanel.classList.add('on');
+  }
 }
 
 /* ── 3. Tabs ────────────────────────────────────────────────────── */

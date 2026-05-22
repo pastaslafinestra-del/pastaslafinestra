@@ -21,9 +21,10 @@ async function fetchTable(table, params = '') {
 }
 
 export async function loadMenuData() {
-  const [items, destacados] = await Promise.all([
+  const [items, destacados, secciones] = await Promise.all([
     fetchTable('menu_items', 'disponible=eq.true&order=orden.asc'),
     fetchTable('destacados',  'disponible=eq.true&order=orden.asc'),
+    fetchTable('secciones_menu', 'order=orden.asc').catch(() => []), // tabla puede no existir aún
   ]);
 
   // Reconstruye el mismo formato que mcard.js ya usa
@@ -50,5 +51,10 @@ export async function loadMenuData() {
     waText: row.wa_text,
   }));
 
-  return { menuData, destacadosData };
+  // Mapa de visibilidad de secciones: { entradas: true, congelados: false, ... }
+  // Si la tabla está vacía o una sección no tiene fila, se muestra por defecto
+  const seccionesConfig = {};
+  secciones.forEach(row => { seccionesConfig[row.key] = row.activa; });
+
+  return { menuData, destacadosData, seccionesConfig };
 }

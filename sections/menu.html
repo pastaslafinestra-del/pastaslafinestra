@@ -17,19 +17,20 @@
     </div>
   </div><!-- /inner -->
 
-  <!-- ── Tabs de navegación ──────────────────────────────────────── -->
+  <!-- ── Tabs de navegación (se muestran/ocultan según config admin) ── -->
   <div class="tabs-sentinel"></div>
   <div class="tabs-sticky-wrap">
-    <div class="tabs-wrap fade">
-      <button class="tab on"  data-tab="entradas"   >Entradas</button>
-      <button class="tab"     data-tab="pastas"     >Pastas</button>
-      <button class="tab"     data-tab="pizzas"     >Pizzas</button>
-      <button class="tab"     data-tab="proteinas"  >Proteínas</button>
-      <button class="tab"     data-tab="ensaladas"  >Ensaladas</button>
-      <button class="tab"     data-tab="infantil"   >Menú Infantil</button>
-      <button class="tab"     data-tab="postres"    >Postres</button>
-      <button class="tab"     data-tab="bebidas"    >Bebidas</button>
-      <button class="tab"     data-tab="adicionales">Adicionales</button>
+    <div class="tabs-wrap fade" id="menu-tabs-wrap">
+      <button class="tab on"  data-tab="entradas"   data-section-key="entradas"   >Entradas</button>
+      <button class="tab"     data-tab="pastas"      data-section-key="pastas"     >Pastas</button>
+      <button class="tab"     data-tab="pizzas"      data-section-key="pizzas"     >Pizzas</button>
+      <button class="tab"     data-tab="proteinas"   data-section-key="proteinas"  >Proteínas</button>
+      <button class="tab"     data-tab="ensaladas"   data-section-key="ensaladas"  >Ensaladas</button>
+      <button class="tab"     data-tab="infantil"    data-section-key="infantil"   >Menú Infantil</button>
+      <button class="tab"     data-tab="postres"     data-section-key="postres"    >Postres</button>
+      <button class="tab"     data-tab="bebidas"     data-section-key="bebidas"    >Bebidas</button>
+      <button class="tab"     data-tab="adicionales" data-section-key="adicionales">Adicionales</button>
+      <button class="tab"     data-tab="congelados"  data-section-key="congelados" >Congelados</button>
     </div>
   </div><!-- /tabs-sticky-wrap -->
 
@@ -120,6 +121,12 @@
 
   <!-- ── ADICIONALES ────────────────────────────────────────────── -->
   <div class="panel" id="p-adicionales">
+    <div class="mgrid"></div>
+  </div>
+
+  <!-- ── CONGELADOS ─────────────────────────────────────────────── -->
+  <div class="panel" id="p-congelados">
+    <p class="panel-note-italic">Pasta fresca artesanal y salsas listas para preparar en casa. Congeladas al vacío sin preservantes.</p>
     <div class="mgrid"></div>
   </div>
 
