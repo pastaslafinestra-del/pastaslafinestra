@@ -64,6 +64,7 @@ export function initMenu(menuData) {
   renderGrid('p-postres',     menuData.postres     || []);
   renderGrid('p-bebidas',     menuData.bebidas     || []);
   renderGrid('p-adicionales', menuData.adicionales || []);
+  renderGrid('p-congelados',  menuData.congelados  || []);
 }
 
 function buildDestCard(plato) {
