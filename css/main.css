@@ -1,0 +1,28 @@
+/* ── Base & Variables ─── */
+@import 'variables.css';
+@import 'base.css';
+@import 'global.css';
+
+/* ── Layout ──────────── */
+@import 'layout.css';
+@import 'navbar.css';
+@import 'hero.css';
+@import 'footer.css';
+
+/* ── Componentes ─────── */
+@import 'buttons.css';
+@import 'badges.css';
+@import 'tabs.css';
+@import 'cards.css';
+@import 'cart.css';
+
+/* ── Secciones ───────── */
+@import 'destacados.css';
+@import 'menu-blocks.css';
+@import 'sections.css';
+@import 'reservas.css';
+
+/* ── Utilidades ──────── */
+@import 'utilities.css';
+@import 'force-light.css';
+@import 'responsive.css';
