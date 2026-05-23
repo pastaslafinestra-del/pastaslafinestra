@@ -1,4 +1,4 @@
-export const WA_NUMBER       = '584247827899';
+export const WA_NUMBER       = '584247842743';
 export const ASSETS_BASE_URL = 'https://atjijqvwwdlydgsonptr.supabase.co/storage/v1/object/public/menu-images/';
 
 export const SUPABASE_URL  = 'https://atjijqvwwdlydgsonptr.supabase.co';
