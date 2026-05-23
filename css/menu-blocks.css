@@ -4,6 +4,16 @@
    banner de ordenar por WhatsApp.
 ══════════════════════════════════════════ */
 
+
+/* ── Transición desde destacados ── */
+#menu {
+  background: linear-gradient(
+    to bottom,
+    #1C1C1C 0%,
+    var(--gris) 12%
+  );
+}
+
 /* ── Sistema de Pasta ── */
 .pasta-system {
   background: var(--negro);
