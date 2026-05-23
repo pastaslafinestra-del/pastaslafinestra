@@ -7,7 +7,7 @@ footer {
   background: var(--negro-deep);
   position: relative;
   overflow: hidden;
-  padding: var(--space-10) var(--space-9) var(--space-9);
+  padding: var(--space-7) var(--space-9) var(--space-6);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -38,16 +38,17 @@ footer::after {
 }
 
 .ft-logo {
-  font-family: var(--font-serif);
-  font-size: clamp(1.6rem, 3vw, 2.2rem);
-  font-style: italic;
-  font-weight: 700;
-  color: var(--blanco);
-  letter-spacing: var(--ls-tight);
-  text-align: center;
-  margin-bottom: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: var(--space-4);
   position: relative;
   z-index: 1;
+}
+.ft-logo img {
+  width: clamp(120px, 22vw, 180px);
+  filter: brightness(0) invert(1);
+  opacity: 0.88;
 }
 .ft-logo::after {
   content: '';
@@ -65,13 +66,13 @@ footer::after {
   line-height: var(--lh-loose);
   text-align: center;
   letter-spacing: var(--ls-sm);
-  margin-bottom: var(--space-7);
+  margin-bottom: var(--space-4);
   position: relative;
   z-index: 1;
 }
 
 .ft-ig {
-  margin-bottom: var(--space-8);
+  margin-bottom: var(--space-5);
   position: relative;
   z-index: 1;
 }

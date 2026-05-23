@@ -220,3 +220,20 @@
 
   .ob-text { font-size: var(--text-base); }
 }
+/* ── Logo junto al título del menú ── */
+.menu-title-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+}
+
+.menu-title-row .sec-title {
+  margin-bottom: 0;
+}
+
+.menu-sec-logo {
+  width: 90px;
+  opacity: 0.82;
+  filter: brightness(0);
+}
