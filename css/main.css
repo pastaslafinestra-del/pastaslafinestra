@@ -24,4 +24,5 @@
 
 /* ── Utilidades ──────── */
 @import 'utilities.css';
+@import 'force-light.css';
 @import 'responsive.css';
