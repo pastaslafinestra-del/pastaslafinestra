@@ -8,6 +8,7 @@
   position: relative;
   width: 100%;
   min-height: 100svh;
+  max-height: 100svh;
   display: flex;
   align-items: flex-end;
   justify-content: center;
@@ -57,17 +58,12 @@
 }
 
 /* ── Textos ── */
-.hero-brand {
-  font-family: var(--font-serif);
-  font-size: clamp(1.4rem, 5vw, 2rem);
-  font-style: italic;
-  color: var(--blanco);
-  letter-spacing: var(--ls-sm);
-  margin-bottom: var(--space-2);
-  opacity: 0.95;
-  text-shadow:
-    0 2px 16px rgba(0,0,0,0.6),
-    0 1px 4px rgba(0,0,0,0.4);
+.hero-brand-logo {
+  width: clamp(120px, 28vw, 220px);
+  margin-bottom: var(--space-3);
+  filter: drop-shadow(0 2px 20px rgba(0,0,0,0.55))
+          drop-shadow(0 1px 4px rgba(0,0,0,0.35));
+  opacity: 0.97;
 }
 
 .hero-eyebrow {
@@ -84,7 +80,7 @@
   font-family: var(--font-serif);
   font-size: clamp(2.8rem, 10vw, 4.4rem);
   font-weight: 700;
-  line-height: 1.02; /* --lh-hero: intencional, más compacto que --lh-tight */
+  line-height: 1.02;
   color: var(--blanco);
   margin-bottom: var(--space-4);
   letter-spacing: var(--ls-tight);

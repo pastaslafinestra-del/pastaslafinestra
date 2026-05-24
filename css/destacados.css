@@ -10,7 +10,11 @@
 
 /* ── Sección ── */
 .dest-sec {
-  background: var(--negro3);
+  background: linear-gradient(
+    to bottom,
+    rgba(10,10,8,0.97) 0%,
+    #1C1C1C 18%
+  );
   padding: var(--space-7) 0 var(--space-6);
 }
 
