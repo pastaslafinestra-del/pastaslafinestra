@@ -30,12 +30,17 @@
     <p class="res-sub">Asegura tu lugar en La Finestra.<br>Te confirmamos por WhatsApp.</p>
 
     <div class="rf-group">
-      <label class="rf-label">👤 Nombre</label>
+      <label class="rf-label" for="res-nombre">👤 Nombre</label>
       <input class="rf-input" id="res-nombre" type="text" placeholder="Tu nombre completo" autocomplete="name">
     </div>
 
     <div class="rf-group">
-      <label class="rf-label">📅 Fecha</label>
+      <label class="rf-label" for="res-telefono">📱 Teléfono / WhatsApp <span class="rf-opcional">(opcional)</span></label>
+      <input class="rf-input" id="res-telefono" type="tel" placeholder="Ej: +58 424 1234567" autocomplete="tel">
+    </div>
+
+    <div class="rf-group">
+      <label class="rf-label" for="res-fecha">📅 Fecha</label>
       <input class="rf-input" id="res-fecha" type="date">
     </div>
 
@@ -78,7 +83,7 @@
     </div>
 
     <div class="rf-group">
-      <label class="rf-label">📝 Notas <span class="rf-opcional">(opcional)</span></label>
+      <label class="rf-label" for="res-notas">📝 Notas <span class="rf-opcional">(opcional)</span></label>
       <textarea class="rf-input rf-textarea" id="res-notas" placeholder="Celebración especial, alergias, preferencias..."></textarea>
     </div>
 
@@ -94,53 +99,6 @@
   </div>
 </main>
 
-<script>
-document.querySelectorAll('#res-hora-chips .rf-chip').forEach(function(chip) {
-  chip.addEventListener('click', function() {
-    document.querySelectorAll('#res-hora-chips .rf-chip').forEach(function(c) { c.classList.remove('activo'); });
-    this.classList.add('activo');
-  });
-});
-
-document.querySelectorAll('#res-personas-chips .rf-chip').forEach(function(chip) {
-  chip.addEventListener('click', function() {
-    document.querySelectorAll('#res-personas-chips .rf-chip').forEach(function(c) { c.classList.remove('activo'); });
-    this.classList.add('activo');
-  });
-});
-
-document.getElementById('rf-submit').addEventListener('click', function() {
-  var nombre  = document.getElementById('res-nombre').value.trim();
-  var fecha   = document.getElementById('res-fecha').value;
-  var horaEl  = document.querySelector('#res-hora-chips .rf-chip.activo');
-  var persEl  = document.querySelector('#res-personas-chips .rf-chip.activo');
-  var notas   = document.getElementById('res-notas').value.trim();
-  var errorEl = document.getElementById('rf-error');
-
-  if (!nombre || !fecha || !horaEl || !persEl) {
-    errorEl.classList.add('visible');
-    errorEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    return;
-  }
-  errorEl.classList.remove('visible');
-
-  var parts = fecha.split('-');
-  var y = parts[0], m = parts[1], d = parts[2];
-  var dias  = ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
-  var meses = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
-  var fo = new Date(parseInt(y), parseInt(m)-1, parseInt(d));
-  var fechaLegible = dias[fo.getDay()] + ' ' + d + ' de ' + meses[parseInt(m)-1] + ' de ' + y;
-
-  var msg = '📅 *Reserva en La Finestra*\n\n'
-    + '👤 *Nombre:* ' + nombre + '\n'
-    + '📆 *Fecha:* ' + fechaLegible + '\n'
-    + '🕐 *Hora:* ' + horaEl.dataset.val + '\n'
-    + '👥 *Personas:* ' + persEl.dataset.val + '\n'
-    + (notas ? '📝 *Notas:* ' + notas + '\n' : '')
-    + '\n_Enviado desde lafinestra.vercel.app_';
-
-  window.open('https://wa.me/584247827899?text=' + encodeURIComponent(msg), '_blank');
-});
-</script>
+<script type="module" src="js/reservas.js"></script>
 </body>
 </html>

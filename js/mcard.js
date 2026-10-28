@@ -12,6 +12,22 @@ window.Cart = Cart;
 
 const ICON_PLUS = `<svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>`;
 
+// ── SANITIZACIÓN DEFENSIVA PARA RENDERIZADO EN DOM ───────
+function escHtml(str) {
+  if (str === null || str === undefined) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+function sanitizeStyle(css) {
+  if (!css) return '';
+  return String(css).replace(/["'<>\\]/g, '');
+}
+
 function buildMcard(plato) {
   const hasImg = Boolean(plato.img);
   const wrapperClasses = ['mcard'];
@@ -19,28 +35,29 @@ function buildMcard(plato) {
 
   let imgBlock = '';
   if (hasImg) {
-    const baseStyle  = `background-image:url('${ASSETS_BASE_URL}${plato.img}')`;
-    const extraStyle = plato.imgStyle ? `;${plato.imgStyle}` : '';
+    const safeImg    = encodeURI(`${ASSETS_BASE_URL}${plato.img}`);
+    const baseStyle  = `background-image:url('${safeImg}')`;
+    const extraStyle = plato.imgStyle ? `;${sanitizeStyle(plato.imgStyle)}` : '';
     const imgClass   = plato.imgStyle ? 'mcard-img mcard-img--producto' : 'mcard-img';
     imgBlock = `<div class="${imgClass}" style="${baseStyle}${extraStyle}"></div>`;
   }
 
-  const catBlock = plato.cat ? `<div class="mcard-cat">${plato.cat}</div>` : '';
+  const catBlock = plato.cat ? `<div class="mcard-cat">${escHtml(plato.cat)}</div>` : '';
 
   return `
     <div class="${wrapperClasses.join(' ')}">
       ${imgBlock}
       <div class="mcard-body">
         ${catBlock}
-        <div class="mcard-name">${plato.name}</div>
-        <div class="mcard-desc">${plato.desc}</div>
+        <div class="mcard-name">${escHtml(plato.name)}</div>
+        <div class="mcard-desc">${escHtml(plato.desc)}</div>
         <div class="mcard-footer">
-          <span class="mcard-price">${plato.price}</span>
+          <span class="mcard-price">${escHtml(plato.price)}</span>
           <button class="mcard-btn"
                   onclick="Cart.add(this.dataset.name, this.dataset.price, this)"
-                  data-name="${plato.name}"
-                  data-price="${plato.price}"
-                  aria-label="Agregar ${plato.name} al carrito">${ICON_PLUS}</button>
+                  data-name="${escHtml(plato.name)}"
+                  data-price="${escHtml(plato.price)}"
+                  aria-label="Agregar ${escHtml(plato.name)} al carrito">${ICON_PLUS}</button>
         </div>
       </div>
     </div>`.trim();
@@ -67,21 +84,24 @@ export function initMenu(menuData) {
 }
 
 function buildDestCard(plato) {
+  const imgStyle = plato.img
+    ? ` style="background-image:url('${encodeURI(ASSETS_BASE_URL + plato.img)}')"`
+    : '';
   return `
     <div class="dest-card">
-      <div class="dest-img" style="background-image:url('${ASSETS_BASE_URL}${plato.img}')">
-        <span class="dest-badge">${plato.badge}</span>
+      <div class="dest-img"${imgStyle}>
+        <span class="dest-badge">${escHtml(plato.badge)}</span>
       </div>
       <div class="dest-info">
-        <div class="dest-name">${plato.name}</div>
-        <div class="dest-desc">${plato.desc}</div>
+        <div class="dest-name">${escHtml(plato.name)}</div>
+        <div class="dest-desc">${escHtml(plato.desc)}</div>
         <div class="dest-bottom">
-          <span class="dest-price">${plato.price}</span>
+          <span class="dest-price">${escHtml(plato.price)}</span>
           <button class="dest-btn"
                   onclick="Cart.add(this.dataset.name, this.dataset.price, this)"
-                  data-name="${plato.name}"
-                  data-price="${plato.price}"
-                  aria-label="Agregar ${plato.name} al carrito">${ICON_PLUS}</button>
+                  data-name="${escHtml(plato.name)}"
+                  data-price="${escHtml(plato.price)}"
+                  aria-label="Agregar ${escHtml(plato.name)} al carrito">${ICON_PLUS}</button>
         </div>
       </div>
     </div>`.trim();

@@ -1,0 +1,23 @@
+{
+  "name": "lafinestra",
+  "version": "2.0.0",
+  "description": "Menú digital interactivo, reservas y pedidos por WhatsApp para La Finestra (Ristorante e Pastificio Italiano)",
+  "type": "module",
+  "scripts": {
+    "quality-gate": "node scripts/quality_gate.js",
+    "test": "node scripts/quality_gate.js",
+    "start": "npx serve ."
+  },
+  "keywords": [
+    "lafinestra",
+    "gastronomy",
+    "restaurant",
+    "whatsapp-ordering",
+    "italian-food",
+    "local-first",
+    "vanilla-js"
+  ],
+  "author": "La Finestra Dev Team",
+  "license": "UNLICENSED",
+  "private": true
+}

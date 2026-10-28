@@ -43,6 +43,16 @@ export const Cart = (() => {
     return '$' + num.toFixed(2).replace('.', ',');
   }
 
+  function escHtml(str) {
+    if (str === null || str === undefined) return '';
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
   /* ── Mensaje WhatsApp ───────────────────────────────── */
   function buildWaMessage() {
     const lines = items.map(i =>
@@ -181,17 +191,17 @@ export const Cart = (() => {
     const ICON_PLUS  = `<svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>`;
 
     itemsEl.innerHTML = items.map(item => `
-      <div class="cart-item" data-item-id="${item.id}">
+      <div class="cart-item" data-item-id="${escHtml(item.id)}">
         <div class="cart-item-info">
-          <div class="cart-item-name" title="${item.name}">${item.name}</div>
+          <div class="cart-item-name" title="${escHtml(item.name)}">${escHtml(item.name)}</div>
           <div class="cart-item-price">${fmtPrice(item.price * item.qty)}</div>
         </div>
         <div class="cart-qty">
           <button class="cart-qty-btn ${item.qty === 1 ? 'will-remove' : ''}"
-                  data-action="dec" data-id="${item.id}"
+                  data-action="dec" data-id="${escHtml(item.id)}"
                   aria-label="Reducir cantidad">${ICON_MINUS}</button>
           <span class="cart-qty-num">${item.qty}</span>
-          <button class="cart-qty-btn" data-action="inc" data-id="${item.id}"
+          <button class="cart-qty-btn" data-action="inc" data-id="${escHtml(item.id)}"
                   aria-label="Aumentar cantidad">${ICON_PLUS}</button>
         </div>
       </div>`).join('');
