@@ -136,3 +136,41 @@
   4. Adaptación táctil elástica en móvil (`transform: scale(1.03)`) con listener pasivo de `touchstart` en el documento.
 - **Invariante para el Asistente:** Prohibido anular propiedades de transformación con `transform: none !important` en estados interactivos de hover/focus que el usuario acciona voluntariamente.
 
+---
+
+### [ERR-007] Bloqueo de Despliegues en Vercel por Incompatibilidad de Esquema (`buildCommand`) y Detección de Build en Proyecto Estático
+- **Fecha:** 2026-10-29
+- **Módulo / Archivo afectado:** `vercel.json`, `package.json`
+- **Síntoma Inicial:** Las actualizaciones de código (favicons oficiales, metadata estructurada, enlaces y mitigaciones de seguridad) no se reflejaban en producción (`https://lafinestra.vercel.app/`), reteniendo el despliegue previo y sirviendo HTTP 404 en `/favicon.ico` y `/apple-touch-icon.png`.
+- **Análisis de los 5 Porqués:**
+  1. ¿Por qué la web mostraba HTTP 404 en los iconos y mantenía el HTML viejo? -> Porque Vercel no actualizó el despliegue de producción a los commits más recientes (`1b48cf2`, `dc3b29c`, `22cec59`).
+  2. ¿Por qué Vercel rechazó esos despliegues con estado Error? -> Porque el pipeline de validación falló al procesar `vercel.json` y la configuración de build.
+  3. ¿Por qué falló `vercel.json`? -> Porque se agregó la clave `"buildCommand": "npm run build"`, la cual no es una propiedad válida en la raíz de `vercel.json` para despliegues estáticos.
+  4. ¿Por qué falló el commit siguiente (`22cec59`) aún tras retirar `"buildCommand"` de `vercel.json`? -> Porque `package.json` contenía un script `"build": "node scripts/prerender.js"`, lo que provocó que Vercel intentara ejecutar un flujo de build de framework buscando carpetas de salida (`dist`, `build`, `public`), inexistentes en un proyecto estático servido desde la raíz.
+  5. ¿Por qué se introdujo esta configuración innecesaria? -> **Causa Raíz:** Intentar forzar un comando de compilación en la nube para un sitio que ya genera su HTML pre-renderizado estáticamente en local y se audita con `scripts/quality_gate.js`, violando el principio Zero-Config de hosting estático en Vercel.
+- **Solución Correcta Implementada:**
+  1. Remoción de `"buildCommand"` de `vercel.json`.
+  2. Renombrado del script en `package.json` de `"build"` a `"prerender"`, permitiendo que Vercel active su despliegue estático nativo ultra-rápido en 2 segundos.
+  3. Despliegue exitoso (commit `3458299` en estado **Ready 🟢**).
+- **Invariante para el Asistente:** En repositorios estáticos Zero-Config servidos desde la raíz en Vercel, no declarar scripts `"build"` que esperen directorios de framework en `package.json` ni propiedades `"buildCommand"` en la raíz de `vercel.json`. Los pre-renderizados deben ejecutarse localmente y verificarse mediante la compuerta de calidad (`scripts/quality_gate.js`).
+
+---
+
+### [ERR-008] Corrupción de HTML y Rotura de Grids por Inyección Regex de Pre-renderizado
+- **Fecha:** 2026-10-29
+- **Módulo / Archivo afectado:** `index.html`, `scripts/prerender.js`, `js/main.js`
+- **Síntoma Inicial:** Las tarjetas del menú y destacados se veían totalmente desalineadas y rotas en desktop y móvil; cards fuera de contenedor `.mgrid`, textos huérfanos bajo destacados y atributos truncados en pantalla (`0,64" aria-label="Agregar...`).
+- **Análisis de los 5 Porqués:**
+  1. ¿Por qué se rompía el menú? -> Porque `index.html` tenía etiquetas de tarjetas y atributos rotos a la mitad y fuera de los contenedores `.mgrid` y `.dest-scroll`.
+  2. ¿Por qué había tarjetas rotas a la mitad? -> Porque el script `scripts/prerender.js` utilizaba expresiones regulares no-codiciosas (`[\s\S]*?<\/div>`) para reemplazar el contenido de contenedores con `<div>` anidados.
+  3. ¿Por qué falló la expresión regular? -> Porque en HTML con múltiples niveles de anidamiento, `[\s\S]*?<\/div>` se detiene en el primer `</div>` interno del primer hijo (la primera card), truncando todo el resto y dejando HTML huérfano e inválido.
+  4. ¿Por qué no se corregía al cargar la página? -> Porque `js/main.js` tenía una condición `if (source === 'supabase')` que impedía que `renderDestacados` e `initMenu` se ejecutaran cuando la carga usaba el catálogo local resiliente (`local-fallback`).
+  5. ¿Por qué ocurrió esto? -> **Causa Raíz:** Intentar parsear y mutar HTML anidado complejo mediante expresiones regulares en tiempo de build en lugar de confiar en el renderizado determinista del DOM en cliente mediante Local-First Fallback.
+- **Solución Correcta Implementada:**
+  1. Restauración íntegra de la estructura HTML limpia y validada en `index.html`.
+  2. Eliminación de la condición restrictiva en `js/main.js`, asegurando que `renderDestacados(destacadosData)` e `initMenu(menuData)` se ejecuten siempre de manera incondicional y atómica.
+  3. Eliminación del script propenso a errores `scripts/prerender.js`.
+- **Invariante para el Asistente:** Prohibido mutar estructuras HTML complejas con expresiones regulares no balanceadas sobre etiquetas `<div>`. El renderizado del catálogo debe estar encapsulado en componentes DOM deterministas (`mcard.js`) alimentados por el catálogo tipado.
+
+
+

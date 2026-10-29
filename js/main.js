@@ -31,13 +31,9 @@ const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matc
 
 /* ── 2. Datos (Supabase / Local-First Fallback) → renderizado ────── */
 try {
-  const { menuData, destacadosData, source } = await loadMenuData();
-  // Si los datos provienen de Supabase (actualizados por el admin), sincronizar el DOM
-  // Si provienen de local-fallback, el HTML pre-renderizado ya está presente con CLS = 0
-  if (source === 'supabase') {
-    renderDestacados(destacadosData);
-    initMenu(menuData);
-  }
+  const { menuData, destacadosData } = await loadMenuData();
+  renderDestacados(destacadosData);
+  initMenu(menuData);
   initStagger(); // Cards ya existen en el DOM
 } catch (err) {
   console.error('[main] Error cargando menú:', err);

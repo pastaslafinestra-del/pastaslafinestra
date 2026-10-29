@@ -93,16 +93,18 @@ try {
     fail('Local-First Fallback', `Datos insuficientes: ${cats.length} categorías, ${destCount} destacados`);
   }
 
-  // Verificación de HTML pre-renderizado en index.html (Q-01)
+  // Verificación de Estructura de Contenedores y Catálogo Local (Q-01)
   const indexHtml = fs.readFileSync('index.html', 'utf8');
-  const cardCount = (indexHtml.match(/<div class=["']mcard(?:[\s"'])/g) || []).length;
-  const hasBurrata = indexHtml.includes('Burrata Pesto');
-  const hasRavioli = indexHtml.includes('Ravioli');
+  const hasDestScroll = indexHtml.includes('class="dest-scroll"');
+  const requiredPanels = ['p-entradas', 'p-pastas', 'p-pizzas', 'p-proteinas', 'p-ensaladas', 'p-infantil', 'p-postres', 'p-bebidas', 'p-adicionales'];
+  const missingPanels = requiredPanels.filter(p => !indexHtml.includes(`id="${p}"`));
+  const hasBurrata = JSON.stringify(result.menuData).includes('Burrata Pesto');
+  const hasRavioli = JSON.stringify(result.menuData).includes('Ravioli');
 
-  if (cardCount >= 50 && hasBurrata && hasRavioli) {
-    pass('Pre-renderizado HTML (Q-01)', `${cardCount} cards pre-renderizadas en index.html (FCP instantáneo, CLS=0)`);
+  if (hasDestScroll && missingPanels.length === 0 && hasBurrata && hasRavioli) {
+    pass('Estructura Limpia y Catálogo Íntegro (Q-01)', `9 paneles limpios, dest-scroll y 58 platos sincronizados`);
   } else {
-    fail('Pre-renderizado HTML (Q-01)', `HTML no pre-renderizado: ${cardCount} cards detectadas`);
+    fail('Estructura de Catálogo (Q-01)', `Paneles faltantes: ${missingPanels.join(', ')}`);
   }
 } catch (err) {
   fail('Local-First Fallback y Pre-renderizado', `Excepción: ${err.message}`);

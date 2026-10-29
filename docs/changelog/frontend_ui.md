@@ -27,3 +27,12 @@
 - **Badges Glassmórficos:** Acabado translúcido esmerilado con desenfoque de fondo (`backdrop-filter: blur(10px)`) y borde sutil.
 - **Prevención de Regresiones:** Desbloqueo de estilos en línea en `animateCards` y eliminación de reglas invasivas de transformación.
 
+---
+
+### [2026-10-29] Hito 2.0.4 — Branding Oficial, Favicons Multiplataforma y Despliegue Zero-Config
+- **Favicons e Iconos Oficiales:** Generación e integración del imagotipo oficial de autor La Finestra con tipografía cursiva sobre fondo oscuro (`#0A0A0A`).
+- **Soporte Multiplataforma Completo:** Creación de `favicon.ico`, `favicon-16x16.png`, `favicon-32x32.png`, `apple-touch-icon.png` (180x180), `icon-192.png` (192x192 para Google Chrome New Tab y Android), `icon-512.png` y `site.webmanifest`.
+- **Inyección en Páginas HTML:** Vinculación sistemática en `index.html`, `reservas.html`, `admin.html`, `privacidad.html`, `terminos.html` y `404.html`.
+- **Despliegue Zero-Config en Vercel:** Resolución de incompatibilidad de esquema en `vercel.json` y `package.json`, restableciendo despliegues estáticos continuos e instantáneos (`2s`) en producción.
+
+
