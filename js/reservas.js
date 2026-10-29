@@ -44,6 +44,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Envío de reserva por WhatsApp y persistencia en Supabase
   const submitBtn = document.getElementById('rf-submit');
+
+    // 0. Mitigación Anti-Bot / Honeypot (S-07)
+    const hpVal = document.getElementById('res-hp')?.value?.trim();
+    if (hpVal) {
+      // Si un bot completó el campo invisible, abortar silenciosamente
+      console.warn('[reservas] Detección de bot por honeypot activada.');
+      return;
+    }
+
+    // Rate limiting básico en cliente (mínimo 20s entre reservas)
+    const lastRes = Number(localStorage.getItem('last_res_ts') || 0);
+    if (Date.now() - lastRes < 20000) {
+      showError('Por favor espera unos segundos antes de enviar otra solicitud.');
+      return;
+    }
+    localStorage.setItem('last_res_ts', String(Date.now()));
+
   if (!submitBtn) return;
 
   submitBtn.addEventListener('click', async () => {

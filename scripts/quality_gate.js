@@ -207,12 +207,17 @@ try {
 
   // Verificación de Teléfono Único (Q-02) y CSP Estricta (S-06)
   const phoneIssues = [];
-  const filesWithWa = ['site.config.js', 'index.html', 'js/main.js', 'README.md', 'SPEC.md'];
+  const filesWithWa = ['site.config.js', 'index.html', 'README.md', 'SPEC.md'];
   for (const f of filesWithWa) {
     if (!fs.existsSync(f)) continue;
     const c = fs.readFileSync(f, 'utf8');
     if (c.includes('7827899')) phoneIssues.push(`${f} contiene número antiguo 7827899`);
     if (!c.includes('7842743')) phoneIssues.push(`${f} no contiene el número activo 7842743`);
+  }
+  const mainJsContent = fs.readFileSync('js/main.js', 'utf8');
+  if (mainJsContent.includes('7827899')) phoneIssues.push(`js/main.js contiene número antiguo 7827899`);
+  if (!mainJsContent.includes('WA_NUMBER') && !mainJsContent.includes('7842743')) {
+    phoneIssues.push(`js/main.js no utiliza WA_NUMBER centralizado`);
   }
   const { WA_NUMBER } = await import('../js/config.js');
   if (WA_NUMBER !== '584247842743') {

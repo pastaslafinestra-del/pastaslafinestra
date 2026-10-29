@@ -6,6 +6,8 @@
 import { Cart }                       from './cart.js';
 import { initMenu, renderDestacados } from './mcard.js';
 import { loadMenuData }               from './menu-fetch.js';
+import { menuData as localMenuData, destacadosData as localDestacadosData } from './menu-data.js';
+import { WA_NUMBER }                  from './config.js';
 
 /* ── 0. Barra de urgencia (horario) ─────────────────────────────── */
 function initUrgencyBar() {
@@ -15,7 +17,7 @@ function initUrgencyBar() {
   const totalMin = now.getHours() * 60 + now.getMinutes();
   const isOpen   = totalMin >= 660 && totalMin < 1320;
   if (isOpen) {
-    bar.innerHTML = '🍝 Abierto ahora &nbsp;·&nbsp; Lunes a Domingo 11:00 AM – 10:00 PM &nbsp;·&nbsp; Delivery disponible &nbsp;<a href="https://wa.me/584247842743" target="_blank">Ordenar ahora →</a>';
+    bar.innerHTML = `🍝 Abierto ahora &nbsp;·&nbsp; Lunes a Domingo 11:00 AM – 10:00 PM &nbsp;·&nbsp; Delivery disponible &nbsp;<a href="https://wa.me/${WA_NUMBER}" target="_blank">Ordenar ahora →</a>`;
   } else {
     bar.classList.add('closed');
     bar.innerHTML = '🔴 Cerrado &nbsp;·&nbsp; Nuestro horario es Lunes a Domingo 11:00 AM – 10:00 PM';
@@ -29,15 +31,23 @@ Cart.init();
 /* ── 5. Reduced motion (movido aquí para que initStagger lo use) ── */
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-/* ── 2. Datos (Supabase / Local-First Fallback) → renderizado ────── */
-try {
-  const { menuData, destacadosData } = await loadMenuData();
-  renderDestacados(destacadosData);
-  initMenu(menuData);
-  initStagger(); // Cards ya existen en el DOM
-} catch (err) {
-  console.error('[main] Error cargando menú:', err);
-}
+/* ── 2. Datos: True Local-First (Render local inmediato + revalidación en segundo plano) ── */
+// Paso A: Renderizado síncrono instantáneo con datos locales (0 ms, cero pantalla en blanco)
+renderDestacados(localDestacadosData);
+initMenu(localMenuData);
+initStagger();
+
+// Paso B: Revalidación en segundo plano con Supabase (Stale-While-Revalidate)
+loadMenuData()
+  .then(({ menuData, destacadosData, source }) => {
+    if (source === 'supabase') {
+      renderDestacados(destacadosData);
+      initMenu(menuData);
+    }
+  })
+  .catch(err => {
+    console.warn('[main] Supabase no disponible; catálogo local activo:', err.message);
+  });
 
 /* ── 3. Tabs ────────────────────────────────────────────────────── */
 function showTab(id, btn) {

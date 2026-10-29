@@ -319,3 +319,26 @@
   }
 }
 
+/* ── ACCESIBILIDAD (C-07): Respeto a prefers-reduced-motion ────── */
+@media (prefers-reduced-motion: reduce) {
+  .mcard,
+  .dest-card,
+  .mcard-img,
+  .dest-img {
+    transition: none !important;
+  }
+  .mcard:hover,
+  .mcard:active,
+  .dest-card:hover,
+  .dest-card:active {
+    transform: none !important;
+    box-shadow: 0 0 0 2px rgba(196, 154, 60, 0.6), 0 8px 24px rgba(0, 0, 0, 0.14) !important;
+  }
+  .mcard:hover .mcard-img,
+  .dest-card:hover .dest-img {
+    transform: none !important;
+    background-size: cover !important;
+  }
+}
+
+
