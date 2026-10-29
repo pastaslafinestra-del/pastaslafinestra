@@ -17,6 +17,7 @@
     <input type="password" id="pwd-input" placeholder="Contraseña de acceso" onkeydown="if(event.key==='Enter')Admin.doLogin()" autocomplete="current-password">
     <button class="login-btn" onclick="Admin.doLogin()">Entrar</button>
     <div class="login-error" id="login-error">Credenciales incorrectas</div>
+    <a href="/" class="login-back-link">← Volver al sitio web</a>
   </div>
 </div>
 
@@ -28,7 +29,10 @@
       <button class="nav-tab on" onclick="Admin.switchSection('menu', this)">Menú Completo</button>
       <button class="nav-tab" onclick="Admin.switchSection('destacados', this)">Platos Destacados</button>
     </nav>
-    <button class="logout-btn" onclick="Admin.logout()">Cerrar Sesión</button>
+    <div style="display:flex;gap:8px;">
+      <a href="/" class="logout-btn" target="_blank" style="text-decoration:none;display:inline-flex;align-items:center;">Ver Web ↗</a>
+      <button class="logout-btn" onclick="Admin.logout()">Cerrar Sesión</button>
+    </div>
   </header>
 
   <main class="admin-main">

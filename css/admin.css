@@ -44,6 +44,8 @@ body { background: var(--bg); color: var(--text); font-family: var(--font); min-
 }
 .login-btn:hover { background: var(--accent2); }
 .login-error { color: #e74c3c; font-size: 13px; margin-top: 12px; display: none; }
+.login-back-link { display: block; text-align: center; margin-top: 18px; color: var(--muted); font-size: 13px; text-decoration: none; transition: color .2s; }
+.login-back-link:hover { color: var(--accent); }
 
 /* PANEL */
 #panel { display: none; }

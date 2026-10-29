@@ -10,7 +10,8 @@
     "db:migrate": "node scripts/db_migrate.js --all",
     "db:dry-run": "node scripts/db_migrate.js --all --dry-run",
     "db:status": "node scripts/db_migrate.js --status",
-    "db:seed": "node scripts/db_migrate.js --file docs/database/migrations/002_initial_seed_v2.0.2.sql"
+    "db:seed": "node scripts/db_migrate.js --file docs/database/migrations/002_initial_seed_v2.0.2.sql",
+    "auth:create-admin": "node scripts/create_admin.js"
   },
   "keywords": [
     "lafinestra",
