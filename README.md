@@ -1,10 +1,10 @@
 # 🍝 La Finestra — Ristorante e Pastificio Italiano
 ### Menú Digital Interactivo, Pedidos por WhatsApp y Módulo de Reservas
 
-[![Quality Gate](https://img.shields.io/badge/Quality_Gate-6%2F6_Passing-success?style=flat-square)](scripts/quality_gate.js)
+[![Quality Gate](https://img.shields.io/badge/Quality_Gate-10%2F10_Passing-success?style=flat-square)](scripts/quality_gate.js)
 [![Architecture](https://img.shields.io/badge/Architecture-Local--First_Resilient-blue?style=flat-square)](docs/architecture/ARQUITECTURA_TECNICA.md)
 [![Security](https://img.shields.io/badge/Security-Zero--Trust_RLS-darkgreen?style=flat-square)](docs/database/schema.sql)
-[![Status](https://img.shields.io/badge/Status-Production_Ready_v2.0.0-gold?style=flat-square)](docs/changelog/README.md)
+[![Status](https://img.shields.io/badge/Status-Production_Ready_v2.1.0-gold?style=flat-square)](docs/changelog/README.md)
 
 ---
 
@@ -21,7 +21,7 @@ flowchart LR
     C -->|"Online"| D["Supabase Cloud"]
     C -->|"Offline / Falla"| E["menu-data.js (Catálogo Local)"]
     B --> F["Drawer de Carrito (cart.js)"]
-    F --> G["WhatsApp API (+58 424-7827899)"]
+    F --> G["WhatsApp API (+58 424-7842743)"]
 ```
 
 ---
@@ -37,7 +37,7 @@ flowchart LR
 4. **Módulo de Reservas de Mesa:**
    - Selección táctil de fecha, turnos de almuerzo/cena y comensales (`reservas.html` + `js/reservas.js`).
 5. **Panel Administrativo Desacoplado:**
-   - Interfaz de gestión (`admin.html`) modularizada en `css/admin.css` y `js/admin.js`, con validación criptográfica SHA-256 (cero contraseñas en texto plano).
+   - Interfaz de gestión (`admin.html`) modularizada en `css/admin.css` y `js/admin.js`, con autenticación real Supabase Auth (JWT verificado y RLS en servidor).
 6. **Esquema de Base de Datos Reproducible:**
    - Scripts DDL (`docs/database/schema.sql`) con Row Level Security (RLS) y DML (`docs/database/seed.sql`) con 58 platos y 5 destacados listos para rehidratar Supabase o PostgreSQL en 1 clic.
 
@@ -88,7 +88,7 @@ lafinestra/
 ## ⚡ 4. Inicio Rápido y Desarrollo Local
 
 ### Prerrequisitos
-- Node.js $\ge 18.0.0$ (opcional para correr la compuerta de calidad localmente).
+- Node.js >= 18 (opcional para correr la compuerta de calidad localmente).
 - Navegador web moderno con soporte para ES Modules.
 
 ### Ejecución Local

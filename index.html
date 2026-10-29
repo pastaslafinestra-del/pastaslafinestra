@@ -29,6 +29,36 @@
 <meta name="twitter:description" content="Pastas y pizzas artesanales con la verdadera receta italiana en San Cristóbal, Táchira. Ordena directo por WhatsApp o reserva tu mesa.">
 <meta name="twitter:image" content="https://lafinestra.vercel.app/assets/images/og-image.jpg">
 
+<!-- Datos Estructurados Schema.org JSON-LD (C-06) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Restaurant",
+  "name": "La Finestra",
+  "image": "https://lafinestra.vercel.app/assets/images/og-image.jpg",
+  "servesCuisine": "Italiana",
+  "telephone": "+584247842743",
+  "url": "https://lafinestra.vercel.app/",
+  "priceRange": "$$",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "San Cristóbal",
+    "addressLocality": "San Cristóbal",
+    "addressRegion": "Táchira",
+    "addressCountry": "VE"
+  },
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+      "opens": "11:00",
+      "closes": "22:00"
+    }
+  ],
+  "hasMenu": "https://lafinestra.vercel.app/#menu"
+}
+</script>
+
 <!-- Tipografías de autor -->
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,500;1,300;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 
@@ -86,10 +116,184 @@
   </div>
 
   <!-- Cards generadas por renderDestacados() en mcard.js -->
-  <div class="dest-scroll"></div>
+  <div class="dest-scroll">
+  <div class="dest-card">
+      <div class="dest-img" style="background-image:url('https://atjijqvwwdlydgsonptr.supabase.co/storage/v1/object/public/menu-images/entradas/burrata_pesto.webp')">
+        <span class="dest-badge">⭐ Chef recomienda</span>
+      </div>
+      <div class="dest-info">
+        <div class="dest-name">Burrata Pesto</div>
+        <div class="dest-desc">Perlas fritas de Mozzarella de Búfala rellenas de pesto, en salsa pomodoro, acompañadas de pan de masa madre.</div>
+        <div class="dest-bottom">
+          <span class="dest-price">$10,64</span>
+          <button class="dest-btn"
+                  data-cart-add
+                  data-name="Burrata Pesto"
+                  data-price="$10,64"
+                  aria-label="Agregar Burrata Pesto al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+  <div class="dest-card">
+      <div class="dest-img" style="background-image:url('https://atjijqvwwdlydgsonptr.supabase.co/storage/v1/object/public/menu-images/pastas/Pasticho_Tradicional_de_Bologna.webp')">
+        <span class="dest-badge">🔥 Más Vendido</span>
+      </div>
+      <div class="dest-info">
+        <div class="dest-name">Pasticho Tradicional de Bologna</div>
+        <div class="dest-desc">Salsa Bologna, Salsa Bechamel, Queso Mozzarella, Queso Parmesano, Jamón Artesanal.</div>
+        <div class="dest-bottom">
+          <span class="dest-price">$9,38</span>
+          <button class="dest-btn"
+                  data-cart-add
+                  data-name="Pasticho Tradicional de Bologna"
+                  data-price="$9,38"
+                  aria-label="Agregar Pasticho Tradicional de Bologna al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+  <div class="dest-card">
+      <div class="dest-img" style="background-image:url('https://atjijqvwwdlydgsonptr.supabase.co/storage/v1/object/public/menu-images/pastas/Tallarin_frutti_latte.webp')">
+        <span class="dest-badge">🍽️ Favorito</span>
+      </div>
+      <div class="dest-info">
+        <div class="dest-name">Tallarín Frutti Latte</div>
+        <div class="dest-desc">Tallarines salteados en aceite de oliva con salsa frutos del mar (Calamar, Camarón, Pulpo Baby, Mejillón).</div>
+        <div class="dest-bottom">
+          <span class="dest-price">$20,10</span>
+          <button class="dest-btn"
+                  data-cart-add
+                  data-name="Tallarín Frutti Latte"
+                  data-price="$20,10"
+                  aria-label="Agregar Tallarín Frutti Latte al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+  <div class="dest-card">
+      <div class="dest-img" style="background-image:url('https://atjijqvwwdlydgsonptr.supabase.co/storage/v1/object/public/menu-images/pastas/Ripieno_Rag%C3%BA.webp')">
+        <span class="dest-badge">✨ Especial</span>
+      </div>
+      <div class="dest-info">
+        <div class="dest-name">Ripieno Ragú</div>
+        <div class="dest-desc">Bola de pan de masa madre rellena con Ragú de Mechada.</div>
+        <div class="dest-bottom">
+          <span class="dest-price">$10,72</span>
+          <button class="dest-btn"
+                  data-cart-add
+                  data-name="Ripieno Ragú"
+                  data-price="$10,72"
+                  aria-label="Agregar Ripieno Ragú al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+  <div class="dest-card">
+      <div class="dest-img" style="background-image:url('https://atjijqvwwdlydgsonptr.supabase.co/storage/v1/object/public/menu-images/pizzas/Salumiera.webp')">
+        <span class="dest-badge">🔥 Más Vendido</span>
+      </div>
+      <div class="dest-info">
+        <div class="dest-name">Salumiera</div>
+        <div class="dest-desc">Pomodoro, mozzarella, jamón artesanal, chorizo español, bologna de cerdo &amp; pistacho, trazos de nuez, pimienta negra.</div>
+        <div class="dest-bottom">
+          <span class="dest-price">$11,39</span>
+          <button class="dest-btn"
+                  data-cart-add
+                  data-name="Salumiera"
+                  data-price="$11,39"
+                  aria-label="Agregar Salumiera al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+  </div>
+      <div class="dest-info">
+        <div class="dest-name">Burrata Pesto</div>
+        <div class="dest-desc">Perlas fritas de Mozzarella de Búfala rellenas de pesto, en salsa pomodoro, acompañadas de pan de masa madre.</div>
+        <div class="dest-bottom">
+          <span class="dest-price">$10,64</span>
+          <button class="dest-btn"
+                  data-cart-add
+                  data-name="Burrata Pesto"
+                  data-price="$10,64"
+                  aria-label="Agregar Burrata Pesto al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+  <div class="dest-card">
+      <div class="dest-img" style="background-image:url('https://atjijqvwwdlydgsonptr.supabase.co/storage/v1/object/public/menu-images/pastas/Pasticho_Tradicional_de_Bologna.webp')">
+        <span class="dest-badge">🔥 Más Vendido</span>
+      </div>
+      <div class="dest-info">
+        <div class="dest-name">Pasticho Tradicional de Bologna</div>
+        <div class="dest-desc">Salsa Bologna, Salsa Bechamel, Queso Mozzarella, Queso Parmesano, Jamón Artesanal.</div>
+        <div class="dest-bottom">
+          <span class="dest-price">$9,38</span>
+          <button class="dest-btn"
+                  data-cart-add
+                  data-name="Pasticho Tradicional de Bologna"
+                  data-price="$9,38"
+                  aria-label="Agregar Pasticho Tradicional de Bologna al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+  <div class="dest-card">
+      <div class="dest-img" style="background-image:url('https://atjijqvwwdlydgsonptr.supabase.co/storage/v1/object/public/menu-images/pastas/Tallarin_frutti_latte.webp')">
+        <span class="dest-badge">🍽️ Favorito</span>
+      </div>
+      <div class="dest-info">
+        <div class="dest-name">Tallarín Frutti Latte</div>
+        <div class="dest-desc">Tallarines salteados en aceite de oliva con salsa frutos del mar (Calamar, Camarón, Pulpo Baby, Mejillón).</div>
+        <div class="dest-bottom">
+          <span class="dest-price">$20,10</span>
+          <button class="dest-btn"
+                  data-cart-add
+                  data-name="Tallarín Frutti Latte"
+                  data-price="$20,10"
+                  aria-label="Agregar Tallarín Frutti Latte al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+  <div class="dest-card">
+      <div class="dest-img" style="background-image:url('https://atjijqvwwdlydgsonptr.supabase.co/storage/v1/object/public/menu-images/pastas/Ripieno_Rag%C3%BA.webp')">
+        <span class="dest-badge">✨ Especial</span>
+      </div>
+      <div class="dest-info">
+        <div class="dest-name">Ripieno Ragú</div>
+        <div class="dest-desc">Bola de pan de masa madre rellena con Ragú de Mechada.</div>
+        <div class="dest-bottom">
+          <span class="dest-price">$10,72</span>
+          <button class="dest-btn"
+                  data-cart-add
+                  data-name="Ripieno Ragú"
+                  data-price="$10,72"
+                  aria-label="Agregar Ripieno Ragú al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+  <div class="dest-card">
+      <div class="dest-img" style="background-image:url('https://atjijqvwwdlydgsonptr.supabase.co/storage/v1/object/public/menu-images/pizzas/Salumiera.webp')">
+        <span class="dest-badge">🔥 Más Vendido</span>
+      </div>
+      <div class="dest-info">
+        <div class="dest-name">Salumiera</div>
+        <div class="dest-desc">Pomodoro, mozzarella, jamón artesanal, chorizo español, bologna de cerdo &amp; pistacho, trazos de nuez, pimienta negra.</div>
+        <div class="dest-bottom">
+          <span class="dest-price">$11,39</span>
+          <button class="dest-btn"
+                  data-cart-add
+                  data-name="Salumiera"
+                  data-price="$11,39"
+                  aria-label="Agregar Salumiera al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Dots generados dinámicamente según cantidad de destacados -->
-  <div class="dest-dots"></div>
+  <div class="dest-dots">
+  <span class="dest-dot active"></span>
+  <span class="dest-dot"></span>
+  <span class="dest-dot"></span>
+  <span class="dest-dot"></span>
+  <span class="dest-dot"></span>
+  </div>
 </section>
 
 <!-- MENÚ -->
@@ -133,7 +337,232 @@
 
   <!-- ENTRADAS -->
   <div class="panel on" id="p-entradas">
-    <div class="mgrid"></div>
+    <div class="mgrid">
+    <div class="mcard">
+      
+      <div class="mcard-body">
+        
+        <div class="mcard-name">Triángolo al Pomodoro</div>
+        <div class="mcard-desc">Triángulos de masa crocante, bañados en salsa napolitana y queso pecorino.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price">$8,04</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Triángolo al Pomodoro"
+                  data-price="$8,04"
+                  aria-label="Agregar Triángolo al Pomodoro al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard mcard-foto mcard-clean">
+      <div class="mcard-img" style="background-image:url('https://atjijqvwwdlydgsonptr.supabase.co/storage/v1/object/public/menu-images/entradas/burrata_pesto.webp')"></div>
+      <div class="mcard-body">
+        
+        <div class="mcard-name">Burrata Pesto</div>
+        <div class="mcard-desc">Perlas fritas de Mozzarella de Búfala rellenas de pesto, en salsa pomodoro, acompañadas de pan de masa madre.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price"><div class="panel on" id="p-entradas">
+    <div class="mgrid">0,64</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Burrata Pesto"
+                  data-price="<div class="panel on" id="p-entradas">
+    <div class="mgrid">0,64"
+                  aria-label="Agregar Burrata Pesto al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard">
+      
+      <div class="mcard-body">
+        
+        <div class="mcard-name">Caponata Siciliana</div>
+        <div class="mcard-desc">Berenjenas, pimentones, cebolla morada, aceitunas negras y tomates encurtidos en aceite de oliva y vinagre de manzana.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price">$8,04</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Caponata Siciliana"
+                  data-price="$8,04"
+                  aria-label="Agregar Caponata Siciliana al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard">
+      
+      <div class="mcard-body">
+        
+        <div class="mcard-name">Bruschettas</div>
+        <div class="mcard-desc">Tostadas de pan de masa madre con tomate deshidratado, pesto y aceto balsámico.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price">$8,04</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Bruschettas"
+                  data-price="$8,04"
+                  aria-label="Agregar Bruschettas al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard">
+      
+      <div class="mcard-body">
+        
+        <div class="mcard-name">Fettunta</div>
+        <div class="mcard-desc">Pan de masa madre tostado al estilo toscano.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price">$8,04</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Fettunta"
+                  data-price="$8,04"
+                  aria-label="Agregar Fettunta al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard">
+      
+      <div class="mcard-body">
+        
+        <div class="mcard-name">Frittata</div>
+        <div class="mcard-desc">Bolitas apanadas fritas rellenas de pasta, salsa bologna, mozzarella y queso pecorino, servidas con más salsa bologna.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price">$8,04</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Frittata"
+                  data-price="$8,04"
+                  aria-label="Agregar Frittata al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard mcard-foto mcard-clean">
+      <div class="mcard-img" style="background-image:url('https://atjijqvwwdlydgsonptr.supabase.co/storage/v1/object/public/menu-images/entradas/Rotolo.webp')"></div>
+      <div class="mcard-body">
+        
+        <div class="mcard-name">Rotolo</div>
+        <div class="mcard-desc">Rollo de queso crema, pimentón dulce, pistacho, nueces y tocineta, servido como dip para untar en tostadas de pan de masa madre.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price">$8,04</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Rotolo"
+                  data-price="$8,04"
+                  aria-label="Agregar Rotolo al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+  </div>
+        <div class="mcard-desc">Triángulos de masa crocante, bañados en salsa napolitana y queso pecorino.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price">$8,04</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Triángolo al Pomodoro"
+                  data-price="$8,04"
+                  aria-label="Agregar Triángolo al Pomodoro al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard mcard-foto mcard-clean">
+      <div class="mcard-img" style="background-image:url('https://atjijqvwwdlydgsonptr.supabase.co/storage/v1/object/public/menu-images/entradas/burrata_pesto.webp')"></div>
+      <div class="mcard-body">
+        
+        <div class="mcard-name">Burrata Pesto</div>
+        <div class="mcard-desc">Perlas fritas de Mozzarella de Búfala rellenas de pesto, en salsa pomodoro, acompañadas de pan de masa madre.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price"><div class="panel on" id="p-entradas">
+    <div class="mgrid">0,64</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Burrata Pesto"
+                  data-price="<div class="panel on" id="p-entradas">
+    <div class="mgrid">0,64"
+                  aria-label="Agregar Burrata Pesto al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard">
+      
+      <div class="mcard-body">
+        
+        <div class="mcard-name">Caponata Siciliana</div>
+        <div class="mcard-desc">Berenjenas, pimentones, cebolla morada, aceitunas negras y tomates encurtidos en aceite de oliva y vinagre de manzana.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price">$8,04</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Caponata Siciliana"
+                  data-price="$8,04"
+                  aria-label="Agregar Caponata Siciliana al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard">
+      
+      <div class="mcard-body">
+        
+        <div class="mcard-name">Bruschettas</div>
+        <div class="mcard-desc">Tostadas de pan de masa madre con tomate deshidratado, pesto y aceto balsámico.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price">$8,04</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Bruschettas"
+                  data-price="$8,04"
+                  aria-label="Agregar Bruschettas al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard">
+      
+      <div class="mcard-body">
+        
+        <div class="mcard-name">Fettunta</div>
+        <div class="mcard-desc">Pan de masa madre tostado al estilo toscano.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price">$8,04</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Fettunta"
+                  data-price="$8,04"
+                  aria-label="Agregar Fettunta al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard">
+      
+      <div class="mcard-body">
+        
+        <div class="mcard-name">Frittata</div>
+        <div class="mcard-desc">Bolitas apanadas fritas rellenas de pasta, salsa bologna, mozzarella y queso pecorino, servidas con más salsa bologna.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price">$8,04</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Frittata"
+                  data-price="$8,04"
+                  aria-label="Agregar Frittata al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard mcard-foto mcard-clean">
+      <div class="mcard-img" style="background-image:url('https://atjijqvwwdlydgsonptr.supabase.co/storage/v1/object/public/menu-images/entradas/Rotolo.webp')"></div>
+      <div class="mcard-body">
+        
+        <div class="mcard-name">Rotolo</div>
+        <div class="mcard-desc">Rollo de queso crema, pimentón dulce, pistacho, nueces y tocineta, servido como dip para untar en tostadas de pan de masa madre.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price">$8,04</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Rotolo"
+                  data-price="$8,04"
+                  aria-label="Agregar Rotolo al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+  </div>
   </div>
 
   <!-- PASTAS -->
@@ -154,7 +583,7 @@
           <h4>Al Latte — Salsas Blancas</h4>
           <ul>
             <li>La Finestra (Pollo, Brócoli, Zanahoria, Champiñón)</li>
-            <li>4 Formaggio</li>
+            <li>4 Formaggi</li>
             <li>Lomito Azzurro (Lomito + Queso Azul)</li>
             <li>Carbonara</li>
             <li>Funghi (Champiñones en Vino Blanco)</li>
@@ -166,7 +595,7 @@
             <li>Bologna</li>
             <li>Napolitana</li>
             <li>Ragú de Mechada</li>
-            <li>Putanesca (Picante)</li>
+            <li>Puttanesca (Picante)</li>
             <li>Sorrentina</li>
             <li><b>Al Pesto:</b> Pesto · Pesto Latte</li>
           </ul>
@@ -174,48 +603,2744 @@
       </div>
     </div>
 
-    <div class="mgrid"></div>
+    <div class="mgrid">
+    <div class="mcard">
+      
+      <div class="mcard-body">
+        <div class="mcard-cat">Pasta Larga</div>
+        <div class="mcard-name">Fettuccine / Tallarín</div>
+        <div class="mcard-desc">Con la salsa de tu preferencia. Hasta 3 salsas en un mismo plato.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price">$8,71</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Fettuccine / Tallarín"
+                  data-price="$8,71"
+                  aria-label="Agregar Fettuccine / Tallarín al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard">
+      
+      <div class="mcard-body">
+        <div class="mcard-cat">Pastificio</div>
+        <div class="mcard-name">Pastificio</div>
+        <div class="mcard-desc">En un mismo plato: Pasticho de Bologna, Tallarín 4 Formaggi y Milanesa de Pollo a la Pizzaiola.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price"><div class="panel" id="p-pastas">
+    <div class="pasta-system">
+      <p class="ps-head">Escoge tu pasta + hasta 3 salsas en un mismo plato</p>
+      <p class="ps-sub">Nuestra pasta está hecha con huevos y harina, libre de preservantes, colorantes o saborizantes. 100% artesanal.</p>
+      <div class="ps-cols">
+        <div class="ps-col pc-verde">
+          <h4>Pasta Fresca Hecha a Mano</h4>
+          <ul>
+            <li><b>Ravioli relleno de:</b> Cerdo a la Naranja · Ricotta &amp; Espinaca · Carne · Serrano &amp; Mozzarella · Almendra &amp; Manzana Acaramelada · Surtido</li>
+            <li><b>Pasta Larga:</b> Fettuccine (2mm) · Tallarín (1cm)</li>
+            <li><b>Pasta Corta:</b> Gnocchi de Papa · Cavatelli</li>
+          </ul>
+        </div>
+        <div class="ps-col pc-blanco">
+          <h4>Al Latte — Salsas Blancas</h4>
+          <ul>
+            <li>La Finestra (Pollo, Brócoli, Zanahoria, Champiñón)</li>
+            <li>4 Formaggi</li>
+            <li>Lomito Azzurro (Lomito + Queso Azul)</li>
+            <li>Carbonara</li>
+            <li>Funghi (Champiñones en Vino Blanco)</li>
+          </ul>
+        </div>
+        <div class="ps-col pc-rojo">
+          <h4>Al Pomodoro — Salsas Rojas</h4>
+          <ul>
+            <li>Bologna</li>
+            <li>Napolitana</li>
+            <li>Ragú de Mechada</li>
+            <li>Puttanesca (Picante)</li>
+            <li>Sorrentina</li>
+            <li><b>Al Pesto:</b> Pesto · Pesto Latte</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="mgrid">6,08</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Pastificio"
+                  data-price="<div class="panel" id="p-pastas">
+    <div class="pasta-system">
+      <p class="ps-head">Escoge tu pasta + hasta 3 salsas en un mismo plato</p>
+      <p class="ps-sub">Nuestra pasta está hecha con huevos y harina, libre de preservantes, colorantes o saborizantes. 100% artesanal.</p>
+      <div class="ps-cols">
+        <div class="ps-col pc-verde">
+          <h4>Pasta Fresca Hecha a Mano</h4>
+          <ul>
+            <li><b>Ravioli relleno de:</b> Cerdo a la Naranja · Ricotta &amp; Espinaca · Carne · Serrano &amp; Mozzarella · Almendra &amp; Manzana Acaramelada · Surtido</li>
+            <li><b>Pasta Larga:</b> Fettuccine (2mm) · Tallarín (1cm)</li>
+            <li><b>Pasta Corta:</b> Gnocchi de Papa · Cavatelli</li>
+          </ul>
+        </div>
+        <div class="ps-col pc-blanco">
+          <h4>Al Latte — Salsas Blancas</h4>
+          <ul>
+            <li>La Finestra (Pollo, Brócoli, Zanahoria, Champiñón)</li>
+            <li>4 Formaggi</li>
+            <li>Lomito Azzurro (Lomito + Queso Azul)</li>
+            <li>Carbonara</li>
+            <li>Funghi (Champiñones en Vino Blanco)</li>
+          </ul>
+        </div>
+        <div class="ps-col pc-rojo">
+          <h4>Al Pomodoro — Salsas Rojas</h4>
+          <ul>
+            <li>Bologna</li>
+            <li>Napolitana</li>
+            <li>Ragú de Mechada</li>
+            <li>Puttanesca (Picante)</li>
+            <li>Sorrentina</li>
+            <li><b>Al Pesto:</b> Pesto · Pesto Latte</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="mgrid">6,08"
+                  aria-label="Agregar Pastificio al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard mcard-foto mcard-clean">
+      <div class="mcard-img" style="background-image:url('https://atjijqvwwdlydgsonptr.supabase.co/storage/v1/object/public/menu-images/pastas/Gnocchi_s_de_papa.webp')"></div>
+      <div class="mcard-body">
+        <div class="mcard-cat">Pasta Corta</div>
+        <div class="mcard-name">Cavatelli / Gnocchi de Papa</div>
+        <div class="mcard-desc">Con la salsa de tu preferencia. Hasta 3 salsas en un mismo plato.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price">$8,71</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Cavatelli / Gnocchi de Papa"
+                  data-price="$8,71"
+                  aria-label="Agregar Cavatelli / Gnocchi de Papa al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard">
+      
+      <div class="mcard-body">
+        <div class="mcard-cat">Ravioli</div>
+        <div class="mcard-name">Ravioli — Almendra &amp; Manzana Acaramelada</div>
+        <div class="mcard-desc">Ravioli relleno, acompañado de la salsa de tu preferencia.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price"><div class="panel" id="p-pastas">
+    <div class="pasta-system">
+      <p class="ps-head">Escoge tu pasta + hasta 3 salsas en un mismo plato</p>
+      <p class="ps-sub">Nuestra pasta está hecha con huevos y harina, libre de preservantes, colorantes o saborizantes. 100% artesanal.</p>
+      <div class="ps-cols">
+        <div class="ps-col pc-verde">
+          <h4>Pasta Fresca Hecha a Mano</h4>
+          <ul>
+            <li><b>Ravioli relleno de:</b> Cerdo a la Naranja · Ricotta &amp; Espinaca · Carne · Serrano &amp; Mozzarella · Almendra &amp; Manzana Acaramelada · Surtido</li>
+            <li><b>Pasta Larga:</b> Fettuccine (2mm) · Tallarín (1cm)</li>
+            <li><b>Pasta Corta:</b> Gnocchi de Papa · Cavatelli</li>
+          </ul>
+        </div>
+        <div class="ps-col pc-blanco">
+          <h4>Al Latte — Salsas Blancas</h4>
+          <ul>
+            <li>La Finestra (Pollo, Brócoli, Zanahoria, Champiñón)</li>
+            <li>4 Formaggi</li>
+            <li>Lomito Azzurro (Lomito + Queso Azul)</li>
+            <li>Carbonara</li>
+            <li>Funghi (Champiñones en Vino Blanco)</li>
+          </ul>
+        </div>
+        <div class="ps-col pc-rojo">
+          <h4>Al Pomodoro — Salsas Rojas</h4>
+          <ul>
+            <li>Bologna</li>
+            <li>Napolitana</li>
+            <li>Ragú de Mechada</li>
+            <li>Puttanesca (Picante)</li>
+            <li>Sorrentina</li>
+            <li><b>Al Pesto:</b> Pesto · Pesto Latte</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="mgrid">1,39</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Ravioli — Almendra &amp; Manzana Acaramelada"
+                  data-price="<div class="panel" id="p-pastas">
+    <div class="pasta-system">
+      <p class="ps-head">Escoge tu pasta + hasta 3 salsas en un mismo plato</p>
+      <p class="ps-sub">Nuestra pasta está hecha con huevos y harina, libre de preservantes, colorantes o saborizantes. 100% artesanal.</p>
+      <div class="ps-cols">
+        <div class="ps-col pc-verde">
+          <h4>Pasta Fresca Hecha a Mano</h4>
+          <ul>
+            <li><b>Ravioli relleno de:</b> Cerdo a la Naranja · Ricotta &amp; Espinaca · Carne · Serrano &amp; Mozzarella · Almendra &amp; Manzana Acaramelada · Surtido</li>
+            <li><b>Pasta Larga:</b> Fettuccine (2mm) · Tallarín (1cm)</li>
+            <li><b>Pasta Corta:</b> Gnocchi de Papa · Cavatelli</li>
+          </ul>
+        </div>
+        <div class="ps-col pc-blanco">
+          <h4>Al Latte — Salsas Blancas</h4>
+          <ul>
+            <li>La Finestra (Pollo, Brócoli, Zanahoria, Champiñón)</li>
+            <li>4 Formaggi</li>
+            <li>Lomito Azzurro (Lomito + Queso Azul)</li>
+            <li>Carbonara</li>
+            <li>Funghi (Champiñones en Vino Blanco)</li>
+          </ul>
+        </div>
+        <div class="ps-col pc-rojo">
+          <h4>Al Pomodoro — Salsas Rojas</h4>
+          <ul>
+            <li>Bologna</li>
+            <li>Napolitana</li>
+            <li>Ragú de Mechada</li>
+            <li>Puttanesca (Picante)</li>
+            <li>Sorrentina</li>
+            <li><b>Al Pesto:</b> Pesto · Pesto Latte</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="mgrid">1,39"
+                  aria-label="Agregar Ravioli — Almendra &amp; Manzana Acaramelada al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard">
+      
+      <div class="mcard-body">
+        <div class="mcard-cat">Ravioli</div>
+        <div class="mcard-name">Ravioli — Carne</div>
+        <div class="mcard-desc">Ravioli relleno de carne, acompañado de la salsa de tu preferencia.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price"><div class="panel" id="p-pastas">
+    <div class="pasta-system">
+      <p class="ps-head">Escoge tu pasta + hasta 3 salsas en un mismo plato</p>
+      <p class="ps-sub">Nuestra pasta está hecha con huevos y harina, libre de preservantes, colorantes o saborizantes. 100% artesanal.</p>
+      <div class="ps-cols">
+        <div class="ps-col pc-verde">
+          <h4>Pasta Fresca Hecha a Mano</h4>
+          <ul>
+            <li><b>Ravioli relleno de:</b> Cerdo a la Naranja · Ricotta &amp; Espinaca · Carne · Serrano &amp; Mozzarella · Almendra &amp; Manzana Acaramelada · Surtido</li>
+            <li><b>Pasta Larga:</b> Fettuccine (2mm) · Tallarín (1cm)</li>
+            <li><b>Pasta Corta:</b> Gnocchi de Papa · Cavatelli</li>
+          </ul>
+        </div>
+        <div class="ps-col pc-blanco">
+          <h4>Al Latte — Salsas Blancas</h4>
+          <ul>
+            <li>La Finestra (Pollo, Brócoli, Zanahoria, Champiñón)</li>
+            <li>4 Formaggi</li>
+            <li>Lomito Azzurro (Lomito + Queso Azul)</li>
+            <li>Carbonara</li>
+            <li>Funghi (Champiñones en Vino Blanco)</li>
+          </ul>
+        </div>
+        <div class="ps-col pc-rojo">
+          <h4>Al Pomodoro — Salsas Rojas</h4>
+          <ul>
+            <li>Bologna</li>
+            <li>Napolitana</li>
+            <li>Ragú de Mechada</li>
+            <li>Puttanesca (Picante)</li>
+            <li>Sorrentina</li>
+            <li><b>Al Pesto:</b> Pesto · Pesto Latte</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="mgrid">0,05</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Ravioli — Carne"
+                  data-price="<div class="panel" id="p-pastas">
+    <div class="pasta-system">
+      <p class="ps-head">Escoge tu pasta + hasta 3 salsas en un mismo plato</p>
+      <p class="ps-sub">Nuestra pasta está hecha con huevos y harina, libre de preservantes, colorantes o saborizantes. 100% artesanal.</p>
+      <div class="ps-cols">
+        <div class="ps-col pc-verde">
+          <h4>Pasta Fresca Hecha a Mano</h4>
+          <ul>
+            <li><b>Ravioli relleno de:</b> Cerdo a la Naranja · Ricotta &amp; Espinaca · Carne · Serrano &amp; Mozzarella · Almendra &amp; Manzana Acaramelada · Surtido</li>
+            <li><b>Pasta Larga:</b> Fettuccine (2mm) · Tallarín (1cm)</li>
+            <li><b>Pasta Corta:</b> Gnocchi de Papa · Cavatelli</li>
+          </ul>
+        </div>
+        <div class="ps-col pc-blanco">
+          <h4>Al Latte — Salsas Blancas</h4>
+          <ul>
+            <li>La Finestra (Pollo, Brócoli, Zanahoria, Champiñón)</li>
+            <li>4 Formaggi</li>
+            <li>Lomito Azzurro (Lomito + Queso Azul)</li>
+            <li>Carbonara</li>
+            <li>Funghi (Champiñones en Vino Blanco)</li>
+          </ul>
+        </div>
+        <div class="ps-col pc-rojo">
+          <h4>Al Pomodoro — Salsas Rojas</h4>
+          <ul>
+            <li>Bologna</li>
+            <li>Napolitana</li>
+            <li>Ragú de Mechada</li>
+            <li>Puttanesca (Picante)</li>
+            <li>Sorrentina</li>
+            <li><b>Al Pesto:</b> Pesto · Pesto Latte</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="mgrid">0,05"
+                  aria-label="Agregar Ravioli — Carne al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard">
+      
+      <div class="mcard-body">
+        <div class="mcard-cat">Ravioli</div>
+        <div class="mcard-name">Ravioli — Cerdo a la Naranja / Ricotta &amp; Espinaca / Jamón Serrano &amp; Mozz</div>
+        <div class="mcard-desc">Ravioli relleno a tu elección.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price">$9,38 – <div class="panel" id="p-pastas">
+    <div class="pasta-system">
+      <p class="ps-head">Escoge tu pasta + hasta 3 salsas en un mismo plato</p>
+      <p class="ps-sub">Nuestra pasta está hecha con huevos y harina, libre de preservantes, colorantes o saborizantes. 100% artesanal.</p>
+      <div class="ps-cols">
+        <div class="ps-col pc-verde">
+          <h4>Pasta Fresca Hecha a Mano</h4>
+          <ul>
+            <li><b>Ravioli relleno de:</b> Cerdo a la Naranja · Ricotta &amp; Espinaca · Carne · Serrano &amp; Mozzarella · Almendra &amp; Manzana Acaramelada · Surtido</li>
+            <li><b>Pasta Larga:</b> Fettuccine (2mm) · Tallarín (1cm)</li>
+            <li><b>Pasta Corta:</b> Gnocchi de Papa · Cavatelli</li>
+          </ul>
+        </div>
+        <div class="ps-col pc-blanco">
+          <h4>Al Latte — Salsas Blancas</h4>
+          <ul>
+            <li>La Finestra (Pollo, Brócoli, Zanahoria, Champiñón)</li>
+            <li>4 Formaggi</li>
+            <li>Lomito Azzurro (Lomito + Queso Azul)</li>
+            <li>Carbonara</li>
+            <li>Funghi (Champiñones en Vino Blanco)</li>
+          </ul>
+        </div>
+        <div class="ps-col pc-rojo">
+          <h4>Al Pomodoro — Salsas Rojas</h4>
+          <ul>
+            <li>Bologna</li>
+            <li>Napolitana</li>
+            <li>Ragú de Mechada</li>
+            <li>Puttanesca (Picante)</li>
+            <li>Sorrentina</li>
+            <li><b>Al Pesto:</b> Pesto · Pesto Latte</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="mgrid">1,73</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Ravioli — Cerdo a la Naranja / Ricotta &amp; Espinaca / Jamón Serrano &amp; Mozz"
+                  data-price="$9,38 – <div class="panel" id="p-pastas">
+    <div class="pasta-system">
+      <p class="ps-head">Escoge tu pasta + hasta 3 salsas en un mismo plato</p>
+      <p class="ps-sub">Nuestra pasta está hecha con huevos y harina, libre de preservantes, colorantes o saborizantes. 100% artesanal.</p>
+      <div class="ps-cols">
+        <div class="ps-col pc-verde">
+          <h4>Pasta Fresca Hecha a Mano</h4>
+          <ul>
+            <li><b>Ravioli relleno de:</b> Cerdo a la Naranja · Ricotta &amp; Espinaca · Carne · Serrano &amp; Mozzarella · Almendra &amp; Manzana Acaramelada · Surtido</li>
+            <li><b>Pasta Larga:</b> Fettuccine (2mm) · Tallarín (1cm)</li>
+            <li><b>Pasta Corta:</b> Gnocchi de Papa · Cavatelli</li>
+          </ul>
+        </div>
+        <div class="ps-col pc-blanco">
+          <h4>Al Latte — Salsas Blancas</h4>
+          <ul>
+            <li>La Finestra (Pollo, Brócoli, Zanahoria, Champiñón)</li>
+            <li>4 Formaggi</li>
+            <li>Lomito Azzurro (Lomito + Queso Azul)</li>
+            <li>Carbonara</li>
+            <li>Funghi (Champiñones en Vino Blanco)</li>
+          </ul>
+        </div>
+        <div class="ps-col pc-rojo">
+          <h4>Al Pomodoro — Salsas Rojas</h4>
+          <ul>
+            <li>Bologna</li>
+            <li>Napolitana</li>
+            <li>Ragú de Mechada</li>
+            <li>Puttanesca (Picante)</li>
+            <li>Sorrentina</li>
+            <li><b>Al Pesto:</b> Pesto · Pesto Latte</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="mgrid">1,73"
+                  aria-label="Agregar Ravioli — Cerdo a la Naranja / Ricotta &amp; Espinaca / Jamón Serrano &amp; Mozz al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard mcard-foto mcard-clean">
+      <div class="mcard-img" style="background-image:url('https://atjijqvwwdlydgsonptr.supabase.co/storage/v1/object/public/menu-images/pastas/Tallarin_frutti_latte.webp')"></div>
+      <div class="mcard-body">
+        <div class="mcard-cat">Frutti di Mare</div>
+        <div class="mcard-name">Tallarín Frutti Latte</div>
+        <div class="mcard-desc">Tallarines salteados en aceite de oliva con salsa frutos del mar (Calamar, Camarón, Pulpo Baby, Mejillón).</div>
+        <div class="mcard-footer">
+          <span class="mcard-price"></div>0,10</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Tallarín Frutti Latte"
+                  data-price="</div>0,10"
+                  aria-label="Agregar Tallarín Frutti Latte al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard mcard-foto mcard-clean">
+      <div class="mcard-img" style="background-image:url('https://atjijqvwwdlydgsonptr.supabase.co/storage/v1/object/public/menu-images/pastas/Tallarin_Frutti_Roja.webp')"></div>
+      <div class="mcard-body">
+        <div class="mcard-cat">Frutti di Mare</div>
+        <div class="mcard-name">Tallarín Frutti Roja</div>
+        <div class="mcard-desc">Tallarines en salsa napolitana con frutos del mar (Calamar, Camarón, Pulpo Baby, Mejillón).</div>
+        <div class="mcard-footer">
+          <span class="mcard-price"></div>0,10</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Tallarín Frutti Roja"
+                  data-price="</div>0,10"
+                  aria-label="Agregar Tallarín Frutti Roja al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard mcard-foto mcard-clean">
+      <div class="mcard-img" style="background-image:url('https://atjijqvwwdlydgsonptr.supabase.co/storage/v1/object/public/menu-images/pastas/Pasticho_Tradicional_de_Bologna.webp')"></div>
+      <div class="mcard-body">
+        <div class="mcard-cat">Pasticho</div>
+        <div class="mcard-name">Pasticho Tradicional de Bologna</div>
+        <div class="mcard-desc">Salsa Bologna, Salsa Bechamel, Queso Mozzarella, Queso Parmesano, Jamón Artesanal.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price">$9,38</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Pasticho Tradicional de Bologna"
+                  data-price="$9,38"
+                  aria-label="Agregar Pasticho Tradicional de Bologna al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard">
+      
+      <div class="mcard-body">
+        <div class="mcard-cat">Pasticho</div>
+        <div class="mcard-name">Pasticho de Berenjena con Bologna</div>
+        <div class="mcard-desc">Láminas de Berenjena, Salsa Bologna, Salsa Bechamel, Queso Mozzarella, Queso Parmesano, Jamón Artesanal.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price">$9,38</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Pasticho de Berenjena con Bologna"
+                  data-price="$9,38"
+                  aria-label="Agregar Pasticho de Berenjena con Bologna al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard">
+      
+      <div class="mcard-body">
+        <div class="mcard-cat">Ripieno</div>
+        <div class="mcard-name">Ripieno Finestra</div>
+        <div class="mcard-desc">Bola de pan de masa madre rellena con Brócoli, Zanahoria, Champiñones y Pechuga de Pollo en salsa blanca.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price"><div class="panel" id="p-pastas">
+    <div class="pasta-system">
+      <p class="ps-head">Escoge tu pasta + hasta 3 salsas en un mismo plato</p>
+      <p class="ps-sub">Nuestra pasta está hecha con huevos y harina, libre de preservantes, colorantes o saborizantes. 100% artesanal.</p>
+      <div class="ps-cols">
+        <div class="ps-col pc-verde">
+          <h4>Pasta Fresca Hecha a Mano</h4>
+          <ul>
+            <li><b>Ravioli relleno de:</b> Cerdo a la Naranja · Ricotta &amp; Espinaca · Carne · Serrano &amp; Mozzarella · Almendra &amp; Manzana Acaramelada · Surtido</li>
+            <li><b>Pasta Larga:</b> Fettuccine (2mm) · Tallarín (1cm)</li>
+            <li><b>Pasta Corta:</b> Gnocchi de Papa · Cavatelli</li>
+          </ul>
+        </div>
+        <div class="ps-col pc-blanco">
+          <h4>Al Latte — Salsas Blancas</h4>
+          <ul>
+            <li>La Finestra (Pollo, Brócoli, Zanahoria, Champiñón)</li>
+            <li>4 Formaggi</li>
+            <li>Lomito Azzurro (Lomito + Queso Azul)</li>
+            <li>Carbonara</li>
+            <li>Funghi (Champiñones en Vino Blanco)</li>
+          </ul>
+        </div>
+        <div class="ps-col pc-rojo">
+          <h4>Al Pomodoro — Salsas Rojas</h4>
+          <ul>
+            <li>Bologna</li>
+            <li>Napolitana</li>
+            <li>Ragú de Mechada</li>
+            <li>Puttanesca (Picante)</li>
+            <li>Sorrentina</li>
+            <li><b>Al Pesto:</b> Pesto · Pesto Latte</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="mgrid">0,72</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Ripieno Finestra"
+                  data-price="<div class="panel" id="p-pastas">
+    <div class="pasta-system">
+      <p class="ps-head">Escoge tu pasta + hasta 3 salsas en un mismo plato</p>
+      <p class="ps-sub">Nuestra pasta está hecha con huevos y harina, libre de preservantes, colorantes o saborizantes. 100% artesanal.</p>
+      <div class="ps-cols">
+        <div class="ps-col pc-verde">
+          <h4>Pasta Fresca Hecha a Mano</h4>
+          <ul>
+            <li><b>Ravioli relleno de:</b> Cerdo a la Naranja · Ricotta &amp; Espinaca · Carne · Serrano &amp; Mozzarella · Almendra &amp; Manzana Acaramelada · Surtido</li>
+            <li><b>Pasta Larga:</b> Fettuccine (2mm) · Tallarín (1cm)</li>
+            <li><b>Pasta Corta:</b> Gnocchi de Papa · Cavatelli</li>
+          </ul>
+        </div>
+        <div class="ps-col pc-blanco">
+          <h4>Al Latte — Salsas Blancas</h4>
+          <ul>
+            <li>La Finestra (Pollo, Brócoli, Zanahoria, Champiñón)</li>
+            <li>4 Formaggi</li>
+            <li>Lomito Azzurro (Lomito + Queso Azul)</li>
+            <li>Carbonara</li>
+            <li>Funghi (Champiñones en Vino Blanco)</li>
+          </ul>
+        </div>
+        <div class="ps-col pc-rojo">
+          <h4>Al Pomodoro — Salsas Rojas</h4>
+          <ul>
+            <li>Bologna</li>
+            <li>Napolitana</li>
+            <li>Ragú de Mechada</li>
+            <li>Puttanesca (Picante)</li>
+            <li>Sorrentina</li>
+            <li><b>Al Pesto:</b> Pesto · Pesto Latte</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="mgrid">0,72"
+                  aria-label="Agregar Ripieno Finestra al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard mcard-foto mcard-clean">
+      <div class="mcard-img" style="background-image:url('https://atjijqvwwdlydgsonptr.supabase.co/storage/v1/object/public/menu-images/pastas/Ripieno_Rag%C3%BA.webp')"></div>
+      <div class="mcard-body">
+        <div class="mcard-cat">Ripieno</div>
+        <div class="mcard-name">Ripieno Ragú</div>
+        <div class="mcard-desc">Bola de pan de masa madre rellena con Ragú de Mechada.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price"><div class="panel" id="p-pastas">
+    <div class="pasta-system">
+      <p class="ps-head">Escoge tu pasta + hasta 3 salsas en un mismo plato</p>
+      <p class="ps-sub">Nuestra pasta está hecha con huevos y harina, libre de preservantes, colorantes o saborizantes. 100% artesanal.</p>
+      <div class="ps-cols">
+        <div class="ps-col pc-verde">
+          <h4>Pasta Fresca Hecha a Mano</h4>
+          <ul>
+            <li><b>Ravioli relleno de:</b> Cerdo a la Naranja · Ricotta &amp; Espinaca · Carne · Serrano &amp; Mozzarella · Almendra &amp; Manzana Acaramelada · Surtido</li>
+            <li><b>Pasta Larga:</b> Fettuccine (2mm) · Tallarín (1cm)</li>
+            <li><b>Pasta Corta:</b> Gnocchi de Papa · Cavatelli</li>
+          </ul>
+        </div>
+        <div class="ps-col pc-blanco">
+          <h4>Al Latte — Salsas Blancas</h4>
+          <ul>
+            <li>La Finestra (Pollo, Brócoli, Zanahoria, Champiñón)</li>
+            <li>4 Formaggi</li>
+            <li>Lomito Azzurro (Lomito + Queso Azul)</li>
+            <li>Carbonara</li>
+            <li>Funghi (Champiñones en Vino Blanco)</li>
+          </ul>
+        </div>
+        <div class="ps-col pc-rojo">
+          <h4>Al Pomodoro — Salsas Rojas</h4>
+          <ul>
+            <li>Bologna</li>
+            <li>Napolitana</li>
+            <li>Ragú de Mechada</li>
+            <li>Puttanesca (Picante)</li>
+            <li>Sorrentina</li>
+            <li><b>Al Pesto:</b> Pesto · Pesto Latte</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="mgrid">0,72</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Ripieno Ragú"
+                  data-price="<div class="panel" id="p-pastas">
+    <div class="pasta-system">
+      <p class="ps-head">Escoge tu pasta + hasta 3 salsas en un mismo plato</p>
+      <p class="ps-sub">Nuestra pasta está hecha con huevos y harina, libre de preservantes, colorantes o saborizantes. 100% artesanal.</p>
+      <div class="ps-cols">
+        <div class="ps-col pc-verde">
+          <h4>Pasta Fresca Hecha a Mano</h4>
+          <ul>
+            <li><b>Ravioli relleno de:</b> Cerdo a la Naranja · Ricotta &amp; Espinaca · Carne · Serrano &amp; Mozzarella · Almendra &amp; Manzana Acaramelada · Surtido</li>
+            <li><b>Pasta Larga:</b> Fettuccine (2mm) · Tallarín (1cm)</li>
+            <li><b>Pasta Corta:</b> Gnocchi de Papa · Cavatelli</li>
+          </ul>
+        </div>
+        <div class="ps-col pc-blanco">
+          <h4>Al Latte — Salsas Blancas</h4>
+          <ul>
+            <li>La Finestra (Pollo, Brócoli, Zanahoria, Champiñón)</li>
+            <li>4 Formaggi</li>
+            <li>Lomito Azzurro (Lomito + Queso Azul)</li>
+            <li>Carbonara</li>
+            <li>Funghi (Champiñones en Vino Blanco)</li>
+          </ul>
+        </div>
+        <div class="ps-col pc-rojo">
+          <h4>Al Pomodoro — Salsas Rojas</h4>
+          <ul>
+            <li>Bologna</li>
+            <li>Napolitana</li>
+            <li>Ragú de Mechada</li>
+            <li>Puttanesca (Picante)</li>
+            <li>Sorrentina</li>
+            <li><b>Al Pesto:</b> Pesto · Pesto Latte</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="mgrid">0,72"
+                  aria-label="Agregar Ripieno Ragú al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard">
+      
+      <div class="mcard-body">
+        <div class="mcard-cat">Ripieno</div>
+        <div class="mcard-name">Ripieno Azzurro</div>
+        <div class="mcard-desc">Bola de pan de masa madre rellena con Lomito en tiras encurtido en vino tinto y romero, con toque de Queso Azul.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price"><div class="panel" id="p-pastas">
+    <div class="pasta-system">
+      <p class="ps-head">Escoge tu pasta + hasta 3 salsas en un mismo plato</p>
+      <p class="ps-sub">Nuestra pasta está hecha con huevos y harina, libre de preservantes, colorantes o saborizantes. 100% artesanal.</p>
+      <div class="ps-cols">
+        <div class="ps-col pc-verde">
+          <h4>Pasta Fresca Hecha a Mano</h4>
+          <ul>
+            <li><b>Ravioli relleno de:</b> Cerdo a la Naranja · Ricotta &amp; Espinaca · Carne · Serrano &amp; Mozzarella · Almendra &amp; Manzana Acaramelada · Surtido</li>
+            <li><b>Pasta Larga:</b> Fettuccine (2mm) · Tallarín (1cm)</li>
+            <li><b>Pasta Corta:</b> Gnocchi de Papa · Cavatelli</li>
+          </ul>
+        </div>
+        <div class="ps-col pc-blanco">
+          <h4>Al Latte — Salsas Blancas</h4>
+          <ul>
+            <li>La Finestra (Pollo, Brócoli, Zanahoria, Champiñón)</li>
+            <li>4 Formaggi</li>
+            <li>Lomito Azzurro (Lomito + Queso Azul)</li>
+            <li>Carbonara</li>
+            <li>Funghi (Champiñones en Vino Blanco)</li>
+          </ul>
+        </div>
+        <div class="ps-col pc-rojo">
+          <h4>Al Pomodoro — Salsas Rojas</h4>
+          <ul>
+            <li>Bologna</li>
+            <li>Napolitana</li>
+            <li>Ragú de Mechada</li>
+            <li>Puttanesca (Picante)</li>
+            <li>Sorrentina</li>
+            <li><b>Al Pesto:</b> Pesto · Pesto Latte</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="mgrid">2,06</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Ripieno Azzurro"
+                  data-price="<div class="panel" id="p-pastas">
+    <div class="pasta-system">
+      <p class="ps-head">Escoge tu pasta + hasta 3 salsas en un mismo plato</p>
+      <p class="ps-sub">Nuestra pasta está hecha con huevos y harina, libre de preservantes, colorantes o saborizantes. 100% artesanal.</p>
+      <div class="ps-cols">
+        <div class="ps-col pc-verde">
+          <h4>Pasta Fresca Hecha a Mano</h4>
+          <ul>
+            <li><b>Ravioli relleno de:</b> Cerdo a la Naranja · Ricotta &amp; Espinaca · Carne · Serrano &amp; Mozzarella · Almendra &amp; Manzana Acaramelada · Surtido</li>
+            <li><b>Pasta Larga:</b> Fettuccine (2mm) · Tallarín (1cm)</li>
+            <li><b>Pasta Corta:</b> Gnocchi de Papa · Cavatelli</li>
+          </ul>
+        </div>
+        <div class="ps-col pc-blanco">
+          <h4>Al Latte — Salsas Blancas</h4>
+          <ul>
+            <li>La Finestra (Pollo, Brócoli, Zanahoria, Champiñón)</li>
+            <li>4 Formaggi</li>
+            <li>Lomito Azzurro (Lomito + Queso Azul)</li>
+            <li>Carbonara</li>
+            <li>Funghi (Champiñones en Vino Blanco)</li>
+          </ul>
+        </div>
+        <div class="ps-col pc-rojo">
+          <h4>Al Pomodoro — Salsas Rojas</h4>
+          <ul>
+            <li>Bologna</li>
+            <li>Napolitana</li>
+            <li>Ragú de Mechada</li>
+            <li>Puttanesca (Picante)</li>
+            <li>Sorrentina</li>
+            <li><b>Al Pesto:</b> Pesto · Pesto Latte</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="mgrid">2,06"
+                  aria-label="Agregar Ripieno Azzurro al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+  </div>
+        <div class="mcard-name">Fettuccine / Tallarín</div>
+        <div class="mcard-desc">Con la salsa de tu preferencia. Hasta 3 salsas en un mismo plato.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price">$8,71</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Fettuccine / Tallarín"
+                  data-price="$8,71"
+                  aria-label="Agregar Fettuccine / Tallarín al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard">
+      
+      <div class="mcard-body">
+        <div class="mcard-cat">Pastificio</div>
+        <div class="mcard-name">Pastificio</div>
+        <div class="mcard-desc">En un mismo plato: Pasticho de Bologna, Tallarín 4 Formaggi y Milanesa de Pollo a la Pizzaiola.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price"><div class="panel" id="p-pastas">
+    <div class="pasta-system">
+      <p class="ps-head">Escoge tu pasta + hasta 3 salsas en un mismo plato</p>
+      <p class="ps-sub">Nuestra pasta está hecha con huevos y harina, libre de preservantes, colorantes o saborizantes. 100% artesanal.</p>
+      <div class="ps-cols">
+        <div class="ps-col pc-verde">
+          <h4>Pasta Fresca Hecha a Mano</h4>
+          <ul>
+            <li><b>Ravioli relleno de:</b> Cerdo a la Naranja · Ricotta &amp; Espinaca · Carne · Serrano &amp; Mozzarella · Almendra &amp; Manzana Acaramelada · Surtido</li>
+            <li><b>Pasta Larga:</b> Fettuccine (2mm) · Tallarín (1cm)</li>
+            <li><b>Pasta Corta:</b> Gnocchi de Papa · Cavatelli</li>
+          </ul>
+        </div>
+        <div class="ps-col pc-blanco">
+          <h4>Al Latte — Salsas Blancas</h4>
+          <ul>
+            <li>La Finestra (Pollo, Brócoli, Zanahoria, Champiñón)</li>
+            <li>4 Formaggi</li>
+            <li>Lomito Azzurro (Lomito + Queso Azul)</li>
+            <li>Carbonara</li>
+            <li>Funghi (Champiñones en Vino Blanco)</li>
+          </ul>
+        </div>
+        <div class="ps-col pc-rojo">
+          <h4>Al Pomodoro — Salsas Rojas</h4>
+          <ul>
+            <li>Bologna</li>
+            <li>Napolitana</li>
+            <li>Ragú de Mechada</li>
+            <li>Puttanesca (Picante)</li>
+            <li>Sorrentina</li>
+            <li><b>Al Pesto:</b> Pesto · Pesto Latte</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="mgrid">6,08</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Pastificio"
+                  data-price="<div class="panel" id="p-pastas">
+    <div class="pasta-system">
+      <p class="ps-head">Escoge tu pasta + hasta 3 salsas en un mismo plato</p>
+      <p class="ps-sub">Nuestra pasta está hecha con huevos y harina, libre de preservantes, colorantes o saborizantes. 100% artesanal.</p>
+      <div class="ps-cols">
+        <div class="ps-col pc-verde">
+          <h4>Pasta Fresca Hecha a Mano</h4>
+          <ul>
+            <li><b>Ravioli relleno de:</b> Cerdo a la Naranja · Ricotta &amp; Espinaca · Carne · Serrano &amp; Mozzarella · Almendra &amp; Manzana Acaramelada · Surtido</li>
+            <li><b>Pasta Larga:</b> Fettuccine (2mm) · Tallarín (1cm)</li>
+            <li><b>Pasta Corta:</b> Gnocchi de Papa · Cavatelli</li>
+          </ul>
+        </div>
+        <div class="ps-col pc-blanco">
+          <h4>Al Latte — Salsas Blancas</h4>
+          <ul>
+            <li>La Finestra (Pollo, Brócoli, Zanahoria, Champiñón)</li>
+            <li>4 Formaggi</li>
+            <li>Lomito Azzurro (Lomito + Queso Azul)</li>
+            <li>Carbonara</li>
+            <li>Funghi (Champiñones en Vino Blanco)</li>
+          </ul>
+        </div>
+        <div class="ps-col pc-rojo">
+          <h4>Al Pomodoro — Salsas Rojas</h4>
+          <ul>
+            <li>Bologna</li>
+            <li>Napolitana</li>
+            <li>Ragú de Mechada</li>
+            <li>Puttanesca (Picante)</li>
+            <li>Sorrentina</li>
+            <li><b>Al Pesto:</b> Pesto · Pesto Latte</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="mgrid">6,08"
+                  aria-label="Agregar Pastificio al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard mcard-foto mcard-clean">
+      <div class="mcard-img" style="background-image:url('https://atjijqvwwdlydgsonptr.supabase.co/storage/v1/object/public/menu-images/pastas/Gnocchi_s_de_papa.webp')"></div>
+      <div class="mcard-body">
+        <div class="mcard-cat">Pasta Corta</div>
+        <div class="mcard-name">Cavatelli / Gnocchi de Papa</div>
+        <div class="mcard-desc">Con la salsa de tu preferencia. Hasta 3 salsas en un mismo plato.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price">$8,71</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Cavatelli / Gnocchi de Papa"
+                  data-price="$8,71"
+                  aria-label="Agregar Cavatelli / Gnocchi de Papa al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard">
+      
+      <div class="mcard-body">
+        <div class="mcard-cat">Ravioli</div>
+        <div class="mcard-name">Ravioli — Almendra &amp; Manzana Acaramelada</div>
+        <div class="mcard-desc">Ravioli relleno, acompañado de la salsa de tu preferencia.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price"><div class="panel" id="p-pastas">
+    <div class="pasta-system">
+      <p class="ps-head">Escoge tu pasta + hasta 3 salsas en un mismo plato</p>
+      <p class="ps-sub">Nuestra pasta está hecha con huevos y harina, libre de preservantes, colorantes o saborizantes. 100% artesanal.</p>
+      <div class="ps-cols">
+        <div class="ps-col pc-verde">
+          <h4>Pasta Fresca Hecha a Mano</h4>
+          <ul>
+            <li><b>Ravioli relleno de:</b> Cerdo a la Naranja · Ricotta &amp; Espinaca · Carne · Serrano &amp; Mozzarella · Almendra &amp; Manzana Acaramelada · Surtido</li>
+            <li><b>Pasta Larga:</b> Fettuccine (2mm) · Tallarín (1cm)</li>
+            <li><b>Pasta Corta:</b> Gnocchi de Papa · Cavatelli</li>
+          </ul>
+        </div>
+        <div class="ps-col pc-blanco">
+          <h4>Al Latte — Salsas Blancas</h4>
+          <ul>
+            <li>La Finestra (Pollo, Brócoli, Zanahoria, Champiñón)</li>
+            <li>4 Formaggi</li>
+            <li>Lomito Azzurro (Lomito + Queso Azul)</li>
+            <li>Carbonara</li>
+            <li>Funghi (Champiñones en Vino Blanco)</li>
+          </ul>
+        </div>
+        <div class="ps-col pc-rojo">
+          <h4>Al Pomodoro — Salsas Rojas</h4>
+          <ul>
+            <li>Bologna</li>
+            <li>Napolitana</li>
+            <li>Ragú de Mechada</li>
+            <li>Puttanesca (Picante)</li>
+            <li>Sorrentina</li>
+            <li><b>Al Pesto:</b> Pesto · Pesto Latte</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="mgrid">1,39</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Ravioli — Almendra &amp; Manzana Acaramelada"
+                  data-price="<div class="panel" id="p-pastas">
+    <div class="pasta-system">
+      <p class="ps-head">Escoge tu pasta + hasta 3 salsas en un mismo plato</p>
+      <p class="ps-sub">Nuestra pasta está hecha con huevos y harina, libre de preservantes, colorantes o saborizantes. 100% artesanal.</p>
+      <div class="ps-cols">
+        <div class="ps-col pc-verde">
+          <h4>Pasta Fresca Hecha a Mano</h4>
+          <ul>
+            <li><b>Ravioli relleno de:</b> Cerdo a la Naranja · Ricotta &amp; Espinaca · Carne · Serrano &amp; Mozzarella · Almendra &amp; Manzana Acaramelada · Surtido</li>
+            <li><b>Pasta Larga:</b> Fettuccine (2mm) · Tallarín (1cm)</li>
+            <li><b>Pasta Corta:</b> Gnocchi de Papa · Cavatelli</li>
+          </ul>
+        </div>
+        <div class="ps-col pc-blanco">
+          <h4>Al Latte — Salsas Blancas</h4>
+          <ul>
+            <li>La Finestra (Pollo, Brócoli, Zanahoria, Champiñón)</li>
+            <li>4 Formaggi</li>
+            <li>Lomito Azzurro (Lomito + Queso Azul)</li>
+            <li>Carbonara</li>
+            <li>Funghi (Champiñones en Vino Blanco)</li>
+          </ul>
+        </div>
+        <div class="ps-col pc-rojo">
+          <h4>Al Pomodoro — Salsas Rojas</h4>
+          <ul>
+            <li>Bologna</li>
+            <li>Napolitana</li>
+            <li>Ragú de Mechada</li>
+            <li>Puttanesca (Picante)</li>
+            <li>Sorrentina</li>
+            <li><b>Al Pesto:</b> Pesto · Pesto Latte</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="mgrid">1,39"
+                  aria-label="Agregar Ravioli — Almendra &amp; Manzana Acaramelada al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard">
+      
+      <div class="mcard-body">
+        <div class="mcard-cat">Ravioli</div>
+        <div class="mcard-name">Ravioli — Carne</div>
+        <div class="mcard-desc">Ravioli relleno de carne, acompañado de la salsa de tu preferencia.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price"><div class="panel" id="p-pastas">
+    <div class="pasta-system">
+      <p class="ps-head">Escoge tu pasta + hasta 3 salsas en un mismo plato</p>
+      <p class="ps-sub">Nuestra pasta está hecha con huevos y harina, libre de preservantes, colorantes o saborizantes. 100% artesanal.</p>
+      <div class="ps-cols">
+        <div class="ps-col pc-verde">
+          <h4>Pasta Fresca Hecha a Mano</h4>
+          <ul>
+            <li><b>Ravioli relleno de:</b> Cerdo a la Naranja · Ricotta &amp; Espinaca · Carne · Serrano &amp; Mozzarella · Almendra &amp; Manzana Acaramelada · Surtido</li>
+            <li><b>Pasta Larga:</b> Fettuccine (2mm) · Tallarín (1cm)</li>
+            <li><b>Pasta Corta:</b> Gnocchi de Papa · Cavatelli</li>
+          </ul>
+        </div>
+        <div class="ps-col pc-blanco">
+          <h4>Al Latte — Salsas Blancas</h4>
+          <ul>
+            <li>La Finestra (Pollo, Brócoli, Zanahoria, Champiñón)</li>
+            <li>4 Formaggi</li>
+            <li>Lomito Azzurro (Lomito + Queso Azul)</li>
+            <li>Carbonara</li>
+            <li>Funghi (Champiñones en Vino Blanco)</li>
+          </ul>
+        </div>
+        <div class="ps-col pc-rojo">
+          <h4>Al Pomodoro — Salsas Rojas</h4>
+          <ul>
+            <li>Bologna</li>
+            <li>Napolitana</li>
+            <li>Ragú de Mechada</li>
+            <li>Puttanesca (Picante)</li>
+            <li>Sorrentina</li>
+            <li><b>Al Pesto:</b> Pesto · Pesto Latte</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="mgrid">0,05</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Ravioli — Carne"
+                  data-price="<div class="panel" id="p-pastas">
+    <div class="pasta-system">
+      <p class="ps-head">Escoge tu pasta + hasta 3 salsas en un mismo plato</p>
+      <p class="ps-sub">Nuestra pasta está hecha con huevos y harina, libre de preservantes, colorantes o saborizantes. 100% artesanal.</p>
+      <div class="ps-cols">
+        <div class="ps-col pc-verde">
+          <h4>Pasta Fresca Hecha a Mano</h4>
+          <ul>
+            <li><b>Ravioli relleno de:</b> Cerdo a la Naranja · Ricotta &amp; Espinaca · Carne · Serrano &amp; Mozzarella · Almendra &amp; Manzana Acaramelada · Surtido</li>
+            <li><b>Pasta Larga:</b> Fettuccine (2mm) · Tallarín (1cm)</li>
+            <li><b>Pasta Corta:</b> Gnocchi de Papa · Cavatelli</li>
+          </ul>
+        </div>
+        <div class="ps-col pc-blanco">
+          <h4>Al Latte — Salsas Blancas</h4>
+          <ul>
+            <li>La Finestra (Pollo, Brócoli, Zanahoria, Champiñón)</li>
+            <li>4 Formaggi</li>
+            <li>Lomito Azzurro (Lomito + Queso Azul)</li>
+            <li>Carbonara</li>
+            <li>Funghi (Champiñones en Vino Blanco)</li>
+          </ul>
+        </div>
+        <div class="ps-col pc-rojo">
+          <h4>Al Pomodoro — Salsas Rojas</h4>
+          <ul>
+            <li>Bologna</li>
+            <li>Napolitana</li>
+            <li>Ragú de Mechada</li>
+            <li>Puttanesca (Picante)</li>
+            <li>Sorrentina</li>
+            <li><b>Al Pesto:</b> Pesto · Pesto Latte</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="mgrid">0,05"
+                  aria-label="Agregar Ravioli — Carne al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard">
+      
+      <div class="mcard-body">
+        <div class="mcard-cat">Ravioli</div>
+        <div class="mcard-name">Ravioli — Cerdo a la Naranja / Ricotta &amp; Espinaca / Jamón Serrano &amp; Mozz</div>
+        <div class="mcard-desc">Ravioli relleno a tu elección.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price">$9,38 – <div class="panel" id="p-pastas">
+    <div class="pasta-system">
+      <p class="ps-head">Escoge tu pasta + hasta 3 salsas en un mismo plato</p>
+      <p class="ps-sub">Nuestra pasta está hecha con huevos y harina, libre de preservantes, colorantes o saborizantes. 100% artesanal.</p>
+      <div class="ps-cols">
+        <div class="ps-col pc-verde">
+          <h4>Pasta Fresca Hecha a Mano</h4>
+          <ul>
+            <li><b>Ravioli relleno de:</b> Cerdo a la Naranja · Ricotta &amp; Espinaca · Carne · Serrano &amp; Mozzarella · Almendra &amp; Manzana Acaramelada · Surtido</li>
+            <li><b>Pasta Larga:</b> Fettuccine (2mm) · Tallarín (1cm)</li>
+            <li><b>Pasta Corta:</b> Gnocchi de Papa · Cavatelli</li>
+          </ul>
+        </div>
+        <div class="ps-col pc-blanco">
+          <h4>Al Latte — Salsas Blancas</h4>
+          <ul>
+            <li>La Finestra (Pollo, Brócoli, Zanahoria, Champiñón)</li>
+            <li>4 Formaggi</li>
+            <li>Lomito Azzurro (Lomito + Queso Azul)</li>
+            <li>Carbonara</li>
+            <li>Funghi (Champiñones en Vino Blanco)</li>
+          </ul>
+        </div>
+        <div class="ps-col pc-rojo">
+          <h4>Al Pomodoro — Salsas Rojas</h4>
+          <ul>
+            <li>Bologna</li>
+            <li>Napolitana</li>
+            <li>Ragú de Mechada</li>
+            <li>Puttanesca (Picante)</li>
+            <li>Sorrentina</li>
+            <li><b>Al Pesto:</b> Pesto · Pesto Latte</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="mgrid">1,73</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Ravioli — Cerdo a la Naranja / Ricotta &amp; Espinaca / Jamón Serrano &amp; Mozz"
+                  data-price="$9,38 – <div class="panel" id="p-pastas">
+    <div class="pasta-system">
+      <p class="ps-head">Escoge tu pasta + hasta 3 salsas en un mismo plato</p>
+      <p class="ps-sub">Nuestra pasta está hecha con huevos y harina, libre de preservantes, colorantes o saborizantes. 100% artesanal.</p>
+      <div class="ps-cols">
+        <div class="ps-col pc-verde">
+          <h4>Pasta Fresca Hecha a Mano</h4>
+          <ul>
+            <li><b>Ravioli relleno de:</b> Cerdo a la Naranja · Ricotta &amp; Espinaca · Carne · Serrano &amp; Mozzarella · Almendra &amp; Manzana Acaramelada · Surtido</li>
+            <li><b>Pasta Larga:</b> Fettuccine (2mm) · Tallarín (1cm)</li>
+            <li><b>Pasta Corta:</b> Gnocchi de Papa · Cavatelli</li>
+          </ul>
+        </div>
+        <div class="ps-col pc-blanco">
+          <h4>Al Latte — Salsas Blancas</h4>
+          <ul>
+            <li>La Finestra (Pollo, Brócoli, Zanahoria, Champiñón)</li>
+            <li>4 Formaggi</li>
+            <li>Lomito Azzurro (Lomito + Queso Azul)</li>
+            <li>Carbonara</li>
+            <li>Funghi (Champiñones en Vino Blanco)</li>
+          </ul>
+        </div>
+        <div class="ps-col pc-rojo">
+          <h4>Al Pomodoro — Salsas Rojas</h4>
+          <ul>
+            <li>Bologna</li>
+            <li>Napolitana</li>
+            <li>Ragú de Mechada</li>
+            <li>Puttanesca (Picante)</li>
+            <li>Sorrentina</li>
+            <li><b>Al Pesto:</b> Pesto · Pesto Latte</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="mgrid">1,73"
+                  aria-label="Agregar Ravioli — Cerdo a la Naranja / Ricotta &amp; Espinaca / Jamón Serrano &amp; Mozz al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard mcard-foto mcard-clean">
+      <div class="mcard-img" style="background-image:url('https://atjijqvwwdlydgsonptr.supabase.co/storage/v1/object/public/menu-images/pastas/Tallarin_frutti_latte.webp')"></div>
+      <div class="mcard-body">
+        <div class="mcard-cat">Frutti di Mare</div>
+        <div class="mcard-name">Tallarín Frutti Latte</div>
+        <div class="mcard-desc">Tallarines salteados en aceite de oliva con salsa frutos del mar (Calamar, Camarón, Pulpo Baby, Mejillón).</div>
+        <div class="mcard-footer">
+          <span class="mcard-price"></div>0,10</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Tallarín Frutti Latte"
+                  data-price="</div>0,10"
+                  aria-label="Agregar Tallarín Frutti Latte al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard mcard-foto mcard-clean">
+      <div class="mcard-img" style="background-image:url('https://atjijqvwwdlydgsonptr.supabase.co/storage/v1/object/public/menu-images/pastas/Tallarin_Frutti_Roja.webp')"></div>
+      <div class="mcard-body">
+        <div class="mcard-cat">Frutti di Mare</div>
+        <div class="mcard-name">Tallarín Frutti Roja</div>
+        <div class="mcard-desc">Tallarines en salsa napolitana con frutos del mar (Calamar, Camarón, Pulpo Baby, Mejillón).</div>
+        <div class="mcard-footer">
+          <span class="mcard-price"></div>0,10</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Tallarín Frutti Roja"
+                  data-price="</div>0,10"
+                  aria-label="Agregar Tallarín Frutti Roja al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard mcard-foto mcard-clean">
+      <div class="mcard-img" style="background-image:url('https://atjijqvwwdlydgsonptr.supabase.co/storage/v1/object/public/menu-images/pastas/Pasticho_Tradicional_de_Bologna.webp')"></div>
+      <div class="mcard-body">
+        <div class="mcard-cat">Pasticho</div>
+        <div class="mcard-name">Pasticho Tradicional de Bologna</div>
+        <div class="mcard-desc">Salsa Bologna, Salsa Bechamel, Queso Mozzarella, Queso Parmesano, Jamón Artesanal.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price">$9,38</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Pasticho Tradicional de Bologna"
+                  data-price="$9,38"
+                  aria-label="Agregar Pasticho Tradicional de Bologna al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard">
+      
+      <div class="mcard-body">
+        <div class="mcard-cat">Pasticho</div>
+        <div class="mcard-name">Pasticho de Berenjena con Bologna</div>
+        <div class="mcard-desc">Láminas de Berenjena, Salsa Bologna, Salsa Bechamel, Queso Mozzarella, Queso Parmesano, Jamón Artesanal.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price">$9,38</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Pasticho de Berenjena con Bologna"
+                  data-price="$9,38"
+                  aria-label="Agregar Pasticho de Berenjena con Bologna al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard">
+      
+      <div class="mcard-body">
+        <div class="mcard-cat">Ripieno</div>
+        <div class="mcard-name">Ripieno Finestra</div>
+        <div class="mcard-desc">Bola de pan de masa madre rellena con Brócoli, Zanahoria, Champiñones y Pechuga de Pollo en salsa blanca.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price"><div class="panel" id="p-pastas">
+    <div class="pasta-system">
+      <p class="ps-head">Escoge tu pasta + hasta 3 salsas en un mismo plato</p>
+      <p class="ps-sub">Nuestra pasta está hecha con huevos y harina, libre de preservantes, colorantes o saborizantes. 100% artesanal.</p>
+      <div class="ps-cols">
+        <div class="ps-col pc-verde">
+          <h4>Pasta Fresca Hecha a Mano</h4>
+          <ul>
+            <li><b>Ravioli relleno de:</b> Cerdo a la Naranja · Ricotta &amp; Espinaca · Carne · Serrano &amp; Mozzarella · Almendra &amp; Manzana Acaramelada · Surtido</li>
+            <li><b>Pasta Larga:</b> Fettuccine (2mm) · Tallarín (1cm)</li>
+            <li><b>Pasta Corta:</b> Gnocchi de Papa · Cavatelli</li>
+          </ul>
+        </div>
+        <div class="ps-col pc-blanco">
+          <h4>Al Latte — Salsas Blancas</h4>
+          <ul>
+            <li>La Finestra (Pollo, Brócoli, Zanahoria, Champiñón)</li>
+            <li>4 Formaggi</li>
+            <li>Lomito Azzurro (Lomito + Queso Azul)</li>
+            <li>Carbonara</li>
+            <li>Funghi (Champiñones en Vino Blanco)</li>
+          </ul>
+        </div>
+        <div class="ps-col pc-rojo">
+          <h4>Al Pomodoro — Salsas Rojas</h4>
+          <ul>
+            <li>Bologna</li>
+            <li>Napolitana</li>
+            <li>Ragú de Mechada</li>
+            <li>Puttanesca (Picante)</li>
+            <li>Sorrentina</li>
+            <li><b>Al Pesto:</b> Pesto · Pesto Latte</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="mgrid">0,72</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Ripieno Finestra"
+                  data-price="<div class="panel" id="p-pastas">
+    <div class="pasta-system">
+      <p class="ps-head">Escoge tu pasta + hasta 3 salsas en un mismo plato</p>
+      <p class="ps-sub">Nuestra pasta está hecha con huevos y harina, libre de preservantes, colorantes o saborizantes. 100% artesanal.</p>
+      <div class="ps-cols">
+        <div class="ps-col pc-verde">
+          <h4>Pasta Fresca Hecha a Mano</h4>
+          <ul>
+            <li><b>Ravioli relleno de:</b> Cerdo a la Naranja · Ricotta &amp; Espinaca · Carne · Serrano &amp; Mozzarella · Almendra &amp; Manzana Acaramelada · Surtido</li>
+            <li><b>Pasta Larga:</b> Fettuccine (2mm) · Tallarín (1cm)</li>
+            <li><b>Pasta Corta:</b> Gnocchi de Papa · Cavatelli</li>
+          </ul>
+        </div>
+        <div class="ps-col pc-blanco">
+          <h4>Al Latte — Salsas Blancas</h4>
+          <ul>
+            <li>La Finestra (Pollo, Brócoli, Zanahoria, Champiñón)</li>
+            <li>4 Formaggi</li>
+            <li>Lomito Azzurro (Lomito + Queso Azul)</li>
+            <li>Carbonara</li>
+            <li>Funghi (Champiñones en Vino Blanco)</li>
+          </ul>
+        </div>
+        <div class="ps-col pc-rojo">
+          <h4>Al Pomodoro — Salsas Rojas</h4>
+          <ul>
+            <li>Bologna</li>
+            <li>Napolitana</li>
+            <li>Ragú de Mechada</li>
+            <li>Puttanesca (Picante)</li>
+            <li>Sorrentina</li>
+            <li><b>Al Pesto:</b> Pesto · Pesto Latte</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="mgrid">0,72"
+                  aria-label="Agregar Ripieno Finestra al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard mcard-foto mcard-clean">
+      <div class="mcard-img" style="background-image:url('https://atjijqvwwdlydgsonptr.supabase.co/storage/v1/object/public/menu-images/pastas/Ripieno_Rag%C3%BA.webp')"></div>
+      <div class="mcard-body">
+        <div class="mcard-cat">Ripieno</div>
+        <div class="mcard-name">Ripieno Ragú</div>
+        <div class="mcard-desc">Bola de pan de masa madre rellena con Ragú de Mechada.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price"><div class="panel" id="p-pastas">
+    <div class="pasta-system">
+      <p class="ps-head">Escoge tu pasta + hasta 3 salsas en un mismo plato</p>
+      <p class="ps-sub">Nuestra pasta está hecha con huevos y harina, libre de preservantes, colorantes o saborizantes. 100% artesanal.</p>
+      <div class="ps-cols">
+        <div class="ps-col pc-verde">
+          <h4>Pasta Fresca Hecha a Mano</h4>
+          <ul>
+            <li><b>Ravioli relleno de:</b> Cerdo a la Naranja · Ricotta &amp; Espinaca · Carne · Serrano &amp; Mozzarella · Almendra &amp; Manzana Acaramelada · Surtido</li>
+            <li><b>Pasta Larga:</b> Fettuccine (2mm) · Tallarín (1cm)</li>
+            <li><b>Pasta Corta:</b> Gnocchi de Papa · Cavatelli</li>
+          </ul>
+        </div>
+        <div class="ps-col pc-blanco">
+          <h4>Al Latte — Salsas Blancas</h4>
+          <ul>
+            <li>La Finestra (Pollo, Brócoli, Zanahoria, Champiñón)</li>
+            <li>4 Formaggi</li>
+            <li>Lomito Azzurro (Lomito + Queso Azul)</li>
+            <li>Carbonara</li>
+            <li>Funghi (Champiñones en Vino Blanco)</li>
+          </ul>
+        </div>
+        <div class="ps-col pc-rojo">
+          <h4>Al Pomodoro — Salsas Rojas</h4>
+          <ul>
+            <li>Bologna</li>
+            <li>Napolitana</li>
+            <li>Ragú de Mechada</li>
+            <li>Puttanesca (Picante)</li>
+            <li>Sorrentina</li>
+            <li><b>Al Pesto:</b> Pesto · Pesto Latte</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="mgrid">0,72</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Ripieno Ragú"
+                  data-price="<div class="panel" id="p-pastas">
+    <div class="pasta-system">
+      <p class="ps-head">Escoge tu pasta + hasta 3 salsas en un mismo plato</p>
+      <p class="ps-sub">Nuestra pasta está hecha con huevos y harina, libre de preservantes, colorantes o saborizantes. 100% artesanal.</p>
+      <div class="ps-cols">
+        <div class="ps-col pc-verde">
+          <h4>Pasta Fresca Hecha a Mano</h4>
+          <ul>
+            <li><b>Ravioli relleno de:</b> Cerdo a la Naranja · Ricotta &amp; Espinaca · Carne · Serrano &amp; Mozzarella · Almendra &amp; Manzana Acaramelada · Surtido</li>
+            <li><b>Pasta Larga:</b> Fettuccine (2mm) · Tallarín (1cm)</li>
+            <li><b>Pasta Corta:</b> Gnocchi de Papa · Cavatelli</li>
+          </ul>
+        </div>
+        <div class="ps-col pc-blanco">
+          <h4>Al Latte — Salsas Blancas</h4>
+          <ul>
+            <li>La Finestra (Pollo, Brócoli, Zanahoria, Champiñón)</li>
+            <li>4 Formaggi</li>
+            <li>Lomito Azzurro (Lomito + Queso Azul)</li>
+            <li>Carbonara</li>
+            <li>Funghi (Champiñones en Vino Blanco)</li>
+          </ul>
+        </div>
+        <div class="ps-col pc-rojo">
+          <h4>Al Pomodoro — Salsas Rojas</h4>
+          <ul>
+            <li>Bologna</li>
+            <li>Napolitana</li>
+            <li>Ragú de Mechada</li>
+            <li>Puttanesca (Picante)</li>
+            <li>Sorrentina</li>
+            <li><b>Al Pesto:</b> Pesto · Pesto Latte</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="mgrid">0,72"
+                  aria-label="Agregar Ripieno Ragú al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard">
+      
+      <div class="mcard-body">
+        <div class="mcard-cat">Ripieno</div>
+        <div class="mcard-name">Ripieno Azzurro</div>
+        <div class="mcard-desc">Bola de pan de masa madre rellena con Lomito en tiras encurtido en vino tinto y romero, con toque de Queso Azul.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price"><div class="panel" id="p-pastas">
+    <div class="pasta-system">
+      <p class="ps-head">Escoge tu pasta + hasta 3 salsas en un mismo plato</p>
+      <p class="ps-sub">Nuestra pasta está hecha con huevos y harina, libre de preservantes, colorantes o saborizantes. 100% artesanal.</p>
+      <div class="ps-cols">
+        <div class="ps-col pc-verde">
+          <h4>Pasta Fresca Hecha a Mano</h4>
+          <ul>
+            <li><b>Ravioli relleno de:</b> Cerdo a la Naranja · Ricotta &amp; Espinaca · Carne · Serrano &amp; Mozzarella · Almendra &amp; Manzana Acaramelada · Surtido</li>
+            <li><b>Pasta Larga:</b> Fettuccine (2mm) · Tallarín (1cm)</li>
+            <li><b>Pasta Corta:</b> Gnocchi de Papa · Cavatelli</li>
+          </ul>
+        </div>
+        <div class="ps-col pc-blanco">
+          <h4>Al Latte — Salsas Blancas</h4>
+          <ul>
+            <li>La Finestra (Pollo, Brócoli, Zanahoria, Champiñón)</li>
+            <li>4 Formaggi</li>
+            <li>Lomito Azzurro (Lomito + Queso Azul)</li>
+            <li>Carbonara</li>
+            <li>Funghi (Champiñones en Vino Blanco)</li>
+          </ul>
+        </div>
+        <div class="ps-col pc-rojo">
+          <h4>Al Pomodoro — Salsas Rojas</h4>
+          <ul>
+            <li>Bologna</li>
+            <li>Napolitana</li>
+            <li>Ragú de Mechada</li>
+            <li>Puttanesca (Picante)</li>
+            <li>Sorrentina</li>
+            <li><b>Al Pesto:</b> Pesto · Pesto Latte</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="mgrid">2,06</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Ripieno Azzurro"
+                  data-price="<div class="panel" id="p-pastas">
+    <div class="pasta-system">
+      <p class="ps-head">Escoge tu pasta + hasta 3 salsas en un mismo plato</p>
+      <p class="ps-sub">Nuestra pasta está hecha con huevos y harina, libre de preservantes, colorantes o saborizantes. 100% artesanal.</p>
+      <div class="ps-cols">
+        <div class="ps-col pc-verde">
+          <h4>Pasta Fresca Hecha a Mano</h4>
+          <ul>
+            <li><b>Ravioli relleno de:</b> Cerdo a la Naranja · Ricotta &amp; Espinaca · Carne · Serrano &amp; Mozzarella · Almendra &amp; Manzana Acaramelada · Surtido</li>
+            <li><b>Pasta Larga:</b> Fettuccine (2mm) · Tallarín (1cm)</li>
+            <li><b>Pasta Corta:</b> Gnocchi de Papa · Cavatelli</li>
+          </ul>
+        </div>
+        <div class="ps-col pc-blanco">
+          <h4>Al Latte — Salsas Blancas</h4>
+          <ul>
+            <li>La Finestra (Pollo, Brócoli, Zanahoria, Champiñón)</li>
+            <li>4 Formaggi</li>
+            <li>Lomito Azzurro (Lomito + Queso Azul)</li>
+            <li>Carbonara</li>
+            <li>Funghi (Champiñones en Vino Blanco)</li>
+          </ul>
+        </div>
+        <div class="ps-col pc-rojo">
+          <h4>Al Pomodoro — Salsas Rojas</h4>
+          <ul>
+            <li>Bologna</li>
+            <li>Napolitana</li>
+            <li>Ragú de Mechada</li>
+            <li>Puttanesca (Picante)</li>
+            <li>Sorrentina</li>
+            <li><b>Al Pesto:</b> Pesto · Pesto Latte</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="mgrid">2,06"
+                  aria-label="Agregar Ripieno Azzurro al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+  </div>
 
     <div class="pasta-note">
-      ⭐ Festival Italiano: Pesto Latte + Carbonara + Napolitana en un solo plato (adicional $3,35) &nbsp;·&nbsp; Due Salsa: 2 salsas a elección (adicional $2,68)
+      ⭐ Festival Italiano: Pesto Latte + Carbonara + Napolitana en un solo plato (adicional $3,35) &nbsp;·&nbsp; Due Salse: 2 salsas a elección (adicional $2,68)
     </div>
   </div>
 
   <!-- PIZZAS -->
   <div class="panel" id="p-pizzas">
-    <div class="mgrid"></div>
+    <div class="mgrid">
+    <div class="mcard">
+      
+      <div class="mcard-body">
+        
+        <div class="mcard-name">Margherita</div>
+        <div class="mcard-desc">Napolitana, mozzarella, tomate cherry, albahaca fresca, mozzarella de búfala, trazos de pesto.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price">$9,38</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Margherita"
+                  data-price="$9,38"
+                  aria-label="Agregar Margherita al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard">
+      
+      <div class="mcard-body">
+        
+        <div class="mcard-name">Quattro Formaggi</div>
+        <div class="mcard-desc">Bechamel, queso mozzarella, queso brie, queso provolone, queso pecorino crocante.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price"><div class="panel" id="p-pizzas">
+    <div class="mgrid">4,74</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Quattro Formaggi"
+                  data-price="<div class="panel" id="p-pizzas">
+    <div class="mgrid">4,74"
+                  aria-label="Agregar Quattro Formaggi al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard mcard-foto mcard-clean">
+      <div class="mcard-img" style="background-image:url('https://atjijqvwwdlydgsonptr.supabase.co/storage/v1/object/public/menu-images/pizzas/Marinara.webp')"></div>
+      <div class="mcard-body">
+        
+        <div class="mcard-name">Marinara</div>
+        <div class="mcard-desc">Napolitana, tomate deshidratado, ajo en rodajas crocantes, anchoas, polvo de aceitunas negras, trazos de albahaca.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price">$9,38</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Marinara"
+                  data-price="$9,38"
+                  aria-label="Agregar Marinara al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard">
+      
+      <div class="mcard-body">
+        
+        <div class="mcard-name">Quotidiano</div>
+        <div class="mcard-desc">Napolitana, mozzarella, jamón artesanal, pechuga de pollo en tiras, champiñones salteados en oliva y vino blanco.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price">$9,38</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Quotidiano"
+                  data-price="$9,38"
+                  aria-label="Agregar Quotidiano al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard">
+      
+      <div class="mcard-body">
+        
+        <div class="mcard-name">Valeria</div>
+        <div class="mcard-desc">Napolitana, mozzarella, pepperoni, queso pecorino crocante.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price">$9,38</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Valeria"
+                  data-price="$9,38"
+                  aria-label="Agregar Valeria al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard">
+      
+      <div class="mcard-body">
+        
+        <div class="mcard-name">Frutti di Mare</div>
+        <div class="mcard-desc">Napolitana, aros de calamar, camarón, pulpo, mejillón negro, perejil deshidratado.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price"></div>0,10</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Frutti di Mare"
+                  data-price="</div>0,10"
+                  aria-label="Agregar Frutti di Mare al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard">
+      
+      <div class="mcard-body">
+        
+        <div class="mcard-name">Purtroppo</div>
+        <div class="mcard-desc">Pomodoro, mozzarella, tomate confitado, jamón serrano, rúgula, orégano, pecorino en tiras, polvo de aceitunas verdes.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price"><div class="panel" id="p-pizzas">
+    <div class="mgrid">1,39</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Purtroppo"
+                  data-price="<div class="panel" id="p-pizzas">
+    <div class="mgrid">1,39"
+                  aria-label="Agregar Purtroppo al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard mcard-foto mcard-clean">
+      <div class="mcard-img" style="background-image:url('https://atjijqvwwdlydgsonptr.supabase.co/storage/v1/object/public/menu-images/pizzas/Salumiera.webp')"></div>
+      <div class="mcard-body">
+        
+        <div class="mcard-name">Salumiera</div>
+        <div class="mcard-desc">Pomodoro, mozzarella, jamón artesanal, chorizo español, bologna de cerdo &amp; pistacho, trazos de nuez, pimienta negra.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price"><div class="panel" id="p-pizzas">
+    <div class="mgrid">1,39</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Salumiera"
+                  data-price="<div class="panel" id="p-pizzas">
+    <div class="mgrid">1,39"
+                  aria-label="Agregar Salumiera al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard">
+      
+      <div class="mcard-body">
+        
+        <div class="mcard-name">Carpaccio</div>
+        <div class="mcard-desc">Napolitana, tomate deshidratado, carpaccio de lomito, alcaparras asadas, pecorino en lajas, reducción de aceto balsámico.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price"><div class="panel" id="p-pizzas">
+    <div class="mgrid">1,39</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Carpaccio"
+                  data-price="<div class="panel" id="p-pizzas">
+    <div class="mgrid">1,39"
+                  aria-label="Agregar Carpaccio al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard">
+      
+      <div class="mcard-body">
+        
+        <div class="mcard-name">Messo</div>
+        <div class="mcard-desc">Bechamel, mozzarella, pomodoro, pesto.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price">$9,38</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Messo"
+                  data-price="$9,38"
+                  aria-label="Agregar Messo al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+  </div>
+        <div class="mcard-desc">Napolitana, mozzarella, tomate cherry, albahaca fresca, mozzarella de búfala, trazos de pesto.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price">$9,38</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Margherita"
+                  data-price="$9,38"
+                  aria-label="Agregar Margherita al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard">
+      
+      <div class="mcard-body">
+        
+        <div class="mcard-name">Quattro Formaggi</div>
+        <div class="mcard-desc">Bechamel, queso mozzarella, queso brie, queso provolone, queso pecorino crocante.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price"><div class="panel" id="p-pizzas">
+    <div class="mgrid">4,74</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Quattro Formaggi"
+                  data-price="<div class="panel" id="p-pizzas">
+    <div class="mgrid">4,74"
+                  aria-label="Agregar Quattro Formaggi al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard mcard-foto mcard-clean">
+      <div class="mcard-img" style="background-image:url('https://atjijqvwwdlydgsonptr.supabase.co/storage/v1/object/public/menu-images/pizzas/Marinara.webp')"></div>
+      <div class="mcard-body">
+        
+        <div class="mcard-name">Marinara</div>
+        <div class="mcard-desc">Napolitana, tomate deshidratado, ajo en rodajas crocantes, anchoas, polvo de aceitunas negras, trazos de albahaca.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price">$9,38</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Marinara"
+                  data-price="$9,38"
+                  aria-label="Agregar Marinara al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard">
+      
+      <div class="mcard-body">
+        
+        <div class="mcard-name">Quotidiano</div>
+        <div class="mcard-desc">Napolitana, mozzarella, jamón artesanal, pechuga de pollo en tiras, champiñones salteados en oliva y vino blanco.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price">$9,38</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Quotidiano"
+                  data-price="$9,38"
+                  aria-label="Agregar Quotidiano al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard">
+      
+      <div class="mcard-body">
+        
+        <div class="mcard-name">Valeria</div>
+        <div class="mcard-desc">Napolitana, mozzarella, pepperoni, queso pecorino crocante.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price">$9,38</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Valeria"
+                  data-price="$9,38"
+                  aria-label="Agregar Valeria al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard">
+      
+      <div class="mcard-body">
+        
+        <div class="mcard-name">Frutti di Mare</div>
+        <div class="mcard-desc">Napolitana, aros de calamar, camarón, pulpo, mejillón negro, perejil deshidratado.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price"></div>0,10</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Frutti di Mare"
+                  data-price="</div>0,10"
+                  aria-label="Agregar Frutti di Mare al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard">
+      
+      <div class="mcard-body">
+        
+        <div class="mcard-name">Purtroppo</div>
+        <div class="mcard-desc">Pomodoro, mozzarella, tomate confitado, jamón serrano, rúgula, orégano, pecorino en tiras, polvo de aceitunas verdes.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price"><div class="panel" id="p-pizzas">
+    <div class="mgrid">1,39</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Purtroppo"
+                  data-price="<div class="panel" id="p-pizzas">
+    <div class="mgrid">1,39"
+                  aria-label="Agregar Purtroppo al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard mcard-foto mcard-clean">
+      <div class="mcard-img" style="background-image:url('https://atjijqvwwdlydgsonptr.supabase.co/storage/v1/object/public/menu-images/pizzas/Salumiera.webp')"></div>
+      <div class="mcard-body">
+        
+        <div class="mcard-name">Salumiera</div>
+        <div class="mcard-desc">Pomodoro, mozzarella, jamón artesanal, chorizo español, bologna de cerdo &amp; pistacho, trazos de nuez, pimienta negra.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price"><div class="panel" id="p-pizzas">
+    <div class="mgrid">1,39</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Salumiera"
+                  data-price="<div class="panel" id="p-pizzas">
+    <div class="mgrid">1,39"
+                  aria-label="Agregar Salumiera al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard">
+      
+      <div class="mcard-body">
+        
+        <div class="mcard-name">Carpaccio</div>
+        <div class="mcard-desc">Napolitana, tomate deshidratado, carpaccio de lomito, alcaparras asadas, pecorino en lajas, reducción de aceto balsámico.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price"><div class="panel" id="p-pizzas">
+    <div class="mgrid">1,39</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Carpaccio"
+                  data-price="<div class="panel" id="p-pizzas">
+    <div class="mgrid">1,39"
+                  aria-label="Agregar Carpaccio al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard">
+      
+      <div class="mcard-body">
+        
+        <div class="mcard-name">Messo</div>
+        <div class="mcard-desc">Bechamel, mozzarella, pomodoro, pesto.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price">$9,38</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Messo"
+                  data-price="$9,38"
+                  aria-label="Agregar Messo al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+  </div>
     <div class="pasta-note">Todas nuestras pizzas miden aproximadamente 30 cms.</div>
   </div>
 
   <!-- PROTEÍNAS -->
   <div class="panel" id="p-proteinas">
     <p class="panel-note-italic">Todas las proteínas vienen acompañadas de Ensalada César <em>o</em> 100gr de Pasta Larga con salsa napolitana o 4 formaggio.</p>
-    <div class="mgrid"></div>
+    <div class="mgrid">
+    <div class="mcard">
+      
+      <div class="mcard-body">
+        
+        <div class="mcard-name">Milanesa de Pollo a la Pizzaiola</div>
+        <div class="mcard-desc">Pechuga de pollo apanada, napolitana, mozzarella, tomate cherry y albahaca fresca.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price"><div class="panel" id="p-proteinas">
+    <p class="panel-note-italic">Todas las proteínas vienen acompañadas de Ensalada César <em>o</em> 100gr de Pasta Larga con salsa napolitana o 4 formaggio.</p>
+    <div class="mgrid">0,72</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Milanesa de Pollo a la Pizzaiola"
+                  data-price="<div class="panel" id="p-proteinas">
+    <p class="panel-note-italic">Todas las proteínas vienen acompañadas de Ensalada César <em>o</em> 100gr de Pasta Larga con salsa napolitana o 4 formaggio.</p>
+    <div class="mgrid">0,72"
+                  aria-label="Agregar Milanesa de Pollo a la Pizzaiola al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard">
+      
+      <div class="mcard-body">
+        
+        <div class="mcard-name">Pollo al Limone</div>
+        <div class="mcard-desc">Pechuga de pollo en salsa de limón y alcaparras, acompañada de vegetales salteados.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price"><div class="panel" id="p-proteinas">
+    <p class="panel-note-italic">Todas las proteínas vienen acompañadas de Ensalada César <em>o</em> 100gr de Pasta Larga con salsa napolitana o 4 formaggio.</p>
+    <div class="mgrid">0,72</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Pollo al Limone"
+                  data-price="<div class="panel" id="p-proteinas">
+    <p class="panel-note-italic">Todas las proteínas vienen acompañadas de Ensalada César <em>o</em> 100gr de Pasta Larga con salsa napolitana o 4 formaggio.</p>
+    <div class="mgrid">0,72"
+                  aria-label="Agregar Pollo al Limone al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard">
+      
+      <div class="mcard-body">
+        
+        <div class="mcard-name">Lomito a la Finestra</div>
+        <div class="mcard-desc">Medallones de lomito en salsa de vino tinto y romero, acompañados de papas rústicas.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price"><div class="panel" id="p-proteinas">
+    <p class="panel-note-italic">Todas las proteínas vienen acompañadas de Ensalada César <em>o</em> 100gr de Pasta Larga con salsa napolitana o 4 formaggio.</p>
+    <div class="mgrid">6,08</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Lomito a la Finestra"
+                  data-price="<div class="panel" id="p-proteinas">
+    <p class="panel-note-italic">Todas las proteínas vienen acompañadas de Ensalada César <em>o</em> 100gr de Pasta Larga con salsa napolitana o 4 formaggio.</p>
+    <div class="mgrid">6,08"
+                  aria-label="Agregar Lomito a la Finestra al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+  </div>
+        <div class="mcard-desc">Pechuga de pollo apanada, napolitana, mozzarella, tomate cherry y albahaca fresca.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price"><div class="panel" id="p-proteinas">
+    <p class="panel-note-italic">Todas las proteínas vienen acompañadas de Ensalada César <em>o</em> 100gr de Pasta Larga con salsa napolitana o 4 formaggio.</p>
+    <div class="mgrid">0,72</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Milanesa de Pollo a la Pizzaiola"
+                  data-price="<div class="panel" id="p-proteinas">
+    <p class="panel-note-italic">Todas las proteínas vienen acompañadas de Ensalada César <em>o</em> 100gr de Pasta Larga con salsa napolitana o 4 formaggio.</p>
+    <div class="mgrid">0,72"
+                  aria-label="Agregar Milanesa de Pollo a la Pizzaiola al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard">
+      
+      <div class="mcard-body">
+        
+        <div class="mcard-name">Pollo al Limone</div>
+        <div class="mcard-desc">Pechuga de pollo en salsa de limón y alcaparras, acompañada de vegetales salteados.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price"><div class="panel" id="p-proteinas">
+    <p class="panel-note-italic">Todas las proteínas vienen acompañadas de Ensalada César <em>o</em> 100gr de Pasta Larga con salsa napolitana o 4 formaggio.</p>
+    <div class="mgrid">0,72</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Pollo al Limone"
+                  data-price="<div class="panel" id="p-proteinas">
+    <p class="panel-note-italic">Todas las proteínas vienen acompañadas de Ensalada César <em>o</em> 100gr de Pasta Larga con salsa napolitana o 4 formaggio.</p>
+    <div class="mgrid">0,72"
+                  aria-label="Agregar Pollo al Limone al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard">
+      
+      <div class="mcard-body">
+        
+        <div class="mcard-name">Lomito a la Finestra</div>
+        <div class="mcard-desc">Medallones de lomito en salsa de vino tinto y romero, acompañados de papas rústicas.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price"><div class="panel" id="p-proteinas">
+    <p class="panel-note-italic">Todas las proteínas vienen acompañadas de Ensalada César <em>o</em> 100gr de Pasta Larga con salsa napolitana o 4 formaggio.</p>
+    <div class="mgrid">6,08</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Lomito a la Finestra"
+                  data-price="<div class="panel" id="p-proteinas">
+    <p class="panel-note-italic">Todas las proteínas vienen acompañadas de Ensalada César <em>o</em> 100gr de Pasta Larga con salsa napolitana o 4 formaggio.</p>
+    <div class="mgrid">6,08"
+                  aria-label="Agregar Lomito a la Finestra al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+  </div>
   </div>
 
   <!-- ENSALADAS -->
   <div class="panel" id="p-ensaladas">
-    <div class="mgrid"></div>
+    <div class="mgrid">
+    <div class="mcard">
+      
+      <div class="mcard-body">
+        
+        <div class="mcard-name">Capressa</div>
+        <div class="mcard-desc">Tomate fresco, mozzarella de búfala, albahaca, aceite de oliva y aceto balsámico.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price">$8,04</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Capressa"
+                  data-price="$8,04"
+                  aria-label="Agregar Capressa al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard">
+      
+      <div class="mcard-body">
+        
+        <div class="mcard-name">Giardino</div>
+        <div class="mcard-desc">Mix de rúgula y lechuga, tomate deshidratado, aceituna negra, palmito, pasas, mozzarella en cubitos, nuez, jamón serrano y aderezo de aceto balsámico con vino.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price"><div class="panel" id="p-ensaladas">
+    <div class="mgrid">4,74</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Giardino"
+                  data-price="<div class="panel" id="p-ensaladas">
+    <div class="mgrid">4,74"
+                  aria-label="Agregar Giardino al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard">
+      
+      <div class="mcard-body">
+        
+        <div class="mcard-name">Panzanella</div>
+        <div class="mcard-desc">Lechuga, pepino, celery, tomate, aceitunas verdes, toque de cebolla morada, crotones de masa madre, almendras.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price"><div class="panel" id="p-ensaladas">
+    <div class="mgrid">0,72</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Panzanella"
+                  data-price="<div class="panel" id="p-ensaladas">
+    <div class="mgrid">0,72"
+                  aria-label="Agregar Panzanella al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+  </div>
+        <div class="mcard-desc">Tomate fresco, mozzarella de búfala, albahaca, aceite de oliva y aceto balsámico.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price">$8,04</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Capressa"
+                  data-price="$8,04"
+                  aria-label="Agregar Capressa al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard">
+      
+      <div class="mcard-body">
+        
+        <div class="mcard-name">Giardino</div>
+        <div class="mcard-desc">Mix de rúgula y lechuga, tomate deshidratado, aceituna negra, palmito, pasas, mozzarella en cubitos, nuez, jamón serrano y aderezo de aceto balsámico con vino.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price"><div class="panel" id="p-ensaladas">
+    <div class="mgrid">4,74</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Giardino"
+                  data-price="<div class="panel" id="p-ensaladas">
+    <div class="mgrid">4,74"
+                  aria-label="Agregar Giardino al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard">
+      
+      <div class="mcard-body">
+        
+        <div class="mcard-name">Panzanella</div>
+        <div class="mcard-desc">Lechuga, pepino, celery, tomate, aceitunas verdes, toque de cebolla morada, crotones de masa madre, almendras.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price"><div class="panel" id="p-ensaladas">
+    <div class="mgrid">0,72</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Panzanella"
+                  data-price="<div class="panel" id="p-ensaladas">
+    <div class="mgrid">0,72"
+                  aria-label="Agregar Panzanella al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+  </div>
   </div>
 
   <!-- MENÚ INFANTIL -->
   <div class="panel" id="p-infantil">
-    <div class="mgrid"></div>
+    <div class="mgrid">
+    <div class="mcard">
+      
+      <div class="mcard-body">
+        
+        <div class="mcard-name">Pastichito</div>
+        <div class="mcard-desc">Capas de pasta fresca, salsa bologna, salsa bechamel, jamón de cerdo, mozzarella.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price">$5,36</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Pastichito"
+                  data-price="$5,36"
+                  aria-label="Agregar Pastichito al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard">
+      
+      <div class="mcard-body">
+        
+        <div class="mcard-name">Media Porción Pasta Larga</div>
+        <div class="mcard-desc">Pasta larga a elección, acompañada de la salsa de su preferencia.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price">$5,36</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Media Porción Pasta Larga"
+                  data-price="$5,36"
+                  aria-label="Agregar Media Porción Pasta Larga al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard">
+      
+      <div class="mcard-body">
+        
+        <div class="mcard-name">Tenders de Pollo</div>
+        <div class="mcard-desc">Tiras de pechuga de pollo empanizadas y fritas, acompañadas de papas fritas rústicas.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price">$8,04</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Tenders de Pollo"
+                  data-price="$8,04"
+                  aria-label="Agregar Tenders de Pollo al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard">
+      
+      <div class="mcard-body">
+        
+        <div class="mcard-name">Bambini (Mini Pizza)</div>
+        <div class="mcard-desc">Mini pizza 20 cms — Napolitana, mozzarella, jamón artesanal.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price">$6,70</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Bambini (Mini Pizza)"
+                  data-price="$6,70"
+                  aria-label="Agregar Bambini (Mini Pizza) al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+  </div>
+        <div class="mcard-desc">Capas de pasta fresca, salsa bologna, salsa bechamel, jamón de cerdo, mozzarella.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price">$5,36</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Pastichito"
+                  data-price="$5,36"
+                  aria-label="Agregar Pastichito al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard">
+      
+      <div class="mcard-body">
+        
+        <div class="mcard-name">Media Porción Pasta Larga</div>
+        <div class="mcard-desc">Pasta larga a elección, acompañada de la salsa de su preferencia.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price">$5,36</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Media Porción Pasta Larga"
+                  data-price="$5,36"
+                  aria-label="Agregar Media Porción Pasta Larga al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard">
+      
+      <div class="mcard-body">
+        
+        <div class="mcard-name">Tenders de Pollo</div>
+        <div class="mcard-desc">Tiras de pechuga de pollo empanizadas y fritas, acompañadas de papas fritas rústicas.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price">$8,04</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Tenders de Pollo"
+                  data-price="$8,04"
+                  aria-label="Agregar Tenders de Pollo al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard">
+      
+      <div class="mcard-body">
+        
+        <div class="mcard-name">Bambini (Mini Pizza)</div>
+        <div class="mcard-desc">Mini pizza 20 cms — Napolitana, mozzarella, jamón artesanal.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price">$6,70</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Bambini (Mini Pizza)"
+                  data-price="$6,70"
+                  aria-label="Agregar Bambini (Mini Pizza) al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+  </div>
   </div>
 
   <!-- POSTRES -->
   <div class="panel" id="p-postres">
-    <div class="mgrid"></div>
+    <div class="mgrid">
+    <div class="mcard">
+      
+      <div class="mcard-body">
+        
+        <div class="mcard-name">Tiramisú Experiencia ⭐</div>
+        <div class="mcard-desc">Servimos en vivo el mejor tiramisú de la ciudad. Una experiencia única preparada en tu mesa.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price">$4,02</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Tiramisú Experiencia ⭐"
+                  data-price="$4,02"
+                  aria-label="Agregar Tiramisú Experiencia ⭐ al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard">
+      
+      <div class="mcard-body">
+        
+        <div class="mcard-name">Pannacotta</div>
+        <div class="mcard-desc">Nata de crema de leche y queso crema, bañada en reducción de frutos rojos.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price">$4,02</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Pannacotta"
+                  data-price="$4,02"
+                  aria-label="Agregar Pannacotta al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard">
+      
+      <div class="mcard-body">
+        
+        <div class="mcard-name">Cheesecake de Maracuyá</div>
+        <div class="mcard-desc">Base de galleta dulce triturada, con capa a base de queso crema y topping de maracuyá.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price">$4,02</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Cheesecake de Maracuyá"
+                  data-price="$4,02"
+                  aria-label="Agregar Cheesecake de Maracuyá al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+  </div>
+        <div class="mcard-desc">Servimos en vivo el mejor tiramisú de la ciudad. Una experiencia única preparada en tu mesa.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price">$4,02</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Tiramisú Experiencia ⭐"
+                  data-price="$4,02"
+                  aria-label="Agregar Tiramisú Experiencia ⭐ al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard">
+      
+      <div class="mcard-body">
+        
+        <div class="mcard-name">Pannacotta</div>
+        <div class="mcard-desc">Nata de crema de leche y queso crema, bañada en reducción de frutos rojos.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price">$4,02</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Pannacotta"
+                  data-price="$4,02"
+                  aria-label="Agregar Pannacotta al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard">
+      
+      <div class="mcard-body">
+        
+        <div class="mcard-name">Cheesecake de Maracuyá</div>
+        <div class="mcard-desc">Base de galleta dulce triturada, con capa a base de queso crema y topping de maracuyá.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price">$4,02</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Cheesecake de Maracuyá"
+                  data-price="$4,02"
+                  aria-label="Agregar Cheesecake de Maracuyá al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+  </div>
   </div>
 
   <!-- BEBIDAS -->
   <div class="panel" id="p-bebidas">
-    <div class="mgrid"></div>
+    <div class="mgrid">
+    <div class="mcard mcard-foto mcard-clean">
+      <div class="mcard-img" style="background-image:url('https://atjijqvwwdlydgsonptr.supabase.co/storage/v1/object/public/menu-images/bebidas/jugo_de_mora.webp')"></div>
+      <div class="mcard-body">
+        <div class="mcard-cat">Naturales</div>
+        <div class="mcard-name">Jugos Naturales</div>
+        <div class="mcard-desc">Mora · Parchita · Frappé de Mango · Frappé de Maracuyá · Frappé Limonada &amp; Menta · Frappé Limonada &amp; Frutos Rojos.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price"></div>,68</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Jugos Naturales"
+                  data-price="</div>,68"
+                  aria-label="Agregar Jugos Naturales al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard mcard-foto mcard-clean">
+      <div class="mcard-img" style="background-image:url('https://atjijqvwwdlydgsonptr.supabase.co/storage/v1/object/public/menu-images/bebidas/Frappe.webp')"></div>
+      <div class="mcard-body">
+        <div class="mcard-cat">Refrescos</div>
+        <div class="mcard-name">Frappé (todos los sabores)</div>
+        <div class="mcard-desc">Consulta los sabores disponibles del día.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price">$3,35</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Frappé (todos los sabores)"
+                  data-price="$3,35"
+                  aria-label="Agregar Frappé (todos los sabores) al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard mcard-foto mcard-clean">
+      <div class="mcard-img" style="background-image:url('https://atjijqvwwdlydgsonptr.supabase.co/storage/v1/object/public/menu-images/bebidas/agua_con_gas.webp')"></div>
+      <div class="mcard-body">
+        <div class="mcard-cat">Aguas</div>
+        <div class="mcard-name">Agua con Gas</div>
+        <div class="mcard-desc">Sola · con Rodajas de Limón · con Frutos Rojos · con Maracuyá.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price">$3,35</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Agua con Gas"
+                  data-price="$3,35"
+                  aria-label="Agregar Agua con Gas al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard mcard-foto mcard-clean">
+      <div class="mcard-img" style="background-image:url('https://atjijqvwwdlydgsonptr.supabase.co/storage/v1/object/public/menu-images/bebidas/T%C3%A9_de_durazno.webp')"></div>
+      <div class="mcard-body">
+        <div class="mcard-cat">Refrescos</div>
+        <div class="mcard-name">Nestea de Durazno</div>
+        <div class="mcard-desc">Té frío de durazno.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price"></div>,68</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Nestea de Durazno"
+                  data-price="</div>,68"
+                  aria-label="Agregar Nestea de Durazno al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard mcard-foto mcard-clean">
+      <div class="mcard-img mcard-img--producto" style="background-image:url('https://atjijqvwwdlydgsonptr.supabase.co/storage/v1/object/public/menu-images/bebidas/agua_minalba.webp');background-size:contain;background-repeat:no-repeat;background-position:center;background-color:#F0EDE6;"></div>
+      <div class="mcard-body">
+        <div class="mcard-cat">Aguas</div>
+        <div class="mcard-name">Agua Minalba 600ml</div>
+        <div class="mcard-desc">Agua mineral natural.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price"></div>,01</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Agua Minalba 600ml"
+                  data-price="</div>,01"
+                  aria-label="Agregar Agua Minalba 600ml al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard mcard-foto mcard-clean">
+      <div class="mcard-img mcard-img--producto" style="background-image:url('https://atjijqvwwdlydgsonptr.supabase.co/storage/v1/object/public/menu-images/bebidas/coca_cola_lata.webp');background-size:contain;background-repeat:no-repeat;background-position:center;background-color:#F0EDE6;"></div>
+      <div class="mcard-body">
+        <div class="mcard-cat">Refrescos</div>
+        <div class="mcard-name">Refrescos Lata</div>
+        <div class="mcard-desc">Todas las variedades disponibles.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price">$3,04</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Refrescos Lata"
+                  data-price="$3,04"
+                  aria-label="Agregar Refrescos Lata al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard mcard-foto mcard-clean">
+      <div class="mcard-img mcard-img--producto" style="background-image:url('https://atjijqvwwdlydgsonptr.supabase.co/storage/v1/object/public/menu-images/bebidas/coca_cola_2l.webp');background-size:contain;background-repeat:no-repeat;background-position:center;background-color:#F0EDE6;"></div>
+      <div class="mcard-body">
+        <div class="mcard-cat">Familiar</div>
+        <div class="mcard-name">Coca Cola 2L</div>
+        <div class="mcard-desc">Solo para llevar.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price">$3,35</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Coca Cola 2L"
+                  data-price="$3,35"
+                  aria-label="Agregar Coca Cola 2L al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+  </div>
+      <div class="mcard-body">
+        <div class="mcard-cat">Naturales</div>
+        <div class="mcard-name">Jugos Naturales</div>
+        <div class="mcard-desc">Mora · Parchita · Frappé de Mango · Frappé de Maracuyá · Frappé Limonada &amp; Menta · Frappé Limonada &amp; Frutos Rojos.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price"></div>,68</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Jugos Naturales"
+                  data-price="</div>,68"
+                  aria-label="Agregar Jugos Naturales al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard mcard-foto mcard-clean">
+      <div class="mcard-img" style="background-image:url('https://atjijqvwwdlydgsonptr.supabase.co/storage/v1/object/public/menu-images/bebidas/Frappe.webp')"></div>
+      <div class="mcard-body">
+        <div class="mcard-cat">Refrescos</div>
+        <div class="mcard-name">Frappé (todos los sabores)</div>
+        <div class="mcard-desc">Consulta los sabores disponibles del día.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price">$3,35</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Frappé (todos los sabores)"
+                  data-price="$3,35"
+                  aria-label="Agregar Frappé (todos los sabores) al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard mcard-foto mcard-clean">
+      <div class="mcard-img" style="background-image:url('https://atjijqvwwdlydgsonptr.supabase.co/storage/v1/object/public/menu-images/bebidas/agua_con_gas.webp')"></div>
+      <div class="mcard-body">
+        <div class="mcard-cat">Aguas</div>
+        <div class="mcard-name">Agua con Gas</div>
+        <div class="mcard-desc">Sola · con Rodajas de Limón · con Frutos Rojos · con Maracuyá.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price">$3,35</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Agua con Gas"
+                  data-price="$3,35"
+                  aria-label="Agregar Agua con Gas al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard mcard-foto mcard-clean">
+      <div class="mcard-img" style="background-image:url('https://atjijqvwwdlydgsonptr.supabase.co/storage/v1/object/public/menu-images/bebidas/T%C3%A9_de_durazno.webp')"></div>
+      <div class="mcard-body">
+        <div class="mcard-cat">Refrescos</div>
+        <div class="mcard-name">Nestea de Durazno</div>
+        <div class="mcard-desc">Té frío de durazno.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price"></div>,68</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Nestea de Durazno"
+                  data-price="</div>,68"
+                  aria-label="Agregar Nestea de Durazno al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard mcard-foto mcard-clean">
+      <div class="mcard-img mcard-img--producto" style="background-image:url('https://atjijqvwwdlydgsonptr.supabase.co/storage/v1/object/public/menu-images/bebidas/agua_minalba.webp');background-size:contain;background-repeat:no-repeat;background-position:center;background-color:#F0EDE6;"></div>
+      <div class="mcard-body">
+        <div class="mcard-cat">Aguas</div>
+        <div class="mcard-name">Agua Minalba 600ml</div>
+        <div class="mcard-desc">Agua mineral natural.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price"></div>,01</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Agua Minalba 600ml"
+                  data-price="</div>,01"
+                  aria-label="Agregar Agua Minalba 600ml al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard mcard-foto mcard-clean">
+      <div class="mcard-img mcard-img--producto" style="background-image:url('https://atjijqvwwdlydgsonptr.supabase.co/storage/v1/object/public/menu-images/bebidas/coca_cola_lata.webp');background-size:contain;background-repeat:no-repeat;background-position:center;background-color:#F0EDE6;"></div>
+      <div class="mcard-body">
+        <div class="mcard-cat">Refrescos</div>
+        <div class="mcard-name">Refrescos Lata</div>
+        <div class="mcard-desc">Todas las variedades disponibles.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price">$3,04</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Refrescos Lata"
+                  data-price="$3,04"
+                  aria-label="Agregar Refrescos Lata al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard mcard-foto mcard-clean">
+      <div class="mcard-img mcard-img--producto" style="background-image:url('https://atjijqvwwdlydgsonptr.supabase.co/storage/v1/object/public/menu-images/bebidas/coca_cola_2l.webp');background-size:contain;background-repeat:no-repeat;background-position:center;background-color:#F0EDE6;"></div>
+      <div class="mcard-body">
+        <div class="mcard-cat">Familiar</div>
+        <div class="mcard-name">Coca Cola 2L</div>
+        <div class="mcard-desc">Solo para llevar.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price">$3,35</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Coca Cola 2L"
+                  data-price="$3,35"
+                  aria-label="Agregar Coca Cola 2L al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+  </div>
   </div>
 
   <!-- ADICIONALES -->
   <div class="panel" id="p-adicionales">
-    <div class="mgrid"></div>
+    <div class="mgrid">
+    <div class="mcard">
+      
+      <div class="mcard-body">
+        
+        <div class="mcard-name">Festival (3 salsas en 1 plato)</div>
+        <div class="mcard-desc">Pesto Latte + Carbonara + Napolitana en un mismo plato.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price">$3,35</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Festival (3 salsas en 1 plato)"
+                  data-price="$3,35"
+                  aria-label="Agregar Festival (3 salsas en 1 plato) al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard">
+      
+      <div class="mcard-body">
+        
+        <div class="mcard-name">Due Salse (2 salsas en 1 plato)</div>
+        <div class="mcard-desc">2 salsas a tu elección en un mismo plato.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price"></div>,68</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Due Salse (2 salsas en 1 plato)"
+                  data-price="</div>,68"
+                  aria-label="Agregar Due Salse (2 salsas en 1 plato) al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard">
+      
+      <div class="mcard-body">
+        
+        <div class="mcard-name">Pan (unidad)</div>
+        <div class="mcard-desc">Pan artesanal de masa madre.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price">$0,34</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Pan (unidad)"
+                  data-price="$0,34"
+                  aria-label="Agregar Pan (unidad) al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard">
+      
+      <div class="mcard-body">
+        
+        <div class="mcard-name">Queso Parmesano</div>
+        <div class="mcard-desc">Porción de queso parmesano rallado.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price"></div>,68</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Queso Parmesano"
+                  data-price="</div>,68"
+                  aria-label="Agregar Queso Parmesano al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard mcard-foto mcard-clean">
+      <div class="mcard-img" style="background-image:url('https://atjijqvwwdlydgsonptr.supabase.co/storage/v1/object/public/menu-images/adicionales/ravioli.webp')"></div>
+      <div class="mcard-body">
+        
+        <div class="mcard-name">Ravioli (para llevar)</div>
+        <div class="mcard-desc">Ravioli frescos para preparar en casa.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price">$5,36</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Ravioli (para llevar)"
+                  data-price="$5,36"
+                  aria-label="Agregar Ravioli (para llevar) al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard">
+      
+      <div class="mcard-body">
+        
+        <div class="mcard-name">Pasta Fresca (para llevar)</div>
+        <div class="mcard-desc">Pasta fresca artesanal para preparar en casa.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price"></div>,68</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Pasta Fresca (para llevar)"
+                  data-price="</div>,68"
+                  aria-label="Agregar Pasta Fresca (para llevar) al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard">
+      
+      <div class="mcard-body">
+        
+        <div class="mcard-name">Salsas (para llevar)</div>
+        <div class="mcard-desc">Salsas frescas del día para llevar a casa.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price">$6,70</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Salsas (para llevar)"
+                  data-price="$6,70"
+                  aria-label="Agregar Salsas (para llevar) al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard">
+      
+      <div class="mcard-body">
+        
+        <div class="mcard-name">Conservas</div>
+        <div class="mcard-desc">Conservas artesanales de la casa.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price">$8,04</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Conservas"
+                  data-price="$8,04"
+                  aria-label="Agregar Conservas al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+  </div>
+        <div class="mcard-desc">Pesto Latte + Carbonara + Napolitana en un mismo plato.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price">$3,35</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Festival (3 salsas en 1 plato)"
+                  data-price="$3,35"
+                  aria-label="Agregar Festival (3 salsas en 1 plato) al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard">
+      
+      <div class="mcard-body">
+        
+        <div class="mcard-name">Due Salse (2 salsas en 1 plato)</div>
+        <div class="mcard-desc">2 salsas a tu elección en un mismo plato.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price"></div>,68</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Due Salse (2 salsas en 1 plato)"
+                  data-price="</div>,68"
+                  aria-label="Agregar Due Salse (2 salsas en 1 plato) al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard">
+      
+      <div class="mcard-body">
+        
+        <div class="mcard-name">Pan (unidad)</div>
+        <div class="mcard-desc">Pan artesanal de masa madre.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price">$0,34</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Pan (unidad)"
+                  data-price="$0,34"
+                  aria-label="Agregar Pan (unidad) al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard">
+      
+      <div class="mcard-body">
+        
+        <div class="mcard-name">Queso Parmesano</div>
+        <div class="mcard-desc">Porción de queso parmesano rallado.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price"></div>,68</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Queso Parmesano"
+                  data-price="</div>,68"
+                  aria-label="Agregar Queso Parmesano al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard mcard-foto mcard-clean">
+      <div class="mcard-img" style="background-image:url('https://atjijqvwwdlydgsonptr.supabase.co/storage/v1/object/public/menu-images/adicionales/ravioli.webp')"></div>
+      <div class="mcard-body">
+        
+        <div class="mcard-name">Ravioli (para llevar)</div>
+        <div class="mcard-desc">Ravioli frescos para preparar en casa.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price">$5,36</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Ravioli (para llevar)"
+                  data-price="$5,36"
+                  aria-label="Agregar Ravioli (para llevar) al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard">
+      
+      <div class="mcard-body">
+        
+        <div class="mcard-name">Pasta Fresca (para llevar)</div>
+        <div class="mcard-desc">Pasta fresca artesanal para preparar en casa.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price"></div>,68</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Pasta Fresca (para llevar)"
+                  data-price="</div>,68"
+                  aria-label="Agregar Pasta Fresca (para llevar) al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard">
+      
+      <div class="mcard-body">
+        
+        <div class="mcard-name">Salsas (para llevar)</div>
+        <div class="mcard-desc">Salsas frescas del día para llevar a casa.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price">$6,70</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Salsas (para llevar)"
+                  data-price="$6,70"
+                  aria-label="Agregar Salsas (para llevar) al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="mcard">
+      
+      <div class="mcard-body">
+        
+        <div class="mcard-name">Conservas</div>
+        <div class="mcard-desc">Conservas artesanales de la casa.</div>
+        <div class="mcard-footer">
+          <span class="mcard-price">$8,04</span>
+          <button class="mcard-btn"
+                  data-cart-add
+                  data-name="Conservas"
+                  data-price="$8,04"
+                  aria-label="Agregar Conservas al carrito"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+    </div>
+  </div>
   </div>
 
   <!-- AVISO DE PRECIOS -->
@@ -303,7 +3428,7 @@
       <span class="ft-legal-sep">·</span>
       <a href="/privacidad#cookies">Aviso de Cookies</a>
     </div>
-    <p class="ft-copy">&copy; 2026 La Finestra &nbsp;·&nbsp; Hecho con amor en San Cristóbal</p>
+    <p class="ft-copy">&copy; 2026 La Finestra &nbsp;·&nbsp; Hecho con amor en San Cristóbal &nbsp;·&nbsp; Desarrollado por <a href="https://aeon.com.ve" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Aeon Studio</a></p>
   </div>
 </footer>
 

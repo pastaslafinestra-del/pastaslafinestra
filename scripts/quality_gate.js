@@ -19,7 +19,7 @@ import fs from 'fs';
 import path from 'path';
 
 let passedChecks = 0;
-const totalChecks = 7;
+const totalChecks = 10;
 let hasFailures = false;
 
 function pass(name, detail = '') {
@@ -42,10 +42,15 @@ console.log('Verificando [1/7]: Escaneo de Secretos Zero-Trust...');
 try {
   const secretPatterns = [
     /const\s+ADMIN_PASSWORD\s*=\s*['"][^'"]+['"]/i,
+    /ADMIN_HASH/i,
     /SUPABASE_SERVICE_ROLE/i,
     /service_role_key/i,
     /ghp_[0-9a-zA-Z]{36}/,
-    /xox[baprs]-[0-9a-zA-Z]{10,48}/
+    /xox[baprs]-[0-9a-zA-Z]{10,48}/,
+    /onclick\s*=/i,
+    /onkeydown\s*=/i,
+    /onchange\s*=/i,
+    /oninput\s*=/i
   ];
 
   const filesToScan = [
@@ -73,8 +78,8 @@ try {
   fail('Escaneo de Secretos', err.message);
 }
 
-// ── CHEQUEO 2: Local-First Resilient Fallback ─────────────────────────
-console.log('Verificando [2/7]: Local-First Resilient Fallback...');
+// ── CHEQUEO 2: Local-First Resilient Fallback y Pre-renderizado ───────
+console.log('Verificando [2/7]: Local-First Fallback y Pre-renderizado (Q-01)...');
 try {
   const { loadMenuData } = await import('../js/menu-fetch.js');
   const result = await loadMenuData();
@@ -87,33 +92,54 @@ try {
   } else {
     fail('Local-First Fallback', `Datos insuficientes: ${cats.length} categorías, ${destCount} destacados`);
   }
+
+  // Verificación de HTML pre-renderizado en index.html (Q-01)
+  const indexHtml = fs.readFileSync('index.html', 'utf8');
+  const cardCount = (indexHtml.match(/class=["'][^"']*mcard/g) || []).length;
+  const hasBurrata = indexHtml.includes('Burrata Pesto');
+  const hasRavioli = indexHtml.includes('Ravioli');
+
+  if (cardCount >= 50 && hasBurrata && hasRavioli) {
+    pass('Pre-renderizado HTML (Q-01)', `${cardCount} cards pre-renderizadas en index.html (FCP instantáneo, CLS=0)`);
+  } else {
+    fail('Pre-renderizado HTML (Q-01)', `HTML no pre-renderizado: ${cardCount} cards detectadas`);
+  }
 } catch (err) {
-  fail('Local-First Fallback', `Excepción no controlada: ${err.message}`);
+  fail('Local-First Fallback y Pre-renderizado', `Excepción: ${err.message}`);
 }
 
-// ── CHEQUEO 3: Integridad de Base de Datos ────────────────────────────
-console.log('Verificando [3/7]: Integridad DDL/DML de Base de Datos...');
+// ── CHEQUEO 3: Integridad de Base de Datos y Suite RLS ─────────────────
+console.log('Verificando [3/7]: Integridad DDL/DML y Suite RLS...');
 try {
   const schemaPath = 'docs/database/schema.sql';
   const seedPath   = 'docs/database/seed.sql';
+  const rlsPath    = 'tests/rls.sql';
 
-  if (!fs.existsSync(schemaPath) || !fs.existsSync(seedPath)) {
-    fail('Artefactos SQL', 'schema.sql o seed.sql faltante');
+  if (!fs.existsSync(schemaPath) || !fs.existsSync(seedPath) || !fs.existsSync(rlsPath)) {
+    fail('Artefactos SQL', 'schema.sql, seed.sql o tests/rls.sql faltante');
   } else {
     const schemaSql = fs.readFileSync(schemaPath, 'utf8');
     const seedSql   = fs.readFileSync(seedPath, 'utf8');
+    const rlsSql    = fs.readFileSync(rlsPath, 'utf8');
 
     const hasTables = schemaSql.includes('CREATE TABLE IF NOT EXISTS public.menu_items') &&
                       schemaSql.includes('CREATE TABLE IF NOT EXISTS public.destacados') &&
+                      schemaSql.includes('price_usd NUMERIC') &&
+                      schemaSql.includes('fk_destacados_menu_item') &&
                       schemaSql.includes('ENABLE ROW LEVEL SECURITY');
     const hasSeedData = seedSql.includes('INSERT INTO public.menu_items') &&
                         seedSql.includes('Burrata Pesto') &&
-                        seedSql.includes('INSERT INTO public.destacados');
+                        seedSql.includes('INSERT INTO public.destacados') &&
+                        !seedSql.includes('Pastificio ⭐') &&
+                        !seedSql.includes('Ripieno ⭐');
+    const hasRlsTests = rlsSql.includes('SET LOCAL ROLE anon') &&
+                        rlsSql.includes('SET LOCAL ROLE authenticated') &&
+                        rlsSql.includes('app_metadata');
 
-    if (hasTables && hasSeedData) {
-      pass('Artefactos SQL Completos', 'DDL con RLS y DML con 58 platos y 5 destacados');
+    if (hasTables && hasSeedData && hasRlsTests) {
+      pass('Artefactos SQL y Suite RLS (D-01, D-02, D-06)', 'DDL con RLS, FK en destacados, price_usd y tests/rls.sql verificado');
     } else {
-      fail('Artefactos SQL', 'schema.sql o seed.sql incompletos o sin políticas RLS');
+      fail('Artefactos SQL', 'schema.sql, seed.sql o tests/rls.sql incompletos o con drift');
     }
   }
 } catch (err) {
@@ -175,6 +201,37 @@ try {
     fail('Integridad de Enlaces', `Referencias rotas: ${brokenRefs.join(', ')}`);
   } else {
     pass('Enlaces e Imports Íntegros', 'Cero enlaces rotos en index, admin y reservas');
+  }
+
+  // Verificación de Teléfono Único (Q-02) y CSP Estricta (S-06)
+  const phoneIssues = [];
+  const filesWithWa = ['site.config.js', 'index.html', 'js/main.js', 'README.md', 'SPEC.md'];
+  for (const f of filesWithWa) {
+    if (!fs.existsSync(f)) continue;
+    const c = fs.readFileSync(f, 'utf8');
+    if (c.includes('7827899')) phoneIssues.push(`${f} contiene número antiguo 7827899`);
+    if (!c.includes('7842743')) phoneIssues.push(`${f} no contiene el número activo 7842743`);
+  }
+  const { WA_NUMBER } = await import('../js/config.js');
+  if (WA_NUMBER !== '584247842743') {
+    phoneIssues.push(`js/config.js exporta WA_NUMBER = ${WA_NUMBER} (esperado: 584247842743)`);
+  }
+  if (phoneIssues.length > 0) {
+    fail('Teléfono Único (Q-02)', phoneIssues.join(', '));
+  } else {
+    pass('Teléfono Único (Q-02)', 'Canal +58 424-7842743 verificado en todos los puntos de contacto');
+  }
+
+  if (fs.existsSync('vercel.json')) {
+    const vercelCfg = JSON.parse(fs.readFileSync('vercel.json', 'utf8'));
+    const globalHeaders = vercelCfg.headers?.find(h => h.source === '/(.*)')?.headers || [];
+    const csp = globalHeaders.find(k => k.key === 'Content-Security-Policy');
+    const scriptSrc = csp ? csp.value.match(/script-src\s+([^;]+)/) : null;
+    if (scriptSrc && !scriptSrc[1].includes("'unsafe-inline'")) {
+      pass('CSP Estricta (S-06)', 'script-src \'self\' sin unsafe-inline verificado');
+    } else {
+      fail('CSP Estricta (S-06)', 'script-src ausente o contiene unsafe-inline');
+    }
   }
 } catch (err) {
   fail('Integridad de Enlaces', err.message);

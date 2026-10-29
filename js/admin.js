@@ -23,9 +23,9 @@ function escHtml(str) {
 const BASE_URL    = SUPABASE_URL.replace(/\/+$/, '');
 const STORAGE_URL = `${BASE_URL}/storage/v1/object/public/menu-images/`;
 
-// Obtener cabeceras de autorización con JWT administrativo o fallback anónimo
+// ── AUTENTICACIÓN Y GESTIÓN DE SESIÓN ZERO-TRUST (S-01, S-04) ──
 function getHeaders() {
-  const token = sessionStorage.getItem('lafinestra_admin_jwt') || SUPABASE_ANON;
+  const token = sessionStorage.getItem('admin_jwt') || SUPABASE_ANON;
   return {
     'apikey':        SUPABASE_ANON,
     'Authorization': `Bearer ${token}`,
@@ -33,102 +33,129 @@ function getHeaders() {
   };
 }
 
-// Hash SHA-256 precalculado para validación de acceso seguro en cliente
-const ADMIN_HASH = 'c08a736df601ffc0ebe11d102608ceaee8b9f9a0f2e34428a9e766fc6de3aa33';
-
-async function sha256(text) {
-  const buffer = new TextEncoder().encode(text);
-  const hash   = await crypto.subtle.digest('SHA-256', buffer);
-  return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2, '0')).join('');
-}
-
-function updateBadge(mode, identifier = '') {
-  const badge = document.getElementById('admin-user-badge');
-  if (!badge) return;
-  if (mode === 'auth') {
-    badge.textContent = `● Supabase: ${identifier || 'Admin'}`;
-    badge.className   = 'badge-user auth';
-  } else if (mode === 'jwt') {
-    badge.textContent = '● JWT Token Activo';
-    badge.className   = 'badge-user auth';
-  } else {
-    badge.textContent = '⚠️ Modo Local (Offline)';
-    badge.className   = 'badge-user local';
+function jwtRole(token) {
+  try {
+    const p = token.split('.')[1].replace(/-/g, '+').replace(/_/g, '/');
+    return JSON.parse(atob(p)).app_metadata?.role ?? null;
+  } catch {
+    return null;
   }
 }
 
-function enterPanel(mode, identifier = '') {
+async function refreshSession() {
+  const rt = sessionStorage.getItem('admin_refresh');
+  if (!rt) return false;
+  try {
+    const r = await fetch(`${BASE_URL}/auth/v1/token?grant_type=refresh_token`, {
+      method: 'POST',
+      headers: { 'apikey': SUPABASE_ANON, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ refresh_token: rt })
+    });
+    if (!r.ok) return false;
+    const d = await r.json();
+    sessionStorage.setItem('admin_jwt', d.access_token);
+    sessionStorage.setItem('admin_refresh', d.refresh_token);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+function forceRelogin(msg = 'Tu sesión ha expirado. Por favor ingresa nuevamente.') {
+  sessionStorage.removeItem('admin_jwt');
+  sessionStorage.removeItem('admin_refresh');
+  sessionStorage.removeItem('admin_user');
+  sessionStorage.removeItem('lafinestra_admin_auth');
+  const panelEl = document.getElementById('panel');
+  const loginEl = document.getElementById('login-screen');
+  if (panelEl) panelEl.style.display = 'none';
+  if (loginEl) loginEl.style.display = 'flex';
+  const errEl = document.getElementById('login-error');
+  if (errEl) {
+    errEl.textContent = msg;
+    errEl.style.display = 'block';
+  }
+}
+
+function updateBadge(identifier = '') {
+  const badge = document.getElementById('admin-user-badge');
+  if (!badge) return;
+  badge.textContent = `● Supabase: ${identifier || 'Admin'}`;
+  badge.className   = 'badge-user auth';
+}
+
+function enterPanel(identifier = '') {
   document.getElementById('login-screen').style.display = 'none';
   document.getElementById('panel').style.display = 'block';
   document.getElementById('login-error').style.display = 'none';
-  updateBadge(mode, identifier);
+  updateBadge(identifier);
   loadMenu();
   loadDestacados();
 }
 
-// ── AUTH ─────────────────────────────────────────────────
+// ── AUTH (S-01: Solo Supabase Auth Real) ─────────────────
 export async function doLogin() {
   const emailInput = document.getElementById('email-input');
   const pwdInput   = document.getElementById('pwd-input');
   const errorEl    = document.getElementById('login-error');
   const email      = emailInput ? emailInput.value.trim() : '';
-  const input      = pwdInput ? pwdInput.value.trim() : '';
+  const password   = pwdInput ? pwdInput.value : '';
 
-  if (!input) {
-    if (errorEl) { errorEl.textContent = 'Por favor ingresa la contraseña'; errorEl.style.display = 'block'; }
-    return;
-  }
+  if (errorEl) errorEl.style.display = 'none';
 
-  // 1. Verificación nativa con Supabase Auth si se suministra correo
-  if (email && input && !input.startsWith('ey')) {
-    try {
-      const res = await fetch(`${BASE_URL}/auth/v1/token?grant_type=password`, {
-        method: 'POST',
-        headers: {
-          'apikey':       SUPABASE_ANON,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ email, password: input })
-      });
-      if (res.ok) {
-        const data = await res.json();
-        sessionStorage.setItem('lafinestra_admin_jwt', data.access_token);
-        sessionStorage.setItem('lafinestra_admin_auth', '1');
-        sessionStorage.setItem('lafinestra_admin_user', data.user?.email || email);
-        enterPanel('auth', data.user?.email || email);
-        return;
-      }
-    } catch (err) {
-      console.warn('[admin] Supabase Auth no disponible:', err.message);
+  if (!email || !password) {
+    if (errorEl) {
+      errorEl.textContent = 'Ingresa correo y contraseña';
+      errorEl.style.display = 'block';
     }
-  }
-
-  // 2. Verificación si el administrador suministra un JWT directo con claim role='admin'
-  if (input.startsWith('ey') && input.split('.').length === 3) {
-    sessionStorage.setItem('lafinestra_admin_jwt', input);
-    sessionStorage.setItem('lafinestra_admin_auth', '1');
-    sessionStorage.setItem('lafinestra_admin_user', 'JWT Token');
-    enterPanel('jwt');
     return;
   }
 
-  // 3. Verificación defensiva por hash SHA-256 precalculado (Modo local de contingencia)
-  const hash = await sha256(input);
-  if (hash === ADMIN_HASH) {
-    sessionStorage.setItem('lafinestra_admin_auth', '1');
-    sessionStorage.setItem('lafinestra_admin_mode', 'local');
-    enterPanel('local');
-    return;
-  }
+  try {
+    const res = await fetch(`${BASE_URL}/auth/v1/token?grant_type=password`, {
+      method: 'POST',
+      headers: {
+        'apikey':       SUPABASE_ANON,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ email, password })
+    });
 
-  if (errorEl) {
-    errorEl.textContent = 'Credenciales no autorizadas';
-    errorEl.style.display = 'block';
+    const raw = await res.text();
+    if (!res.ok) {
+      if (errorEl) {
+        errorEl.textContent = 'Credenciales incorrectas';
+        errorEl.style.display = 'block';
+      }
+      return;
+    }
+
+    const data = JSON.parse(raw);
+    const role = jwtRole(data.access_token);
+    if (role !== 'admin') {
+      if (errorEl) {
+        errorEl.textContent = 'Acceso denegado: este usuario no es administrador';
+        errorEl.style.display = 'block';
+      }
+      return;
+    }
+
+    sessionStorage.setItem('admin_jwt', data.access_token);
+    sessionStorage.setItem('admin_refresh', data.refresh_token);
+    sessionStorage.setItem('admin_user', data.user?.email || email);
+    sessionStorage.setItem('lafinestra_admin_auth', '1');
+
+    enterPanel(data.user?.email || email);
+  } catch (err) {
+    if (errorEl) {
+      errorEl.textContent = 'Error de conexión con el servicio de autenticación';
+      errorEl.style.display = 'block';
+    }
   }
 }
 
 export async function logout() {
-  const token = sessionStorage.getItem('lafinestra_admin_jwt');
+  const token = sessionStorage.getItem('admin_jwt');
   if (token && token !== SUPABASE_ANON) {
     try {
       fetch(`${BASE_URL}/auth/v1/logout`, {
@@ -138,10 +165,10 @@ export async function logout() {
       }).catch(() => {});
     } catch (_) {}
   }
+  sessionStorage.removeItem('admin_jwt');
+  sessionStorage.removeItem('admin_refresh');
+  sessionStorage.removeItem('admin_user');
   sessionStorage.removeItem('lafinestra_admin_auth');
-  sessionStorage.removeItem('lafinestra_admin_jwt');
-  sessionStorage.removeItem('lafinestra_admin_user');
-  sessionStorage.removeItem('lafinestra_admin_mode');
   document.getElementById('panel').style.display = 'none';
   document.getElementById('login-screen').style.display = 'flex';
   const pwdInput = document.getElementById('pwd-input');
@@ -152,8 +179,10 @@ export async function logout() {
 export function switchSection(name, btn) {
   document.querySelectorAll('.section-view').forEach(s => s.classList.remove('on'));
   document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('on'));
-  document.getElementById('section-' + name).classList.add('on');
-  btn.classList.add('on');
+  const targetSection = document.getElementById('section-' + name);
+  if (targetSection) targetSection.classList.add('on');
+  const targetTab = btn || document.querySelector(`.nav-tab[data-section="${name}"]`);
+  if (targetTab) targetTab.classList.add('on');
 }
 
 // ── TOAST ────────────────────────────────────────────────
@@ -164,57 +193,60 @@ export function toast(msg, type = 'ok') {
   setTimeout(() => t.classList.remove('show'), 3000);
 }
 
-// ── SUPABASE HELPERS CON CONTROL DEFENSIVO RLS ───────────
-async function parseError(response) {
-  let text = '';
+// ── HELPER CENTRALIZADO REST CON VERIFICACIÓN RLS REAL (S-02, S-03b, S-04) ──
+function friendlyError(status, raw) {
+  let msg = raw;
   try {
-    const json = await response.json();
-    text = json.message || json.error_description || JSON.stringify(json);
-  } catch (e) {
-    text = await response.text();
+    const j = JSON.parse(raw);
+    msg = j.message || j.error_description || j.hint || raw;
+  } catch {}
+  if (status === 401) return 'Sesión no autorizada o expirada (HTTP 401)';
+  if (status === 403 || /row-level security/i.test(msg)) return 'Acceso denegado (RLS): requiere rol admin';
+  if (status === 409 || /duplicate key/i.test(msg)) return 'Ya existe un plato con ese nombre en esa categoría';
+  return msg || `Error HTTP ${status}`;
+}
+
+async function sb(method, path, body = null, isRetry = false) {
+  const headers = { ...getHeaders() };
+  if (method !== 'GET') {
+    headers['Prefer'] = 'return=representation'; // Exigir representación para verificar filas afectadas
   }
-  if (response.status === 401) {
-    return 'Sesión expirada o token no autorizado (HTTP 401). Inicia sesión nuevamente.';
+  const url = `${BASE_URL}/rest/v1/${path}`;
+  const r = await fetch(url, {
+    method,
+    headers,
+    body: body ? JSON.stringify(body) : undefined
+  });
+
+  const raw = await r.text(); // Lectura única del stream para evitar doble consumo
+
+  if (r.status === 401 && !isRetry) {
+    const refreshed = await refreshSession();
+    if (refreshed) {
+      return sb(method, path, body, true);
+    }
+    forceRelogin('Tu sesión ha expirado');
+    throw new Error('Sesión expirada');
   }
-  if (response.status === 403 || text.toLowerCase().includes('row-level security')) {
-    return 'Acceso denegado por políticas RLS. Requiere usuario con app_metadata.role = "admin".';
+
+  if (!r.ok) {
+    throw new Error(friendlyError(r.status, raw));
   }
-  return text || `Error HTTP ${response.status}`;
+
+  const data = raw ? JSON.parse(raw) : [];
+
+  // En PATCH y DELETE, si devuelve array vacío significa que RLS bloqueó o no existía la fila
+  if (['PATCH', 'DELETE'].includes(method) && Array.isArray(data) && data.length === 0) {
+    throw new Error('No se guardó: sin permisos o el registro ya no existe');
+  }
+
+  return data;
 }
 
-async function sbGet(table, params = '') {
-  const r = await fetch(`${BASE_URL}/rest/v1/${table}?${params}`, { headers: getHeaders() });
-  if (!r.ok) throw new Error(await parseError(r));
-  return r.json();
-}
-
-async function sbInsert(table, data) {
-  const r = await fetch(`${BASE_URL}/rest/v1/${table}`, {
-    method: 'POST',
-    headers: { ...getHeaders(), 'Prefer': 'return=representation' },
-    body: JSON.stringify(data)
-  });
-  if (!r.ok) throw new Error(await parseError(r));
-  return r.json();
-}
-
-async function sbUpdate(table, id, data) {
-  const r = await fetch(`${BASE_URL}/rest/v1/${table}?id=eq.${id}`, {
-    method: 'PATCH',
-    headers: { ...getHeaders(), 'Prefer': 'return=representation' },
-    body: JSON.stringify(data)
-  });
-  if (!r.ok) throw new Error(await parseError(r));
-  return r.json();
-}
-
-async function sbDelete(table, id) {
-  const r = await fetch(`${BASE_URL}/rest/v1/${table}?id=eq.${id}`, {
-    method: 'DELETE',
-    headers: getHeaders()
-  });
-  if (!r.ok) throw new Error(await parseError(r));
-}
+const sbGet    = (table, params = '') => sb('GET', `${table}?${params}`);
+const sbInsert = (table, data)        => sb('POST', table, data);
+const sbUpdate = (table, id, data)    => sb('PATCH', `${table}?id=eq.${id}`, data);
+const sbDelete = (table, id)          => sb('DELETE', `${table}?id=eq.${id}`);
 
 // ── IMAGE UPLOAD CON LISTA BLANCA MIME Y LÍMITE DE PESO ──
 const ALLOWED_MIME = {
@@ -234,14 +266,11 @@ async function uploadImage(file, folder) {
   }
   const safeFolder = String(folder).replace(/[^a-z0-9_-]/gi, '');
   const name  = `${safeFolder}/${Date.now()}.${ext}`;
-  const token = sessionStorage.getItem('lafinestra_admin_jwt') || SUPABASE_ANON;
+  const headers = getHeaders();
+  headers['Content-Type'] = file.type;
   const r = await fetch(`${BASE_URL}/storage/v1/object/menu-images/${name}`, {
     method: 'POST',
-    headers: {
-      'apikey':        SUPABASE_ANON,
-      'Authorization': `Bearer ${token}`,
-      'Content-Type':  file.type
-    },
+    headers,
     body: file
   });
   if (!r.ok) throw new Error('Error subiendo imagen a almacenamiento (verifica permisos de admin)');
@@ -273,7 +302,7 @@ async function loadMenu() {
     renderStats();
     renderTable();
   } catch(e) {
-    toast('Nota: Base de datos remota no disponible. Modo visualización activa.', 'err');
+    toast('Error cargando menú: ' + e.message, 'err');
   }
 }
 
@@ -316,14 +345,14 @@ function renderRows(items) {
       <td class="td-price">${escHtml(item.price)}</td>
       <td>
         <label class="toggle">
-          <input type="checkbox" ${item.disponible ? 'checked' : ''} onchange="Admin.toggleDisponible(${Number(item.id)}, this.checked)">
+          <input type="checkbox" class="toggle-disp-item" data-id="${Number(item.id)}" ${item.disponible ? 'checked' : ''}>
           <span class="toggle-slider"></span>
         </label>
       </td>
       <td>
         <div class="actions">
-          <button class="act-btn" onclick="Admin.openModal(${Number(item.id)})">Editar</button>
-          <button class="act-btn del" onclick="Admin.deleteItem(${Number(item.id)})">Borrar</button>
+          <button class="act-btn" data-action="openModal" data-id="${Number(item.id)}">Editar</button>
+          <button class="act-btn del" data-action="deleteItem" data-id="${Number(item.id)}">Borrar</button>
         </div>
       </td>
     </tr>`).join('');
@@ -399,6 +428,17 @@ export async function saveItem() {
   const price = document.getElementById('f-price').value.trim();
   if (!name || !desc || !price) { toast('Nombre, descripción y precio son obligatorios', 'err'); return; }
 
+  let priceUsd = 0;
+  let priceMaxUsd = null;
+  if (price.includes('–')) {
+    const parts = price.split('–');
+    priceUsd = parseFloat(parts[0].replace(/[^0-9,.]/g, '').replace(',', '.')) || 0;
+    priceMaxUsd = parseFloat(parts[1].replace(/[^0-9,.]/g, '').replace(',', '.')) || null;
+  } else {
+    priceUsd = parseFloat(price.replace(/[^0-9,.]/g, '').replace(',', '.')) || 0;
+  }
+  const formattedPrice = fmtPrice(priceUsd, priceMaxUsd) || price;
+
   const categoria  = document.getElementById('f-categoria').value;
   const cat        = document.getElementById('f-cat').value.trim() || null;
   const wa_text    = document.getElementById('f-watext').value.trim();
@@ -411,7 +451,19 @@ export async function saveItem() {
   try {
     if (imgFile) imgPath = await uploadImage(imgFile, categoria);
 
-    const payload = { categoria, cat, name, descripcion: desc, price, wa_text, orden, disponible, img: imgPath };
+    const payload = {
+      categoria,
+      cat,
+      name,
+      descripcion: desc,
+      price: formattedPrice,
+      price_usd: priceUsd,
+      price_max_usd: priceMaxUsd,
+      wa_text,
+      orden,
+      disponible,
+      img: imgPath
+    };
 
     if (editingId) {
       await sbUpdate('menu_items', editingId, payload);
@@ -428,41 +480,59 @@ export async function saveItem() {
   } catch(e) { toast('Error guardando: ' + e.message, 'err'); }
 }
 
-// ── DESTACADOS ───────────────────────────────────────────
+// ── HELPER DE FORMATEO DE MONEDA (D-01) ─────────────────
+function fmtPrice(priceUsd, priceMaxUsd) {
+  if (priceUsd === null || priceUsd === undefined) return '';
+  const fmt = (n) => '$' + Number(n).toFixed(2).replace('.', ',');
+  if (priceMaxUsd !== null && priceMaxUsd !== undefined && Number(priceMaxUsd) > Number(priceUsd)) {
+    return `${fmt(priceUsd)} – ${fmt(priceMaxUsd)}`;
+  }
+  return fmt(priceUsd);
+}
+
+// ── DESTACADOS (D-02: Relacionados por Foreign Key a menu_items) ──
 let allDest = [];
 
 async function loadDestacados() {
   try {
-    allDest = await sbGet('destacados', 'order=orden.asc');
+    allDest = await sbGet('destacados', 'select=id,badge,orden,disponible,menu_item_id,menu_items(id,name,descripcion,price,price_usd,price_max_usd,img,wa_text)&order=orden.asc');
     renderDestTable();
-  } catch(e) { toast('Nota: Destacados no disponibles en red.', 'err'); }
+  } catch(e) {
+    toast('Error cargando destacados: ' + e.message, 'err');
+  }
 }
 
 function renderDestTable() {
   const tbody = document.getElementById('dest-tbody');
   if (!allDest.length) { tbody.innerHTML = '<tr><td colspan="6" class="loading">Sin destacados</td></tr>'; return; }
-  tbody.innerHTML = allDest.map(d => `
+  tbody.innerHTML = allDest.map(d => {
+    const m = d.menu_items || {};
+    const imgPath = m.img || d.img;
+    const name = m.name || d.name || '(Plato no encontrado)';
+    const price = m.price_usd != null ? fmtPrice(m.price_usd, m.price_max_usd) : (m.price || d.price || '');
+    return `
     <tr>
-      <td>${d.img
-        ? `<img class="td-img" src="${escHtml(STORAGE_URL + d.img)}" alt="">`
+      <td>${imgPath
+        ? `<img class="td-img" src="${escHtml(STORAGE_URL + imgPath)}" alt="">`
         : `<div class="td-img-placeholder"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>`
       }</td>
       <td style="font-size:14px">${escHtml(d.badge)}</td>
-      <td class="td-name">${escHtml(d.name)}</td>
-      <td class="td-price">${escHtml(d.price)}</td>
+      <td class="td-name">${escHtml(name)}</td>
+      <td class="td-price">${escHtml(price)}</td>
       <td>
         <label class="toggle">
-          <input type="checkbox" ${d.disponible ? 'checked' : ''} onchange="Admin.toggleDest(${Number(d.id)}, this.checked)">
+          <input type="checkbox" class="toggle-disp-dest" data-id="${Number(d.id)}" ${d.disponible ? 'checked' : ''}>
           <span class="toggle-slider"></span>
         </label>
       </td>
       <td>
         <div class="actions">
-          <button class="act-btn" onclick="Admin.openDestModal(${Number(d.id)})">Editar</button>
-          <button class="act-btn del" onclick="Admin.deleteDest(${Number(d.id)})">Borrar</button>
+          <button class="act-btn" data-action="openDestModal" data-id="${Number(d.id)}">Editar</button>
+          <button class="act-btn del" data-action="deleteDest" data-id="${Number(d.id)}">Borrar</button>
         </div>
       </td>
-    </tr>`).join('');
+    </tr>`;
+  }).join('');
 }
 
 export async function toggleDest(id, val) {
@@ -476,7 +546,8 @@ export async function toggleDest(id, val) {
 
 export async function deleteDest(id) {
   const target = allDest.find(d => d.id === id);
-  const name = target ? target.name : `#${id}`;
+  const m = target ? (target.menu_items || {}) : {};
+  const name = m.name || (target ? target.name : `#${id}`);
   if (!confirm(`¿Eliminar destacado "${name}"?`)) return;
   try {
     await sbDelete('destacados', id);
@@ -488,31 +559,30 @@ export async function deleteDest(id) {
 
 let editingDestId = null;
 
+function populateDestItemSelect(selectedId = null) {
+  const sel = document.getElementById('df-menu-item-id');
+  if (!sel) return;
+  sel.innerHTML = allItems.map(item => {
+    const isSel = Number(selectedId) === Number(item.id) ? 'selected' : '';
+    return `<option value="${Number(item.id)}" ${isSel}>${escHtml(item.name)} (${escHtml(item.categoria)} - ${escHtml(item.price)})</option>`;
+  }).join('');
+}
+
 export function openDestModal(id = null) {
   editingDestId = id;
   document.getElementById('dest-modal-title').textContent = id ? 'Editar destacado' : 'Nuevo destacado';
-  document.getElementById('img-preview-dest').style.display = 'none';
-  document.getElementById('df-img-file').value = '';
-  document.getElementById('dest-current-img-label').textContent = '';
 
   if (id) {
     const d = allDest.find(i => i.id === id);
     if (!d) return;
+    populateDestItemSelect(d.menu_item_id);
     document.getElementById('df-badge').value      = d.badge || '';
-    document.getElementById('df-name').value       = d.name || '';
-    document.getElementById('df-desc').value       = d.descripcion || '';
-    document.getElementById('df-price').value      = d.price || '';
-    document.getElementById('df-watext').value     = d.wa_text || '';
     document.getElementById('df-orden').value      = d.orden ?? 0;
     document.getElementById('df-disponible').value = d.disponible ? 'true' : 'false';
-    if (d.img) {
-      document.getElementById('dest-current-img-label').textContent = `Imagen actual: ${d.img}`;
-      document.getElementById('img-preview-dest').src = STORAGE_URL + d.img;
-      document.getElementById('img-preview-dest').style.display = 'block';
-    }
   } else {
-    ['df-badge','df-name','df-desc','df-price','df-watext'].forEach(id => document.getElementById(id).value = '');
-    document.getElementById('df-orden').value = 0;
+    populateDestItemSelect();
+    document.getElementById('df-badge').value      = '⭐ Chef recomienda';
+    document.getElementById('df-orden').value      = 0;
     document.getElementById('df-disponible').value = 'true';
   }
   document.getElementById('dest-modal').classList.add('open');
@@ -521,50 +591,100 @@ export function openDestModal(id = null) {
 export function closeDestModal() { document.getElementById('dest-modal').classList.remove('open'); }
 
 export async function saveDestacado() {
-  const badge = document.getElementById('df-badge').value.trim();
-  const name  = document.getElementById('df-name').value.trim();
-  const desc  = document.getElementById('df-desc').value.trim();
-  const price = document.getElementById('df-price').value.trim();
-  if (!badge || !name || !desc || !price) { toast('Badge, nombre, descripción y precio son obligatorios', 'err'); return; }
-
-  const wa_text    = document.getElementById('df-watext').value.trim();
+  const menuItemId = Number(document.getElementById('df-menu-item-id').value);
+  const badge      = document.getElementById('df-badge').value.trim();
   const orden      = parseInt(document.getElementById('df-orden').value) || 0;
   const disponible = document.getElementById('df-disponible').value === 'true';
-  const imgFile    = document.getElementById('df-img-file').files[0];
 
-  let imgPath = editingDestId ? (allDest.find(d => d.id === editingDestId)?.img || null) : null;
+  if (!menuItemId || !badge) {
+    toast('Selecciona un plato y define la etiqueta/badge', 'err');
+    return;
+  }
+
+  const targetItem = allItems.find(i => i.id === menuItemId);
+  const payload = {
+    menu_item_id: menuItemId,
+    badge,
+    orden,
+    disponible,
+    name:        targetItem ? targetItem.name : undefined,
+    descripcion: targetItem ? targetItem.descripcion : undefined,
+    price:       targetItem ? targetItem.price : undefined,
+    img:         targetItem ? targetItem.img : undefined,
+    wa_text:     targetItem ? targetItem.wa_text : undefined
+  };
 
   try {
-    if (imgFile) imgPath = await uploadImage(imgFile, 'destacados');
-
-    const payload = { badge, name, descripcion: desc, price, wa_text, orden, disponible, img: imgPath };
-
     if (editingDestId) {
       await sbUpdate('destacados', editingDestId, payload);
-      const idx = allDest.findIndex(d => d.id === editingDestId);
-      if (idx !== -1) allDest[idx] = { ...allDest[idx], ...payload };
       toast('Destacado actualizado ✓');
     } else {
-      const [created] = await sbInsert('destacados', payload);
-      allDest.push(created);
+      await sbInsert('destacados', payload);
       toast('Destacado creado ✓');
     }
-
-    closeDestModal(); renderDestTable();
-  } catch(e) { toast('Error guardando: ' + e.message, 'err'); }
+    closeDestModal();
+    loadDestacados();
+  } catch(e) {
+    toast('Error guardando: ' + e.message, 'err');
+  }
 }
 
-// Exponer en window para manejadores HTML onclick
-window.Admin = {
-  doLogin, logout, switchSection, toast, previewImg, previewDestImg,
-  filterTable, toggleDisponible, deleteItem, openModal, closeModal, saveItem,
-  toggleDest, deleteDest, openDestModal, closeDestModal, saveDestacado
-};
+// ── EVENT DELEGATION CENTRALIZADO (S-06: Cero handlers inline) ──
+document.addEventListener('click', (e) => {
+  const el = e.target.closest('[data-action]');
+  if (!el) return;
+  const action = el.dataset.action;
+  const id = el.dataset.id ? Number(el.dataset.id) : null;
+  const section = el.dataset.section;
 
-// Auto-login si ya existe sesión activa
-if (sessionStorage.getItem('lafinestra_admin_auth') === '1') {
-  const jwt  = sessionStorage.getItem('lafinestra_admin_jwt');
-  const user = sessionStorage.getItem('lafinestra_admin_user');
-  const mode = jwt ? (user && user !== 'JWT Token' ? 'auth' : 'jwt') : 'local';
-  enterPanel(mode, user || '');
+  switch (action) {
+    case 'doLogin': doLogin(); break;
+    case 'logout': logout(); break;
+    case 'switchSection': switchSection(section, el); break;
+    case 'openModal': openModal(id); break;
+    case 'closeModal': closeModal(); break;
+    case 'saveItem': saveItem(); break;
+    case 'deleteItem': if (id) deleteItem(id); break;
+    case 'openDestModal': openDestModal(id); break;
+    case 'closeDestModal': closeDestModal(); break;
+    case 'saveDestacado': saveDestacado(); break;
+    case 'deleteDest': if (id) deleteDest(id); break;
+  }
+});
+
+document.addEventListener('change', (e) => {
+  if (e.target.matches('#cat-filter')) {
+    filterTable();
+  } else if (e.target.matches('#f-img-file')) {
+    previewImg(e.target);
+  } else if (e.target.matches('#df-img-file')) {
+    previewDestImg(e.target);
+  } else if (e.target.matches('.toggle-disp-item')) {
+    const id = Number(e.target.dataset.id);
+    toggleDisponible(id, e.target.checked);
+  } else if (e.target.matches('.toggle-disp-dest')) {
+    const id = Number(e.target.dataset.id);
+    toggleDest(id, e.target.checked);
+  }
+});
+
+document.addEventListener('input', (e) => {
+  if (e.target.matches('#search-input')) {
+    filterTable();
+  }
+});
+
+document.addEventListener('keydown', (e) => {
+  if (e.target.matches('#pwd-input') && e.key === 'Enter') {
+    doLogin();
+  }
+});
+
+// Auto-login si ya existe sesión activa y verificada con rol admin
+const jwt  = sessionStorage.getItem('admin_jwt');
+const user = sessionStorage.getItem('admin_user');
+if (jwt && jwtRole(jwt) === 'admin') {
+  enterPanel(user || 'Admin');
+} else if (jwt) {
+  logout();
 }

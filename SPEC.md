@@ -91,7 +91,7 @@ Paso 5: Presiona "Enviar reserva por WhatsApp".
   - **Primaria:** Supabase PostgreSQL vía REST API pública (`/rest/v1/menu_items`).
   - **Secundaria (Fallback):** Objeto tipado en memoria (`js/menu-data.js`).
 * **Canal de Despacho:**
-  - WhatsApp Click-to-Chat URI (`https://wa.me/584247827899?text=...`).
+  - WhatsApp Click-to-Chat URI (`https://wa.me/584247842743?text=...`).
 
 ---
 

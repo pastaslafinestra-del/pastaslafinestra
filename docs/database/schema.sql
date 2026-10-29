@@ -1,12 +1,9 @@
 -- =============================================================================
 -- ESQUEMA DDL POSTGRESQL / SUPABASE — LA FINESTRA
--- Versión: 2.0.2 (Certificación Final de Ciberseguridad & Puesta en Producción)
+-- Versión: 2.1.0 (Auditoría Integral de Integridad de Datos y Seguridad)
 -- Repositorio: moisesrojasp89-Dev/lafinestra
 -- Estándar: Zero-Trust RLS, Timezone-Aware, Idempotente y Defensivo
 -- =============================================================================
-
--- Habilitar extensiones requeridas
-CREATE EXTENSION IF NOT EXISTS "pgcrypto";
 
 -- -----------------------------------------------------------------------------
 -- 1. TABLA: categorias
@@ -35,6 +32,8 @@ CREATE TABLE IF NOT EXISTS public.menu_items (
     name TEXT NOT NULL,                  -- Nombre del plato
     descripcion TEXT,                    -- Descripción e ingredientes
     price TEXT NOT NULL,                 -- Precio formateado (ej. '$8,04')
+    price_usd NUMERIC(8,2) NOT NULL DEFAULT 0.00 CHECK (price_usd >= 0), -- D-01: precio base numérico
+    price_max_usd NUMERIC(8,2) CHECK (price_max_usd IS NULL OR price_max_usd >= price_usd), -- D-01: precio rango tope
     img TEXT,                            -- Ruta relativa de la foto (ej. 'entradas/burrata_pesto.webp')
     img_style TEXT,                      -- Estilos CSS de encuadre
     wa_text TEXT,                        -- Frase para el mensaje de WhatsApp
@@ -44,29 +43,40 @@ CREATE TABLE IF NOT EXISTS public.menu_items (
     updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
--- Asegurar constraint UNIQUE y columnas para idempotencia incluso en tablas preexistentes (v2.0.0 -> v2.0.2)
+-- Asegurar constraint UNIQUE y columnas para idempotencia incluso en tablas preexistentes (v2.0.0 -> v2.1.0)
 ALTER TABLE public.menu_items ADD COLUMN IF NOT EXISTS created_at TIMESTAMPTZ NOT NULL DEFAULT NOW();
 ALTER TABLE public.menu_items ADD COLUMN IF NOT EXISTS updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW();
+ALTER TABLE public.menu_items ADD COLUMN IF NOT EXISTS price_usd NUMERIC(8,2) NOT NULL DEFAULT 0.00;
+ALTER TABLE public.menu_items ADD COLUMN IF NOT EXISTS price_max_usd NUMERIC(8,2);
 
 DO $$
 BEGIN
     IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'uq_menu_items_cat_name') THEN
         ALTER TABLE public.menu_items ADD CONSTRAINT uq_menu_items_cat_name UNIQUE (categoria, name);
     END IF;
+    IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'chk_menu_items_price_usd') THEN
+        ALTER TABLE public.menu_items ADD CONSTRAINT chk_menu_items_price_usd CHECK (price_usd >= 0);
+    END IF;
+    IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'chk_menu_items_price_max_usd') THEN
+        ALTER TABLE public.menu_items ADD CONSTRAINT chk_menu_items_price_max_usd CHECK (price_max_usd IS NULL OR price_max_usd >= price_usd);
+    END IF;
 END $$;
 
 COMMENT ON TABLE public.menu_items IS 'Catálogo completo de platos, pizzas, postres y bebidas';
 COMMENT ON COLUMN public.menu_items.disponible IS 'Si es FALSE, RLS oculta el plato automáticamente a clientes anon';
+COMMENT ON COLUMN public.menu_items.price_usd IS 'D-01: Precio base numérico exacto en USD';
+COMMENT ON COLUMN public.menu_items.price_max_usd IS 'D-01: Precio rango tope numérico en USD';
 
 -- -----------------------------------------------------------------------------
 -- 3. TABLA: destacados
 -- -----------------------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS public.destacados (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    menu_item_id BIGINT NOT NULL REFERENCES public.menu_items(id) ON DELETE CASCADE,
     badge TEXT NOT NULL,                 -- Etiqueta (ej. '⭐ Chef recomienda', '🔥 Más Vendido')
-    name TEXT NOT NULL,
+    name TEXT,
     descripcion TEXT,
-    price TEXT NOT NULL,
+    price TEXT,
     img TEXT,
     wa_text TEXT,
     orden INTEGER NOT NULL DEFAULT 0,
@@ -75,18 +85,22 @@ CREATE TABLE IF NOT EXISTS public.destacados (
     updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
--- Asegurar constraint UNIQUE y columnas para idempotencia incluso en tablas preexistentes (v2.0.0 -> v2.0.2)
+-- Asegurar constraint UNIQUE y columnas para idempotencia
+ALTER TABLE public.destacados ADD COLUMN IF NOT EXISTS menu_item_id BIGINT;
 ALTER TABLE public.destacados ADD COLUMN IF NOT EXISTS created_at TIMESTAMPTZ NOT NULL DEFAULT NOW();
 ALTER TABLE public.destacados ADD COLUMN IF NOT EXISTS updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW();
 
 DO $$
 BEGIN
-    IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'uq_destacados_name') THEN
-        ALTER TABLE public.destacados ADD CONSTRAINT uq_destacados_name UNIQUE (name);
+    IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'fk_destacados_menu_item') THEN
+        ALTER TABLE public.destacados ADD CONSTRAINT fk_destacados_menu_item FOREIGN KEY (menu_item_id) REFERENCES public.menu_items(id) ON DELETE CASCADE;
+    END IF;
+    IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'uq_destacados_menu_item_id') THEN
+        ALTER TABLE public.destacados ADD CONSTRAINT uq_destacados_menu_item_id UNIQUE (menu_item_id);
     END IF;
 END $$;
 
-COMMENT ON TABLE public.destacados IS 'Platos recomendados desplegados en el carrusel de inicio';
+COMMENT ON TABLE public.destacados IS 'Platos recomendados desplegados en el carrusel de inicio (D-02: vinculados por FK a menu_items)';
 
 -- -----------------------------------------------------------------------------
 -- 4. TABLA: reservas
@@ -224,6 +238,7 @@ CREATE POLICY "Creacion publica reservas"
     WITH CHECK (
         estado = 'pendiente'
         AND fecha >= (NOW() AT TIME ZONE 'America/Caracas')::DATE
+        AND fecha <= ((NOW() AT TIME ZONE 'America/Caracas')::DATE + 90)
     );
 
 -- ── 8.2 Políticas Administrativas Blindadas (authenticated) ────────────────
@@ -248,3 +263,33 @@ CREATE POLICY "Gestion total admin reservas"
     ON public.reservas FOR ALL
     TO authenticated
     USING (public.is_admin()) WITH CHECK (public.is_admin());
+
+-- -----------------------------------------------------------------------------
+-- 7. CONFIGURACIÓN Y POLÍTICAS DE SUPABASE STORAGE (BUCKET: menu-images)
+-- -----------------------------------------------------------------------------
+INSERT INTO storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
+VALUES (
+  'menu-images',
+  'menu-images',
+  TRUE,
+  4194304, -- 4 MB
+  ARRAY['image/webp', 'image/jpeg', 'image/png']
+)
+ON CONFLICT (id) DO UPDATE
+SET public = EXCLUDED.public,
+    file_size_limit = EXCLUDED.file_size_limit,
+    allowed_mime_types = EXCLUDED.allowed_mime_types;
+
+DROP POLICY IF EXISTS "admin sube imagenes" ON storage.objects;
+CREATE POLICY "admin sube imagenes" ON storage.objects FOR INSERT TO authenticated
+  WITH CHECK (bucket_id = 'menu-images' AND public.is_admin());
+
+DROP POLICY IF EXISTS "admin edita imagenes" ON storage.objects;
+CREATE POLICY "admin edita imagenes" ON storage.objects FOR UPDATE TO authenticated
+  USING (bucket_id = 'menu-images' AND public.is_admin())
+  WITH CHECK (bucket_id = 'menu-images' AND public.is_admin());
+
+DROP POLICY IF EXISTS "admin borra imagenes" ON storage.objects;
+CREATE POLICY "admin borra imagenes" ON storage.objects FOR DELETE TO authenticated
+  USING (bucket_id = 'menu-images' AND public.is_admin());
+

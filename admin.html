@@ -14,9 +14,9 @@
   <div class="login-box">
     <div class="login-logo">La Finestra</div>
     <div class="login-title">Panel Admin</div>
-    <input type="email" id="email-input" placeholder="Correo administrador (opcional)" autocomplete="username">
-    <input type="password" id="pwd-input" placeholder="Contraseña de acceso" onkeydown="if(event.key==='Enter')Admin.doLogin()" autocomplete="current-password">
-    <button class="login-btn" onclick="Admin.doLogin()">Entrar</button>
+    <input type="email" id="email-input" placeholder="Correo electrónico de administrador" autocomplete="username" required>
+    <input type="password" id="pwd-input" placeholder="Contraseña de acceso" autocomplete="current-password" required>
+    <button class="login-btn" data-action="doLogin">Entrar</button>
     <div class="login-error" id="login-error">Credenciales incorrectas</div>
     <a href="/" class="login-back-link">← Volver al sitio web</a>
   </div>
@@ -27,12 +27,12 @@
   <header class="admin-header">
     <div class="admin-brand">La Finestra · Gestión de Carta <span id="admin-user-badge" class="badge-user"></span></div>
     <nav class="admin-nav">
-      <button class="nav-tab on" onclick="Admin.switchSection('menu', this)">Menú Completo</button>
-      <button class="nav-tab" onclick="Admin.switchSection('destacados', this)">Platos Destacados</button>
+      <button class="nav-tab on" data-action="switchSection" data-section="menu">Menú Completo</button>
+      <button class="nav-tab" data-action="switchSection" data-section="destacados">Platos Destacados</button>
     </nav>
     <div style="display:flex;gap:8px;">
       <a href="/" class="logout-btn" target="_blank" style="text-decoration:none;display:inline-flex;align-items:center;">Ver Web ↗</a>
-      <button class="logout-btn" onclick="Admin.logout()">Cerrar Sesión</button>
+      <button class="logout-btn" data-action="logout">Cerrar Sesión</button>
     </div>
   </header>
 
@@ -43,7 +43,7 @@
       <div class="stats" id="menu-stats"></div>
       <div class="toolbar">
         <div class="toolbar-left">
-          <select class="filter-select" id="cat-filter" onchange="Admin.filterTable()">
+          <select class="filter-select" id="cat-filter">
             <option value="">Todas las categorías</option>
             <option value="entradas">Entradas</option>
             <option value="pastas">Pastas</option>
@@ -55,9 +55,9 @@
             <option value="bebidas">Bebidas</option>
             <option value="adicionales">Adicionales</option>
           </select>
-          <input class="search-input" type="text" placeholder="Buscar plato..." id="search-input" oninput="Admin.filterTable()">
+          <input class="search-input" type="text" placeholder="Buscar plato..." id="search-input">
         </div>
-        <button class="btn btn-primary" onclick="Admin.openModal()">+ Nuevo plato</button>
+        <button class="btn btn-primary" data-action="openModal">+ Nuevo plato</button>
       </div>
       <div class="table-wrap">
         <table id="menu-table">
@@ -81,7 +81,7 @@
     <div id="section-destacados" class="section-view">
       <div class="toolbar">
         <div class="toolbar-left"></div>
-        <button class="btn btn-primary" onclick="Admin.openDestModal()">+ Nuevo destacado</button>
+        <button class="btn btn-primary" data-action="openDestModal">+ Nuevo destacado</button>
       </div>
       <div class="table-wrap">
         <table id="dest-table">
@@ -108,7 +108,7 @@
   <div class="modal">
     <div class="modal-header">
       <div class="modal-title" id="modal-title">Nuevo plato</div>
-      <button class="modal-close" onclick="Admin.closeModal()">×</button>
+      <button class="modal-close" data-action="closeModal">×</button>
     </div>
     <div class="modal-body">
       <input type="hidden" id="edit-id">
@@ -161,7 +161,7 @@
         <div class="form-group form-full">
           <label class="form-label">Imagen</label>
           <div class="img-upload-area" id="upload-area">
-            <input type="file" id="f-img-file" accept="image/*" onchange="Admin.previewImg(this)">
+            <input type="file" id="f-img-file" accept="image/*">
             <div class="img-upload-label">Clic para subir imagen (webp, jpg, png)</div>
             <img class="img-preview" id="img-preview-item" src="" alt="Vista previa">
           </div>
@@ -170,41 +170,29 @@
       </div>
     </div>
     <div class="modal-footer">
-      <button class="btn btn-ghost" onclick="Admin.closeModal()">Cancelar</button>
-      <button class="btn btn-primary" onclick="Admin.saveItem()">Guardar</button>
+      <button class="btn btn-ghost" data-action="closeModal">Cancelar</button>
+      <button class="btn btn-primary" data-action="saveItem">Guardar</button>
     </div>
   </div>
 </div>
 
-<!-- MODAL: DESTACADO -->
+<!-- MODAL: DESTACADO (D-02: Vinculado a plato de menú) -->
 <div class="modal-overlay" id="dest-modal">
   <div class="modal">
     <div class="modal-header">
       <div class="modal-title" id="dest-modal-title">Nuevo destacado</div>
-      <button class="modal-close" onclick="Admin.closeDestModal()">×</button>
+      <button class="modal-close" data-action="closeDestModal">×</button>
     </div>
     <div class="modal-body">
       <input type="hidden" id="dest-edit-id">
       <div class="form-grid">
         <div class="form-group form-full">
+          <label class="form-label">Plato del Menú *</label>
+          <select class="form-select" id="df-menu-item-id"></select>
+        </div>
+        <div class="form-group form-full">
           <label class="form-label">Badge *</label>
           <input class="form-input" id="df-badge" placeholder="Ej: ⭐ Chef recomienda">
-        </div>
-        <div class="form-group form-full">
-          <label class="form-label">Nombre *</label>
-          <input class="form-input" id="df-name" placeholder="Nombre del plato">
-        </div>
-        <div class="form-group form-full">
-          <label class="form-label">Descripción *</label>
-          <textarea class="form-textarea" id="df-desc" placeholder="Descripción"></textarea>
-        </div>
-        <div class="form-group">
-          <label class="form-label">Precio *</label>
-          <input class="form-input" id="df-price" placeholder="$8,04">
-        </div>
-        <div class="form-group">
-          <label class="form-label">Texto WhatsApp</label>
-          <input class="form-input" id="df-watext" placeholder="Ej: una Burrata Pesto">
         </div>
         <div class="form-group">
           <label class="form-label">Orden</label>
@@ -217,20 +205,11 @@
             <option value="false">No</option>
           </select>
         </div>
-        <div class="form-group form-full">
-          <label class="form-label">Imagen</label>
-          <div class="img-upload-area">
-            <input type="file" id="df-img-file" accept="image/*" onchange="Admin.previewDestImg(this)">
-            <div class="img-upload-label">Clic para subir imagen</div>
-            <img class="img-preview" id="img-preview-dest" src="" alt="Vista previa destacado">
-          </div>
-          <div id="dest-current-img-label" class="img-current-label"></div>
-        </div>
       </div>
     </div>
     <div class="modal-footer">
-      <button class="btn btn-ghost" onclick="Admin.closeDestModal()">Cancelar</button>
-      <button class="btn btn-primary" onclick="Admin.saveDestacado()">Guardar</button>
+      <button class="btn btn-ghost" data-action="closeDestModal">Cancelar</button>
+      <button class="btn btn-primary" data-action="saveDestacado">Guardar</button>
     </div>
   </div>
 </div>

@@ -28,7 +28,7 @@ INSERT INTO public.menu_items (categoria, cat, name, descripcion, price, img, im
   ('entradas', NULL, 'Frittata', 'Bolitas apanadas fritas rellenas de pasta, salsa bologna, mozzarella y queso pecorino, servidas con más salsa bologna.', '$8,04', NULL, NULL, 'Frittata', 5, TRUE),
   ('entradas', NULL, 'Rotolo', 'Rollo de queso crema, pimentón dulce, pistacho, nueces y tocineta, servido como dip para untar en tostadas de pan de masa madre.', '$8,04', 'entradas/Rotolo.webp', NULL, 'Rotolo', 6, TRUE),
   ('pastas', 'Pasta Larga', 'Fettuccine / Tallarín', 'Con la salsa de tu preferencia. Hasta 3 salsas en un mismo plato.', '$8,71', NULL, NULL, 'Pasta Larga', 100, TRUE),
-  ('pastas', 'Pastificio ⭐', 'Pastificio', 'En un mismo plato: Pasticho de Bologna, Tallarín 4 Formaggio y Milanesa de Pollo a la Pizzaiola.', '$16,08', NULL, NULL, 'el Pastificio', 101, TRUE),
+  ('pastas', 'Pastificio', 'Pastificio', 'En un mismo plato: Pasticho de Bologna, Tallarín 4 Formaggi y Milanesa de Pollo a la Pizzaiola.', '$16,08', NULL, NULL, 'el Pastificio', 101, TRUE),
   ('pastas', 'Pasta Corta', 'Cavatelli / Gnocchi de Papa', 'Con la salsa de tu preferencia. Hasta 3 salsas en un mismo plato.', '$8,71', 'pastas/Gnocchi_s_de_papa.webp', NULL, 'Pasta Corta', 102, TRUE),
   ('pastas', 'Ravioli', 'Ravioli — Almendra & Manzana Acaramelada', 'Ravioli relleno, acompañado de la salsa de tu preferencia.', '$11,39', NULL, NULL, 'Ravioli Almendra y Manzana', 103, TRUE),
   ('pastas', 'Ravioli', 'Ravioli — Carne', 'Ravioli relleno de carne, acompañado de la salsa de tu preferencia.', '$10,05', NULL, NULL, 'Ravioli de Carne', 104, TRUE),
@@ -37,9 +37,9 @@ INSERT INTO public.menu_items (categoria, cat, name, descripcion, price, img, im
   ('pastas', 'Frutti di Mare', 'Tallarín Frutti Roja', 'Tallarines en salsa napolitana con frutos del mar (Calamar, Camarón, Pulpo Baby, Mejillón).', '$20,10', 'pastas/Tallarin_Frutti_Roja.webp', NULL, 'Tallarín Frutti Roja', 107, TRUE),
   ('pastas', 'Pasticho', 'Pasticho Tradicional de Bologna', 'Salsa Bologna, Salsa Bechamel, Queso Mozzarella, Queso Parmesano, Jamón Artesanal.', '$9,38', 'pastas/Pasticho_Tradicional_de_Bologna.webp', NULL, 'Pasticho Tradicional', 108, TRUE),
   ('pastas', 'Pasticho', 'Pasticho de Berenjena con Bologna', 'Láminas de Berenjena, Salsa Bologna, Salsa Bechamel, Queso Mozzarella, Queso Parmesano, Jamón Artesanal.', '$9,38', NULL, NULL, 'Pasticho de Berenjena', 109, TRUE),
-  ('pastas', 'Ripieno ⭐', 'Ripieno Finestra', 'Bola de pan de masa madre rellena con Brócoli, Zanahoria, Champiñones y Pechuga de Pollo en salsa blanca.', '$10,72', NULL, NULL, 'Ripieno Finestra', 110, TRUE),
-  ('pastas', 'Ripieno ⭐', 'Ripieno Ragú', 'Bola de pan de masa madre rellena con Ragú de Mechada.', '$10,72', 'pastas/Ripieno_Ragú.webp', NULL, 'Ripieno Ragú', 111, TRUE),
-  ('pastas', 'Ripieno ⭐', 'Ripieno Azzurro', 'Bola de pan de masa madre rellena con Lomito en tiras encurtido en vino tinto y romero, con toque de Queso Azul.', '$12,06', NULL, NULL, 'Ripieno Azzurro', 112, TRUE),
+  ('pastas', 'Ripieno', 'Ripieno Finestra', 'Bola de pan de masa madre rellena con Brócoli, Zanahoria, Champiñones y Pechuga de Pollo en salsa blanca.', '$10,72', NULL, NULL, 'Ripieno Finestra', 110, TRUE),
+  ('pastas', 'Ripieno', 'Ripieno Ragú', 'Bola de pan de masa madre rellena con Ragú de Mechada.', '$10,72', 'pastas/Ripieno_Ragú.webp', NULL, 'Ripieno Ragú', 111, TRUE),
+  ('pastas', 'Ripieno', 'Ripieno Azzurro', 'Bola de pan de masa madre rellena con Lomito en tiras encurtido en vino tinto y romero, con toque de Queso Azul.', '$12,06', NULL, NULL, 'Ripieno Azzurro', 112, TRUE),
   ('pizzas', NULL, 'Margherita', 'Napolitana, mozzarella, tomate cherry, albahaca fresca, mozzarella de búfala, trazos de pesto.', '$9,38', NULL, NULL, 'Pizza Margherita', 200, TRUE),
   ('pizzas', NULL, 'Quattro Formaggi', 'Bechamel, queso mozzarella, queso brie, queso provolone, queso pecorino crocante.', '$14,74', NULL, NULL, 'Pizza Quattro Formaggi', 201, TRUE),
   ('pizzas', NULL, 'Marinara', 'Napolitana, tomate deshidratado, ajo en rodajas crocantes, anchoas, polvo de aceitunas negras, trazos de albahaca.', '$9,38', 'pizzas/Marinara.webp', NULL, 'Pizza Marinara', 202, TRUE),
@@ -71,7 +71,7 @@ INSERT INTO public.menu_items (categoria, cat, name, descripcion, price, img, im
   ('bebidas', 'Refrescos', 'Refrescos Lata', 'Todas las variedades disponibles.', '$3,04', 'bebidas/coca_cola_lata.webp', 'background-size:contain;background-repeat:no-repeat;background-position:center;background-color:#F0EDE6;', 'un Refresco Lata', 705, TRUE),
   ('bebidas', 'Familiar', 'Coca Cola 2L', 'Solo para llevar.', '$3,35', 'bebidas/coca_cola_2l.webp', 'background-size:contain;background-repeat:no-repeat;background-position:center;background-color:#F0EDE6;', 'Coca Cola 2L', 706, TRUE),
   ('adicionales', NULL, 'Festival (3 salsas en 1 plato)', 'Pesto Latte + Carbonara + Napolitana en un mismo plato.', '$3,35', NULL, NULL, 'el Festival Italiano', 800, TRUE),
-  ('adicionales', NULL, 'Due Salsa (2 salsas en 1 plato)', '2 salsas a tu elección en un mismo plato.', '$2,68', NULL, NULL, 'Due Salsa', 801, TRUE),
+  ('adicionales', NULL, 'Due Salse (2 salsas en 1 plato)', '2 salsas a tu elección en un mismo plato.', '$2,68', NULL, NULL, 'Due Salse', 801, TRUE),
   ('adicionales', NULL, 'Pan (unidad)', 'Pan artesanal de masa madre.', '$0,34', NULL, NULL, 'Pan', 802, TRUE),
   ('adicionales', NULL, 'Queso Parmesano', 'Porción de queso parmesano rallado.', '$2,68', NULL, NULL, 'Queso Parmesano', 803, TRUE),
   ('adicionales', NULL, 'Ravioli (para llevar)', 'Ravioli frescos para preparar en casa.', '$5,36', 'adicionales/ravioli.webp', NULL, 'Ravioli para llevar', 804, TRUE),
@@ -89,19 +89,15 @@ SET cat = EXCLUDED.cat,
     disponible = EXCLUDED.disponible,
     updated_at = NOW();
 
--- 3. DESTACADOS (5 Platos Estrella del Carrusel)
-INSERT INTO public.destacados (badge, name, descripcion, price, img, wa_text, orden, disponible) VALUES
-  ('⭐ Chef recomienda', 'Burrata Pesto', 'Perlas fritas de Mozzarella de Búfala rellenas de pesto, en salsa pomodoro, acompañadas de pan de masa madre.', '$10,64', 'entradas/burrata_pesto.webp', 'una Burrata Pesto', 0, TRUE),
-  ('🔥 Más Vendido', 'Pasticho Tradicional de Bologna', 'Capas de pasta fresca, salsa bologna, bechamel, mozzarella y queso parmesano gratinado.', '$9,38', 'pastas/Pasticho_Tradicional_de_Bologna.webp', 'Pasticho Tradicional de Bologna', 1, TRUE),
-  ('🍽️ Favorito', 'Tallarín Frutti Latte', 'Tallarín fresco con salsa blanca, frutos de mar salteados en oliva y vino blanco.', '$20,10', 'pastas/Tallarin_frutti_latte.webp', 'Tallarín Frutti Latte', 2, TRUE),
-  ('✨ Especial', 'Ripieno Ragú', 'Ravioli relleno bañado en ragú de carne cocido a fuego lento.', '$10,72', 'pastas/Ripieno_Ragú.webp', 'Ripieno Ragú', 3, TRUE),
-  ('🔥 Más Vendido', 'Salumiera', 'Pomodoro, mozzarella, jamón artesanal, chorizo español, bologna de cerdo & pistacho, trazos de nuez, pimienta negra.', '$11,39', 'pizzas/Salumiera.webp', 'Pizza Salumiera', 4, TRUE)
-ON CONFLICT (name) DO UPDATE
+-- 3. DESTACADOS (5 Platos Estrella del Carrusel con FK D-02)
+INSERT INTO public.destacados (menu_item_id, badge, orden, disponible) VALUES
+  ((SELECT id FROM public.menu_items WHERE name = 'Burrata Pesto' LIMIT 1), '⭐ Chef recomienda', 0, TRUE),
+  ((SELECT id FROM public.menu_items WHERE name = 'Pasticho Tradicional de Bologna' LIMIT 1), '🔥 Más Vendido', 1, TRUE),
+  ((SELECT id FROM public.menu_items WHERE name = 'Tallarín Frutti Latte' LIMIT 1), '🍽️ Favorito', 2, TRUE),
+  ((SELECT id FROM public.menu_items WHERE name = 'Ripieno Ragú' LIMIT 1), '✨ Especial', 3, TRUE),
+  ((SELECT id FROM public.menu_items WHERE name = 'Salumiera' LIMIT 1), '🔥 Más Vendido', 4, TRUE)
+ON CONFLICT (menu_item_id) DO UPDATE
 SET badge = EXCLUDED.badge,
-    descripcion = EXCLUDED.descripcion,
-    price = EXCLUDED.price,
-    img = EXCLUDED.img,
-    wa_text = EXCLUDED.wa_text,
     orden = EXCLUDED.orden,
     disponible = EXCLUDED.disponible,
     updated_at = NOW();

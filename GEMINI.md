@@ -13,7 +13,7 @@
   - **Frontend:** Vanilla JavaScript (ES Modules), HTML5 semántico, CSS3 moderno con variables y tokens.
   - **Persistencia / Backend:** Supabase PostgreSQL (con arquitectura Local-First Fallback a `menu-data.js`).
   - **Despliegue:** Vercel (`vercel.json`) / Static Web Hosting.
-  - **Canal de Venta:** WhatsApp API (`wa.me/584247827899`) con formateo automático de pedidos y reservas.
+  - **Canal de Venta:** WhatsApp API (`wa.me/584247842743`) con formateo automático de pedidos y reservas.
 
 ---
 

@@ -77,9 +77,9 @@ export const menuData = {
       waText: 'Pasta Larga',
     },
     {
-      cat:    'Pastificio ⭐',
+      cat:    'Pastificio',
       name:   'Pastificio',
-      desc:   'En un mismo plato: Pasticho de Bologna, Tallarín 4 Formaggio y Milanesa de Pollo a la Pizzaiola.',
+      desc:   'En un mismo plato: Pasticho de Bologna, Tallarín 4 Formaggi y Milanesa de Pollo a la Pizzaiola.',
       price:  '$16,08',
       waText: 'el Pastificio',
     },
@@ -144,14 +144,14 @@ export const menuData = {
       waText: 'Pasticho de Berenjena',
     },
     {
-      cat:    'Ripieno ⭐',
+      cat:    'Ripieno',
       name:   'Ripieno Finestra',
       desc:   'Bola de pan de masa madre rellena con Brócoli, Zanahoria, Champiñones y Pechuga de Pollo en salsa blanca.',
       price:  '$10,72',
       waText: 'Ripieno Finestra',
     },
     {
-      cat:    'Ripieno ⭐',
+      cat:    'Ripieno',
       name:   'Ripieno Ragú',
       desc:   'Bola de pan de masa madre rellena con Ragú de Mechada.',
       price:  '$10,72',
@@ -159,7 +159,7 @@ export const menuData = {
       img:    'pastas/Ripieno_Ragú.webp',
     },
     {
-      cat:    'Ripieno ⭐',
+      cat:    'Ripieno',
       name:   'Ripieno Azzurro',
       desc:   'Bola de pan de masa madre rellena con Lomito en tiras encurtido en vino tinto y romero, con toque de Queso Azul.',
       price:  '$12,06',
@@ -399,10 +399,10 @@ export const menuData = {
       waText: 'el Festival Italiano',
     },
     {
-      name:   'Due Salsa (2 salsas en 1 plato)',
+      name:   'Due Salse (2 salsas en 1 plato)',
       desc:   '2 salsas a tu elección en un mismo plato.',
       price:  '$2,68',
-      waText: 'Due Salsa',
+      waText: 'Due Salse',
     },
     {
       name:   'Pan (unidad)',
@@ -450,45 +450,18 @@ export const menuData = {
    badge: etiqueta visual de la card.
    Los precios y datos deben coincidir con menuData.
 ─────────────────────────────────────────────────────── */
+function findItem(name) {
+  for (const list of Object.values(menuData)) {
+    const found = list.find(item => item.name === name);
+    if (found) return found;
+  }
+  return {};
+}
+
 export const destacadosData = [
-  {
-    badge:  '⭐ Chef recomienda',
-    name:   'Burrata Pesto',
-    desc:   'Perlas fritas de Mozzarella de Búfala rellenas de pesto, en salsa pomodoro, acompañadas de pan de masa madre.',
-    price:  '$10,64',
-    img:    'entradas/burrata_pesto.webp',
-    waText: 'una Burrata Pesto',
-  },
-  {
-    badge:  '🔥 Más Vendido',
-    name:   'Pasticho Tradicional de Bologna',
-    desc:   'Capas de pasta fresca, salsa bologna, bechamel, mozzarella y queso parmesano gratinado.',
-    price:  '$9,38',
-    img:    'pastas/Pasticho_Tradicional_de_Bologna.webp',
-    waText: 'Pasticho Tradicional de Bologna',
-  },
-  {
-    badge:  '🍽️ Favorito',
-    name:   'Tallarín Frutti Latte',
-    desc:   'Tallarín fresco con salsa blanca, frutos de mar salteados en oliva y vino blanco.',
-    price:  '$20,10',
-    img:    'pastas/Tallarin_frutti_latte.webp',
-    waText: 'Tallarín Frutti Latte',
-  },
-  {
-    badge:  '✨ Especial',
-    name:   'Ripieno Ragú',
-    desc:   'Ravioli relleno bañado en ragú de carne cocido a fuego lento.',
-    price:  '$10,72',
-    img:    'pastas/Ripieno_Ragú.webp',
-    waText: 'Ripieno Ragú',
-  },
-  {
-    badge:  '🔥 Más Vendido',
-    name:   'Salumiera',
-    desc:   'Pomodoro, mozzarella, jamón artesanal, chorizo español, bologna de cerdo & pistacho, trazos de nuez, pimienta negra.',
-    price:  '$11,39',
-    img:    'pizzas/Salumiera.webp',
-    waText: 'Pizza Salumiera',
-  },
+  { badge: '⭐ Chef recomienda', ...findItem('Burrata Pesto') },
+  { badge: '🔥 Más Vendido',     ...findItem('Pasticho Tradicional de Bologna') },
+  { badge: '🍽️ Favorito',        ...findItem('Tallarín Frutti Latte') },
+  { badge: '✨ Especial',        ...findItem('Ripieno Ragú') },
+  { badge: '🔥 Más Vendido',     ...findItem('Salumiera') },
 ];

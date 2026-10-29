@@ -28,7 +28,7 @@ A continuación se presentan íntegros y en texto plano todos los módulos de Ja
 
 ### Módulo 1: `js/config.js`
 ```javascript
-export const WA_NUMBER       = '584247827899';
+export const WA_NUMBER       = '584247842743';
 export const ASSETS_BASE_URL = 'https://atjijqvwwdlydgsonptr.supabase.co/storage/v1/object/public/menu-images/';
 
 export const SUPABASE_URL  = 'https://atjijqvwwdlydgsonptr.supabase.co';
@@ -1279,7 +1279,7 @@ function initUrgencyBar() {
   const totalMin = now.getHours() * 60 + now.getMinutes();
   const isOpen   = totalMin >= 660 && totalMin < 1320;
   if (isOpen) {
-    bar.innerHTML = '🍝 Abierto ahora &nbsp;·&nbsp; Lunes a Domingo 11:00 AM – 10:00 PM &nbsp;·&nbsp; Delivery disponible &nbsp;<a href="https://wa.me/584247827899" target="_blank">Ordenar ahora →</a>';
+    bar.innerHTML = '🍝 Abierto ahora &nbsp;·&nbsp; Lunes a Domingo 11:00 AM – 10:00 PM &nbsp;·&nbsp; Delivery disponible &nbsp;<a href="https://wa.me/584247842743" target="_blank">Ordenar ahora →</a>';
   } else {
     bar.classList.add('closed');
     bar.innerHTML = '🔴 Cerrado &nbsp;·&nbsp; Nuestro horario es Lunes a Domingo 11:00 AM – 10:00 PM';

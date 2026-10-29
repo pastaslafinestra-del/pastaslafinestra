@@ -8,8 +8,6 @@
 import { ASSETS_BASE_URL } from './config.js';
 import { Cart }             from './cart.js';
 
-window.Cart = Cart;
-
 const ICON_PLUS = `<svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>`;
 
 // ── SANITIZACIÓN DEFENSIVA PARA RENDERIZADO EN DOM ───────
@@ -54,7 +52,7 @@ function buildMcard(plato) {
         <div class="mcard-footer">
           <span class="mcard-price">${escHtml(plato.price)}</span>
           <button class="mcard-btn"
-                  onclick="Cart.add(this.dataset.name, this.dataset.price, this)"
+                  data-cart-add
                   data-name="${escHtml(plato.name)}"
                   data-price="${escHtml(plato.price)}"
                   aria-label="Agregar ${escHtml(plato.name)} al carrito">${ICON_PLUS}</button>
@@ -98,7 +96,7 @@ function buildDestCard(plato) {
         <div class="dest-bottom">
           <span class="dest-price">${escHtml(plato.price)}</span>
           <button class="dest-btn"
-                  onclick="Cart.add(this.dataset.name, this.dataset.price, this)"
+                  data-cart-add
                   data-name="${escHtml(plato.name)}"
                   data-price="${escHtml(plato.price)}"
                   aria-label="Agregar ${escHtml(plato.name)} al carrito">${ICON_PLUS}</button>
@@ -117,3 +115,10 @@ export function renderDestacados(destacadosData) {
     .map((_, i) => `<span class="dest-dot${i === 0 ? ' active' : ''}"></span>`)
     .join('\n');
 }
+
+// ── EVENT DELEGATION (S-06: Agregar al carrito sin handlers inline) ──
+document.addEventListener('click', (e) => {
+  const btn = e.target.closest('[data-cart-add]');
+  if (!btn) return;
+  Cart.add(btn.dataset.name, btn.dataset.price, btn);
+});
