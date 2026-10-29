@@ -87,11 +87,19 @@ document.querySelectorAll('.fade, .fade-left, .fade-right').forEach(el => {
 /* ── 7. Stagger ─────────────────────────────────────────────────── */
 function animateCards(cards) {
   cards.forEach((card, i) => {
+    const delay = i * 45;
     card.style.opacity    = '0';
     card.style.transform  = 'translateY(16px)';
-    card.style.transition = `opacity 0.45s ease ${i * 60}ms, transform 0.45s ease ${i * 60}ms`;
+    card.style.transition = `opacity 0.4s ease ${delay}ms, transform 0.4s ease ${delay}ms`;
     requestAnimationFrame(() => requestAnimationFrame(() => {
-      card.style.opacity = '1'; card.style.transform = 'translateY(0)';
+      card.style.opacity = '1';
+      card.style.transform = 'translateY(0)';
+      // Liberar estilos inline al terminar animación para no bloquear el zoom/hover CSS
+      setTimeout(() => {
+        card.style.removeProperty('opacity');
+        card.style.removeProperty('transform');
+        card.style.removeProperty('transition');
+      }, delay + 450);
     }));
   });
 }
@@ -124,6 +132,10 @@ function initStagger() {
             if (!e.isIntersecting) return;
             e.target.style.transition = 'opacity 0.45s ease';
             e.target.style.opacity    = '1';
+            setTimeout(() => {
+              e.target.style.removeProperty('opacity');
+              e.target.style.removeProperty('transition');
+            }, 460);
             obs.unobserve(e.target);
           });
         }, {
@@ -192,3 +204,7 @@ function initStagger() {
     });
   }
 })();
+
+/* ── 11. Soporte táctil móvil (:active dinámico en iOS/Android) ──── */
+document.addEventListener('touchstart', () => {}, { passive: true });
+

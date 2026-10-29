@@ -53,7 +53,7 @@
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
-  padding: 0.25rem 1.2rem 1rem;
+  padding: 0.65rem 1.2rem 1rem;
   align-items: stretch; /* todas las dest-card igualan altura entre sí */
 }
 
@@ -80,13 +80,17 @@
 }
 
 .dest-card:hover {
-  transform: translateY(-6px);
+  transform: translateY(-6px) scale(1.025);
   border-color: rgba(196, 154, 60, 0.45);
   box-shadow: 0 20px 42px -6px rgba(0, 0, 0, 0.75),
-              0 0 24px -6px rgba(196, 154, 60, 0.18);
+              0 0 24px -6px rgba(196, 154, 60, 0.20);
+  z-index: 2;
 }
 
-.dest-card:active { transform: scale(0.98); }
+.dest-card:active {
+  transform: translateY(-3px) scale(1.025);
+  box-shadow: 0 16px 36px -4px rgba(0, 0, 0, 0.65);
+}
 
 /* ── Imagen ── */
 .dest-img {
@@ -98,6 +102,7 @@
   overflow: hidden;
   flex-shrink: 0;
   transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              background-size 0.5s ease,
               filter 0.4s ease;
 }
 
@@ -111,9 +116,11 @@
 
 .dest-img > * { position: relative; z-index: 1; }
 
-.dest-card:hover .dest-img {
-  transform: scale(1.05);
-  filter: brightness(1.04);
+.dest-card:hover .dest-img,
+.dest-card:active .dest-img {
+  transform: scale(1.08);
+  background-size: 112%;
+  filter: brightness(1.05);
 }
 
 /* ── Badge Glassmórfico Premium ── */
@@ -254,7 +261,7 @@
 @media (min-width: 769px) {
   .dest-sec { padding: 3rem 0 2rem; }
   .dest-header { padding: 0 2rem 1.2rem; }
-  .dest-scroll { padding: 0.25rem 2rem 1rem; gap: 1.1rem; }
+  .dest-scroll { padding: 0.65rem 2rem 1rem; gap: 1.1rem; }
 
   /* En desktop: card más grande, igual que mcard desktop */
   .dest-card { width: 250px; height: auto; min-height: 400px; }
