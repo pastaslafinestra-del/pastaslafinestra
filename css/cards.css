@@ -15,6 +15,28 @@
 }
 
 /* ── Grid desktop: flex wrap, cards fijas 250px igual que dest-card ── */
+.menu-header-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 0.8rem;
+  gap: 1rem;
+}
+
+.menu-section-logo {
+  height: 44px;
+  width: auto;
+  object-fit: contain;
+  opacity: 0.88;
+  margin-bottom: 0.4rem;
+}
+
+@media (max-width: 480px) {
+  .menu-section-logo {
+    height: 32px;
+  }
+}
+
 .mgrid {
   display: flex;
   flex-wrap: wrap;
@@ -224,7 +246,9 @@
     padding-right: 1.2rem;
   }
 
-  .mgrid {
+
+
+.mgrid {
     display: flex;
     flex-wrap: nowrap;
     overflow-x: auto;

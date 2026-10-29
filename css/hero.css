@@ -56,6 +56,19 @@
   gap: 0;
 }
 
+.hero-logo-wrap {
+  margin-bottom: 0.8rem;
+  display: flex;
+  justify-content: center;
+}
+
+.hero-logo-img {
+  width: clamp(170px, 38vw, 240px);
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 16px rgba(0,0,0,0.6));
+}
+
 .hero-brand {
   font-family: var(--font-serif);
   font-size: clamp(1.4rem, 5vw, 2rem);

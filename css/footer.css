@@ -37,6 +37,15 @@ footer::after {
   pointer-events: none;
 }
 
+.ft-logo-img {
+  width: clamp(170px, 28vw, 250px);
+  height: auto;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.7));
+}
+
 .ft-logo {
   font-family: var(--font-serif);
   font-size: clamp(1.6rem, 3vw, 2.2rem);
@@ -142,6 +151,8 @@ footer::after {
 
 @media (max-width: 768px) {
   footer { padding: var(--space-section-mobile) 1.5rem 2.5rem; }
-  .ft-logo { font-size: 1.6rem; }
+  .ft-logo-img { width: clamp(140px, 45vw, 190px); }
+
+.ft-logo { font-size: 1.6rem; }
   footer::after { width: 280px; }
 }
