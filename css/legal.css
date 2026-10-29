@@ -4,10 +4,10 @@
    Diseño sobrio, legible y mobile-first.
 ══════════════════════════════════════════ */
 
-html, body {
+html, body.page-dark {
   min-height: 100%;
-  background: #0d0d0d;
-  color: var(--blanco, #fff);
+  background-color: #0f0f0f !important;
+  color: #ffffff !important;
   font-family: var(--font-sans, 'Jost', system-ui, sans-serif);
   overflow-x: hidden;
   line-height: 1.7;
