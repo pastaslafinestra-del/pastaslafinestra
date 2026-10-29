@@ -6,19 +6,20 @@
  * Estándar: Mandato Institucional AGENTS.md / Manual para Desarrollo Asistido con IA
  *
  * Chequeos ejecutados:
- *   [1/6] Escaneo de Seguridad Zero-Trust y Cero Secretos en Código
- *   [2/6] Verificación del Patrón Local-First Resilient Fallback
- *   [3/6] Integridad DDL/DML de Base de Datos (schema.sql y seed.sql)
- *   [4/6] Verificación de Documentación Esencial y Arnés Institucional
- *   [5/6] Integridad de Enlaces e Imports (HTML/JS/CSS)
- *   [6/6] Detección de Código Huérfano y Dependencias Zombie
+ *   [1/7] Escaneo de Seguridad Zero-Trust y Cero Secretos en Código
+ *   [2/7] Verificación del Patrón Local-First Resilient Fallback
+ *   [3/7] Integridad DDL/DML de Base de Datos (schema.sql y seed.sql)
+ *   [4/7] Verificación de Documentación Esencial y Arnés Institucional
+ *   [5/7] Integridad de Enlaces e Imports (HTML/JS/CSS)
+ *   [6/7] Detección de Código Huérfano y Dependencias Zombie
+ *   [7/7] Suite Automatizada de Migraciones y Runner DDL/DML
  */
 
 import fs from 'fs';
 import path from 'path';
 
 let passedChecks = 0;
-const totalChecks = 6;
+const totalChecks = 7;
 let hasFailures = false;
 
 function pass(name, detail = '') {
@@ -37,7 +38,7 @@ console.log('   Estándar de Gobernanza y Certificación Institucional 2026');
 console.log('=================================================================\n');
 
 // ── CHEQUEO 1: Escaneo de Secretos Zero-Trust ─────────────────────────
-console.log('Verificando [1/6]: Escaneo de Secretos Zero-Trust...');
+console.log('Verificando [1/7]: Escaneo de Secretos Zero-Trust...');
 try {
   const secretPatterns = [
     /const\s+ADMIN_PASSWORD\s*=\s*['"][^'"]+['"]/i,
@@ -73,7 +74,7 @@ try {
 }
 
 // ── CHEQUEO 2: Local-First Resilient Fallback ─────────────────────────
-console.log('Verificando [2/6]: Local-First Resilient Fallback...');
+console.log('Verificando [2/7]: Local-First Resilient Fallback...');
 try {
   const { loadMenuData } = await import('../js/menu-fetch.js');
   const result = await loadMenuData();
@@ -91,7 +92,7 @@ try {
 }
 
 // ── CHEQUEO 3: Integridad de Base de Datos ────────────────────────────
-console.log('Verificando [3/6]: Integridad DDL/DML de Base de Datos...');
+console.log('Verificando [3/7]: Integridad DDL/DML de Base de Datos...');
 try {
   const schemaPath = 'docs/database/schema.sql';
   const seedPath   = 'docs/database/seed.sql';
@@ -120,7 +121,7 @@ try {
 }
 
 // ── CHEQUEO 4: Arnés Documental Institucional ─────────────────────────
-console.log('Verificando [4/6]: Documentación y Arnés Institucional...');
+console.log('Verificando [4/7]: Documentación y Arnés Institucional...');
 try {
   const requiredDocs = [
     'AGENTS.md',
@@ -146,7 +147,7 @@ try {
 }
 
 // ── CHEQUEO 5: Integridad de Enlaces e Imports ─────────────────────────
-console.log('Verificando [5/6]: Integridad de Enlaces e Imports...');
+console.log('Verificando [5/7]: Integridad de Enlaces e Imports...');
 try {
   const htmlFiles = ['index.html', 'admin.html', 'reservas.html'];
   let brokenRefs = [];
@@ -180,7 +181,7 @@ try {
 }
 
 // ── CHEQUEO 6: Detección de Código Huérfano y Dependencias Zombie ─────
-console.log('Verificando [6/6]: Código Huérfano y Dependencias Zombie...');
+console.log('Verificando [6/7]: Código Huérfano y Dependencias Zombie...');
 try {
   let issues = [];
 
@@ -202,6 +203,57 @@ try {
   }
 } catch (err) {
   fail('Código Huérfano', err.message);
+}
+
+// ── CHEQUEO 7: Suite de Migraciones y Runner DDL/DML ─────────────────
+console.log('Verificando [7/7]: Suite Automatizada de Migraciones y Runner DDL/DML...');
+try {
+  let migrationIssues = [];
+
+  const runnerPath = 'scripts/db_migrate.js';
+  const envExamplePath = '.env.example';
+  const migrationsDir = 'docs/database/migrations';
+
+  if (!fs.existsSync(runnerPath)) {
+    migrationIssues.push('scripts/db_migrate.js no existe');
+  } else {
+    const runnerContent = fs.readFileSync(runnerPath, 'utf8');
+    if (runnerContent.includes('atjijqvwwdlydgsonptr')) {
+      migrationIssues.push('scripts/db_migrate.js contiene project_ref hardcodeado');
+    }
+    if (!runnerContent.includes('pg_advisory_xact_lock')) {
+      migrationIssues.push('scripts/db_migrate.js no implementa pg_advisory_xact_lock transaccional');
+    }
+  }
+
+  if (!fs.existsSync(envExamplePath)) {
+    migrationIssues.push('.env.example no existe');
+  }
+
+  if (!fs.existsSync(migrationsDir)) {
+    migrationIssues.push('docs/database/migrations/ no existe');
+  } else {
+    const migFiles = fs.readdirSync(migrationsDir).filter(f => f.endsWith('.sql'));
+    if (migFiles.length < 2) {
+      migrationIssues.push(`Migraciones insuficientes en ${migrationsDir}: encontrados ${migFiles.length}`);
+    }
+  }
+
+  const pkgJson = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+  const requiredScripts = ['db:migrate', 'db:dry-run', 'db:status', 'db:seed'];
+  for (const s of requiredScripts) {
+    if (!pkgJson.scripts || !pkgJson.scripts[s]) {
+      migrationIssues.push(`package.json carece del script "${s}"`);
+    }
+  }
+
+  if (migrationIssues.length > 0) {
+    fail('Suite de Migraciones', migrationIssues.join(', '));
+  } else {
+    pass('Suite de Migraciones Certificada', 'Runner institucional, .env.example, scripts y migraciones v2.0.2 activos');
+  }
+} catch (err) {
+  fail('Suite de Migraciones', err.message);
 }
 
 // ── RESULTADO FINAL ──────────────────────────────────────────────────
