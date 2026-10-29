@@ -46,29 +46,37 @@
 
 /* ── Card base ── */
 .mcard {
- width: 250px;
- min-width: 250px;
- max-width: 250px;
- height: auto;
- min-height: 400px;
- flex-shrink: 0;
- background: var(--blanco);
- border: 1px solid var(--gris2);
- border-radius: var(--radio-card);
- overflow: hidden;
- display: flex;
- flex-direction: column;
- transition: var(--transition-premium);
+  width: 250px;
+  min-width: 250px;
+  max-width: 250px;
+  height: auto;
+  min-height: 400px;
+  flex-shrink: 0;
+  background: var(--blanco);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: var(--radio-card);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
+  transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.32s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.3s ease,
+              background-color 0.3s ease;
 }
 
 .mcard:hover {
-  background: var(--crema);
-  border-color: var(--crema3);
-  box-shadow: var(--shadow-card);
-  transform: translateY(-3px);
+  background: #FCFBF7;
+  border-color: rgba(196, 154, 60, 0.42);
+  box-shadow: 0 20px 38px -10px rgba(0, 0, 0, 0.10),
+              0 8px 18px -4px rgba(196, 154, 60, 0.12);
+  transform: translateY(-5px);
 }
 
-.mcard:active { transform: scale(0.98); }
+.mcard:active {
+  transform: scale(0.98);
+}
 
 /* Borde lateral verde eliminado — generaba desalineación entre cards con y sin foto */
 
@@ -78,8 +86,10 @@
   background-size: cover;
   background-position: center;
   background-color: white;
-  transition: transform 0.5s ease;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.4s ease;
   position: relative;
+  overflow: hidden;
   flex-shrink: 0;
 }
 
@@ -87,11 +97,16 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, transparent 55%, rgba(0,0,0,0.3) 100%);
+  background: linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.25) 100%);
   pointer-events: none;
+  transition: opacity 0.3s ease;
 }
 
-.mcard-foto:hover .mcard-img { transform: scale(1.05); }
+.mcard:hover .mcard-img,
+.mcard-foto:hover .mcard-img {
+  transform: scale(1.05);
+  filter: contrast(1.02) brightness(1.02);
+}
 
 .mcard-clean .mcard-img {
   background-size: cover;
@@ -166,23 +181,24 @@
   font-weight: 600;
   letter-spacing: var(--ls-sm);
   color: var(--verde);
-  background: rgba(27,107,48,0.08);
+  background: rgba(27, 107, 48, 0.08);
   display: inline-block;
-  padding: 4px 14px;
-  border-radius: var(--radio);
-  border: 1px solid rgba(27,107,48,0.12);
-  transition: var(--transition-fast);
+  padding: 4px 13px;
+  border-radius: 6px;
+  border: 1px solid rgba(27, 107, 48, 0.16);
+  transition: all 0.22s ease;
 }
 
 .mcard:hover .mcard-price {
-  background: rgba(27,107,48,0.13);
-  border-color: rgba(27,107,48,0.2);
+  background: rgba(27, 107, 48, 0.13);
+  border-color: rgba(27, 107, 48, 0.28);
+  transform: translateY(-1px);
 }
 
 .mcard-btn {
   width: 32px;
   height: 32px;
-  background: var(--verde2);
+  background: linear-gradient(135deg, var(--verde2) 0%, var(--verde) 100%);
   border-radius: 50%;
   border: none;
   cursor: pointer;
@@ -192,18 +208,26 @@
   justify-content: center;
   text-decoration: none;
   flex-shrink: 0;
-  transition: var(--transition-smooth);
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
   -webkit-tap-highlight-color: transparent;
-  box-shadow: 0 2px 10px rgba(27,107,48,0.3);
+  box-shadow: 0 3px 10px rgba(27, 107, 48, 0.32);
 }
 
 .mcard-btn:hover {
-  background: var(--verde);
-  transform: scale(1.1);
-  box-shadow: 0 4px 16px rgba(27,107,48,0.45);
+  background: linear-gradient(135deg, var(--verde3) 0%, var(--verde2) 100%);
+  transform: scale(1.12);
+  box-shadow: 0 6px 18px rgba(27, 107, 48, 0.50);
 }
 
-.mcard-btn:active { transform: scale(0.9); }
+.mcard-btn:active {
+  transform: scale(0.92);
+  box-shadow: 0 2px 6px rgba(27, 107, 48, 0.3);
+}
+
+.mcard-btn:focus-visible {
+  outline: 2px solid var(--verde);
+  outline-offset: 2px;
+}
 
 .mcard-btn svg {
   width: 15px;
@@ -286,5 +310,16 @@
   .panel-note-italic {
     margin: 0.5rem 1.2rem 0.25rem;
     font-size: 0.80rem;
+  }
+}
+
+/* ── Accesibilidad: Reducción de movimiento ── */
+@media (prefers-reduced-motion: reduce) {
+  .mcard,
+  .mcard-img,
+  .mcard-btn,
+  .mcard-price {
+    transition: none !important;
+    transform: none !important;
   }
 }
