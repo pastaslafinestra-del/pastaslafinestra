@@ -149,7 +149,7 @@ try {
 // ── CHEQUEO 5: Integridad de Enlaces e Imports ─────────────────────────
 console.log('Verificando [5/7]: Integridad de Enlaces e Imports...');
 try {
-  const htmlFiles = ['index.html', 'admin.html', 'reservas.html'];
+  const htmlFiles = ['index.html', 'admin.html', 'reservas.html', 'privacidad.html', 'terminos.html', '404.html'];
   let brokenRefs = [];
 
   for (const hf of htmlFiles) {

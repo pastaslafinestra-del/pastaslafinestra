@@ -108,6 +108,30 @@ footer::after {
   position: relative;
   z-index: 1;
 }
+.ft-legal-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.6rem 1rem;
+  margin-bottom: 0.8rem;
+  font-family: var(--font-sans);
+  font-size: var(--text-2xs);
+  letter-spacing: var(--ls-sm);
+  color: rgba(255, 255, 255, 0.3);
+}
+.ft-legal-links a {
+  color: rgba(255, 255, 255, 0.4);
+  text-decoration: none;
+  transition: var(--transition-fast);
+}
+.ft-legal-links a:hover {
+  color: var(--verde3);
+}
+.ft-legal-sep {
+  opacity: 0.25;
+}
+
 .ft-copy {
   font-family: var(--font-sans);
   font-size: var(--text-2xs);
