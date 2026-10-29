@@ -41,7 +41,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 1.1rem;
-  padding: 0.25rem 2rem 1rem;
+  padding: 0.75rem 2rem 1.25rem;
 }
 
 /* ── Card base ── */
@@ -71,12 +71,12 @@
   border-color: rgba(196, 154, 60, 0.42);
   box-shadow: 0 20px 38px -10px rgba(0, 0, 0, 0.12),
               0 8px 18px -4px rgba(196, 154, 60, 0.15);
-  transform: translateY(-6px) scale(1.025);
-  z-index: 2;
+  transform: translateY(-8px) scale(1.04);
+  z-index: 5;
 }
 
 .mcard:active {
-  transform: translateY(-3px) scale(1.025);
+  transform: translateY(-3px) scale(1.03);
   box-shadow: 0 16px 32px -6px rgba(0, 0, 0, 0.14);
 }
 
@@ -89,6 +89,7 @@
   background-position: center;
   background-color: white;
   transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              background-size 0.5s ease,
               filter 0.4s ease;
   position: relative;
   overflow: hidden;
@@ -109,6 +110,7 @@
 .mcard-foto:hover .mcard-img,
 .mcard-foto:active .mcard-img {
   transform: scale(1.10);
+  background-size: 114%;
   filter: contrast(1.03) brightness(1.03);
 }
 
@@ -317,13 +319,3 @@
   }
 }
 
-/* ── Accesibilidad: Reducción de movimiento ── */
-@media (prefers-reduced-motion: reduce) {
-  .mcard,
-  .mcard-img,
-  .mcard-btn,
-  .mcard-price {
-    transition: none !important;
-    transform: none !important;
-  }
-}

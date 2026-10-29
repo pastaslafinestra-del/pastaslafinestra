@@ -80,15 +80,15 @@
 }
 
 .dest-card:hover {
-  transform: translateY(-6px) scale(1.025);
+  transform: translateY(-8px) scale(1.04);
   border-color: rgba(196, 154, 60, 0.45);
   box-shadow: 0 20px 42px -6px rgba(0, 0, 0, 0.75),
               0 0 24px -6px rgba(196, 154, 60, 0.20);
-  z-index: 2;
+  z-index: 5;
 }
 
 .dest-card:active {
-  transform: translateY(-3px) scale(1.025);
+  transform: translateY(-3px) scale(1.03);
   box-shadow: 0 16px 36px -4px rgba(0, 0, 0, 0.65);
 }
 
@@ -118,8 +118,8 @@
 
 .dest-card:hover .dest-img,
 .dest-card:active .dest-img {
-  transform: scale(1.08);
-  background-size: 112%;
+  transform: scale(1.10);
+  background-size: 114%;
   filter: brightness(1.05);
 }
 
@@ -272,13 +272,3 @@
   .dest-dots { display: none; }
 }
 
-/* ── Accesibilidad: Reducción de movimiento ── */
-@media (prefers-reduced-motion: reduce) {
-  .dest-card,
-  .dest-img,
-  .dest-badge,
-  .dest-btn {
-    transition: none !important;
-    transform: none !important;
-  }
-}
