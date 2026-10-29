@@ -116,3 +116,23 @@
   5. Inyección de `keepalive: true` en el `fetch` hacia Supabase y deshabilitación temporal del botón `#rf-submit` por 3 segundos.
   6. Revocación de sesión en servidor (`POST /auth/v1/logout`) en `logout()`.
 - **Invariante para el Asistente:** Todo dato renderizado en `innerHTML` o dentro de atributos HTML debe escapar caracteres especiales con `escHtml()`; las peticiones que precedan redirecciones externas en móviles deben usar `keepalive: true`.
+
+---
+
+### [ERR-006] Bloqueo de Interacciones y Zoom en Desktop por Regla Invasiva de Reducción de Movimiento
+- **Fecha:** 2026-10-28
+- **Módulo / Archivo afectado:** `css/cards.css`, `css/destacados.css`, `js/main.js`
+- **Síntoma Inicial:** Las tarjetas del menú y destacados se veían totalmente planas y estáticas en Desktop; las fotos no hacían zoom al pasar el cursor (`:hover`), mientras que en móvil algunas se encogían en vez de expandirse.
+- **Análisis de los 5 Porqués:**
+  1. ¿Por qué las cards no reaccionaban en Desktop? -> Porque la regla `@media (prefers-reduced-motion: reduce)` aplicaba `transform: none !important;`.
+  2. ¿Por qué se activaba `prefers-reduced-motion` en la PC del usuario? -> Porque en Windows la configuración de rendimiento/accesibilidad tenía desactivadas las animaciones de ventanas del sistema operativo, propagando dicha preferencia a Chromium/Firefox.
+  3. ¿Por qué se incluyó `transform: none !important;` en micro-interacciones hover? -> Porque se aplicó una regla de reducción de movimiento global sobre transformaciones táctiles y de hover que el usuario activaba voluntariamente con el ratón.
+  4. ¿Por qué los estilos de animación inicial en JS (`animateCards`) afectaban el hover? -> Porque dejaban `card.style.transform = 'translateY(0)'` fijado como estilo en línea, anulando las clases CSS por especificidad.
+  5. ¿Por qué en móvil las cards se encogían? -> **Causa Raíz:** El selector `:active` utilizaba `transform: scale(0.98)` (contracción en vez de elevación) y Safari móvil requería un listener pasivo de `touchstart` para disparar `:active`.
+- **Solución Correcta Implementada:**
+  1. Remoción de `transform: none !important;` en media queries de accesibilidad para permitir micro-interacciones hover voluntarias del usuario.
+  2. Liberación automática de estilos inline (`style.removeProperty`) en `animateCards` al finalizar la transición escalonada.
+  3. Escalado notable del $104\%$ (`scale(1.04)`) y elevación en hover para Desktop, combinado con doble zoom de imagen (`transform: scale(1.10)` y `background-size: 114%`).
+  4. Adaptación táctil elástica en móvil (`transform: scale(1.03)`) con listener pasivo de `touchstart` en el documento.
+- **Invariante para el Asistente:** Prohibido anular propiedades de transformación con `transform: none !important` en estados interactivos de hover/focus que el usuario acciona voluntariamente.
+

@@ -17,3 +17,13 @@
 - **Manejo Granular de Errores RLS:** Interceptación e interpretación de respuestas HTTP 401 y 403 de PostgREST, proporcionando alertas informativas de autorización sin bloquear la interfaz.
 - **Badge Dinámico de Estado de Sesión:** Implementación visual de `#admin-user-badge` en el panel administrativo diferenciando estado autenticado en Supabase vs modo contingencia local.
 - **Sanitización de URL Base (`menu-fetch.js`):** Eliminación defensiva de barras finales en `SUPABASE_URL` para prevenir dobles slashes en rutas REST y Storage.
+
+---
+
+### [2026-10-28] Hito 2.0.3 — Refactorización UI/UX, Microinteracciones y Zoom Cinematográfico
+- **Efecto Zoom Tridimensional:** Elevación suave y escalado al $104\%$ (`transform: translateY(-8px) scale(1.04)`) en tarjetas `.mcard` y `.dest-card`.
+- **Doble Zoom en Imágenes de Menú:** Combinación de `transform: scale(1.10)` y `background-size: 114%` con curvas Bezier aceleradas por GPU.
+- **Micro-interacciones Móviles:** Soporte táctil reactivo con listener pasivo de `touchstart` y respuesta elástica al toque (`scale(1.03)`).
+- **Badges Glassmórficos:** Acabado translúcido esmerilado con desenfoque de fondo (`backdrop-filter: blur(10px)`) y borde sutil.
+- **Prevención de Regresiones:** Desbloqueo de estilos en línea en `animateCards` y eliminación de reglas invasivas de transformación.
+
