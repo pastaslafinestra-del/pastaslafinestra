@@ -34,7 +34,7 @@ function fail(name, reason) {
 
 console.log('\n🔍 =================================================================');
 console.log('   COMPUERTA DE CALIDAD AUTOMATIZADA — LA FINESTRA');
-console.log('   Estándar de Gobernanza y Certificación Institucional 2026');
+console.log('   Suite de Verificación e Integridad de Código (Pruebas de Regresión)');
 console.log('=================================================================\n');
 
 // ── CHEQUEO 1: Escaneo de Secretos Zero-Trust ─────────────────────────
@@ -329,6 +329,6 @@ if (hasFailures) {
   console.error('❌ La compuerta de calidad reportó fallos. Tarea no certificada.\n');
   process.exit(1);
 } else {
-  console.log('✨ [CERTIFICACIÓN CONCEDIDA] El proyecto cumple al 100% los estándares institucionales.\n');
+  console.log('✨ [VERIFICACIONES APROBADAS] Suite de regresión e integridad interna superada (10/10).\n');
   process.exit(0);
 }

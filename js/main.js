@@ -43,6 +43,7 @@ loadMenuData()
     if (source === 'supabase') {
       renderDestacados(destacadosData);
       initMenu(menuData);
+      Cart.syncPrices(menuData);
     }
   })
   .catch(err => {
@@ -96,6 +97,14 @@ document.querySelectorAll('.fade, .fade-left, .fade-right').forEach(el => {
 
 /* ── 7. Stagger ─────────────────────────────────────────────────── */
 function animateCards(cards) {
+  if (reducedMotion) {
+    cards.forEach(card => {
+      card.style.removeProperty('opacity');
+      card.style.removeProperty('transform');
+      card.style.removeProperty('transition');
+    });
+    return;
+  }
   cards.forEach((card, i) => {
     const delay = i * 45;
     card.style.opacity    = '0';

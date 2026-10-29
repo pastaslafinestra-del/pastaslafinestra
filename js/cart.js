@@ -59,7 +59,7 @@ export const Cart = (() => {
       `• ${i.qty}x ${i.name} — ${fmtPrice(i.price * i.qty)}`
     );
     lines.push('');
-    lines.push(`*Total: ${fmtPrice(subtotal())}*`);
+    lines.push(`*Total estimado: ${fmtPrice(subtotal())}* _(sujeto a confirmación)_`);
     lines.push('');
     lines.push('¡Hola! Quiero realizar este pedido 🍝');
     return encodeURIComponent(lines.join('\n'));
@@ -250,6 +250,34 @@ export const Cart = (() => {
     render();
   }
 
-  return { init, add, open, close };
+  function syncPrices(menuData) {
+    if (!menuData || !items.length) return;
+    const priceMap = new Map();
+    for (const cat of Object.values(menuData)) {
+      if (Array.isArray(cat)) {
+        for (const item of cat) {
+          const p = item.price_usd != null ? Number(item.price_usd) : parsePrice(item.price);
+          priceMap.set(item.name.toLowerCase().trim(), p);
+        }
+      }
+    }
+    let updated = false;
+    items.forEach(it => {
+      const canonical = it.name.toLowerCase().trim();
+      if (priceMap.has(canonical)) {
+        const fresh = priceMap.get(canonical);
+        if (Math.abs(it.price - fresh) > 0.001) {
+          it.price = fresh;
+          updated = true;
+        }
+      }
+    });
+    if (updated) {
+      render();
+      console.log('[cart] Precios del pedido sincronizados con catálogo remoto revalidado.');
+    }
+  }
+
+  return { init, add, open, close, syncPrices };
 
 })();
