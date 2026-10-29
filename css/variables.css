@@ -28,9 +28,20 @@
   --rojo:    #BF2227;
   --rojo2:   #D42830;
 
-  /* Oros */
-  --oro:     #9A7B2F;
-  --oro2:    #C49A3C;
+  /* Oros y Acentos de Autor */
+  --oro:        #9A7B2F;
+  --oro2:       #C49A3C;
+  --oro-border: rgba(196, 154, 60, 0.42);
+  --oro-glow:   0 8px 18px -4px rgba(196, 154, 60, 0.15);
+  --ring-oro:   0 0 0 2px var(--oro2);
+
+  /* Brand / Integraciones / Banderas */
+  --wa:           #25D366;
+  --wa-hover:     #1EA854;
+  --wa-dark:      #128C7E;
+  --italia-verde: #009246;
+  --italia-rojo:  #CE2B37;
+  --crema-light:  #FCFBF7;
 
   /* Grises claros */
   --gris:    #F2F0EC;
@@ -50,7 +61,8 @@
   /* Sombras neutras (negro) */
   --shadow-soft:        0 2px 12px rgba(0,0,0,0.06);  /* elementos sutiles, how-num  */
   --shadow-card:        0 4px 24px rgba(0,0,0,0.08);  /* cards en reposo             */
-  --shadow-card-hover:  0 8px 40px rgba(0,0,0,0.12);  /* cards en hover              */
+  --shadow-card-hover:      0 8px 40px rgba(0,0,0,0.12);  /* cards en hover              */
+  --shadow-card-accessible: var(--ring-oro), var(--shadow-card-hover); /* accesibilidad reducida */
   --shadow-overlay:     0 4px 24px rgba(0,0,0,0.20);  /* botones sobre fondo verde   */
   --shadow-heavy:       0 8px 32px rgba(0,0,0,0.30);  /* hover botones sobre verde   */
   --shadow-dark:        0 4px 24px rgba(0,0,0,0.35);  /* banners oscuros hover       */

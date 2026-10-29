@@ -441,7 +441,7 @@ ROLLBACK;
 *(Bloque accesible de reducción de movimiento: elevación estática sin transformaciones cinéticas)*
 
 ```css
-/* ── ACCESIBILIDAD (C-07 / WCAG 2.2): Respeto a prefers-reduced-motion (sin !important) ── */
+/* ── ACCESIBILIDAD (C-07 / WCAG 2.2): Respeto a prefers-reduced-motion (sin !important, diseño tokenizado) ── */
 @media (prefers-reduced-motion: reduce) {
   .mcard,
   .dest-card,
@@ -454,7 +454,7 @@ ROLLBACK;
   .dest-card:hover,
   .dest-card:active {
     transform: none;
-    box-shadow: 0 0 0 2px rgba(196, 154, 60, 0.6), 0 8px 24px rgba(0, 0, 0, 0.14);
+    box-shadow: var(--shadow-card-accessible);
   }
   .mcard:hover .mcard-img,
   .dest-card:hover .dest-img {

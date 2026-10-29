@@ -6,8 +6,8 @@
 
 html, body.page-dark {
   min-height: 100%;
-  background-color: #0f0f0f;
-  color: #ffffff;
+  background-color: var(--negro);
+  color: var(--blanco);
   font-family: var(--font-sans, 'Jost', system-ui, sans-serif);
   overflow-x: hidden;
   line-height: 1.7;
@@ -40,7 +40,7 @@ html, body.page-dark {
 }
 
 .legal-back:hover {
-  color: #fff;
+  color: var(--blanco);
 }
 
 .legal-back svg {
@@ -52,7 +52,7 @@ html, body.page-dark {
   font-family: var(--font-serif, 'Playfair Display', serif);
   font-size: 1.05rem;
   font-style: italic;
-  color: #fff;
+  color: var(--blanco);
   text-decoration: none;
 }
 
@@ -69,7 +69,7 @@ html, body.page-dark {
   gap: 6px;
   background: rgba(27, 107, 48, 0.15);
   border: 1px solid rgba(27, 107, 48, 0.35);
-  color: #4cd97b;
+  color: var(--verde3);
   font-size: 0.75rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -83,7 +83,7 @@ html, body.page-dark {
   font-size: clamp(2rem, 4vw, 2.8rem);
   font-weight: 700;
   line-height: 1.15;
-  color: #fff;
+  color: var(--blanco);
   margin-bottom: 0.6rem;
 }
 
@@ -110,7 +110,7 @@ html, body.page-dark {
 .legal-section h2 {
   font-family: var(--font-serif, 'Playfair Display', serif);
   font-size: 1.35rem;
-  color: #fff;
+  color: var(--blanco);
   margin-bottom: 0.8rem;
   display: flex;
   align-items: center;
@@ -122,7 +122,7 @@ html, body.page-dark {
   display: inline-block;
   width: 4px;
   height: 18px;
-  background: #009246; /* Verde italiano */
+  background: var(--italia-verde); /* Verde italiano */
   border-radius: 2px;
 }
 
@@ -175,7 +175,7 @@ html, body.page-dark {
   font-size: 0.8rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: #e09f3e;
+  color: var(--oro2);
   margin-bottom: 0.8rem;
 }
 
@@ -183,7 +183,7 @@ html, body.page-dark {
   font-family: var(--font-serif, 'Playfair Display', serif);
   font-size: clamp(2rem, 5vw, 3rem);
   line-height: 1.1;
-  color: #fff;
+  color: var(--blanco);
   margin-bottom: 1rem;
 }
 
@@ -213,8 +213,8 @@ html, body.page-dark {
   align-items: center;
   justify-content: center;
   padding: 12px 24px;
-  background: #009246;
-  color: #fff;
+  background: var(--italia-verde);
+  color: var(--blanco);
   text-decoration: none;
   font-weight: 500;
   border-radius: 6px;
@@ -222,7 +222,7 @@ html, body.page-dark {
 }
 
 .btn-primary-error:hover {
-  background: #007a3a;
+  background: var(--verde2);
 }
 
 .btn-secondary-error {
@@ -232,7 +232,7 @@ html, body.page-dark {
   padding: 12px 24px;
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.15);
-  color: #fff;
+  color: var(--blanco);
   text-decoration: none;
   font-weight: 500;
   border-radius: 6px;

@@ -12,13 +12,13 @@
 html {
   scroll-behavior: smooth;
   color-scheme: light only;
-  background-color: #FFFFFF;
+  background-color: var(--blanco);
   /* Base font-size: permite que rem escale limpio en todos los navegadores */
   font-size: 16px;
 }
 
 body {
-  background-color: #FFFFFF;
+  background-color: var(--blanco);
   color: var(--texto);
   font-family: var(--font-sans);
   font-size: var(--text-base);
@@ -66,8 +66,8 @@ h1, h2, h3, h4, h5, h6 {
 @media (prefers-color-scheme: dark) {
   html:not(:has(body.page-dark)),
   body:not(.page-dark) {
-    background-color: #FFFFFF;
-    color: #1A1A1A;
+    background-color: var(--blanco);
+    color: var(--texto);
     color-scheme: light;
   }
   body:not(.page-dark) * { color-scheme: light; }
@@ -75,21 +75,21 @@ h1, h2, h3, h4, h5, h6 {
 body:not(.page-dark) button:not(.tab):not(.mcard-btn):not(.dest-btn):not(.cart-fab):not(.cart-close):not(.cart-qty-btn):not(.cart-btn-wa),
 body:not(.page-dark) select,
 body:not(.page-dark) textarea {
-  background-color: #FFFFFF;
-  color: #1A1A1A;
+  background-color: var(--blanco);
+  color: var(--texto);
 }
-  .about, .menu-sec, .horario { background-color: #F6F1E9; }
-  .hero, .valores             { background-color: #141414; }
+  .about, .menu-sec, .horario { background-color: var(--crema); }
+  .hero, .valores             { background-color: var(--negro2); }
   .about-card, .icard,
-  .pasta-system, .price-notice { background-color: #0A0A0A; }
-  .vitem                      { background-color: #1C1C1C; }
-  .cta-sec                    { background-color: #1B6B30; }
-  footer                      { background-color: #060606; }
-  nav                         { background-color: #0A0A0A; }
-  .mcard        { background-color: #FFFFFF; color: #1A1A1A; }
-  .mcard-name   { color: #1A1A1A; }
-  .mcard-desc   { color: #7A746C; }
-  .mcard:hover  { background-color: #F6F1E9; }
-  .tab    { color: #7A746C; background-color: transparent; }
-  .tab.on { color: #1B6B30; }
+  .pasta-system, .price-notice { background-color: var(--negro); }
+  .vitem                      { background-color: var(--negro3); }
+  .cta-sec                    { background-color: var(--verde); }
+  footer                      { background-color: var(--negro); }
+  nav                         { background-color: var(--negro); }
+  .mcard        { background-color: var(--blanco); color: var(--texto); }
+  .mcard-name   { color: var(--texto); }
+  .mcard-desc   { color: var(--texto3); }
+  .mcard:hover  { background-color: var(--crema); }
+  .tab    { color: var(--texto3); background-color: transparent; }
+  .tab.on { color: var(--verde); }
 }

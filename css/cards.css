@@ -67,8 +67,8 @@
 }
 
 .mcard:hover {
-  background: #FCFBF7;
-  border-color: rgba(196, 154, 60, 0.42);
+  background: var(--crema-light);
+  border-color: var(--oro-border);
   box-shadow: 0 20px 38px -10px rgba(0, 0, 0, 0.12),
               0 8px 18px -4px rgba(196, 154, 60, 0.15);
   transform: translateY(-8px) scale(1.04);
@@ -332,7 +332,7 @@
   .dest-card:hover,
   .dest-card:active {
     transform: none;
-    box-shadow: 0 0 0 2px rgba(196, 154, 60, 0.6), 0 8px 24px rgba(0, 0, 0, 0.14);
+    box-shadow: var(--shadow-card-accessible);
   }
   .mcard:hover .mcard-img,
   .dest-card:hover .dest-img {
