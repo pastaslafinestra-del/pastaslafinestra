@@ -190,7 +190,7 @@ A continuación se detalla la resolución técnica de cada uno de los hallazgos 
   2. ¿Por qué se activaba en el entorno de pruebas? -> Porque Windows tenía desactivadas las animaciones de ventanas en accesibilidad, propagando la preferencia al navegador Chromium.
   3. ¿Por qué la solución inicial de "liberar el zoom" fue incorrecta? -> Porque anular la preferencia del usuario ignora una configuración explícita de accesibilidad, violando WCAG 2.2 y el requisito C-07.
   4. ¿Por qué JavaScript interfería? -> Porque `animateCards` aplicaba estilos inline que sobreescribían las clases CSS.
-  5. ¿Cuál es el tratamiento accesible correcto? -> **Causa Raíz / Solución:** Para usuarios con reducción de movimiento activada, se anulan las transformaciones cinéticas de escala y movimiento (`scale()`, `translateY()`), pero se proporciona retroalimentación visual accesible estática mediante sombreado y borde de foco (`box-shadow: 0 0 0 2px rgba(196, 154, 60, 0.6), 0 8px 24px rgba(0, 0, 0, 0.14) !important`). En JS, `animateCards` consulta `reducedMotion` vía `matchMedia` y cancela los timers de animación.
+  5. ¿Cuál es el tratamiento accesible correcto? -> **Causa Raíz / Solución:** Para usuarios con reducción de movimiento activada, se anulan las transformaciones cinéticas de escala y movimiento (`scale()`, `translateY()`), pero se proporciona retroalimentación visual accesible estática mediante sombreado y borde de foco (`box-shadow: 0 0 0 2px rgba(196, 154, 60, 0.6), 0 8px 24px rgba(0, 0, 0, 0.14) ` por especificidad y orden de cascada natural). En JS, `animateCards` consulta `reducedMotion` vía `matchMedia` y cancela los timers de animación.
 
 ### [ERR-007] Fallo de Build en Vercel por Detección de Framework sin Carpeta de Salida
 - **Síntoma:** Vercel retenía despliegues anteriores en estado Error tras commits recientes.
@@ -441,25 +441,25 @@ ROLLBACK;
 *(Bloque accesible de reducción de movimiento: elevación estática sin transformaciones cinéticas)*
 
 ```css
-/* ── ACCESIBILIDAD (C-07 / WCAG 2.2): Respeto a prefers-reduced-motion ────── */
+/* ── ACCESIBILIDAD (C-07 / WCAG 2.2): Respeto a prefers-reduced-motion (sin !important) ── */
 @media (prefers-reduced-motion: reduce) {
   .mcard,
   .dest-card,
   .mcard-img,
   .dest-img {
-    transition: none !important;
+    transition: none;
   }
   .mcard:hover,
   .mcard:active,
   .dest-card:hover,
   .dest-card:active {
-    transform: none !important;
-    box-shadow: 0 0 0 2px rgba(196, 154, 60, 0.6), 0 8px 24px rgba(0, 0, 0, 0.14) !important;
+    transform: none;
+    box-shadow: 0 0 0 2px rgba(196, 154, 60, 0.6), 0 8px 24px rgba(0, 0, 0, 0.14);
   }
   .mcard:hover .mcard-img,
   .dest-card:hover .dest-img {
-    transform: none !important;
-    background-size: cover !important;
+    transform: none;
+    background-size: cover;
   }
 }
 ```

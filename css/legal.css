@@ -6,8 +6,8 @@
 
 html, body.page-dark {
   min-height: 100%;
-  background-color: #0f0f0f !important;
-  color: #ffffff !important;
+  background-color: #0f0f0f;
+  color: #ffffff;
   font-family: var(--font-sans, 'Jost', system-ui, sans-serif);
   overflow-x: hidden;
   line-height: 1.7;
