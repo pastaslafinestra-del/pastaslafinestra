@@ -19,6 +19,9 @@ CREATE TABLE IF NOT EXISTS public.categorias (
     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
+-- Asegurar columnas sobre tablas preexistentes (v2.0.0 -> v2.0.2)
+ALTER TABLE public.categorias ADD COLUMN IF NOT EXISTS created_at TIMESTAMPTZ NOT NULL DEFAULT NOW();
+
 COMMENT ON TABLE public.categorias IS 'Categorías taxonómicas del menú gastronómico';
 COMMENT ON COLUMN public.categorias.activo IS 'Si es FALSE, oculta automáticamente la categoría y todos sus platos a anon';
 
@@ -41,7 +44,10 @@ CREATE TABLE IF NOT EXISTS public.menu_items (
     updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
--- Asegurar constraint UNIQUE para idempotencia incluso en tablas preexistentes (v2.0.0 -> v2.0.2)
+-- Asegurar constraint UNIQUE y columnas para idempotencia incluso en tablas preexistentes (v2.0.0 -> v2.0.2)
+ALTER TABLE public.menu_items ADD COLUMN IF NOT EXISTS created_at TIMESTAMPTZ NOT NULL DEFAULT NOW();
+ALTER TABLE public.menu_items ADD COLUMN IF NOT EXISTS updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW();
+
 DO $$
 BEGIN
     IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'uq_menu_items_cat_name') THEN
@@ -68,6 +74,10 @@ CREATE TABLE IF NOT EXISTS public.destacados (
     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
+
+-- Asegurar constraint UNIQUE y columnas para idempotencia incluso en tablas preexistentes (v2.0.0 -> v2.0.2)
+ALTER TABLE public.destacados ADD COLUMN IF NOT EXISTS created_at TIMESTAMPTZ NOT NULL DEFAULT NOW();
+ALTER TABLE public.destacados ADD COLUMN IF NOT EXISTS updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW();
 
 DO $$
 BEGIN
