@@ -2,7 +2,7 @@
  * scripts/prerender.js — Generador estático de HTML para SSR / Pre-renderizado
  *
  * Lee js/menu-data.js e inyecta las cards de destacados y del menú completo
- * directamente dentro del HTML estático de index.html antes del despliegue.
+ * directamente entre los marcadores deterministas de index.html antes del despliegue.
  * Cumple con Q-01: Cero layout shift (CLS = 0) y visibilidad 100% para SEO y curl.
  */
 
@@ -93,6 +93,15 @@ function buildDestCard(plato) {
     </div>`.trim();
 }
 
+function replaceBetween(content, startMarker, endMarker, newText) {
+  const sIdx = content.indexOf(startMarker);
+  const eIdx = content.indexOf(endMarker);
+  if (sIdx !== -1 && eIdx !== -1) {
+    return content.slice(0, sIdx + startMarker.length) + '\n' + newText + '\n' + content.slice(eIdx);
+  }
+  return content;
+}
+
 export function prerender() {
   console.log('🔨 Iniciando pre-renderizado de catálogo estático...');
   let html = fs.readFileSync(INDEX_HTML_PATH, 'utf8');
@@ -101,8 +110,8 @@ export function prerender() {
   const destCardsHtml = destacadosData.map(buildDestCard).join('\n  ');
   const destDotsHtml = destacadosData.map((_, i) => `<span class="dest-dot${i === 0 ? ' active' : ''}"></span>`).join('\n  ');
 
-  html = html.replace(/<div class="dest-scroll">[\s\S]*?<\/div>/, `<div class="dest-scroll">\n  ${destCardsHtml}\n  </div>`);
-  html = html.replace(/<div class="dest-dots">[\s\S]*?<\/div>/, `<div class="dest-dots">\n  ${destDotsHtml}\n  </div>`);
+  html = replaceBetween(html, '<!-- DEST_START -->', '<!-- DEST_END -->', destCardsHtml);
+  html = html.replace(/<div class="dest-dots">[\s\S]*?<\/div>/, `<div class="dest-dots">\n  ${destDotsHtml}\n</div>`);
 
   // 2. Pre-renderizar categorías de la carta
   const categorias = [
@@ -116,9 +125,9 @@ export function prerender() {
     totalCards += items.length;
     const cardsHtml = items.map(buildMcard).join('\n    ');
 
-    // Buscar el contenedor específico de la categoría
-    const regex = new RegExp(`(<div class="panel[^"]*" id="p-${cat}">[\\s\\S]*?<div class="mgrid">)[\\s\\S]*?(<\\/div>)`);
-    html = html.replace(regex, `$1\n    ${cardsHtml}\n  $2`);
+    const startMarker = `<!-- MGRID_${cat.toUpperCase()}:START -->`;
+    const endMarker   = `<!-- MGRID_${cat.toUpperCase()}:END -->`;
+    html = replaceBetween(html, startMarker, endMarker, cardsHtml);
   });
 
   fs.writeFileSync(INDEX_HTML_PATH, html, 'utf8');

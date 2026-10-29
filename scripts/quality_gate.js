@@ -95,7 +95,7 @@ try {
 
   // Verificación de HTML pre-renderizado en index.html (Q-01)
   const indexHtml = fs.readFileSync('index.html', 'utf8');
-  const cardCount = (indexHtml.match(/class=["'][^"']*mcard/g) || []).length;
+  const cardCount = (indexHtml.match(/<div class=["']mcard(?:[\s"'])/g) || []).length;
   const hasBurrata = indexHtml.includes('Burrata Pesto');
   const hasRavioli = indexHtml.includes('Ravioli');
 
