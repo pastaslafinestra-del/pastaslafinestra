@@ -100,6 +100,7 @@ function animateCards(cards) {
   if (reducedMotion) {
     cards.forEach(card => {
       card.style.removeProperty('opacity');
+      card.style.removeProperty('translate');
       card.style.removeProperty('transform');
       card.style.removeProperty('transition');
     });
@@ -108,15 +109,15 @@ function animateCards(cards) {
   cards.forEach((card, i) => {
     const delay = i * 45;
     card.style.opacity    = '0';
-    card.style.transform  = 'translateY(16px)';
-    card.style.transition = `opacity 0.4s ease ${delay}ms, transform 0.4s ease ${delay}ms`;
+    card.style.translate  = '0 16px';
+    card.style.transition = `opacity 0.4s ease ${delay}ms, translate 0.4s ease ${delay}ms`;
     requestAnimationFrame(() => requestAnimationFrame(() => {
-      card.style.opacity = '1';
-      card.style.transform = 'translateY(0)';
-      // Liberar estilos inline al terminar animación para no bloquear el zoom/hover CSS
+      card.style.opacity   = '1';
+      card.style.translate = '0 0';
+      // Liberar estilos inline al terminar animación para mantener cascada CSS limpia
       setTimeout(() => {
         card.style.removeProperty('opacity');
-        card.style.removeProperty('transform');
+        card.style.removeProperty('translate');
         card.style.removeProperty('transition');
       }, delay + 450);
     }));

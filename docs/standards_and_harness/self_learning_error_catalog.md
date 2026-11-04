@@ -130,11 +130,12 @@
   4. ¿Por qué los estilos de animación inicial en JS (`animateCards`) afectaban el hover? -> Porque dejaban `card.style.transform = 'translateY(0)'` fijado como estilo en línea, anulando las clases CSS por especificidad.
   5. ¿Por qué en móvil las cards se encogían? -> **Causa Raíz:** El selector `:active` utilizaba `transform: scale(0.98)` (contracción en vez de elevación) y Safari móvil requería un listener pasivo de `touchstart` para disparar `:active`.
 - **Solución Correcta Implementada:**
-  1. Remoción de `transform: none !important;` en media queries de accesibilidad para permitir micro-interacciones hover voluntarias del usuario.
-  2. Liberación automática de estilos inline (`style.removeProperty`) en `animateCards` al finalizar la transición escalonada.
+  1. Remoción de `transform: none` y `transition: none` sobre `.mcard` y `.dest-card` en media queries `@media (prefers-reduced-motion: reduce)` (limitando dicha media query exclusivamente a animaciones autónomas/continuas como `.wa-float-pulse` y `.fade`) para permitir siempre micro-interacciones hover voluntarias del usuario en Desktop.
+  2. Uso de la propiedad individual `translate` y liberación automática de estilos inline (`style.removeProperty`) en `animateCards` al finalizar la transición escalonada, más identidad `transform: translateY(0) scale(1)` en estado base.
   3. Escalado notable del $104\%$ (`scale(1.04)`) y elevación en hover para Desktop, combinado con doble zoom de imagen (`transform: scale(1.10)` y `background-size: 114%`).
   4. Adaptación táctil elástica en móvil (`transform: scale(1.03)`) con listener pasivo de `touchstart` en el documento.
-- **Invariante para el Asistente:** Prohibido anular propiedades de transformación con `transform: none !important` en estados interactivos de hover/focus que el usuario acciona voluntariamente.
+  5. Guardia automatizada en `scripts/quality_gate.js` que falla si `@media (prefers-reduced-motion: reduce)` incluye selectores `.mcard:hover` o `.dest-card:hover`.
+- **Invariante para el Asistente:** Prohibido anular propiedades de transformación o transición (`transform: none`, `transition: none`) sobre `.mcard` o `.dest-card` dentro de `@media (prefers-reduced-motion: reduce)`, ya que Windows con efectos visuales desactivados propaga esa media query al navegador Desktop y congela el zoom interactivo de las tarjetas.
 
 ---
 

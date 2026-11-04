@@ -260,6 +260,13 @@ try {
     issues.push('js/tabsinit.js es código duplicado huérfano');
   }
 
+  // Guardia de regresión ERR-006: Verificar que prefers-reduced-motion no bloquee el zoom de cards en Desktop
+  const cardsCss = fs.readFileSync('css/cards.css', 'utf8');
+  const reducedMotionBlock = cardsCss.split('@media (prefers-reduced-motion: reduce)')[1] || '';
+  if (reducedMotionBlock.includes('.mcard:hover') || reducedMotionBlock.includes('.dest-card:hover')) {
+    issues.push('css/cards.css bloquea el zoom/hover de .mcard o .dest-card dentro de prefers-reduced-motion (Regresión ERR-006)');
+  }
+
   if (issues.length > 0) {
     fail('Anti-Bloat y Limpieza', issues.join(', '));
   } else {

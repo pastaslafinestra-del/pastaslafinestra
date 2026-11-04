@@ -35,4 +35,12 @@
 - **Inyección en Páginas HTML:** Vinculación sistemática en `index.html`, `reservas.html`, `admin.html`, `privacidad.html`, `terminos.html` y `404.html`.
 - **Despliegue Zero-Config en Vercel:** Resolución de incompatibilidad de esquema en `vercel.json` y `package.json`, restableciendo despliegues estáticos continuos e instantáneos (`2s`) en producción.
 
+---
+
+### [2026-11-04] Hito 2.0.5 — Restauración de Zoom Hover en Desktop y Blindaje Anti-Regresión (ERR-006)
+- **Preservación de Zoom Interactivo en Desktop (`css/cards.css`, `css/destacados.css`):** Aislamiento de `@media (prefers-reduced-motion: reduce)` exclusivamente a animaciones autónomas (`.wa-float-pulse`, `.fade`), evitando que Windows con efectos de ventana desactivados anule el zoom y elevación `:hover` en `.mcard` y `.dest-card`.
+- **Propiedades de Transformación Individuales (`js/main.js`):** Uso de `translate` en `animateCards` y transformaciones de identidad base (`transform: translateY(0) scale(1)`) para impedir colisiones de especificidad ni saltos de contexto de apilamiento durante el `:hover`.
+- **Guardia en Compuerta de Calidad (`scripts/quality_gate.js`):** Verificación determinista contra bloqueos de `.mcard:hover` o `.dest-card:hover` dentro de `prefers-reduced-motion`.
+
+
 
