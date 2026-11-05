@@ -359,7 +359,7 @@ export const menuData = {
       desc:   'Té frío de durazno.',
       price:  '$2,68',
       waText: 'Nestea de Durazno',
-      img:    'bebidas/Té_de_durazno.webp',
+      img:    'bebidas/Te_de_durazno.webp',
     },
     {
       cat:    'Aguas',

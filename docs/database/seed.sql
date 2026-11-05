@@ -66,7 +66,7 @@ INSERT INTO public.menu_items (categoria, cat, name, descripcion, price, img, im
   ('bebidas', 'Naturales', 'Jugos Naturales', 'Mora · Parchita · Frappé de Mango · Frappé de Maracuyá · Frappé Limonada & Menta · Frappé Limonada & Frutos Rojos.', '$2,68', 'bebidas/jugo_de_mora.webp', NULL, 'un Jugo Natural', 700, TRUE),
   ('bebidas', 'Refrescos', 'Frappé (todos los sabores)', 'Consulta los sabores disponibles del día.', '$3,35', 'bebidas/Frappe.webp', NULL, 'un Frappé', 701, TRUE),
   ('bebidas', 'Aguas', 'Agua con Gas', 'Sola · con Rodajas de Limón · con Frutos Rojos · con Maracuyá.', '$3,35', 'bebidas/agua_con_gas.webp', NULL, 'Agua con Gas', 702, TRUE),
-  ('bebidas', 'Refrescos', 'Nestea de Durazno', 'Té frío de durazno.', '$2,68', 'bebidas/Té_de_durazno.webp', NULL, 'Nestea de Durazno', 703, TRUE),
+  ('bebidas', 'Refrescos', 'Nestea de Durazno', 'Té frío de durazno.', '$2,68', 'bebidas/Te_de_durazno.webp', NULL, 'Nestea de Durazno', 703, TRUE),
   ('bebidas', 'Aguas', 'Agua Minalba 600ml', 'Agua mineral natural.', '$2,01', 'bebidas/agua_minalba.webp', 'background-size:contain;background-repeat:no-repeat;background-position:center;background-color:#F0EDE6;', 'Agua Minalba', 704, TRUE),
   ('bebidas', 'Refrescos', 'Refrescos Lata', 'Todas las variedades disponibles.', '$3,04', 'bebidas/coca_cola_lata.webp', 'background-size:contain;background-repeat:no-repeat;background-position:center;background-color:#F0EDE6;', 'un Refresco Lata', 705, TRUE),
   ('bebidas', 'Familiar', 'Coca Cola 2L', 'Solo para llevar.', '$3,35', 'bebidas/coca_cola_2l.webp', 'background-size:contain;background-repeat:no-repeat;background-position:center;background-color:#F0EDE6;', 'Coca Cola 2L', 706, TRUE),
