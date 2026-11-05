@@ -50,30 +50,33 @@
   display: flex;
   gap: 0.9rem;
   overflow-x: auto;
+  overflow-y: hidden;
+  touch-action: pan-x pan-y;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
-  padding: 0.65rem 1.2rem 1rem;
+  padding: 0.9rem 1.2rem 1.1rem;
   align-items: stretch; /* todas las dest-card igualan altura entre sí */
 }
 
 .dest-scroll::-webkit-scrollbar { display: none; }
 
-/* ── Card ── */
+/* ── Card (Full-Image Editorial + Click para ver descripción) ── */
 .dest-card {
   flex-shrink: 0;
   width: 210px;
-  height: auto;
-  min-height: 380px;
+  height: 290px;
+  min-height: 290px;
   background: #141414;
   border-radius: 14px;
   overflow: hidden;
   scroll-snap-align: start;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.10);
   display: flex;
   flex-direction: column;
   position: relative;
-  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.45);
+  cursor: pointer;
+  box-shadow: 0 6px 22px -2px rgba(0, 0, 0, 0.55);
   transform: translateY(0) scale(1);
   transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1),
               box-shadow 0.32s cubic-bezier(0.16, 1, 0.3, 1),
@@ -82,9 +85,9 @@
 
 .dest-card:hover {
   transform: translateY(-8px) scale(1.04);
-  border-color: rgba(196, 154, 60, 0.45);
+  border-color: rgba(196, 154, 60, 0.55);
   box-shadow: 0 20px 42px -6px rgba(0, 0, 0, 0.75),
-              0 0 24px -6px rgba(196, 154, 60, 0.20);
+              0 0 24px -6px rgba(196, 154, 60, 0.25);
   z-index: 5;
 }
 
@@ -93,36 +96,75 @@
   box-shadow: 0 16px 36px -4px rgba(0, 0, 0, 0.65);
 }
 
-/* ── Imagen ── */
+/* ── Imagen Completa (Full-Bleed) ── */
 .dest-img {
+  position: absolute;
+  inset: 0;
   width: 100%;
-  height: 155px;
+  height: 100%;
   background-size: cover;
   background-position: center;
-  position: relative;
   overflow: hidden;
-  flex-shrink: 0;
+  z-index: 1;
   transform: scale(1);
-  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-              background-size 0.5s ease,
-              filter 0.4s ease;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .dest-img::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, transparent 40%, rgba(10, 10, 10, 0.65) 100%);
-  transition: opacity 0.3s ease;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.28) 0%,
+    rgba(0, 0, 0, 0.04) 35%,
+    rgba(10, 10, 10, 0.72) 68%,
+    rgba(10, 10, 10, 0.95) 100%
+  );
+  transition: opacity 0.3s ease, background 0.3s ease;
 }
 
-.dest-img > * { position: relative; z-index: 1; }
+.dest-img > * { position: relative; z-index: 2; }
 
 .dest-card:hover .dest-img,
-.dest-card:active .dest-img {
-  transform: scale(1.10);
-  background-size: 114%;
-  filter: brightness(1.05);
+.dest-card.show-desc .dest-img {
+  transform: scale(1.08);
+}
+
+/* ── Indicador "ⓘ Info / Ver descripción" ── */
+.card-info-hint {
+  position: absolute;
+  top: 9px;
+  right: 9px;
+  background: rgba(12, 12, 12, 0.62);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: rgba(255, 255, 255, 0.88);
+  font-family: var(--font-sans);
+  font-size: 0.60rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  padding: 4px 9px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  z-index: 4;
+  pointer-events: none;
+  transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+}
+
+.dest-card:hover .card-info-hint,
+.mcard:hover .card-info-hint {
+  border-color: rgba(196, 154, 60, 0.55);
+  color: #fff;
+}
+
+.dest-card.show-desc .card-info-hint,
+.mcard.show-desc .card-info-hint {
+  background: rgba(196, 154, 60, 0.28);
+  border-color: rgba(196, 154, 60, 0.75);
+  color: #fff;
 }
 
 /* ── Badge Glassmórfico Premium ── */
@@ -142,7 +184,7 @@
   border-radius: 20px;
   border: 1px solid rgba(255, 255, 255, 0.20);
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.40);
-  z-index: 2;
+  z-index: 4;
   transition: border-color 0.3s ease, transform 0.3s ease;
 }
 
@@ -151,28 +193,56 @@
   transform: translateY(-1px);
 }
 
-/* ── Info ── */
+/* ── Info superpuesta sobre la imagen ── */
 .dest-info {
-  padding: 0.75rem 0.9rem 0.9rem;
+  position: relative;
+  z-index: 3;
+  margin-top: auto;
+  padding: 0.85rem 0.95rem 0.9rem;
   display: flex;
   flex-direction: column;
-  flex: 1;
+  justify-content: flex-end;
+  transition: background-color 0.3s ease, backdrop-filter 0.3s ease;
+}
+
+.dest-card.show-desc .dest-info {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 10, 10, 0.86);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 2.6rem 1rem 0.95rem;
 }
 
 .dest-name {
   font-family: var(--font-serif);
-  font-size: 0.95rem;
-  color: #f0ebe2;
-  margin-bottom: 0.3rem;
+  font-size: 1.02rem;
+  font-weight: 700;
+  color: #FAF6EE;
+  margin-bottom: 0.15rem;
   line-height: var(--lh-snug);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.75);
 }
 
 .dest-desc {
   font-family: var(--font-serif-body);
-  font-size: 0.80rem;
-  color: rgba(255,255,255,0.38);
-  line-height: var(--lh-normal);
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.90);
+  line-height: 1.45;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
   margin-bottom: 0;
+  transition: max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.28s ease,
+              margin-bottom 0.28s ease;
+}
+
+.dest-card.show-desc .dest-desc {
+  max-height: 160px;
+  opacity: 1;
+  margin-top: 0.35rem;
+  margin-bottom: 0.5rem;
 }
 
 /* Footer siempre pegado al fondo */
@@ -180,9 +250,9 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: auto;
-  padding-top: 0.7rem;
-  border-top: 1px solid rgba(255,255,255,0.07);
+  margin-top: 0.45rem;
+  padding-top: 0.55rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
 }
 
 .dest-price {
@@ -259,18 +329,30 @@
   border-radius: 3px;
 }
 
+/* ── Pantallas táctiles (Móvil / Tablet): evitar que el roce del dedo al hacer scroll
+   dispare saltos verticales o parpadeos en las cards; mantener zoom suave en la foto ── */
+@media (hover: none), (pointer: coarse) {
+  .dest-card:hover,
+  .dest-card:active {
+    transform: none;
+    box-shadow: 0 6px 22px -2px rgba(0, 0, 0, 0.55);
+  }
+  .dest-card.show-desc {
+    border-color: rgba(196, 154, 60, 0.55);
+  }
+}
+
 /* ── Desktop ── */
 @media (min-width: 769px) {
   .dest-sec { padding: 3rem 0 2rem; }
   .dest-header { padding: 0 2rem 1.2rem; }
   .dest-scroll { padding: 1.1rem 2rem 1.5rem; gap: 1.1rem; }
 
-  /* En desktop: card más grande, igual que mcard desktop */
-  .dest-card { width: 250px; height: auto; min-height: 400px; }
-  .dest-img { height: 175px; }
-  .dest-name { font-size: 0.98rem; }
-  .dest-desc { font-size: 0.83rem; -webkit-line-clamp: 3; line-clamp: 3; }
-  .dest-info { padding: 0.85rem 0.95rem 0.95rem; }
+  /* En desktop: proporción vertical compacta de plato completo (245x325) */
+  .dest-card { width: 245px; height: 325px; min-height: 325px; }
+  .dest-name { font-size: 1.05rem; }
+  .dest-desc { font-size: 0.86rem; }
+  .dest-info { padding: 0.95rem 1rem 0.95rem; }
   .dest-dots { display: none; }
 }
 

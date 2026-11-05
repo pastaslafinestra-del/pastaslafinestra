@@ -32,19 +32,23 @@ function buildMcard(plato) {
   if (hasImg) wrapperClasses.push('mcard-foto', 'mcard-clean');
 
   let imgBlock = '';
+  let infoHint = '';
   if (hasImg) {
     const safeImg    = encodeURI(`${ASSETS_BASE_URL}${plato.img}`);
     const baseStyle  = `background-image:url('${safeImg}')`;
     const extraStyle = plato.imgStyle ? `;${sanitizeStyle(plato.imgStyle)}` : '';
     const imgClass   = plato.imgStyle ? 'mcard-img mcard-img--producto' : 'mcard-img';
     imgBlock = `<div class="${imgClass}" style="${baseStyle}${extraStyle}"></div>`;
+    infoHint = `<span class="card-info-hint" aria-hidden="true">ⓘ Info</span>`;
   }
 
   const catBlock = plato.cat ? `<div class="mcard-cat">${escHtml(plato.cat)}</div>` : '';
+  const interactiveAttrs = hasImg ? ' data-card-toggle tabindex="0" role="button" aria-expanded="false"' : '';
 
   return `
-    <div class="${wrapperClasses.join(' ')}">
+    <div class="${wrapperClasses.join(' ')}"${interactiveAttrs}>
       ${imgBlock}
+      ${infoHint}
       <div class="mcard-body">
         ${catBlock}
         <div class="mcard-name">${escHtml(plato.name)}</div>
@@ -86,9 +90,10 @@ function buildDestCard(plato) {
     ? ` style="background-image:url('${encodeURI(ASSETS_BASE_URL + plato.img)}')"`
     : '';
   return `
-    <div class="dest-card">
+    <div class="dest-card" data-card-toggle tabindex="0" role="button" aria-expanded="false">
       <div class="dest-img"${imgStyle}>
         <span class="dest-badge">${escHtml(plato.badge)}</span>
+        <span class="card-info-hint" aria-hidden="true">ⓘ Info</span>
       </div>
       <div class="dest-info">
         <div class="dest-name">${escHtml(plato.name)}</div>
@@ -116,9 +121,30 @@ export function renderDestacados(destacadosData) {
     .join('\n');
 }
 
-// ── EVENT DELEGATION (S-06: Agregar al carrito sin handlers inline) ──
+// ── EVENT DELEGATION (S-06: Agregar al carrito y toggle de descripción sin handlers inline) ──
 document.addEventListener('click', (e) => {
   const btn = e.target.closest('[data-cart-add]');
-  if (!btn) return;
-  Cart.add(btn.dataset.name, btn.dataset.price, btn);
+  if (btn) {
+    e.stopPropagation();
+    Cart.add(btn.dataset.name, btn.dataset.price, btn);
+    return;
+  }
+
+  const toggleCard = e.target.closest('[data-card-toggle]');
+  if (toggleCard) {
+    const isNowOpen = toggleCard.classList.toggle('show-desc');
+    toggleCard.setAttribute('aria-expanded', isNowOpen ? 'true' : 'false');
+    const hint = toggleCard.querySelector('.card-info-hint');
+    if (hint) {
+      hint.textContent = isNowOpen ? '✕ Cerrar' : 'ⓘ Info';
+    }
+  }
+});
+
+document.addEventListener('keydown', (e) => {
+  if (e.key !== 'Enter' && e.key !== ' ') return;
+  const toggleCard = e.target.closest('[data-card-toggle]');
+  if (!toggleCard || e.target.closest('[data-cart-add]')) return;
+  e.preventDefault();
+  toggleCard.click();
 });
