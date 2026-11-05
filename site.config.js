@@ -19,8 +19,8 @@ export const siteConfig = {
     }
   },
   contact: {
-    whatsapp: '584247842743',
-    whatsappFormatted: '+58 424-7842743',
+    whatsapp: '584247827899',
+    whatsappFormatted: '+58 424-7827899',
     instagram: 'lafinestrapastas',
     address: 'San Cristóbal, Táchira, Venezuela',
     hours: 'Lunes a Domingo 11:00 AM – 10:00 PM',
@@ -46,9 +46,10 @@ export const siteConfig = {
     developedByUrl: 'https://aeon.com.ve'
   },
   supabase: {
-    url: 'https://atjijqvwwdlydgsonptr.supabase.co',
-    anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF0amlqcXZ3d2RseWRnc29ucHRyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkzMTI1MDIsImV4cCI6MjA5NDg4ODUwMn0.DDVEbZaVmAqmuvUs-jAHYAWm1PVUyT1zzy5gKJCdK3Q',
-    bucket: 'menu-images'
+    url: 'https://daevefcmtmnjxliosdhf.supabase.co',
+    anonKey: 'sb_publishable_NjeW434fUs7h7bl8NDsczw_h1ozVnLX',
+    bucket: 'menu-images',
+    storageUrl: 'https://atjijqvwwdlydgsonptr.supabase.co/storage/v1/object/public/menu-images/'
   }
 };
 

@@ -21,7 +21,7 @@ flowchart LR
     C -->|"Online"| D["Supabase Cloud"]
     C -->|"Offline / Falla"| E["menu-data.js (Catálogo Local)"]
     B --> F["Drawer de Carrito (cart.js)"]
-    F --> G["WhatsApp API (+58 424-7842743)"]
+    F --> G["WhatsApp API (+58 424-7827899)"]
 ```
 
 ---

@@ -211,22 +211,20 @@ try {
   for (const f of filesWithWa) {
     if (!fs.existsSync(f)) continue;
     const c = fs.readFileSync(f, 'utf8');
-    if (c.includes('7827899')) phoneIssues.push(`${f} contiene número antiguo 7827899`);
-    if (!c.includes('7842743')) phoneIssues.push(`${f} no contiene el número activo 7842743`);
+    if (!c.includes('7827899')) phoneIssues.push(`${f} no contiene el número activo 7827899`);
   }
   const mainJsContent = fs.readFileSync('js/main.js', 'utf8');
-  if (mainJsContent.includes('7827899')) phoneIssues.push(`js/main.js contiene número antiguo 7827899`);
-  if (!mainJsContent.includes('WA_NUMBER') && !mainJsContent.includes('7842743')) {
+  if (!mainJsContent.includes('WA_NUMBER') && !mainJsContent.includes('7827899')) {
     phoneIssues.push(`js/main.js no utiliza WA_NUMBER centralizado`);
   }
   const { WA_NUMBER } = await import('../js/config.js');
-  if (WA_NUMBER !== '584247842743') {
-    phoneIssues.push(`js/config.js exporta WA_NUMBER = ${WA_NUMBER} (esperado: 584247842743)`);
+  if (WA_NUMBER !== '584247827899') {
+    phoneIssues.push(`js/config.js exporta WA_NUMBER = ${WA_NUMBER} (esperado: 584247827899)`);
   }
   if (phoneIssues.length > 0) {
     fail('Teléfono Único (Q-02)', phoneIssues.join(', '));
   } else {
-    pass('Teléfono Único (Q-02)', 'Canal +58 424-7842743 verificado en todos los puntos de contacto');
+    pass('Teléfono Único (Q-02)', 'Canal +58 424-7827899 verificado en todos los puntos de contacto');
   }
 
   if (fs.existsSync('vercel.json')) {
