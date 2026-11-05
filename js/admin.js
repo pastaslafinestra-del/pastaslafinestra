@@ -466,12 +466,31 @@ export async function saveItem() {
     };
 
     if (editingId) {
-      await sbUpdate('menu_items', editingId, payload);
+      try {
+        await sbUpdate('menu_items', editingId, payload);
+      } catch (err) {
+        if (/price_usd|price_max_usd/i.test(err.message)) {
+          const { price_usd, price_max_usd, ...legacyPayload } = payload;
+          await sbUpdate('menu_items', editingId, legacyPayload);
+        } else {
+          throw err;
+        }
+      }
       const idx = allItems.findIndex(i => i.id === editingId);
       if (idx !== -1) allItems[idx] = { ...allItems[idx], ...payload };
       toast('Plato actualizado ✓');
     } else {
-      const [created] = await sbInsert('menu_items', payload);
+      let created;
+      try {
+        [created] = await sbInsert('menu_items', payload);
+      } catch (err) {
+        if (/price_usd|price_max_usd/i.test(err.message)) {
+          const { price_usd, price_max_usd, ...legacyPayload } = payload;
+          [created] = await sbInsert('menu_items', legacyPayload);
+        } else {
+          throw err;
+        }
+      }
       allItems.push(created);
       toast('Plato creado ✓');
     }
@@ -495,7 +514,11 @@ let allDest = [];
 
 async function loadDestacados() {
   try {
-    allDest = await sbGet('destacados', 'select=id,badge,orden,disponible,menu_item_id,menu_items(id,name,descripcion,price,price_usd,price_max_usd,img,wa_text)&order=orden.asc');
+    try {
+      allDest = await sbGet('destacados', 'select=id,badge,orden,disponible,name,descripcion,price,img,wa_text,menu_item_id,menu_items(id,name,descripcion,price,price_usd,price_max_usd,img,wa_text)&order=orden.asc');
+    } catch {
+      allDest = await sbGet('destacados', 'order=orden.asc');
+    }
     renderDestTable();
   } catch(e) {
     toast('Error cargando destacados: ' + e.message, 'err');
@@ -616,10 +639,28 @@ export async function saveDestacado() {
 
   try {
     if (editingDestId) {
-      await sbUpdate('destacados', editingDestId, payload);
+      try {
+        await sbUpdate('destacados', editingDestId, payload);
+      } catch (err) {
+        if (/menu_item_id/i.test(err.message)) {
+          const { menu_item_id, ...legacyPayload } = payload;
+          await sbUpdate('destacados', editingDestId, legacyPayload);
+        } else {
+          throw err;
+        }
+      }
       toast('Destacado actualizado ✓');
     } else {
-      await sbInsert('destacados', payload);
+      try {
+        await sbInsert('destacados', payload);
+      } catch (err) {
+        if (/menu_item_id/i.test(err.message)) {
+          const { menu_item_id, ...legacyPayload } = payload;
+          await sbInsert('destacados', legacyPayload);
+        } else {
+          throw err;
+        }
+      }
       toast('Destacado creado ✓');
     }
     closeDestModal();

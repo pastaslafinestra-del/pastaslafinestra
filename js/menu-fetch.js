@@ -55,11 +55,22 @@ export function fmtPrice(priceUsd, priceMaxUsd) {
   return fmt(priceUsd);
 }
 
+async function fetchDestacados() {
+  try {
+    return await fetchTable(
+      'destacados',
+      'select=id,badge,orden,disponible,name,descripcion,price,img,wa_text,menu_items(id,name,descripcion,price_usd,price_max_usd,price,img,wa_text)&disponible=eq.true&order=orden.asc'
+    );
+  } catch {
+    return await fetchTable('destacados', 'disponible=eq.true&order=orden.asc');
+  }
+}
+
 export async function loadMenuData() {
   try {
     const [items, destacados] = await Promise.all([
       fetchTable('menu_items', 'disponible=eq.true&order=orden.asc'),
-      fetchTable('destacados', 'select=id,badge,orden,disponible,name,descripcion,price,img,wa_text,menu_items(id,name,descripcion,price_usd,price_max_usd,price,img,wa_text)&disponible=eq.true&order=orden.asc'),
+      fetchDestacados(),
     ]);
 
     if (!Array.isArray(items) || items.length === 0) {

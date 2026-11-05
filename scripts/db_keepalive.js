@@ -38,8 +38,14 @@ function loadEnv() {
 
 loadEnv();
 
-const baseUrl = (process.env.SUPABASE_URL || SUPABASE_URL || '').replace(/\/+$/, '');
-const anonKey = process.env.SUPABASE_ANON_KEY || SUPABASE_ANON;
+const args = process.argv.slice(2);
+const urlIdx = args.indexOf('--url');
+const keyIdx = args.indexOf('--key');
+const cliUrl = urlIdx !== -1 && args[urlIdx + 1] ? args[urlIdx + 1] : null;
+const cliKey = keyIdx !== -1 && args[keyIdx + 1] ? args[keyIdx + 1] : null;
+
+const baseUrl = (cliUrl || process.env.SUPABASE_URL || SUPABASE_URL || '').replace(/\/+$/, '');
+const anonKey = cliKey || process.env.SUPABASE_ANON_KEY || SUPABASE_ANON;
 
 console.log('\n💓 =================================================================');
 console.log('   SUPABASE KEEP-ALIVE & HEALTH CHECK — LA FINESTRA');
@@ -52,10 +58,11 @@ try {
     Authorization: `Bearer ${anonKey}`,
   };
 
-  const [menuRes, destRes] = await Promise.all([
-    fetch(`${baseUrl}/rest/v1/menu_items?select=id,categoria,name,disponible&disponible=eq.true`, { headers }),
-    fetch(`${baseUrl}/rest/v1/destacados?select=id,badge,orden,name,img,menu_item_id,menu_items(id,name,img)&disponible=eq.true&order=orden.asc`, { headers }),
-  ]);
+  const menuRes = await fetch(`${baseUrl}/rest/v1/menu_items?select=id,categoria,name,disponible&disponible=eq.true`, { headers });
+  let destRes = await fetch(`${baseUrl}/rest/v1/destacados?select=id,badge,orden,name,img,menu_item_id,menu_items(id,name,img)&disponible=eq.true&order=orden.asc`, { headers });
+  if (!destRes.ok) {
+    destRes = await fetch(`${baseUrl}/rest/v1/destacados?select=id,badge,orden,name,img&disponible=eq.true&order=orden.asc`, { headers });
+  }
 
   if (!menuRes.ok) throw new Error(`PostgREST menu_items devolvió HTTP ${menuRes.status}`);
   if (!destRes.ok) throw new Error(`PostgREST destacados devolvió HTTP ${destRes.status}`);
