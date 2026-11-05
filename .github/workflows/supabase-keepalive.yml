@@ -1,0 +1,23 @@
+name: Supabase Keep-Alive Pulse
+
+on:
+  schedule:
+    # Ejecuta cada 3 días a las 12:00 UTC (evita la pausa por inactividad de 7 días en Supabase Free Tier)
+    - cron: '0 12 */3 * *'
+  workflow_dispatch:
+
+jobs:
+  keepalive:
+    name: Ping Supabase PostgREST API
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Execute Keep-Alive & Health Check
+        run: node scripts/db_keepalive.js

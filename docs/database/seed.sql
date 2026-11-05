@@ -38,7 +38,7 @@ INSERT INTO public.menu_items (categoria, cat, name, descripcion, price, img, im
   ('pastas', 'Pasticho', 'Pasticho Tradicional de Bologna', 'Salsa Bologna, Salsa Bechamel, Queso Mozzarella, Queso Parmesano, Jamón Artesanal.', '$9,38', 'pastas/Pasticho_Tradicional_de_Bologna.webp', NULL, 'Pasticho Tradicional', 108, TRUE),
   ('pastas', 'Pasticho', 'Pasticho de Berenjena con Bologna', 'Láminas de Berenjena, Salsa Bologna, Salsa Bechamel, Queso Mozzarella, Queso Parmesano, Jamón Artesanal.', '$9,38', NULL, NULL, 'Pasticho de Berenjena', 109, TRUE),
   ('pastas', 'Ripieno', 'Ripieno Finestra', 'Bola de pan de masa madre rellena con Brócoli, Zanahoria, Champiñones y Pechuga de Pollo en salsa blanca.', '$10,72', NULL, NULL, 'Ripieno Finestra', 110, TRUE),
-  ('pastas', 'Ripieno', 'Ripieno Ragú', 'Bola de pan de masa madre rellena con Ragú de Mechada.', '$10,72', 'pastas/Ripieno_Ragú.webp', NULL, 'Ripieno Ragú', 111, TRUE),
+  ('pastas', 'Ripieno', 'Ripieno Ragú', 'Bola de pan de masa madre rellena con Ragú de Mechada.', '$10,72', 'pastas/Ripieno_Ragu.webp', NULL, 'Ripieno Ragú', 111, TRUE),
   ('pastas', 'Ripieno', 'Ripieno Azzurro', 'Bola de pan de masa madre rellena con Lomito en tiras encurtido en vino tinto y romero, con toque de Queso Azul.', '$12,06', NULL, NULL, 'Ripieno Azzurro', 112, TRUE),
   ('pizzas', NULL, 'Margherita', 'Napolitana, mozzarella, tomate cherry, albahaca fresca, mozzarella de búfala, trazos de pesto.', '$9,38', NULL, NULL, 'Pizza Margherita', 200, TRUE),
   ('pizzas', NULL, 'Quattro Formaggi', 'Bechamel, queso mozzarella, queso brie, queso provolone, queso pecorino crocante.', '$14,74', NULL, NULL, 'Pizza Quattro Formaggi', 201, TRUE),

@@ -156,7 +156,7 @@ export const menuData = {
       desc:   'Bola de pan de masa madre rellena con Ragú de Mechada.',
       price:  '$10,72',
       waText: 'Ripieno Ragú',
-      img:    'pastas/Ripieno_Ragú.webp',
+      img:    'pastas/Ripieno_Ragu.webp',
     },
     {
       cat:    'Ripieno',

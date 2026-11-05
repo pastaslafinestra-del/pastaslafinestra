@@ -34,3 +34,10 @@
 - **Estructuración de Migraciones:** Despliegue de `docs/database/migrations/001_initial_schema_v2.0.2.sql` y `002_initial_seed_v2.0.2.sql`.
 - **Comandos npm Integrados:** `npm run db:migrate`, `npm run db:status`, `npm run db:seed`, `npm run db:dry-run`.
 - **Quality Gate:** Ampliado a 7 verificaciones deterministas (100% aprobadas).
+
+---
+
+### [2026-11-05] Hito 2.0.5 — Migración 007 (Vínculos Exactos en Destacados) y Keep-Alive Automatizado
+- **Migración 007 (`007_fix_destacados_fk_links.sql`):** Corrección determinista de las claves foráneas `menu_item_id` en `public.destacados` (`Tallarín Frutti Latte` en posición 2 y `Ripieno Ragú` en posición 3) y normalización de la ruta de imagen `pastas/Ripieno_Ragu.webp` acorde al objeto real en Supabase Storage (`menu-images`).
+- **Keep-Alive Automatizado (`scripts/db_keepalive.js` y `.github/workflows/supabase-keepalive.yml`):** Script de pulso activo hacia PostgREST (`/rest/v1/menu_items`, `/rest/v1/destacados`) y workflow programado en GitHub Actions cada 72 horas (`0 12 */3 * *`) para evitar la pausa automática por inactividad de 7 días en Supabase Free Tier sin intervención manual.
+
