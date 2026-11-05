@@ -55,6 +55,17 @@ export function fmtPrice(priceUsd, priceMaxUsd) {
   return fmt(priceUsd);
 }
 
+/**
+ * Normaliza nombres de archivos de imagen cuyos objetos en Supabase Storage
+ * fueron subidos sin tildes (evita 400 Bad Request incluso en bases remotas sin migrar).
+ */
+function normalizeImgPath(img) {
+  if (!img) return img;
+  return String(img)
+    .replace('pastas/Ripieno_Ragú.webp', 'pastas/Ripieno_Ragu.webp')
+    .replace('bebidas/Té_de_durazno.webp', 'bebidas/Te_de_durazno.webp');
+}
+
 async function fetchDestacados() {
   try {
     return await fetchTable(
@@ -88,7 +99,7 @@ export async function loadMenuData() {
         price:    displayPrice,
         priceUsd: row.price_usd != null ? Number(row.price_usd) : null,
         cat:      row.cat,
-        img:      row.img,
+        img:      normalizeImgPath(row.img),
         imgStyle: row.img_style,
         waText:   row.wa_text,
       });
@@ -103,7 +114,7 @@ export async function loadMenuData() {
         desc:     m.descripcion || row.descripcion,
         price:    displayPrice,
         priceUsd: m.price_usd != null ? Number(m.price_usd) : null,
-        img:      m.img || row.img,
+        img:      normalizeImgPath(m.img || row.img),
         waText:   m.wa_text || row.wa_text,
       };
     });
