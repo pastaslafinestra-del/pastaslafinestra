@@ -42,5 +42,13 @@
 - **Propiedades de Transformación Individuales (`js/main.js`):** Uso de `translate` en `animateCards` y transformaciones de identidad base (`transform: translateY(0) scale(1)`) para impedir colisiones de especificidad ni saltos de contexto de apilamiento durante el `:hover`.
 - **Guardia en Compuerta de Calidad (`scripts/quality_gate.js`):** Verificación determinista contra bloqueos de `.mcard:hover` o `.dest-card:hover` dentro de `prefers-reduced-motion`.
 
+---
+
+### [2026-11-05] Hito 2.0.6 — Rediseño Editorial Full-Bleed de Cards y Blindaje de Scroll Táctil en Móvil
+- **Imagen Completa en Cards (`css/destacados.css`, `css/cards.css`):** Rediseño de `.dest-card` y `.mcard:has(.mcard-img)` (con fallback `@supports not selector(:has(*))` en `.mcard.mcard-foto`) para que la fotografía del plato ocupe el $100\%$ de la tarjeta (`245×325px` en Desktop, `210×290px` en Móvil) con degradado inferior oscuro.
+- **Descripción Interactiva bajo Demanda (`js/mcard.js`):** Visualización limpia de título, precio y botón `+` por defecto, revelando la descripción del plato sobre un overlay glassmórfico (`backdrop-filter: blur(10px)`) al hacer clic o tocar la card (`.show-desc`), con indicador `ⓘ Info` / `✕ Cerrar` y soporte de teclado accesible (`aria-expanded`, `Enter`/`Space`).
+- **Blindaje de Scroll y Eliminación de Parpadeo en Móvil:** Remoción de `background-size: 114%` en favor de zoom puro por GPU (`transform: scale(1.08)` sobre `background-size: cover`), adición de `overflow-y: hidden` y `touch-action: pan-x pan-y` en `.dest-scroll` y `.mgrid`, y aislamiento de la elevación vertical de caja mediante `@media (hover: none), (pointer: coarse)` para evitar choques entre el scroll horizontal y vertical en iOS/Android.
+
+
 
 
